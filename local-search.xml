@@ -11,6 +11,24 @@
     <content type="html"><![CDATA[<p>这是个代码测试文件</p><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><br>hexo <span class="hljs-keyword">new</span> [layout] &lt;<span class="hljs-built_in">title</span>&gt;<br></code></pre></td></tr></table></figure>]]></content>
     
     
+    <categories>
+      
+      <category>Sports</category>
+      
+      <category>Baseball</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Injury</tag>
+      
+      <tag>Fight</tag>
+      
+      <tag>Shocking</tag>
+      
+    </tags>
     
   </entry>
   
