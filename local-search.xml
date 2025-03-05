@@ -8,7 +8,7 @@
     <link href="/2025/03/05/%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6/"/>
     <url>/2025/03/05/%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6/</url>
     
-    <content type="html"><![CDATA[<p>这是个代码测试文件</p><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><br>hexo <span class="hljs-keyword">new</span> [layout] &lt;<span class="hljs-built_in">title</span>&gt;<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>这是个代码测试文件</p><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><br>hexo <span class="hljs-keyword">new</span> [layout] &lt;<span class="hljs-built_in">title</span>&gt;<br></code></pre></td></tr></table></figure><p>这里有一张图片</p><p><img src="/images/2025-03-05-17-19-21.png"></p>]]></content>
     
     
     <categories>
