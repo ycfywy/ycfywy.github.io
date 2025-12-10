@@ -1,0 +1,790 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ycf">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="计算 a &#x3D; gxmod p 离散对数计算的问题 最坏情况下是O(p) 这里可以使用Sherwood算法引入随机性，降低进入最坏情况的概率。  这个改写利用了随机预处理来改变求解的实例，使得原本可能在特定输入下性能不佳的确定性离散对数算法 logg, p，能够以接近平均性能的效率求解。 🔬 dlogRH 算法工作原理分析 1. 算法目标  问题: 离散对数问题。 输入: 基数 g，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="概率算法ppt总结">
+<meta property="og:url" content="https://ycfywy.github.io/2025/12/10/%E6%A6%82%E7%8E%87%E7%AE%97%E6%B3%95ppt%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="ycf blog">
+<meta property="og:description" content="计算 a &#x3D; gxmod p 离散对数计算的问题 最坏情况下是O(p) 这里可以使用Sherwood算法引入随机性，降低进入最坏情况的概率。  这个改写利用了随机预处理来改变求解的实例，使得原本可能在特定输入下性能不佳的确定性离散对数算法 logg, p，能够以接近平均性能的效率求解。 🔬 dlogRH 算法工作原理分析 1. 算法目标  问题: 离散对数问题。 输入: 基数 g，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/10/%E6%A6%82%E7%8E%87%E7%AE%97%E6%B3%95ppt%E6%80%BB%E7%BB%93/2025-12-10-14-09-30.png">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/10/%E6%A6%82%E7%8E%87%E7%AE%97%E6%B3%95ppt%E6%80%BB%E7%BB%93/2025-12-10-15-52-43.png">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/10/%E6%A6%82%E7%8E%87%E7%AE%97%E6%B3%95ppt%E6%80%BB%E7%BB%93/2025-12-10-15-55-14.png">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/10/%E6%A6%82%E7%8E%87%E7%AE%97%E6%B3%95ppt%E6%80%BB%E7%BB%93/2025-12-10-15-57-53.png">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/10/%E6%A6%82%E7%8E%87%E7%AE%97%E6%B3%95ppt%E6%80%BB%E7%BB%93/2025-12-10-16-00-10.png">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/10/%E6%A6%82%E7%8E%87%E7%AE%97%E6%B3%95ppt%E6%80%BB%E7%BB%93/2025-12-10-16-18-12.png">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/10/%E6%A6%82%E7%8E%87%E7%AE%97%E6%B3%95ppt%E6%80%BB%E7%BB%93/2025-12-10-16-21-17.png">
+<meta property="article:published_time" content="2025-12-10T06:09:10.000Z">
+<meta property="article:modified_time" content="2025-12-10T15:18:39.830Z">
+<meta property="article:author" content="ycf">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ycfywy.github.io/2025/12/10/%E6%A6%82%E7%8E%87%E7%AE%97%E6%B3%95ppt%E6%80%BB%E7%BB%93/2025-12-10-14-09-30.png">
+  
+  
+  
+  <title>概率算法ppt总结 - ycf blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"ycfywy.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ycf blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/images/index.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="概率算法ppt总结"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-12-10 14:09" pubdate>
+          2025年12月10日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          910 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          8 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">概率算法ppt总结</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>计算 <span class="math inline"><em>a</em> = <em>g</em><sup><em>x</em></sup><em>m</em><em>o</em><em>d</em> <em>p</em></span> 离散对数计算的问题 最坏情况下是<span class="math inline"><em>O</em>(<em>p</em>)</span> 这里可以使用Sherwood算法引入随机性，降低进入最坏情况的概率。</p>
+<p><img src="./2025-12-10-14-09-30.png" srcset="/img/loading.gif" lazyload /></p>
+<p>这个改写利用了随机预处理来改变求解的实例，使得原本可能在特定输入下性能不佳的确定性离散对数算法 <span class="math inline"><em>l</em><em>o</em><em>g</em><sub><em>g</em>, <em>p</em></sub></span>，能够以接近平均性能的效率求解。</p>
+<h2 id="dlog_rh-算法工作原理分析">🔬 <span class="math inline"><em>d</em><em>l</em><em>o</em><em>g</em><sub><em>R</em><em>H</em></sub></span> 算法工作原理分析</h2>
+<h3 id="算法目标">1. 算法目标</h3>
+<ul>
+<li><strong>问题</strong>: 离散对数问题。</li>
+<li><strong>输入</strong>: 基数 <span class="math inline"><em>g</em></span>，目标值 <span class="math inline"><em>a</em></span>，模数 <span class="math inline"><em>p</em></span>。</li>
+<li><strong>求解</strong>: 找到指数 <span class="math inline"><em>x</em></span>，使得 <span class="math inline"><em>g</em><sup><em>x</em></sup> ≡ <em>a</em> (mod  <em>p</em>)</span>。</li>
+<li><strong>模</strong>: 运算发生在 <span class="math inline">ℤ<sub><em>p</em></sub><sup>*</sup></span> (模 <span class="math inline"><em>p</em></span> 乘法群) 中。指数 <span class="math inline"><em>x</em></span> 在 <span class="math inline">ℤ<sub><em>p</em> − 1</sub></span> (模 <span class="math inline"><em>p</em> − 1</span> 加法群) 中，即 <span class="math inline"><em>x</em> ∈ {0, 1, …, <em>p</em> − 2}</span>。</li>
+</ul>
+<h3 id="dlog_rh-步骤解析">2. <span class="math inline"><em>d</em><em>l</em><em>o</em><em>g</em><sub><em>R</em><em>H</em></sub></span> 步骤解析</h3>
+<table>
+
+<thead>
+<tr class="header">
+<th style="text-align: left;">步骤</th>
+<th style="text-align: left;">代码</th>
+<th style="text-align: left;">解释</th>
+<th style="text-align: left;">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>I. 随机数</strong></td>
+<td style="text-align: left;"><code>r ← uniform(0..p-2);</code></td>
+<td style="text-align: left;">随机选择一个指数 <span class="math inline"><em>r</em> ∈ {0, 1, …, <em>p</em> − 2}</span>。<strong>这是随机性的来源。</strong></td>
+<td style="text-align: left;">引入随机变量 <span class="math inline"><em>r</em></span>。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>II. 预处理 (实例 <span class="math inline"><em>y</em></span>)</strong></td>
+<td style="text-align: left;"><code>b ← ModularExponent(g, r, p);</code></td>
+<td style="text-align: left;">计算 <span class="math inline"><em>b</em> = <em>g</em><sup><em>r</em></sup> (mod  <em>p</em>)</span>。</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>c ← b \cdot a \pmod{p};</code></td>
+<td style="text-align: left;">计算 <span class="math inline"><em>c</em> = <em>b</em> ⋅ <em>a</em> (mod  <em>p</em>) = <em>g</em><sup><em>r</em></sup> ⋅ <em>g</em><sup><em>x</em></sup> (mod  <em>p</em>) = <em>g</em><sup><em>r</em> + <em>x</em></sup> (mod  <em>p</em>)</span>。</td>
+<td style="text-align: left;"><strong>原实例 <span class="math inline"><em>a</em></span> 变换为随机实例 <span class="math inline"><em>c</em></span>。</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>III. 确定求解 (<span class="math inline"><em>f</em></span>)</strong></td>
+<td style="text-align: left;"><code>y ← logg,pc;</code></td>
+<td style="text-align: left;">使用<strong>确定性算法</strong> <span class="math inline"><em>l</em><em>o</em><em>g</em><sub><em>g</em>, <em>p</em></sub></span> 求解实例 <span class="math inline"><em>c</em></span>。<strong>目标是找到 <span class="math inline"><em>y</em></span>，使得 <span class="math inline"><em>g</em><sup><em>y</em></sup> ≡ <em>c</em> (mod  <em>p</em>)</span>。</strong></td>
+<td style="text-align: left;"><span class="math inline"><em>y</em></span> 是 <span class="math inline"><em>r</em> + <em>x</em></span> 的解。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>IV. 后处理 (<span class="math inline"><em>v</em></span>)</strong></td>
+<td style="text-align: left;"><code>return (y-r) mod (p-1);</code></td>
+<td style="text-align: left;"><span class="math inline"><em>y</em></span> 是 <span class="math inline"><em>r</em> + <em>x</em></span> 的解，所以 <span class="math inline"><em>y</em> ≡ <em>r</em> + <em>x</em> (mod  <em>p</em> − 1)</span>。因此，<span class="math inline"><em>x</em> ≡ <em>y</em> − <em>r</em> (mod  <em>p</em> − 1)</span>。<strong>这是将解 <span class="math inline"><em>y</em></span> 变回 <span class="math inline"><em>x</em></span> 的步骤。</strong></td>
+<td style="text-align: left;">恢复原实例 <span class="math inline"><em>a</em></span> 的解 <span class="math inline"><em>x</em></span>。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="u-和-v-函数的确定">3. <span class="math inline"><em>u</em></span> 和 <span class="math inline"><em>v</em></span> 函数的确定</h3>
+<p>根据 Sherwood 算法的<strong>随机预处理一般方法</strong>：</p>
+<ul>
+<li><strong>原实例 <span class="math inline"><em>x</em></span></strong>: 在离散对数问题中，原实例是<strong>目标值 <span class="math inline"><em>a</em></span></strong>。</li>
+<li><strong>随机变量 <span class="math inline"><em>r</em></span></strong>: 在 <span class="math inline">{0, 1, …, <em>p</em> − 2}</span> 中随机抽取。</li>
+<li><strong>确定性算法 <span class="math inline"><em>f</em></span></strong>: 是 <span class="math inline"><em>l</em><em>o</em><em>g</em><sub><em>g</em>, <em>p</em></sub></span>，即 <span class="math inline"><em>f</em>(<em>a</em>) = <em>x</em></span>。</li>
+</ul>
+<h4 id="预处理函数-u">1. 预处理函数 <span class="math inline"><em>u</em></span></h4>
+<p><span class="math inline"><em>u</em>(<em>a</em>, <em>r</em>)</span> 的作用是将原实例 <span class="math inline"><em>a</em></span> 变换为随机实例 <span class="math inline"><em>c</em></span>。</p>
+<p><span class="math display">$$\text{原实例 } a \xrightarrow{u(a, r)} \text{随机实例 } c$$</span></p>
+<p>根据代码 <span class="math inline"><em>c</em> ← (<em>g</em><sup><em>r</em></sup> (mod  <em>p</em>)) ⋅ <em>a</em> (mod  <em>p</em>)</span>：</p>
+<p><span class="math display"><em>u</em>(<em>a</em>, <em>r</em>) = (<em>g</em><sup><em>r</em></sup> ⋅ <em>a</em>) (mod  <em>p</em>)</span></p>
+<h4 id="后处理函数-v">2. 后处理函数 <span class="math inline"><em>v</em></span></h4>
+<p><span class="math inline"><em>v</em>(<em>r</em>, <em>s</em>)</span> 的作用是将确定性算法的解 <span class="math inline"><em>s</em></span> (即代码中的 <span class="math inline"><em>y</em></span>) 结合随机变量 <span class="math inline"><em>r</em></span>，变换回原实例的解 <span class="math inline"><em>x</em></span>。</p>
+<p><span class="math display">$$\text{随机变量 } r \text{ 和 解 } s \xrightarrow{v(r, s)} \text{原实例的解 } x$$</span></p>
+<p>根据代码 <span class="math inline"><em>x</em> ← (<em>y</em> − <em>r</em>) (mod  <em>p</em> − 1)</span>：</p>
+<p><span class="math display"><em>v</em>(<em>r</em>, <em>s</em>) = (<em>s</em> − <em>r</em>) (mod  <em>p</em> − 1)</span></p>
+<hr />
+<h3 id="素数判定问题-p124">5.2 素数判定问题 p124</h3>
+<ul>
+<li>方法1：随机因子</li>
+</ul>
+<p><img src="./2025-12-10-15-52-43.png" srcset="/img/loading.gif" lazyload /> 在 n = 2623 的情况下 <span class="math inline">$2 - \sqrt{2623}$</span>随机选择有98%的概率正确</p>
+<ul>
+<li>方法2：费马小定理的逆否命题</li>
+</ul>
+<p><img src="./2025-12-10-15-55-14.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="./2025-12-10-15-57-53.png" srcset="/img/loading.gif" lazyload /></p>
+<p>显然这种判定比较不负责（只要有 mod n == 1就是素数 不等于1就不是） 满足<span class="math inline"><em>a</em><sup><em>n</em> − 1</sup><em>m</em><em>o</em><em>d</em> <em>n</em> = 1</span>的数我们称为伪素数</p>
+<p><img src="./2025-12-10-16-00-10.png" srcset="/img/loading.gif" lazyload /></p>
+<p>也就是说，仅仅使用费马小定理，会有一些合数比较特殊，他们有很多的a做了运算后 均为1。这就迎来了我们的方法3</p>
+<ul>
+<li>方法3： Miller-Rabin测试</li>
+</ul>
+<p><img src="./2025-12-10-16-18-12.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="./2025-12-10-16-21-17.png" srcset="/img/loading.gif" lazyload /></p>
+<p>判断一个底数 <span class="math inline"><em>a</em></span> 是否为强伪证据： 分解 <span class="math inline"><em>n</em> − 1</span>： 将 <span class="math inline"><em>n</em> − 1</span> 分解为 <span class="math inline">2<sup><em>s</em></sup><em>t</em></span>（<span class="math inline"><em>t</em></span> 为奇数）。 计算初始值： 计算 <span class="math inline"><em>x</em> ← <em>a</em><sup><em>t</em></sup> (mod  <em>n</em>)</span>。 检查条件 ① 和 <span class="math inline"><em>i</em> = 0</span> 的条件 ②： 如果 <span class="math inline"><em>x</em> = 1</span> 或 <span class="math inline"><em>x</em> = <em>n</em> − 1</span>（即 <span class="math inline"><em>a</em><sup><em>t</em></sup> ≡ 1 (mod  <em>n</em>)</span> 或 <span class="math inline"><em>a</em><sup><em>t</em></sup> ≡  − 1 (mod  <em>n</em>)</span>），则 <span class="math inline"><em>a</em></span> 满足条件，返回 <span class="math inline"><em>t</em><em>r</em><em>u</em><em>e</em></span>（<span class="math inline"><em>a</em></span> 是强伪证据）。 循环检查其余的条件 ②： 执行 <span class="math inline"><em>s</em> − 1</span> 次循环，在每次循环中计算 <span class="math inline"><em>x</em> ← <em>x</em><sup>2</sup> (mod  <em>n</em>)</span>（相当于检查 <span class="math inline"><em>a</em><sup>2<sup><em>i</em></sup><em>t</em></sup> (mod  <em>n</em>)</span>）。如果在循环中发现 <span class="math inline"><em>x</em> = <em>n</em> − 1</span>，则满足条件②，返回 <span class="math inline"><em>t</em><em>r</em><em>u</em><em>e</em></span>（<span class="math inline"><em>a</em></span> 是强伪证据）。</p>
+<p>返回 <span class="math inline"><em>f</em><em>a</em><em>l</em><em>s</em><em>e</em></span>：如果所有检查都未通过，则 <span class="math inline"><em>a</em></span> 不是强伪证据。此时 <span class="math inline"><em>a</em></span> 是 <span class="math inline"><em>n</em></span> 是合数的强证据，所以 <span class="math inline"><em>n</em></span> 必定是合数，返回 <span class="math inline"><em>f</em><em>a</em><em>l</em><em>s</em><em>e</em></span>（测试成功）。</p>
+<p>这种方法大大缩减了伪证据数目</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/course/" class="category-chain-item">course</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>概率算法ppt总结</div>
+      <div>https://ycfywy.github.io/2025/12/10/概率算法ppt总结/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ycf</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年12月10日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/12/10/StressPrompt-Does-Stress-Impact-Large-Language-Models-and-Human-Performance-Similarly/" title="StressPrompt: Does Stress Impact Large Language Models and Human Performance Similarly?">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">StressPrompt: Does Stress Impact Large Language Models and Human Performance Similarly?</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/12/10/GenAL-Generative-Agent-for-Adaptive-Learning/" title="GenAL: Generative Agent for Adaptive Learning">
+                        <span class="hidden-mobile">GenAL: Generative Agent for Adaptive Learning</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
