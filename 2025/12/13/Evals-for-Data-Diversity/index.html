@@ -19,12 +19,12 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="LLM生成数据的多样性评估：深入探究指标 link 引言：为什么合成数据需要多样性？ 使用大型语言模型（LLMs）生成合成数据已成为一种流行的方法。然而，一个常见的问题是，LLM直接生成的输出往往具有重复性。 为了提高生成数据的多样性，我们通常会采用一些技术，例如：  采样参数： 提高温度（temperature）、使用核采样（nucleus-sampling）或 Top-K 采样。">
+    <meta name="description" content="LLM生成数据的多样性评估 link 引言：为什么合成数据需要多样性？ 使用大型语言模型（LLMs）生成合成数据已成为一种流行的方法。然而，一个常见的问题是，LLM直接生成的输出往往具有重复性。 为了提高生成数据的多样性，我们通常会采用一些技术，例如：  采样参数： 提高温度（temperature）、使用核采样（nucleus-sampling）或 Top-K 采样。 属性生成：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Evals for Data Diversity">
 <meta property="og:url" content="https://ycfywy.github.io/2025/12/13/Evals-for-Data-Diversity/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="LLM生成数据的多样性评估：深入探究指标 link 引言：为什么合成数据需要多样性？ 使用大型语言模型（LLMs）生成合成数据已成为一种流行的方法。然而，一个常见的问题是，LLM直接生成的输出往往具有重复性。 为了提高生成数据的多样性，我们通常会采用一些技术，例如：  采样参数： 提高温度（temperature）、使用核采样（nucleus-sampling）或 Top-K 采样。">
+<meta property="og:description" content="LLM生成数据的多样性评估 link 引言：为什么合成数据需要多样性？ 使用大型语言模型（LLMs）生成合成数据已成为一种流行的方法。然而，一个常见的问题是，LLM直接生成的输出往往具有重复性。 为了提高生成数据的多样性，我们通常会采用一些技术，例如：  采样参数： 提高温度（temperature）、使用核采样（nucleus-sampling）或 Top-K 采样。 属性生成：">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ycfywy.github.io/2025/12/13/Evals-for-Data-Diversity/2025-12-13-19-46-14.png">
 <meta property="og:image" content="https://ycfywy.github.io/2025/12/13/Evals-for-Data-Diversity/2025-12-13-19-46-20.png">
@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://ycfywy.github.io/2025/12/13/Evals-for-Data-Diversity/2025-12-13-19-49-04.png">
 <meta property="og:image" content="https://ycfywy.github.io/2025/12/13/Evals-for-Data-Diversity/2025-12-13-19-49-10.png">
 <meta property="article:published_time" content="2025-12-13T11:36:52.000Z">
-<meta property="article:modified_time" content="2025-12-13T11:49:42.036Z">
+<meta property="article:modified_time" content="2025-12-13T11:56:21.233Z">
 <meta property="article:author" content="ycf">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://ycfywy.github.io/2025/12/13/Evals-for-Data-Diversity/2025-12-13-19-46-14.png">
@@ -288,7 +288,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="llm生成数据的多样性评估深入探究指标">LLM生成数据的多样性评估：深入探究指标</h1>
+                <h1 id="llm生成数据的多样性评估">LLM生成数据的多样性评估</h1>
 <p><a target="_blank" rel="noopener" href="https://amitness.com/posts/diversity-evals">link</a></p>
 <h2 id="引言为什么合成数据需要多样性">引言：为什么合成数据需要多样性？</h2>
 <p>使用大型语言模型（LLMs）生成合成数据已成为一种流行的方法。然而，一个常见的问题是，LLM直接生成的输出往往具有<strong>重复性</strong>。</p>
@@ -308,9 +308,14 @@
 <li><strong>基本概念：</strong> 源自语言学中的“型符比”（type-token ratio）。</li>
 <li><strong>计算方式：</strong> 计算生成的整个数据集中<strong>独特 N-gram 的数量</strong>与<strong>总 N-gram 的数量</strong>之比。</li>
 </ul>
-<p>例如，对于文本 “As an AI language model” 和 “As an AI model”： * 总 Unigram (1-gram) 数量：9 * 独特 Unigram 数量：5 (As, an, AI, language, model) * <strong>多样性得分：</strong> <span class="math inline">5/9 ≈ 0.55</span></p>
+<p>例如，对于文本 “As an AI language model” 和 “As an AI model”：</p>
+<ul>
+<li>总 Unigram (1-gram) 数量：9</li>
+<li>独特 Unigram 数量：5 (As, an, AI, language, model)</li>
+<li><strong>多样性得分：</strong> <span class="math inline">5/9 ≈ 0.55</span></li>
+</ul>
 <p><img src="./2025-12-13-19-46-14.png" srcset="/img/loading.gif" lazyload /> <img src="./2025-12-13-19-46-20.png" srcset="/img/loading.gif" lazyload /></p>
-<p>这个概念可以扩展到 Bigram (k=2)、Trigram (k=3) 等，并可以分别报告或组合成一个分数。</p>
+<p>这个概念可以扩展到 Bigram (k=2)、Trigram (k=3) 等，并可以分别组合成一个分数。</p>
 <h3 id="n-gram-熵-ent-n">2. N-gram 熵 (Ent-n)</h3>
 <ul>
 <li><strong>基本概念：</strong> 在理想情况下，LLM 生成的所有文本都应该是独特的，任何 N-gram 都不会重复超过一次。</li>
@@ -378,7 +383,8 @@
 </ol></li>
 <li><strong>判断标准：</strong> 压缩比越高，表示句法模板重复越多，<strong>多样性越低</strong>。多样性得分取压缩比的倒数。</li>
 </ul>
-<p><img src="./2025-12-13-19-48-57.png" srcset="/img/loading.gif" lazyload /> <img src="./2025-12-13-19-49-04.png" srcset="/img/loading.gif" lazyload /> <img src="./2025-12-13-19-49-10.png" srcset="/img/loading.gif" lazyload /> —</p>
+<p><img src="./2025-12-13-19-48-57.png" srcset="/img/loading.gif" lazyload /> <img src="./2025-12-13-19-49-04.png" srcset="/img/loading.gif" lazyload /> <img src="./2025-12-13-19-49-10.png" srcset="/img/loading.gif" lazyload /></p>
+<hr />
 <h2 id="总结">总结</h2>
 <p>我们探索了衡量LLM生成数据的语言多样性的三大类指标：</p>
 <table>
@@ -407,7 +413,7 @@
 </tr>
 </tbody>
 </table>
-<p>在实际应用中，这些自动指标快速且易于计算，可以作为评估合成数据语言多样性的指标。</p>
+<p>在实际应用中，这些自动指标快速且易于计算，可以作为评估LLM生成数据多样性的指标。</p>
 
                 
               </div>
@@ -415,6 +421,27 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/eval/" class="category-chain-item">eval</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
