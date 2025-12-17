@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>一些工作感想</title>
+    <link href="/2025/12/16/%E4%B8%80%E4%BA%9B%E5%B7%A5%E4%BD%9C%E6%84%9F%E6%83%B3/"/>
+    <url>/2025/12/16/%E4%B8%80%E4%BA%9B%E5%B7%A5%E4%BD%9C%E6%84%9F%E6%83%B3/</url>
+    
+    <content type="html"><![CDATA[<p>小公司的潜台词就是： - 权责关系混乱，你什么都要干 - 没有任何方向，老板只会说这个好，那个也好</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>混合分布的概述</title>
     <link href="/2025/12/16/%E6%B7%B7%E5%90%88%E5%88%86%E5%B8%83%E7%9A%84%E6%A6%82%E8%BF%B0/"/>
     <url>/2025/12/16/%E6%B7%B7%E5%90%88%E5%88%86%E5%B8%83%E7%9A%84%E6%A6%82%E8%BF%B0/</url>
@@ -59,7 +72,7 @@
     <link href="/2025/12/15/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A7%9F%E8%B5%81%E5%92%8C%E9%85%8D%E7%BD%AE/"/>
     <url>/2025/12/15/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A7%9F%E8%B5%81%E5%92%8C%E9%85%8D%E7%BD%AE/</url>
     
-    <content type="html"><![CDATA[<p><a href="https://www.autodl.com/console/instance/list?tag_id=">link</a></p><p>还是AutoDL便宜 <img src="./2025-12-15-13-35-31.png" /></p><p><img src="./2025-12-15-13-37-26.png" /></p><p>配置好vllm (中间发现了一个<a href="https://github.com/vllm-project/vllm/issues/23517">bug</a>) 下载了Qwen3-8B Qwen3-8B-Embedding做测试 还是可以的 25GB/32GB <img src="./2025-12-15-13-39-39.png" /></p><p>此外AutoDL还支持0.1元/h的无GPU模式启动，这个模式下可以编写一些代码逻辑，很便宜。</p>]]></content>
+    <content type="html"><![CDATA[<p><a href="https://www.autodl.com/console/instance/list?tag_id=">link</a></p><h2 id="aliyun服务器定价">aliyun服务器定价</h2><p>一方面，卡的定价比较贵，24GB的A10要8.5元/h 而且还没有计算服务器的网费。另一方面显卡型号不全，便宜的卡如5090这种都没有。 <img src="./2025-12-17-10-45-30.png" /> <img src="./2025-12-17-10-46-02.png" /></p><h2 id="autodl服务器定价">AutoDL服务器定价</h2><p>价格便宜得多，而且支持0.1元/h的无GPU模式启动，这个模式下可以编写一些代码逻辑，很便宜。 <img src="./2025-12-17-10-51-11.png" /></p><h2 id="购买服务器并进行一些配置">购买服务器，并进行一些配置</h2><p>这里选择32GB的5090服务器，并进行一些LLM相关配置： - 选好cuda版本 12.8 - 下载对应版本的vllm 用于测试GPU - 配置镜像的链接（AutoDL是国内的服务器 需要配置一下镜像） - vllm下载Qwen3-8B 测试GPU</p><p><img src="./2025-12-15-13-35-31.png" /> <img src="./2025-12-15-13-37-26.png" /></p><p>配置好vllm (中间发现了一个<a href="https://github.com/vllm-project/vllm/issues/23517">bug</a>) 下载了Qwen3-8B 运行做测试，模型跑起来的GPU使用情况25GB/32GB <img src="./2025-12-15-13-39-39.png" /></p>]]></content>
     
     
     
