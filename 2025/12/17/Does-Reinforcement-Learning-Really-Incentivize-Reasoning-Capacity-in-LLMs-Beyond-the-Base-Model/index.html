@@ -19,21 +19,28 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="小公司的潜台词就是： - 权责关系混乱，你什么都要干 - 没有任何方向，老板只会说这个好，那个也好">
+    <meta name="description" content="阅读总结   本文深入分析了RLVR(LLM训练中使用的RL算法)对模型表现的真实作用，指出RL虽然提升了模型的表现，但是没有提高模型的upper bound。本文重点贡献在于做了非常详实的实验证明这一论点。实验包括： - 统计LLM在pass@k的情况下的表现，用数据论证 - 使用不同的强化学习算法训练base model对比性能 把avg@k 变成pass@k   过去的测试LLM pe">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一些工作感想">
-<meta property="og:url" content="https://ycfywy.github.io/2025/12/16/%E4%B8%80%E4%BA%9B%E5%B7%A5%E4%BD%9C%E6%84%9F%E6%83%B3/index.html">
+<meta property="og:title" content="Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?">
+<meta property="og:url" content="https://ycfywy.github.io/2025/12/17/Does-Reinforcement-Learning-Really-Incentivize-Reasoning-Capacity-in-LLMs-Beyond-the-Base-Model/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="小公司的潜台词就是： - 权责关系混乱，你什么都要干 - 没有任何方向，老板只会说这个好，那个也好">
+<meta property="og:description" content="阅读总结   本文深入分析了RLVR(LLM训练中使用的RL算法)对模型表现的真实作用，指出RL虽然提升了模型的表现，但是没有提高模型的upper bound。本文重点贡献在于做了非常详实的实验证明这一论点。实验包括： - 统计LLM在pass@k的情况下的表现，用数据论证 - 使用不同的强化学习算法训练base model对比性能 把avg@k 变成pass@k   过去的测试LLM pe">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-12-16T10:11:23.000Z">
-<meta property="article:modified_time" content="2025-12-16T10:13:22.731Z">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/17/Does-Reinforcement-Learning-Really-Incentivize-Reasoning-Capacity-in-LLMs-Beyond-the-Base-Model/2025-12-17-22-42-47.png">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/17/Does-Reinforcement-Learning-Really-Incentivize-Reasoning-Capacity-in-LLMs-Beyond-the-Base-Model/2025-12-17-22-43-34.png">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/17/Does-Reinforcement-Learning-Really-Incentivize-Reasoning-Capacity-in-LLMs-Beyond-the-Base-Model/2025-12-17-22-45-36.png">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/17/Does-Reinforcement-Learning-Really-Incentivize-Reasoning-Capacity-in-LLMs-Beyond-the-Base-Model/2025-12-17-22-59-17.png">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/17/Does-Reinforcement-Learning-Really-Incentivize-Reasoning-Capacity-in-LLMs-Beyond-the-Base-Model/2025-12-17-23-06-43.png">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/17/Does-Reinforcement-Learning-Really-Incentivize-Reasoning-Capacity-in-LLMs-Beyond-the-Base-Model/2025-12-17-23-06-59.png">
+<meta property="article:published_time" content="2025-12-17T14:33:02.000Z">
+<meta property="article:modified_time" content="2025-12-17T15:18:07.768Z">
 <meta property="article:author" content="ycf">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ycfywy.github.io/2025/12/17/Does-Reinforcement-Learning-Really-Incentivize-Reasoning-Capacity-in-LLMs-Beyond-the-Base-Model/2025-12-17-22-42-47.png">
   
   
   
-  <title>一些工作感想 - ycf blog</title>
+  <title>Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model? - ycf blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +206,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="一些工作感想"></span>
+            <span id="subtitle" data-typed-text="Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?"></span>
           
         </div>
 
@@ -210,8 +217,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-12-16 18:11" pubdate>
-          2025年12月16日 晚上
+        <time datetime="2025-12-17 22:33" pubdate>
+          2025年12月17日 晚上
         </time>
       </span>
     
@@ -222,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          39 字
+          699 字
         
       </span>
     
@@ -233,7 +240,7 @@
         
         
         
-          1 分钟
+          6 分钟
         
       </span>
     
@@ -270,12 +277,19 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">一些工作感想</h1>
+            <h1 id="seo-header">Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?</h1>
             
             
               <div class="markdown-body">
                 
-                <p>小公司的潜台词就是： - 权责关系混乱，你什么都要干 - 没有任何方向，老板只会说这个好，那个也好</p>
+                <h2 id="阅读总结">阅读总结</h2>
+<p>  本文深入分析了RLVR(LLM训练中使用的RL算法)对模型表现的真实作用，指出<strong>RL虽然提升了模型的表现，但是没有提高模型的upper bound</strong>。本文重点贡献在于做了非常详实的实验证明这一论点。实验包括： - 统计LLM在pass@k的情况下的表现，用数据论证 - 使用不同的强化学习算法训练base model对比性能</p>
+<h2 id="把avgk-变成passk">把avg@k 变成pass@k</h2>
+<p>  过去的测试LLM performance的方式：让LLM跑1000道题目，输出正确就记1分，计算正确率。本文为了测试LLM能力的边界，采用pass@k的测试方法：模型做K次，只要有1次做对就算对吗，这代表了模型能力的边界。   把测试改成pass@k之后发现，LLM在k值比较大的时候，表现反而不如base model。进一步在各个模型(Qwen LLaMa)和各个测试的benchmark(AIME24 MATH500..)上实验，也发现类似的现象。 <img src="./2025-12-17-22-42-47.png" srcset="/img/loading.gif" lazyload /> <img src="./2025-12-17-22-43-34.png" srcset="/img/loading.gif" lazyload />   对base model和经过rl的model回答问题的情况做分类，分为4类：base和rl都能做对/base能做对rl做不对/base做不对rl做对/base rl都做不对。发现base能做对的rl做不对，强化学习反而降低了模型的表现。 <img src="./2025-12-17-22-45-36.png" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="使用不同的强化学习算法训练">使用不同的强化学习算法训练</h2>
+<p>  发现RL算法只能提高k比较小的情况下的表现，随着k的增大，LLM的表现有一个upper bound，而且这个upper bound和base model是一样的。用人话说就是：RL的过程没有提高LLM的upper bound，只是让LLM能够尽可能少的K次尝试，就能回答正确。(这个发现说明：RL确实能够提升模型的表现，只是提升不了模型的upper bound)。 <img src="./2025-12-17-22-59-17.png" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="discussion">Discussion</h2>
+<p>  在RL领域中，AlphaGO非常出名。作为一个使用纯强化学习训练的围棋AI，AlphaGO能够下出来人类棋手意料之外的位置。这表明AlphaGO通过强化学习拓宽了现有围棋知识的边界。   为什么RLVR不能够拓宽LLM能力的边界呢？这是因为RLVR并不等于RL，相比于RL他有一些缺陷： - 搜索空间很大: 相比于围棋的搜索空间，语言的搜索空间很大，模型随机采样是大概率得不到正确答案，也没有reward。这就是为什么现有的RL都依赖于一个比较强大的Pre-Train model。因为需要base model来引导，才能在广大的空间里面，输出一个正确的答案。 - sparse reward: LLM只有输出正确答案的时候才有reward，其他情况都是0。假设模型在RL过程中通过探索，生成了一个answer。这个answer大概率是没有reward的，这种探索边界的行为大概率会被抑制。 <img src="./2025-12-17-23-06-43.png" srcset="/img/loading.gif" lazyload /> <img src="./2025-12-17-23-06-59.png" srcset="/img/loading.gif" lazyload /></p>
 
                 
               </div>
@@ -283,6 +297,27 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/NeurIPS2025/" class="category-chain-item">NeurIPS2025</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -293,8 +328,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>一些工作感想</div>
-      <div>https://ycfywy.github.io/2025/12/16/一些工作感想/</div>
+      <div>Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?</div>
+      <div>https://ycfywy.github.io/2025/12/17/Does-Reinforcement-Learning-Really-Incentivize-Reasoning-Capacity-in-LLMs-Beyond-the-Base-Model/</div>
     </div>
     <div class="license-meta">
       
@@ -306,7 +341,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年12月16日</div>
+          <div>2025年12月17日</div>
         </div>
       
       
@@ -338,18 +373,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/12/17/Does-Reinforcement-Learning-Really-Incentivize-Reasoning-Capacity-in-LLMs-Beyond-the-Base-Model/" title="Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/12/16/%E6%B7%B7%E5%90%88%E5%88%86%E5%B8%83%E7%9A%84%E6%A6%82%E8%BF%B0/" title="混合分布的概述">
-                        <span class="hidden-mobile">混合分布的概述</span>
+                      <a href="/2025/12/16/%E4%B8%80%E4%BA%9B%E5%B7%A5%E4%BD%9C%E6%84%9F%E6%83%B3/" title="一些工作感想">
+                        <span class="hidden-mobile">一些工作感想</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
