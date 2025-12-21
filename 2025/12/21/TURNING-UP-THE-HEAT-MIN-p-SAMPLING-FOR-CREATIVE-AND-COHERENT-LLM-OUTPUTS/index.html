@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://ycfywy.github.io/2025/12/21/TURNING-UP-THE-HEAT-MIN-p-SAMPLING-FOR-CREATIVE-AND-COHERENT-LLM-OUTPUTS/2025-12-21-15-07-39.png">
 <meta property="og:image" content="https://ycfywy.github.io/2025/12/21/TURNING-UP-THE-HEAT-MIN-p-SAMPLING-FOR-CREATIVE-AND-COHERENT-LLM-OUTPUTS/2025-12-21-15-09-11.png">
 <meta property="article:published_time" content="2025-12-21T05:38:02.000Z">
-<meta property="article:modified_time" content="2025-12-21T09:33:19.198Z">
+<meta property="article:modified_time" content="2025-12-21T09:36:41.039Z">
 <meta property="article:author" content="ycf">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://ycfywy.github.io/2025/12/21/TURNING-UP-THE-HEAT-MIN-p-SAMPLING-FOR-CREATIVE-AND-COHERENT-LLM-OUTPUTS/2025-12-21-15-15-49.png">
@@ -335,12 +335,9 @@
 <p>核心痛点： 现有的方法在高温度设置下，很难在保持逻辑连贯的同时提供高质量的创造性输出，且做不到动态调整。</p>
 <h2 id="解决方法">解决方法</h2>
 <p>  为了解决这些痛点，本文提出了Min-p 采样。该采样方法解决了以下问题： - 即使在极高温度（如 <span class="math inline"><em>T</em> = 3.0</span>）下，Min-p 也能过滤掉那些相对于“最佳候选词”概率过低的词，从而防止模型胡言乱语。 - 解决了 Top-k 和 Top-p 对“模型确定性”不敏感的问题。Min-p 能根据模型是“非常确定”（高置信度）还是“犹豫不决”（低置信度）来自动收缩或放宽候选词的选择范围。 - 计算复杂度与易用性： 相比于 Mirostat 或 <span class="math inline"><em>η</em></span>-sampling 等基于熵的复杂采样方法，Min-p 非常简单，几乎不增加推理计算成本，且易于集成 。</p>
-<p>Min-p 的核心思想是基于模型对首选词的“信心”来进行动态截断。算法逻辑在每个解码步骤 <span class="math inline"><em>t</em></span>，假设模型预测的词表概率分布为 <span class="math inline"><em>P</em>(<em>x</em>)</span>：找到最大概率： 找出当前最可能的那个词的概率值，记为 <span class="math inline"><em>p</em><sub><em>m</em><em>a</em><em>x</em></sub></span> 。</p>
-<p><span class="math display"><em>p</em><sub><em>m</em><em>a</em><em>x</em></sub> = max<sub><em>v</em> ∈ <em>V</em></sub><em>P</em>(<em>v</em>|<em>x</em><sub>1 : <em>t</em> − 1</sub>)</span></p>
-<p>计算截断阈值： 设定一个基础超参数 <span class="math inline"><em>p</em><sub><em>b</em><em>a</em><em>s</em><em>e</em></sub></span>（通常为 0.05 或 0.1），实际的过滤阈值 <span class="math inline"><em>p</em><sub><em>s</em><em>c</em><em>a</em><em>l</em><em>e</em><em>d</em></sub></span> 是两者的乘积。</p>
-<p><span class="math display"><em>p</em><sub><em>s</em><em>c</em><em>a</em><em>l</em><em>e</em><em>d</em></sub> = <em>p</em><sub><em>b</em><em>a</em><em>s</em><em>e</em></sub> × <em>p</em><sub><em>m</em><em>a</em><em>x</em></sub></span></p>
-<p>构建候选池： 只有概率值大于等于 <span class="math inline"><em>p</em><sub><em>s</em><em>c</em><em>a</em><em>l</em><em>e</em><em>d</em></sub></span> 的词才会被保留，其他的全部剔除。</p>
-<p><span class="math display">𝒱<sub><em>m</em><em>i</em><em>n</em></sub> = {<em>v</em> ∈ 𝒱 : <em>P</em>(<em>v</em>|<em>x</em><sub>1 : <em>t</em> − 1</sub>) ≥ <em>p</em><sub><em>s</em><em>c</em><em>a</em><em>l</em><em>e</em><em>d</em></sub>}</span></p>
+<p>Min-p 的核心思想是基于模型对首选词的“信心”来进行动态截断。算法逻辑在每个解码步骤 <span class="math inline"><em>t</em></span>，假设模型预测的词表概率分布为 <span class="math inline"><em>P</em>(<em>x</em>)</span>：找到最大概率： 找出当前最可能的那个词的概率值，记为 <span class="math inline"><em>p</em><sub><em>m</em><em>a</em><em>x</em></sub></span> 。 <span class="math display"><em>p</em><sub><em>m</em><em>a</em><em>x</em></sub> = max<sub><em>v</em> ∈ <em>V</em></sub><em>P</em>(<em>v</em>|<em>x</em><sub>1 : <em>t</em> − 1</sub>)</span></p>
+<p>计算截断阈值： 设定一个基础超参数 <span class="math inline"><em>p</em><sub><em>b</em><em>a</em><em>s</em><em>e</em></sub></span>（通常为 0.05 或 0.1），实际的过滤阈值 <span class="math inline"><em>p</em><sub><em>s</em><em>c</em><em>a</em><em>l</em><em>e</em><em>d</em></sub></span> 是两者的乘积。 <span class="math display"><em>p</em><sub><em>s</em><em>c</em><em>a</em><em>l</em><em>e</em><em>d</em></sub> = <em>p</em><sub><em>b</em><em>a</em><em>s</em><em>e</em></sub> × <em>p</em><sub><em>m</em><em>a</em><em>x</em></sub></span></p>
+<p>构建候选池： 只有概率值大于等于 <span class="math inline"><em>p</em><sub><em>s</em><em>c</em><em>a</em><em>l</em><em>e</em><em>d</em></sub></span> 的词才会被保留，其他的全部剔除。 <span class="math display">𝒱<sub><em>m</em><em>i</em><em>n</em></sub> = {<em>v</em> ∈ 𝒱 : <em>P</em>(<em>v</em>|<em>x</em><sub>1 : <em>t</em> − 1</sub>) ≥ <em>p</em><sub><em>s</em><em>c</em><em>a</em><em>l</em><em>e</em><em>d</em></sub>}</span></p>
 <p>重归一化与采样： 在剩下的候选词中进行归一化并采样 。</p>
 <p>  如果模型觉得下一个词是“Apple”的概率是 90% (<span class="math inline"><em>p</em><sub><em>m</em><em>a</em><em>x</em></sub> = 0.9</span>)，且 <span class="math inline"><em>p</em><sub><em>b</em><em>a</em><em>s</em><em>e</em></sub> = 0.1</span>，那么阈值就是 <span class="math inline">0.09</span>。所有概率低于 9% 的词都会被丢弃。这迫使模型专注于高概率词，保持连贯。如果模型觉得下一个词概率都很低，最高的也才 10% (<span class="math inline"><em>p</em><sub><em>m</em><em>a</em><em>x</em></sub> = 0.1</span>)，那么阈值就变成了 <span class="math inline">0.01</span>。这样更多低概率的词就有机会入选，增加了创造性和多样性。</p>
 <p>  使用一张图片解释这个采样方法的优势：如图(a, c)，在高确定性的场景下，top-p方法会引入很多小概率的token，导致low quality，但是min-p方法可以过滤掉这些小概率tokne。如图(b, d)，在低确定性的场景下，top-k方法会忽略掉很多高概率的token，导致low diversity，但是min-p方法不会忽略他们。 <img src="./2025-12-21-15-25-48.png" srcset="/img/loading.gif" lazyload /></p>
