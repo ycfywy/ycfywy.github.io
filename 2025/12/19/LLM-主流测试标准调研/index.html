@@ -19,12 +19,12 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="总结   本文介绍了目前主流的测试LLM性能的benchmarks     数据集名称 测试主题 测试方法 资源链接     GPQA 专家级科学 (生物、物理、化学) 448道由博士生水平专家编写的高难度选择题。 Paper &#x2F; Dataset   AIME 2025 竞赛数学 包含美国邀请数学考试（AIME）2025年的真题，侧重深度数学推理。 D">
+    <meta name="description" content="总结   本文介绍了目前主流的测试LLM性能的benchmarks 增强版大模型评估基准对照表 (2025版)     数据集名称 测试主题 核心测试方法 选型建议 &#x2F; 适用场景 资源链接     GPQA 专家级科学 448道博士水平物理&#x2F;生物&#x2F;化学题。 必选。 用于测试模型在垂直领域硬科学推理的“天花板”水平。 Dataset   AIME 202">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LLM 主流测试标准调研">
 <meta property="og:url" content="https://ycfywy.github.io/2025/12/19/LLM-%E4%B8%BB%E6%B5%81%E6%B5%8B%E8%AF%95%E6%A0%87%E5%87%86%E8%B0%83%E7%A0%94/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="总结   本文介绍了目前主流的测试LLM性能的benchmarks     数据集名称 测试主题 测试方法 资源链接     GPQA 专家级科学 (生物、物理、化学) 448道由博士生水平专家编写的高难度选择题。 Paper &#x2F; Dataset   AIME 2025 竞赛数学 包含美国邀请数学考试（AIME）2025年的真题，侧重深度数学推理。 D">
+<meta property="og:description" content="总结   本文介绍了目前主流的测试LLM性能的benchmarks 增强版大模型评估基准对照表 (2025版)     数据集名称 测试主题 核心测试方法 选型建议 &#x2F; 适用场景 资源链接     GPQA 专家级科学 448道博士水平物理&#x2F;生物&#x2F;化学题。 必选。 用于测试模型在垂直领域硬科学推理的“天花板”水平。 Dataset   AIME 202">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="d:\MyDeskTop\%E5%90%88%E8%AE%A2%E6%9C%AC%E6%9D%90%E6%96%99\2025-12-19-23-33-02.png">
 <meta property="og:image" content="https://ycfywy.github.io/2025/12/19/LLM-%E4%B8%BB%E6%B5%81%E6%B5%8B%E8%AF%95%E6%A0%87%E5%87%86%E8%B0%83%E7%A0%94/LLM-%E4%B8%BB%E6%B5%81%E6%B5%8B%E8%AF%95%E6%A0%87%E5%87%86%E8%B0%83%E7%A0%94/2025-12-19-23-37-18.png">
@@ -38,7 +38,7 @@
 <meta property="og:image" content="d:\MyDeskTop\%E5%90%88%E8%AE%A2%E6%9C%AC%E6%9D%90%E6%96%99\2025-12-19-23-55-08.png">
 <meta property="og:image" content="d:\MyDeskTop\%E5%90%88%E8%AE%A2%E6%9C%AC%E6%9D%90%E6%96%99\2025-12-19-23-56-32.png">
 <meta property="article:published_time" content="2025-12-19T15:28:09.000Z">
-<meta property="article:modified_time" content="2025-12-22T01:44:18.955Z">
+<meta property="article:modified_time" content="2025-12-28T16:41:52.951Z">
 <meta property="article:author" content="ycf">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="d:\MyDeskTop\%E5%90%88%E8%AE%A2%E6%9C%AC%E6%9D%90%E6%96%99\2025-12-19-23-33-02.png">
@@ -234,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          2k 字
         
       </span>
     
@@ -245,7 +245,7 @@
         
         
         
-          15 分钟
+          17 分钟
         
       </span>
     
@@ -289,79 +289,120 @@
                 
                 <h2 id="总结">总结</h2>
 <p>  本文介绍了目前主流的测试LLM性能的benchmarks</p>
+<h3 id="增强版大模型评估基准对照表-2025版">增强版大模型评估基准对照表 (2025版)</h3>
 <table>
 
 <thead>
 <tr class="header">
 <th>数据集名称</th>
 <th>测试主题</th>
-<th>测试方法</th>
+<th>核心测试方法</th>
+<th>选型建议 / 适用场景</th>
 <th>资源链接</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>GPQA</strong></td>
-<td>专家级科学 (生物、物理、化学)</td>
-<td>448道由博士生水平专家编写的高难度选择题。</td>
-<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2311.12022">Paper</a> / <a target="_blank" rel="noopener" href="https://huggingface.co/datasets/Idavidrein/gpqa">Dataset</a></td>
+<td>专家级科学</td>
+<td>448道博士水平物理/生物/化学题。</td>
+<td><strong>必选。</strong> 用于测试模型在垂直领域硬科学推理的“天花板”水平。</td>
+<td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/Idavidrein/gpqa">Dataset</a></td>
 </tr>
 <tr class="even">
 <td><strong>AIME 2025</strong></td>
 <td>竞赛数学</td>
-<td>包含美国邀请数学考试（AIME）2025年的真题，侧重深度数学推理。</td>
+<td>深度数学推理，非选择题。</td>
+<td><strong>进阶。</strong> 评估模型是否具备类似 o1/o3 的深度思维（Reasoning）能力。</td>
 <td><a target="_blank" rel="noopener" href="http://huggingface.co/datasets/opencompass/AIME2025">Dataset</a></td>
 </tr>
 <tr class="odd">
+<td><strong>C-Eval</strong></td>
+<td><strong>中文综合能力</strong></td>
+<td>13948道涵盖52个学科的选择题。</td>
+<td><strong>中文必选。</strong> 国内大模型最基础的门槛测试，评估中文综合知识储备。</td>
+<td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/ceval/ceval-exam">Dataset</a></td>
+</tr>
+<tr class="even">
+<td><strong>CMMLU</strong></td>
+<td><strong>中文综合知识</strong></td>
+<td>涵盖67个学科，专门针对中文语境优化。</td>
+<td><strong>中文必选。</strong> 补充 C-Eval，更侧重中文文化背景下的多任务知识评估。</td>
+<td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/haonan-li/cmmlu">Dataset</a></td>
+</tr>
+<tr class="odd">
 <td><strong>SWE-bench</strong></td>
-<td>软件工程 / 代码修复</td>
-<td>给予问题描述，要求 AI 修改仓库代码并<strong>通过单元测试</strong>（Fail-to-Pass 模式）。</td>
+<td>软件工程</td>
+<td>修改真实代码仓库并修复 Bug。</td>
+<td><strong>Agent必选。</strong> 评估模型作为“AI程序员”在复杂环境下的工程落地能力。</td>
 <td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/SWE-bench/SWE-bench">Dataset</a></td>
 </tr>
 <tr class="even">
-<td><strong>HLE</strong> (Humanity’s Last Exam)</td>
-<td>跨学科前沿知识 (多模态)</td>
-<td>2500道涵盖数学、人文、自然科学的<strong>前沿专家级</strong>选择题与简答题。</td>
-<td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/cais/hle">Dataset</a></td>
+<td><strong>AlignBench</strong></td>
+<td><strong>中文指令对齐</strong></td>
+<td>涵盖数学、逻辑、中文理解等8大维度。</td>
+<td><strong>对齐评估。</strong> 衡量模型是否听话、回答是否符合中文用户的语言习惯。</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2311.16452">Paper</a></td>
 </tr>
 <tr class="odd">
 <td><strong>MMLU</strong></td>
-<td>通用世界知识 (多任务)</td>
-<td>涵盖57个学科（人文、社科、STEM等），共11.6万道多项选择题。</td>
+<td>通用世界知识</td>
+<td>57个学科，1.16万道题。</td>
+<td><strong>全球基准。</strong> 模型预训练阶段效果的最直观参考，用于横向对比模型量级。</td>
 <td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/cais/mmlu">Dataset</a></td>
 </tr>
 <tr class="even">
+<td><strong>HLE</strong></td>
+<td>前沿专家知识</td>
+<td>跨学科多模态，高难度。</td>
+<td><strong>前沿探索。</strong> 当 MMLU 达到 90%+ 产生饱和时，用此项测试拉开差距。</td>
+<td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/cais/hle">Dataset</a></td>
+</tr>
+<tr class="odd">
 <td><strong>Math-500</strong></td>
-<td>高难度数学推理</td>
-<td>从 MATH 数据集中精选出的 500 道高难度竞赛级数学题。</td>
+<td>高难度数学</td>
+<td>从 MATH 中精选的 500 道难题。</td>
+<td><strong>推理基准。</strong> 快速评估模型逻辑链条（CoT）是否严密，适合小样本快评。</td>
 <td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/HuggingFaceH4/MATH-500">Dataset</a></td>
+</tr>
+<tr class="even">
+<td><strong>C-Math</strong></td>
+<td><strong>中文数学能力</strong></td>
+<td>专门针对中文表述的数学问题。</td>
+<td><strong>场景优化。</strong> 评估模型能否理解中文语境下的数学逻辑和数量关系。</td>
+<td><a target="_blank" rel="noopener" href="https://www.google.com/search?q=https://huggingface.co/datasets/Libert-S/C-Math">Dataset</a></td>
 </tr>
 <tr class="odd">
 <td><strong>IFBench</strong></td>
-<td>指令遵循 (Instruction Following)</td>
-<td>自动化评估模型在满足特定约束（格式、字数、语言等）下的表现。</td>
+<td>指令遵循</td>
+<td>自动化评估格式/字数约束。</td>
+<td><strong>指令遵循。</strong> 适合评估模型在 RAG、长文本总结等对格式要求严苛的任务表现。</td>
 <td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/allenai/IF_multi_constraints_upto5">Dataset</a></td>
 </tr>
 <tr class="even">
-<td><strong>GLUE</strong></td>
-<td>通用自然语言理解 (NLU)</td>
-<td>集合了多种基础语言任务（情感分析、文本蕴含等）的综合评价标准。</td>
-<td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/nyu-mll/glue">Dataset</a></td>
-</tr>
-<tr class="odd">
 <td><strong>GSM8K</strong></td>
-<td>小学数学应用题</td>
-<td>8500道需要 2-8 步<strong>多步算术推理</strong>的应用题，以自然语言解答。</td>
+<td>小学数学应用</td>
+<td>8500道多步算术推理。</td>
+<td><strong>基础基准。</strong> 用于评估中轻量级模型（如 7B/14B）的基本逻辑能力。</td>
 <td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/openai/gsm8k">Dataset</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><strong>HumanEval</strong></td>
-<td>代码生成 (Python)</td>
-<td>164个编程问题，要求编写代码并<strong>通过自动化单元测试</strong>。</td>
+<td>代码生成</td>
+<td>164个 Python 编程问题。</td>
+<td><strong>代码必选。</strong> 评估模型生成算法代码的纯净度和逻辑性，最经典的代码集。</td>
 <td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/openai/openai_humaneval">Dataset</a></td>
+</tr>
+<tr class="even">
+<td><strong>SuperCLUE</strong></td>
+<td><strong>中文大模型总榜</strong></td>
+<td>分级评估（L1-L5）的多维度测试。</td>
+<td><strong>行业对比。</strong> 适合用于对外宣传或横向对比国内主流商用模型的地位。</td>
+<td><a target="_blank" rel="noopener" href="https://www.superclueai.com/">Link</a></td>
 </tr>
 </tbody>
 </table>
+<hr />
 <hr />
 <h3 id="gpqa">GPQA</h3>
 <p>paper: https://arxiv.org/abs/2311.12022 dataset:https://huggingface.co/datasets/Idavidrein/gpqa</p>
