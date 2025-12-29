@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://ycfywy.github.io/2025/12/28/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-11-25-15.png">
 <meta property="og:image" content="https://ycfywy.github.io/2025/12/28/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-16-17-01.png">
 <meta property="article:published_time" content="2025-12-27T16:39:31.000Z">
-<meta property="article:modified_time" content="2025-12-29T08:56:30.656Z">
+<meta property="article:modified_time" content="2025-12-29T08:59:10.992Z">
 <meta property="article:author" content="ycf">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://ycfywy.github.io/2025/12/28/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-11-09-11.png">
@@ -316,7 +316,7 @@
 <p>  本文对Reasoning model在困难数据集和一般数据集上的Reasoning steps做了统计，统计结果如下。对这些数据进行分析，发现在一般数据集上(对应 Full)，模型的成功率和Reasoning steps相关性趋近于0；在困难数据集上，推理的深度才发挥作用。 <img src="./2025-12-29-11-14-46.png" srcset="/img/loading.gif" lazyload /></p>
 <p>  考虑人为地增加或者缩短模型的thinking steps，比如通过提示词规定，模型必须在k步内解决问题。本文对Reasong model成功解决的问题集进行了thinking steps reduce，解决失败的问题进行了thinking steps increase。根据reduce/increase的比例，每10%绘制一个散点，绘制出散点图如下： 随着thinking steps的增加，Full任务上模型表现基本不变，Hard任务上模型表现比较混乱，没什么规律。随着thinking steps的减少，Full/Hard任务上模型表现均有下降，Hard任务下降的程度更高。（说实话都没什么规律，但是作者还是强行分析了一下） <img src="./2025-12-29-11-24-56.png" srcset="/img/loading.gif" lazyload /> <img src="./2025-12-29-11-25-15.png" srcset="/img/loading.gif" lazyload /></p>
 <h3 id="rq2推理质量分析">RQ2:推理质量分析</h3>
-<p>针对RQ2, 作者希望从3个角度分析Reasoning Steps： 效率(推理是否精炼且无冗余) 逻辑一致性(步骤之间是否逻辑连贯) 完整性(是否覆盖了所有需求和边缘情况)。为了达到这个目的，作者构建了对Reasoning Steps中的错误的分类方法，并邀请了 21 名参与者进行数据标注。具体的实验方法和结果在下面讨论，</p>
+<p>针对RQ2, 作者希望从3个角度分析Reasoning Steps： 效率(推理是否精炼且无冗余) 逻辑一致性(步骤之间是否逻辑连贯) 完整性(是否覆盖了所有需求和边缘情况)。为了达到这个目的，作者构建了对错误数据的Reasoning Steps的分类方法，并邀请了 21 名参与者进行数据标注。具体的实验方法和结果在下面讨论。</p>
 <h4 id="人工数据标记的方法">人工数据标记的方法</h4>
 <ul>
 <li>人员背景：21 名标注者(14 名软件工程方向的研究生和 7 名具有 3-8 年工作经验的专业软件工程师。)所有人精通 Python，并对 LLM 推理（Chain-of-Thought）有实际使用经验。</li>
@@ -357,7 +357,7 @@
 <li>错误的转换：从推理计划转换为最终代码时，丢失了推理中原本正确的逻辑。</li>
 </ul></li>
 </ol>
-<h2 id="我的思考">我的思考</h2>
+<h2 id="我的收获">我的收获</h2>
 <p>  该研究为我们理解“Thinking LLMs”提供了一些启示 ：推理长度不是唯一指标：步数多不代表质量高。完整性是核心瓶颈：目前模型在代码生成中最弱的环节是未能完全分析所有约束和边缘情况（特别是难题） 。</p>
 
                 
