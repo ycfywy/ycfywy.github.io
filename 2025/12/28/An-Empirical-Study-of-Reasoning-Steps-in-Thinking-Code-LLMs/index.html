@@ -26,17 +26,17 @@
 <meta property="og:site_name" content="ycf blog">
 <meta property="og:description" content="文章概述   这篇论文题目为《An Empirical Study of Reasoning Steps in Thinking Code LLMs》，从steps count, Efficiency, Logic Consistency, Completeness的角度分析了Reasoning model在解决代码问题时的Reasoning steps的具体内容。   本文主要的贡献是：">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ycfywy.github.io/2025/12/28/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-11-09-11.png">
-<meta property="og:image" content="https://ycfywy.github.io/2025/12/28/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-11-10-03.png">
-<meta property="og:image" content="https://ycfywy.github.io/2025/12/28/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-11-14-46.png">
-<meta property="og:image" content="https://ycfywy.github.io/2025/12/28/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-11-24-56.png">
-<meta property="og:image" content="https://ycfywy.github.io/2025/12/28/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-11-25-15.png">
-<meta property="og:image" content="https://ycfywy.github.io/2025/12/28/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-16-17-01.png">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/28/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-11-09-11.png">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/28/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-11-10-03.png">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/28/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-11-14-46.png">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/28/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-11-24-56.png">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/28/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-11-25-15.png">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/28/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-16-17-01.png">
 <meta property="article:published_time" content="2025-12-27T16:39:31.000Z">
-<meta property="article:modified_time" content="2025-12-29T08:59:10.992Z">
+<meta property="article:modified_time" content="2025-12-29T15:55:13.902Z">
 <meta property="article:author" content="ycf">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://ycfywy.github.io/2025/12/28/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-11-09-11.png">
+<meta name="twitter:image" content="https://ycfywy.github.io/2025/12/28/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-11-09-11.png">
   
   
   
@@ -311,10 +311,10 @@
 <li>人为增加thinking steps对简单任务的影响不大，对困难任务可能提高也可能降低；认为减少thinking steps对简单和困难任务均有影响，但是对困难任务影响大一些(只减少10%的thinking steps就会导致模型崩溃)</li>
 </ul>
 <h4 id="数据收集">数据收集</h4>
-<p>  本文在如下的Reasoning model上收集数据。具体来说，本文从BigCodeBench这个代码测试的数据集中选取100个tasks，其中Hard tasks和Full tasks与原数据集的分布一致(分别为14% 和 86%)。随后，这些题目被送入6个测试模型中，提示词要求模型按照 &lt;step1&gt;&lt;step1&gt; …. &lt;stepn&gt;&lt;stepn&gt;的格式输出。最终收集了共600个回答，并统计了每个模型的Total Reasoning Steps和 Average Steps per Task， 如下图所示。 <img src="./2025-12-29-11-09-11.png" srcset="/img/loading.gif" lazyload /> <img src="./2025-12-29-11-10-03.png" srcset="/img/loading.gif" lazyload /></p>
+<p>  本文在如下的Reasoning model上收集数据。具体来说，本文从BigCodeBench这个代码测试的数据集中选取100个tasks，其中Hard tasks和Full tasks与原数据集的分布一致(分别为14% 和 86%)。随后，这些题目被送入6个测试模型中，提示词要求模型按照 &lt;step1&gt;&lt;step1&gt; …. &lt;stepn&gt;&lt;stepn&gt;的格式输出。最终收集了共600个回答，并统计了每个模型的Total Reasoning Steps和 Average Steps per Task， 如下图所示。 <img src="An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-11-09-11.png" srcset="/img/loading.gif" lazyload /> <img src="An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-11-10-03.png" srcset="/img/loading.gif" lazyload /></p>
 <h4 id="数据分析">数据分析</h4>
-<p>  本文对Reasoning model在困难数据集和一般数据集上的Reasoning steps做了统计，统计结果如下。对这些数据进行分析，发现在一般数据集上(对应 Full)，模型的成功率和Reasoning steps相关性趋近于0；在困难数据集上，推理的深度才发挥作用。 <img src="./2025-12-29-11-14-46.png" srcset="/img/loading.gif" lazyload /></p>
-<p>  考虑人为地增加或者缩短模型的thinking steps，比如通过提示词规定，模型必须在k步内解决问题。本文对Reasong model成功解决的问题集进行了thinking steps reduce，解决失败的问题进行了thinking steps increase。根据reduce/increase的比例，每10%绘制一个散点，绘制出散点图如下： 随着thinking steps的增加，Full任务上模型表现基本不变，Hard任务上模型表现比较混乱，没什么规律。随着thinking steps的减少，Full/Hard任务上模型表现均有下降，Hard任务下降的程度更高。（说实话都没什么规律，但是作者还是强行分析了一下） <img src="./2025-12-29-11-24-56.png" srcset="/img/loading.gif" lazyload /> <img src="./2025-12-29-11-25-15.png" srcset="/img/loading.gif" lazyload /></p>
+<p>  本文对Reasoning model在困难数据集和一般数据集上的Reasoning steps做了统计，统计结果如下。对这些数据进行分析，发现在一般数据集上(对应 Full)，模型的成功率和Reasoning steps相关性趋近于0；在困难数据集上，推理的深度才发挥作用。 <img src="An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-11-14-46.png" srcset="/img/loading.gif" lazyload /></p>
+<p>  考虑人为地增加或者缩短模型的thinking steps，比如通过提示词规定，模型必须在k步内解决问题。本文对Reasong model成功解决的问题集进行了thinking steps reduce，解决失败的问题进行了thinking steps increase。根据reduce/increase的比例，每10%绘制一个散点，绘制出散点图如下： 随着thinking steps的增加，Full任务上模型表现基本不变，Hard任务上模型表现比较混乱，没什么规律。随着thinking steps的减少，Full/Hard任务上模型表现均有下降，Hard任务下降的程度更高。（说实话都没什么规律，但是作者还是强行分析了一下） <img src="An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-11-24-56.png" srcset="/img/loading.gif" lazyload /> <img src="An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-11-25-15.png" srcset="/img/loading.gif" lazyload /></p>
 <h3 id="rq2推理质量分析">RQ2:推理质量分析</h3>
 <p>针对RQ2, 作者希望从3个角度分析Reasoning Steps： 效率(推理是否精炼且无冗余) 逻辑一致性(步骤之间是否逻辑连贯) 完整性(是否覆盖了所有需求和边缘情况)。为了达到这个目的，作者构建了对错误数据的Reasoning Steps的分类方法，并邀请了 21 名参与者进行数据标注。具体的实验方法和结果在下面讨论。</p>
 <h4 id="人工数据标记的方法">人工数据标记的方法</h4>
@@ -335,7 +335,7 @@
 </ul></li>
 </ul>
 <h4 id="标注结果分析">标注结果分析</h4>
-<p><img src="./2025-12-29-16-17-01.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="An-Empirical-Study-of-Reasoning-Steps-in-Thinking-Code-LLMs/2025-12-29-16-17-01.png" srcset="/img/loading.gif" lazyload /></p>
 <ol type="1">
 <li>完整性缺陷—— 占比最高 (44.5%)
 <ul>
@@ -420,6 +420,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2025/12/29/%E5%AF%B9LLM%E8%BE%93%E5%87%BA%E5%A4%9A%E6%A0%B7%E6%80%A7%E7%9A%84%E6%9B%B4%E5%85%A8%E9%9D%A2%E7%9A%84%E8%B0%83%E7%A0%94/" title="对LLM输出多样性的更全面的调研">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">对LLM输出多样性的更全面的调研</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
