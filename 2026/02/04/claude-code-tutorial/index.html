@@ -19,42 +19,24 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="阅读总结   该文章承接之前关于LLM Diversity的研究。我们之前已经阅读的文章主要是通过采样、数据合成的方式提高LLM Diversity。今天阅读的文章是通过在RL阶段引入Diversity reward，从Quality + Diversity的角度约束RL阶段的参数更新，从而提高LLM Diversity。   本文的写作逻辑非常清晰。算法的formula讨论，模型训练的数据集">
+    <meta name="description" content="Claude Code 简介   Claude Code 是 Anthropic 官方推出的 AI 编程助手 CLI 工具，它可以帮助开发者完成代码编写、调试、重构、测试等各类软件开发任务。与传统的代码编辑器插件不同，Claude Code 是一个独立的命令行工具，可以在任何目录下运行，通过自然语言与开发者交互。 常用命令 基础命令    命令 说明     claude">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Jointly Reinforcing Diversity and Quality in Language Model Generations">
-<meta property="og:url" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/index.html">
+<meta property="og:title" content="Claude Code 入门指南">
+<meta property="og:url" content="https://ycfywy.github.io/2026/02/04/claude-code-tutorial/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="阅读总结   该文章承接之前关于LLM Diversity的研究。我们之前已经阅读的文章主要是通过采样、数据合成的方式提高LLM Diversity。今天阅读的文章是通过在RL阶段引入Diversity reward，从Quality + Diversity的角度约束RL阶段的参数更新，从而提高LLM Diversity。   本文的写作逻辑非常清晰。算法的formula讨论，模型训练的数据集">
+<meta property="og:description" content="Claude Code 简介   Claude Code 是 Anthropic 官方推出的 AI 编程助手 CLI 工具，它可以帮助开发者完成代码编写、调试、重构、测试等各类软件开发任务。与传统的代码编辑器插件不同，Claude Code 是一个独立的命令行工具，可以在任何目录下运行，通过自然语言与开发者交互。 常用命令 基础命令    命令 说明     claude">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-16-31-57.png">
-<meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-16-39-42.png">
-<meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-16-47-37.png">
-<meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-17-12-09.png">
-<meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-17-12-17.png">
-<meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-17-12-26.png">
-<meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-17-15-06.png">
-<meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-17-23-56.png">
-<meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-17-24-03.png">
-<meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-17-41-21.png">
-<meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-17-53-56.png">
-<meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-17-57-16.png">
-<meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-18-01-07.png">
-<meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-18-03-56.png">
-<meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-18-03-41.png">
-<meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-18-13-46.png">
-<meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-18-16-25.png">
-<meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-18-15-36.png">
-<meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-18-19-34.png">
-<meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-18-19-56.png">
-<meta property="article:published_time" content="2026-01-03T08:16:31.000Z">
-<meta property="article:modified_time" content="2026-02-01T08:50:56.484Z">
+<meta property="article:published_time" content="2026-02-04T09:21:53.000Z">
+<meta property="article:modified_time" content="2026-02-04T09:33:23.448Z">
 <meta property="article:author" content="ycf">
+<meta property="article:tag" content="AI编程助手">
+<meta property="article:tag" content="CLI工具">
+<meta property="article:tag" content="Claude Code">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-16-31-57.png">
   
   
   
-  <title>Jointly Reinforcing Diversity and Quality in Language Model Generations - ycf blog</title>
+  <title>Claude Code 入门指南 - ycf blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -220,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Jointly Reinforcing Diversity and Quality in Language Model Generations"></span>
+            <span id="subtitle" data-typed-text="Claude Code 入门指南"></span>
           
         </div>
 
@@ -231,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-01-03 16:16" pubdate>
-          2026年1月3日 下午
+        <time datetime="2026-02-04 17:21" pubdate>
+          2026年2月4日 下午
         </time>
       </span>
     
@@ -243,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          1k 字
         
       </span>
     
@@ -254,7 +236,7 @@
         
         
         
-          16 分钟
+          9 分钟
         
       </span>
     
@@ -291,70 +273,221 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Jointly Reinforcing Diversity and Quality in Language Model Generations</h1>
+            <h1 id="seo-header">Claude Code 入门指南</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="阅读总结">阅读总结</h2>
-<p>  该文章承接之前关于LLM Diversity的研究。我们之前已经阅读的文章主要是通过采样、数据合成的方式提高LLM Diversity。今天阅读的文章是通过在RL阶段引入Diversity reward，从Quality + Diversity的角度约束RL阶段的参数更新，从而提高LLM Diversity。</p>
-<p>  本文的写作逻辑非常清晰。算法的formula讨论，模型训练的数据集、框架，测试使用的benchmarks，消融实验的设计都非常棒，很有学习意义。</p>
-<h2 id="研究背景">研究背景</h2>
-<p>  先来谈一谈Reinforce Learning。现有的大部分LLM做强化学习首选的方案就是GRPO。通俗地将，GRPO的原理就是：给定一个prompt，让LLM输出n个回答。Reward model对这些回答进行打分。将n个回答视为一组，我们希望鼓励LLM输出组内Reward在平均值以上的回答，拒绝组内Reward在平均值以下的回答。具体的数学原理参见<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/23066650797">link</a>，强化学习台湾大学李宏毅老师视频<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15hw9euExZ/?spm_id_from=333.337.search-card.all.click&amp;vd_source=f849fb0704d7dc059fbab19eff482313">link</a>。</p>
-<p>  现有的Reward model在打分时，只针对单个回答的质量，而没有考虑组内的样本的多样性。当我们组内的多个回答质量相当时，我们应该给组内比较Diversity的回答额外的Reward，鼓励更加多样的回答。为了能够提高LLM Diversity，本文提出在RL阶段引入Diversity Reward的方法，鼓励模型输出更加多样性的内容。</p>
-<h2 id="解决方法">解决方法</h2>
-<p>  如何设计Diversity Reward以及将该Reward融入到现有的RL算法中，是本文需要解决的问题。</p>
-<h3 id="diversity-reward的设计">Diversity Reward的设计</h3>
-<p>  考虑给定一个prompt后LLM的n个回答。我们可以从语义的角度对n个回答做聚类。位于相同聚类的回答语义近似，不同聚类的回答语义不同。如图所示，LLM的回答可以划分出3个聚类，其中绿色回答的Quality Reward与蓝色回答一样，但因为是更加Diversity的回答，Reward被放大。 <img src="./2026-01-03-16-31-57.png" srcset="/img/loading.gif" lazyload /></p>
-<p>  为了从语义的角度衡量两个回答是否相似，本文训练了一个classifier。(<strong>这里比较奇怪：作者并没有详细讨论classifier的设计与实现 而是放在Appendix里面 可能是技术含量比较低吧。这里为了更全面的了解文章，我们做一下讲解</strong>)</p>
+                <h2 id="claude-code-简介">Claude Code 简介</h2>
+<p>  Claude Code 是 Anthropic 官方推出的 AI 编程助手 CLI 工具，它可以帮助开发者完成代码编写、调试、重构、测试等各类软件开发任务。与传统的代码编辑器插件不同，Claude Code 是一个独立的命令行工具，可以在任何目录下运行，通过自然语言与开发者交互。</p>
+<h2 id="常用命令">常用命令</h2>
+<h3 id="基础命令">基础命令</h3>
+<table>
+<thead>
+<tr class="header">
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>claude</code></td>
+<td>启动 Claude Code 交互会话</td>
+</tr>
+<tr class="even">
+<td><code>claude "任务描述"</code></td>
+<td>直接执行单次任务</td>
+</tr>
+<tr class="odd">
+<td><code>claude -p "任务描述"</code></td>
+<td>使用提示模式执行任务</td>
+</tr>
+<tr class="even">
+<td><code>claude --help</code></td>
+<td>查看帮助信息</td>
+</tr>
+<tr class="odd">
+<td><code>exit</code> / <code>Ctrl+C</code></td>
+<td>退出 Claude Code</td>
+</tr>
+</tbody>
+</table>
+<h3 id="任务执行相关">任务执行相关</h3>
+<table>
+<thead>
+<tr class="header">
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Task /task_name</code></td>
+<td>执行已命名的任务</td>
+</tr>
+<tr class="even">
+<td><code>/plan</code></td>
+<td>创建并保存执行计划</td>
+</tr>
+<tr class="odd">
+<td><code>/approve</code></td>
+<td>批准执行计划</td>
+</tr>
+<tr class="even">
+<td><code>/compact</code></td>
+<td>压缩对话历史，减少上下文消耗</td>
+</tr>
+<tr class="odd">
+<td><code>/complete</code></td>
+<td>标记任务完成</td>
+</tr>
+</tbody>
+</table>
+<h3 id="git-集成命令">Git 集成命令</h3>
+<table>
+<thead>
+<tr class="header">
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Git: Commit</code></td>
+<td>创建 git 提交</td>
+</tr>
+<tr class="even">
+<td><code>Git: Push</code></td>
+<td>推送到远程仓库</td>
+</tr>
+<tr class="odd">
+<td><code>Git: PR</code></td>
+<td>创建 Pull Request</td>
+</tr>
+</tbody>
+</table>
+<h2 id="文件夹与项目操作">文件夹与项目操作</h2>
+<h3 id="工作目录相关">工作目录相关</h3>
+<p>  Claude Code 可以分析任意项目结构，理解你的代码库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 进入项目目录后直接使用</span><br><span class="hljs-built_in">cd</span> /path/to/your/project<br>claude<br></code></pre></td></tr></table></figure>
+<h3 id="文件操作">文件操作</h3>
+<p>  在 Claude Code 对话中，你可以直接要求它：</p>
+<table>
+<thead>
+<tr class="header">
+<th>操作</th>
+<th>示例指令</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>查看文件</td>
+<td>“Read the file src/utils.ts”</td>
+</tr>
+<tr class="even">
+<td>创建文件</td>
+<td>“Write a new component at src/components/Button.tsx”</td>
+</tr>
+<tr class="odd">
+<td>编辑文件</td>
+<td>“Edit the config file to add new setting”</td>
+</tr>
+<tr class="even">
+<td>搜索文件</td>
+<td>"Find all files matching *.test.ts"</td>
+</tr>
+<tr class="odd">
+<td>搜索内容</td>
+<td>“Search for all occurrences of ‘getUser’”</td>
+</tr>
+</tbody>
+</table>
+<h3 id="模式匹配">模式匹配</h3>
+<p>  Claude Code 支持使用 Glob 模式查找文件：</p>
 <ul>
-<li>Base model: <a target="_blank" rel="noopener" href="https://huggingface.co/answerdotai/ModernBERT-base">ModernBERT-base</a>(一个预训练transformer模型 参数量1GB)</li>
-<li>Traning dataset: 1000 NoveltyBench annotations (2000 responses) 拼接annotations和response，模型需要预测response1 和 response2是否相似。 <img src="./2026-01-03-16-39-42.png" srcset="/img/loading.gif" lazyload /></li>
-<li>testing: 预留100个data，和现有的classifier以及LLM Judge(GPT-4o, o1-mini, o1-mini-cot)做性能对比，优于LLM Judge。(选用这些模型也是研究惯例吧， 一开始的LLM judge大家用的都是OpenAI的model) <img src="./2026-01-03-16-47-37.png" srcset="/img/loading.gif" lazyload /></li>
+<li><code>**/*.js</code> - 查找所有 JS 文件</li>
+<li><code>src/**/*.ts</code> - 查找 src 目录下所有 TS 文件</li>
+<li><code>**/test*.py</code> - 查找所有测试 Python 文件</li>
 </ul>
-<p>  一旦我们有了一个classifier，就可以逐个pair判断回答是否相似。使用如下的公式计算单个Diversity Reward。举个例子：对于4个answer，以蓝色answer为例，有1个回答和他类似，2个回答和他不一样，计算出的Diversity Reward就是 2 / (4 - 1) = 2/3。 <img src="./2026-01-03-17-12-09.png" srcset="/img/loading.gif" lazyload /> <img src="./2026-01-03-17-12-17.png" srcset="/img/loading.gif" lazyload /> <img src="./2026-01-03-17-12-26.png" srcset="/img/loading.gif" lazyload /></p>
-<h3 id="将diversity-reward融入rl">将Diversity Reward融入RL</h3>
-<p>  前面已经讲过GRPO算法的基本原理，这里给出公式。为了将Diversity Reward引入RL过程，需要对<span class="math inline"><em>r</em>(<em>x</em>, <em>y</em>)</span>进行改写。 <img src="./2026-01-03-17-15-06.png" srcset="/img/loading.gif" lazyload /></p>
-<p>  如下，作者对GRPO做了3处修改：(1)将Diversity Reward作为一个0-1的放缩因子乘到原理的Reward function。(2)将图中的<span class="math inline"><em>Σ</em></span>部分修改为token level：计算损失时，直接除以整个 Batch 中所有 token 的总数。而不是除以句子的总数。之所以这样处理，是因为前人的研究发现，除以句子的总数放大了短句的reward。(3)去除了Advantage function的normalization。作者认为标准化的操作会放大噪声，后续也会有消融实验。 <img src="./2026-01-03-17-23-56.png" srcset="/img/loading.gif" lazyload /> <img src="./2026-01-03-17-24-03.png" srcset="/img/loading.gif" lazyload /></p>
-<p>  至此，讲述完了整篇文章的Method部分，方法比较常规，但是是LLM Diversity领域的重要尝试。下面是实验部分，证明该方法的表现。</p>
-<h2 id="实验部分">实验部分</h2>
-<p>  本文将Non-verifiable Tasks和Verifiable Tasks分开进行实验。具体来说，就是将开放式问题和数学问题分开进行实验，因为一个是有具体答案的，另一个是没有的。</p>
-<h3 id="non-verifiable-tasks">Non-verifiable Tasks</h3>
-<h4 id="实验设置">实验设置</h4>
-<ul>
-<li>baseline: 未修改的GRPO | DivPO(强行把“最具有多样性”的作为 Chosen，把“最缺乏多样性”的作为 Rejected。) | GRPO-Unlikeliness(给那些概率较低（低似然）的回答更高的奖励，强迫模型去探索“冷门”路径。) | Our method</li>
-<li>model: Llama-3.1-8B-Instruct | Llama-3.3-70B-Instruct</li>
-<li>data: subset of 10k prompts in WildChat <img src="./2026-01-03-17-41-21.png" srcset="/img/loading.gif" lazyload /></li>
-<li>benchmarks: <strong>AlpacaEval 2.0</strong>(评估模型通用指令遵循，对输出长度进行控制的能力，使用LCWR length control win rate指标)  <strong>ArenaHard v2.0</strong>(复杂逻辑与创意写作，模型需要根据指令进行特定格式、长度的输出，使用WR win rate指标)  <strong>EQ-Bench</strong>(创意写作/情感智能任务，使用LLM judge的评分指标)    (开放式问题，使用Distinct-n计算n-gram的多样性来 评估模型输出的多样性)</li>
-</ul>
-<h4 id="实验结果">实验结果</h4>
-<p>  Darling 在所有基准测试中均实现了质量与多样性的双重最佳。 具体而言，在所有基准模型中，Darling 取得了最高的质量评分（AlpacaEval 和 ArenaHard ），同时在语义层面（Distinct）和词汇层面（Distinct-4）也都达到了最高的多样性。此外，尽管本文并未显式地在创意写作提示词上进行训练，但与所有基准模型相比，Darling 在 EQ-Bench（创意写作）中获得了最高的 ELO 分数，证明了提升多样性对创意类任务的显著效果。 <img src="./2026-01-03-17-53-56.png" srcset="/img/loading.gif" lazyload /></p>
-<p>  进一步的，本文绘制Quality-Diversity曲线，发现本文提出的方法扩展了Quality-Diversity的边界(将图像的右上角做了延申)。 <img src="./2026-01-03-17-57-16.png" srcset="/img/loading.gif" lazyload /></p>
-<h3 id="verifiable-tasks">Verifiable Tasks</h3>
-<h4 id="实验设置-1">实验设置</h4>
-<ul>
-<li>baseline: 与前面设置一样</li>
-<li>model: Qwen3-4B-Base | Qwen3-14B-Base</li>
-<li>data: subset of 10k data in DeepscaleR dataset <img src="./2026-01-03-18-01-07.png" srcset="/img/loading.gif" lazyload /></li>
-<li>benchmarks: <strong>AIME25</strong> (极其强调深度推理，通常需要模型进行多步复杂的逻辑推导。) <strong>HMMT &amp; Brumo 2025</strong> (2025 年最新的竞赛题目，题型新颖，能够有效解决数据污染的问题。)</li>
-</ul>
-<h4 id="实验结果-1">实验结果</h4>
-<p>  根据实验结果，在不同的pass@k下，本文提出的训练方法有效地提高了模型在Verifiable Tasks上的表现。 <img src="./2026-01-03-18-03-56.png" srcset="/img/loading.gif" lazyload /> <img src="./2026-01-03-18-03-41.png" srcset="/img/loading.gif" lazyload /></p>
-<h2 id="消融实验">消融实验</h2>
-<p>  本文主要做了3个消融实验：</p>
-<ol type="1">
-<li>对比融合Diversity Reward的加法方式与乘法方式(本文的方法)</li>
-<li>对比语义多样性与Classifier(本文的方法)</li>
-<li>GRPO Normalization的消融</li>
-</ol>
-<h3 id="diversity-reward应该加法融合还是乘法融合">Diversity Reward应该加法融合还是乘法融合？</h3>
-<p>  实验结果：乘法聚合（Darling 采用的方案）在 AlpacaEval 2.0 上的表现优于加法聚合，而在 ArenaHard v2.0 和 NoveltyBench 上的表现则与之持平。本文之所以选择乘法聚合，是因为它具有简洁性：它不需要额外处理不同奖励尺度不匹配的问题，也不需要对各项独立奖励的混合权重进行繁琐的超参数调优。 <img src="./2026-01-03-18-13-46.png" srcset="/img/loading.gif" lazyload /></p>
-<h3 id="classifier有没有用">Classifier有没有用？</h3>
-<p>  将训练的classifier替换成词汇多样性指标，使用4-gram来评估某个回答的多样性。实验结果：虽然将 4-gram 多样性与质量相结合在AlpacaEval 2.0, ArenaHard v2.0）能够达到与Darling 相当的水平，但在NoveltyBench中，其表现显著逊于 Darling。此外，在数学题目中，使用词汇多样性作为奖励的效果在 pass@1 性能上甚至不如原生的 GRPO 基准。 <img src="./2026-01-03-18-16-25.png" srcset="/img/loading.gif" lazyload /> <img src="./2026-01-03-18-15-36.png" srcset="/img/loading.gif" lazyload /></p>
-<h3 id="去掉normalization有没有影响">去掉Normalization有没有影响</h3>
-<p>  从结果上看，RL中有没有Normalization影响不大。反而是性能有微小提升。 <img src="./2026-01-03-18-19-34.png" srcset="/img/loading.gif" lazyload /> <img src="./2026-01-03-18-19-56.png" srcset="/img/loading.gif" lazyload /></p>
-<iframe src="//player.bilibili.com/player.html?isOutside=true&amp;aid=115960878996056&amp;bvid=BV171zaBJEp3&amp;cid=35624452519&amp;p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="500">
-</iframe>
+<h2 id="skills技能使用">Skills（技能）使用</h2>
+<h3 id="什么是-skills">什么是 Skills</h3>
+<p>  Skills 是 Claude Code 的扩展功能模块，每个 Skill 都是一个专门化的工具或功能集，可以帮助完成特定类型的任务。</p>
+<h3 id="常用内置-skills">常用内置 Skills</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Skill 名称</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>bash</code></td>
+<td>执行 Shell 命令</td>
+</tr>
+<tr class="even">
+<td><code>glob</code></td>
+<td>文件模式匹配搜索</td>
+</tr>
+<tr class="odd">
+<td><code>grep</code></td>
+<td>在文件中搜索文本</td>
+</tr>
+<tr class="even">
+<td><code>read</code></td>
+<td>读取文件内容</td>
+</tr>
+<tr class="odd">
+<td><code>write</code></td>
+<td>创建或覆盖文件</td>
+</tr>
+<tr class="even">
+<td><code>edit</code></td>
+<td>修改文件内容</td>
+</tr>
+<tr class="odd">
+<td><code>Task</code></td>
+<td>创建和管理任务</td>
+</tr>
+<tr class="even">
+<td><code>WebFetch</code></td>
+<td>获取网页内容</td>
+</tr>
+<tr class="odd">
+<td><code>WebSearch</code></td>
+<td>网络搜索</td>
+</tr>
+</tbody>
+</table>
+<h3 id="自定义-skills">自定义 Skills</h3>
+<p>  你可以创建自己的 Skills 来扩展 Claude Code 的功能。Skills 通常以以下方式使用：</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">skill:</span>skill_name <span class="hljs-string">&quot;参数&quot;</span><br></code></pre></td></tr></table></figure>
+<h3 id="task-工具的高级用法">Task 工具的高级用法</h3>
+<p>  <code>Task</code> 工具是 Claude Code 最强大的功能之一：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 执行特定类型的任务</span><br>Task test-runner <span class="hljs-string">&quot;运行所有测试&quot;</span><br>Task code-review <span class="hljs-string">&quot;检查代码质量问题&quot;</span><br>Task docs-generator <span class="hljs-string">&quot;生成 API 文档&quot;</span><br></code></pre></td></tr></table></figure>
+<h2 id="最佳实践">最佳实践</h2>
+<h3 id="明确任务目标">1. 明确任务目标</h3>
+<p>  在描述任务时，越具体越好：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># ✅ 好的示例</span><br>claude <span class="hljs-string">&quot;Refactor the user authentication module to use JWT tokens&quot;</span><br><br><span class="hljs-comment"># ❌ 模糊的示例</span><br>claude <span class="hljs-string">&quot;fix the login&quot;</span><br></code></pre></td></tr></table></figure>
+<h3 id="使用-plan-模式处理复杂任务">2. 使用 /plan 模式处理复杂任务</h3>
+<p>  对于涉及多个步骤的复杂任务，先使用 <code>/plan</code> 让 Claude 制定执行计划，确认无误后再批准执行。</p>
+<h3 id="合理使用-compact">3. 合理使用 /compact</h3>
+<p>  当对话历史较长时，使用 <code>/compact</code> 可以压缩上下文，节省 token 消耗同时保留重要信息。</p>
+<h3 id="利用版本控制">4. 利用版本控制</h3>
+<p>  在进行大规模代码修改前，先提交当前更改，或让 Claude 创建新的分支进行实验。</p>
+<h3 id="结合-ide-使用">5. 结合 IDE 使用</h3>
+<p>  Claude Code 可以与 VS Code、Neovim 等编辑器配合使用，实现无缝的开发体验。</p>
+<h2 id="常见问题">常见问题</h2>
+<p><strong>Q: Claude Code 会修改我的代码吗？</strong></p>
+<p>  默认情况下，Claude Code 在执行修改前会请求你的确认。只有获得批准后才会实际修改文件。</p>
+<p><strong>Q: 如何控制 Claude Code 的行为？</strong></p>
+<p>  可以通过系统提示词、对话中的具体指令来控制其行为，也可以在配置文件中设置偏好。</p>
+<p><strong>Q: 支持哪些编程语言？</strong></p>
+<p>  Claude Code 本身是语言无关的，可以处理任何编程语言的代码任务。</p>
+<p><strong>Q: 如何保证代码安全？</strong></p>
+<p>  Claude Code 在执行危险操作前会发出警告，某些敏感操作需要明确授权。</p>
+<h2 id="总结">总结</h2>
+<p>  Claude Code 作为一款 AI 编程助手，通过自然语言交互大大提升了开发效率。掌握其常用命令和工作模式，可以让你在日常开发中事半功倍。建议从简单的任务开始尝试，逐步探索其更多高级功能。</p>
 
                 
               </div>
@@ -373,7 +506,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/ICLR2026/" class="category-chain-item">ICLR2026</a>
+  <a href="/categories/%E5%B7%A5%E5%85%B7%E6%95%99%E7%A8%8B/" class="category-chain-item">工具教程</a>
   
   
 
@@ -385,6 +518,17 @@
     </div>
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Claude-Code/" class="print-no-link">#Claude Code</a>
+      
+        <a href="/tags/AI%E7%BC%96%E7%A8%8B%E5%8A%A9%E6%89%8B/" class="print-no-link">#AI编程助手</a>
+      
+        <a href="/tags/CLI%E5%B7%A5%E5%85%B7/" class="print-no-link">#CLI工具</a>
+      
+    </div>
+  
 </div>
 
 
@@ -393,8 +537,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Jointly Reinforcing Diversity and Quality in Language Model Generations</div>
-      <div>https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/</div>
+      <div>Claude Code 入门指南</div>
+      <div>https://ycfywy.github.io/2026/02/04/claude-code-tutorial/</div>
     </div>
     <div class="license-meta">
       
@@ -406,7 +550,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年1月3日</div>
+          <div>2026年2月4日</div>
         </div>
       
       
@@ -438,9 +582,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/02/04/claude-code-tutorial/" title="Claude Code 入门指南">
+                      <a href="/2026/02/22/test/" title="test">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Claude Code 入门指南</span>
+                        <span class="hidden-mobile">test</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -448,8 +592,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/01/02/%E8%A7%86%E9%A2%91-%E5%9B%BE%E7%89%87%E7%94%9F%E6%88%90AI%E7%9A%84%E4%B8%80%E4%BA%9B%E6%8A%BD%E8%B1%A1%E4%BA%8B%E6%83%85/" title="视频/图片生成AI的一些抽象事情">
-                        <span class="hidden-mobile">视频/图片生成AI的一些抽象事情</span>
+                      <a href="/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/" title="Jointly Reinforcing Diversity and Quality in Language Model Generations">
+                        <span class="hidden-mobile">Jointly Reinforcing Diversity and Quality in Language Model Generations</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
