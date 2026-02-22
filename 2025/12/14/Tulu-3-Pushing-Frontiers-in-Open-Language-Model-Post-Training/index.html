@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="../../../../img/fluid.png">
-  <link rel="icon" href="../../../../img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -19,12 +19,12 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="我的评价    当前存在什么问题    本文打算通过什么思路解决    该思路会遇到什么挑战    本文通过什么手段克服该挑战    本文如何通过实验论证了该方案的优越性    本文的写作思路    我的思考">
+    <meta name="description" content="我的评价&emsp;&emsp; 当前存在什么问题&emsp;&emsp; 本文打算通过什么思路解决&emsp;&emsp; 该思路会遇到什么挑战&emsp;&emsp; 本文通过什么手段克服该挑战&emsp;&emsp; 本文如何通过实验论证了该方案的优越性&emsp;&emsp; 本文的写作思路&emsp;&emsp; 我的思考&emsp;&emsp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tülu 3: Pushing Frontiers in Open Language Model Post-Training">
 <meta property="og:url" content="https://ycfywy.github.io/2025/12/14/Tulu-3-Pushing-Frontiers-in-Open-Language-Model-Post-Training/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="我的评价    当前存在什么问题    本文打算通过什么思路解决    该思路会遇到什么挑战    本文通过什么手段克服该挑战    本文如何通过实验论证了该方案的优越性    本文的写作思路    我的思考">
+<meta property="og:description" content="我的评价&emsp;&emsp; 当前存在什么问题&emsp;&emsp; 本文打算通过什么思路解决&emsp;&emsp; 该思路会遇到什么挑战&emsp;&emsp; 本文通过什么手段克服该挑战&emsp;&emsp; 本文如何通过实验论证了该方案的优越性&emsp;&emsp; 本文的写作思路&emsp;&emsp; 我的思考&emsp;&emsp;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-12-14T12:51:33.000Z">
 <meta property="article:modified_time" content="2025-12-14T12:56:05.771Z">
@@ -57,12 +57,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="../../../../css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="../../../../css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="../../../../css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
@@ -78,8 +78,8 @@
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="../../../../js/utils.js" ></script>
-  <script  src="../../../../js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
 
 
@@ -96,7 +96,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="../../../../index.html">
+    <a class="navbar-brand" href="/">
       <strong>ycf blog</strong>
     </a>
 
@@ -115,7 +115,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../index.html" target="_self">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -127,7 +127,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../archives/" target="_self">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -139,7 +139,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../categories/" target="_self">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -151,7 +151,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../tags/" target="_self">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -163,7 +163,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../about/" target="_self">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -193,7 +193,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('../../../../images/index.png') no-repeat center center; background-size: cover;">
+     style="background: url('/images/index.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          76 字
+          92 字
         
       </span>
     
@@ -275,22 +275,14 @@
             
               <div class="markdown-body">
                 
-                <h2 id="我的评价">我的评价</h2>
-<p>  </p>
-<h2 id="当前存在什么问题">当前存在什么问题</h2>
-<p>  </p>
-<h2 id="本文打算通过什么思路解决">本文打算通过什么思路解决</h2>
-<p>  </p>
-<h2 id="该思路会遇到什么挑战">该思路会遇到什么挑战</h2>
-<p>  </p>
-<h2 id="本文通过什么手段克服该挑战">本文通过什么手段克服该挑战</h2>
-<p>  </p>
-<h2 id="本文如何通过实验论证了该方案的优越性">本文如何通过实验论证了该方案的优越性</h2>
-<p>  </p>
-<h2 id="本文的写作思路">本文的写作思路</h2>
-<p>  </p>
-<h2 id="我的思考">我的思考</h2>
-<p>  </p>
+                <h2 id="我的评价"><a href="#我的评价" class="headerlink" title="我的评价"></a>我的评价</h2><p>&emsp;&emsp;</p>
+<h2 id="当前存在什么问题"><a href="#当前存在什么问题" class="headerlink" title="当前存在什么问题"></a>当前存在什么问题</h2><p>&emsp;&emsp;</p>
+<h2 id="本文打算通过什么思路解决"><a href="#本文打算通过什么思路解决" class="headerlink" title="本文打算通过什么思路解决"></a>本文打算通过什么思路解决</h2><p>&emsp;&emsp;</p>
+<h2 id="该思路会遇到什么挑战"><a href="#该思路会遇到什么挑战" class="headerlink" title="该思路会遇到什么挑战"></a>该思路会遇到什么挑战</h2><p>&emsp;&emsp;</p>
+<h2 id="本文通过什么手段克服该挑战"><a href="#本文通过什么手段克服该挑战" class="headerlink" title="本文通过什么手段克服该挑战"></a>本文通过什么手段克服该挑战</h2><p>&emsp;&emsp;</p>
+<h2 id="本文如何通过实验论证了该方案的优越性"><a href="#本文如何通过实验论证了该方案的优越性" class="headerlink" title="本文如何通过实验论证了该方案的优越性"></a>本文如何通过实验论证了该方案的优越性</h2><p>&emsp;&emsp;</p>
+<h2 id="本文的写作思路"><a href="#本文的写作思路" class="headerlink" title="本文的写作思路"></a>本文的写作思路</h2><p>&emsp;&emsp;</p>
+<h2 id="我的思考"><a href="#我的思考" class="headerlink" title="我的思考"></a>我的思考</h2><p>&emsp;&emsp;</p>
 
                 
               </div>
@@ -309,7 +301,7 @@
     
       <span class="category-chain">
         
-  <a href="../../../../categories/COLM2025/" class="category-chain-item">COLM2025</a>
+  <a href="/categories/COLM2025/" class="category-chain-item">COLM2025</a>
   
   
 
@@ -374,7 +366,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="../../15/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A7%9F%E8%B5%81%E5%92%8C%E9%85%8D%E7%BD%AE/" title="云服务器租赁和配置">
+                      <a href="/2025/12/15/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A7%9F%E8%B5%81%E5%92%8C%E9%85%8D%E7%BD%AE/" title="云服务器租赁和配置">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">云服务器租赁和配置</span>
                         <span class="visible-mobile">上一篇</span>
@@ -384,7 +376,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="../../13/Evals-for-Data-Diversity/" title="Evals for Data Diversity">
+                      <a href="/2025/12/13/Evals-for-Data-Diversity/" title="Evals for Data Diversity">
                         <span class="hidden-mobile">Evals for Data Diversity</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -519,8 +511,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="../../../../js/events.js" ></script>
-<script  src="../../../../js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -542,7 +534,7 @@
 
 
   
-    <script  src="../../../../js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -684,7 +676,7 @@
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
-  <script  src="../../../../js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -692,7 +684,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="../../../../js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
   

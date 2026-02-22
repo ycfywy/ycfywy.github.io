@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="../../../../img/fluid.png">
-  <link rel="icon" href="../../../../img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -19,12 +19,12 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="阅读总结    研究背景    解决方法    本文如何通过实验论证了该方案的优越性    我的思考">
+    <meta name="description" content="阅读总结&emsp;&emsp; 研究背景&emsp;&emsp; 解决方法&emsp;&emsp; 本文如何通过实验论证了该方案的优越性&emsp;&emsp; 我的思考&emsp;&emsp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Through the Valley: Path to Effective Long CoT Training for Small Language Models">
 <meta property="og:url" content="https://ycfywy.github.io/2025/12/23/Through-the-Valley-Path-to-Effective-Long-CoT-Training-forSmall-Language-Models/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="阅读总结    研究背景    解决方法    本文如何通过实验论证了该方案的优越性    我的思考">
+<meta property="og:description" content="阅读总结&emsp;&emsp; 研究背景&emsp;&emsp; 解决方法&emsp;&emsp; 本文如何通过实验论证了该方案的优越性&emsp;&emsp; 我的思考&emsp;&emsp;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-12-23T15:54:00.000Z">
 <meta property="article:modified_time" content="2025-12-23T15:54:00.080Z">
@@ -57,12 +57,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="../../../../css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="../../../../css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="../../../../css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
@@ -78,8 +78,8 @@
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="../../../../js/utils.js" ></script>
-  <script  src="../../../../js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
 
 
@@ -96,7 +96,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="../../../../index.html">
+    <a class="navbar-brand" href="/">
       <strong>ycf blog</strong>
     </a>
 
@@ -115,7 +115,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../index.html" target="_self">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -127,7 +127,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../archives/" target="_self">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -139,7 +139,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../categories/" target="_self">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -151,7 +151,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../tags/" target="_self">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -163,7 +163,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../about/" target="_self">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -193,7 +193,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('../../../../images/index.png') no-repeat center center; background-size: cover;">
+     style="background: url('/images/index.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          34 字
+          44 字
         
       </span>
     
@@ -275,16 +275,11 @@
             
               <div class="markdown-body">
                 
-                <h2 id="阅读总结">阅读总结</h2>
-<p>  </p>
-<h2 id="研究背景">研究背景</h2>
-<p>  </p>
-<h2 id="解决方法">解决方法</h2>
-<p>  </p>
-<h2 id="本文如何通过实验论证了该方案的优越性">本文如何通过实验论证了该方案的优越性</h2>
-<p>  </p>
-<h2 id="我的思考">我的思考</h2>
-<p>  </p>
+                <h2 id="阅读总结"><a href="#阅读总结" class="headerlink" title="阅读总结"></a>阅读总结</h2><p>&emsp;&emsp;</p>
+<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>&emsp;&emsp;</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>&emsp;&emsp;</p>
+<h2 id="本文如何通过实验论证了该方案的优越性"><a href="#本文如何通过实验论证了该方案的优越性" class="headerlink" title="本文如何通过实验论证了该方案的优越性"></a>本文如何通过实验论证了该方案的优越性</h2><p>&emsp;&emsp;</p>
+<h2 id="我的思考"><a href="#我的思考" class="headerlink" title="我的思考"></a>我的思考</h2><p>&emsp;&emsp;</p>
 
                 
               </div>
@@ -347,7 +342,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="../../25/FOCUSED-CHAIN-OF-THOUGHT-EFFICIENT-LLM-REA-SONING-VIA-STRUCTURED-INPUT-INFORMATION/" title="FOCUSED CHAIN OF THOUGHT EFFICIENT LLM REA SONING VIA STRUCTURED INPUT INFORMATION">
+                      <a href="/2025/12/25/FOCUSED-CHAIN-OF-THOUGHT-EFFICIENT-LLM-REA-SONING-VIA-STRUCTURED-INPUT-INFORMATION/" title="FOCUSED CHAIN OF THOUGHT EFFICIENT LLM REA SONING VIA STRUCTURED INPUT INFORMATION">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">FOCUSED CHAIN OF THOUGHT EFFICIENT LLM REA SONING VIA STRUCTURED INPUT INFORMATION</span>
                         <span class="visible-mobile">上一篇</span>
@@ -357,7 +352,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="../../21/TURNING-UP-THE-HEAT-MIN-p-SAMPLING-FOR-CREATIVE-AND-COHERENT-LLM-OUTPUTS/" title="TURNING UP THE HEAT: MIN-p SAMPLING FOR CREATIVE AND COHERENT LLM OUTPUTS">
+                      <a href="/2025/12/21/TURNING-UP-THE-HEAT-MIN-p-SAMPLING-FOR-CREATIVE-AND-COHERENT-LLM-OUTPUTS/" title="TURNING UP THE HEAT: MIN-p SAMPLING FOR CREATIVE AND COHERENT LLM OUTPUTS">
                         <span class="hidden-mobile">TURNING UP THE HEAT: MIN-p SAMPLING FOR CREATIVE AND COHERENT LLM OUTPUTS</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -492,8 +487,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="../../../../js/events.js" ></script>
-<script  src="../../../../js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -515,7 +510,7 @@
 
 
   
-    <script  src="../../../../js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -657,7 +652,7 @@
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
-  <script  src="../../../../js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -665,7 +660,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="../../../../js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
   

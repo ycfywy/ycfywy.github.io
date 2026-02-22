@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="../../../../img/fluid.png">
-  <link rel="icon" href="../../../../img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -19,12 +19,12 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="我的评价    作者说LLM生成内容的多样性不好，是因为数据本身就带有人类的偏好。数据本身的偏好是模型多样性缺失的原因，是本文要证明的内容。按照这个分析，作者大概会构造一些偏好数据，然后训练模型，证明这种多样性确实源于偏好数据。    作者改进模型数据多样性的方法，不是通过output的采样，而是使用Prompt，让模型输出多个回答并带有概率分布，这种方式很难理解为什么这么做。明明使用ll">
+    <meta name="description" content="我的评价&emsp;&emsp; 作者说LLM生成内容的多样性不好，是因为数据本身就带有人类的偏好。数据本身的偏好是模型多样性缺失的原因，是本文要证明的内容。按照这个分析，作者大概会构造一些偏好数据，然后训练模型，证明这种多样性确实源于偏好数据。 &emsp;&emsp; 作者改进模型数据多样性的方法，不是通过output的采样，而是使用Prompt，让模型输出多个回答并带有概率分布，这种方式很">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VERBALIZED SAMPLING: HOW TO MITIGATE MODE COLLAPSE AND UNLOCK LLM DIVERSITY">
 <meta property="og:url" content="https://ycfywy.github.io/2025/12/11/VERBALIZED-SAMPLING-HOW-TO-MITIGATE-MODE-COLLAPSE-AND-UNLOCK-LLM-DIVERSITY/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="我的评价    作者说LLM生成内容的多样性不好，是因为数据本身就带有人类的偏好。数据本身的偏好是模型多样性缺失的原因，是本文要证明的内容。按照这个分析，作者大概会构造一些偏好数据，然后训练模型，证明这种多样性确实源于偏好数据。    作者改进模型数据多样性的方法，不是通过output的采样，而是使用Prompt，让模型输出多个回答并带有概率分布，这种方式很难理解为什么这么做。明明使用ll">
+<meta property="og:description" content="我的评价&emsp;&emsp; 作者说LLM生成内容的多样性不好，是因为数据本身就带有人类的偏好。数据本身的偏好是模型多样性缺失的原因，是本文要证明的内容。按照这个分析，作者大概会构造一些偏好数据，然后训练模型，证明这种多样性确实源于偏好数据。 &emsp;&emsp; 作者改进模型数据多样性的方法，不是通过output的采样，而是使用Prompt，让模型输出多个回答并带有概率分布，这种方式很">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ycfywy.github.io/2025/12/11/VERBALIZED-SAMPLING-HOW-TO-MITIGATE-MODE-COLLAPSE-AND-UNLOCK-LLM-DIVERSITY/2025-12-11-22-43-23.png">
 <meta property="og:image" content="https://ycfywy.github.io/2025/12/11/VERBALIZED-SAMPLING-HOW-TO-MITIGATE-MODE-COLLAPSE-AND-UNLOCK-LLM-DIVERSITY/2025-12-12-22-38-08.png">
@@ -67,12 +67,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="../../../../css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="../../../../css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="../../../../css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
@@ -88,8 +88,8 @@
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="../../../../js/utils.js" ></script>
-  <script  src="../../../../js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
 
 
@@ -106,7 +106,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="../../../../index.html">
+    <a class="navbar-brand" href="/">
       <strong>ycf blog</strong>
     </a>
 
@@ -125,7 +125,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../index.html" target="_self">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -137,7 +137,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../archives/" target="_self">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -149,7 +149,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../categories/" target="_self">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -161,7 +161,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../tags/" target="_self">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -173,7 +173,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../about/" target="_self">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -203,7 +203,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('../../../../images/index.png') no-repeat center center; background-size: cover;">
+     style="background: url('/images/index.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -232,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          1.9k 字
         
       </span>
     
@@ -285,54 +285,56 @@
             
               <div class="markdown-body">
                 
-                <p><img src="./2025-12-11-22-43-23.png" srcset="/img/loading.gif" lazyload /></p>
-<h2 id="我的评价">我的评价</h2>
-<p>   作者说LLM生成内容的多样性不好，是因为数据本身就带有人类的偏好。数据本身的偏好是模型多样性缺失的原因，是本文要证明的内容。按照这个分析，作者大概会构造一些偏好数据，然后训练模型，证明这种多样性确实源于偏好数据。</p>
-<p>   作者改进模型数据多样性的方法，不是通过output的采样，而是使用Prompt，让模型输出多个回答并带有概率分布，这种方式很难理解为什么这么做。明明使用llm的参数temperature改变采样策略就可以做到，为什么还要这种Prompt呢？(作者标榜Prompt可以做到Training-Free 但是采样策略也是啊 而且更可控…)</p>
-<p>  总结来说，这篇文章有点像是独立的两篇文章。前半段对Training Data的bias的分析不够深入，只是针对一个数据集做了分析，通过拟合，证明了数据确实有bias。在我看来，还应该对bias data对模型的影响进行更加细致的分析（比如通过消除bias data中的bias，重新训练，看能否消除这种diversity的缺失）。后半段则是对VERBALIZED SAMPLING（一种带有概率的Prompt）来缓解模型diversity的降低。在我看来，后半段完全可以单独弄一个文章，分析temperature / reward model / training algforithm / prompt等对模型输出diversity的影响，看看哪个更有效。</p>
-<p>  作为一篇ICLR 2026在投的文章，从<a target="_blank" rel="noopener" href="https://openreview.net/forum?id=9jQkmGunGo">OpenReview</a>上面的评论，也可以看出和评价类似的Reviewer comment。不过这确实是一篇实验非常详实，消融实验设计也很合理的好文章。</p>
-<h2 id="当前存在什么问题">当前存在什么问题</h2>
-<p>  在创意性的问题，比如“tell me a joke” “write a story about bear”… 场景下，我们需要 LLM 给出尽可能 diverse 的 answer。但是前人研究发现，LLM 在训练的过程中，生成内容的 diversity 会降低。过去的研究集中在算法层面，认为 trainging algorithm 存在天然的缺陷，比如单一的奖励信号，RLHF 中的 KL 正则化项等等，他们天然的就会在训练的过程中降低 model output diversity。因此，解决的方案就是从算法角度下手，尽可能优化 sft rl 的过程。</p>
+                <p><img src="./2025-12-11-22-43-23.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="我的评价"><a href="#我的评价" class="headerlink" title="我的评价"></a>我的评价</h2><p>&emsp;&emsp; 作者说LLM生成内容的多样性不好，是因为数据本身就带有人类的偏好。数据本身的偏好是模型多样性缺失的原因，是本文要证明的内容。按照这个分析，作者大概会构造一些偏好数据，然后训练模型，证明这种多样性确实源于偏好数据。</p>
+<p>&emsp;&emsp; 作者改进模型数据多样性的方法，不是通过output的采样，而是使用Prompt，让模型输出多个回答并带有概率分布，这种方式很难理解为什么这么做。明明使用llm的参数temperature改变采样策略就可以做到，为什么还要这种Prompt呢？(作者标榜Prompt可以做到Training-Free 但是采样策略也是啊 而且更可控…)</p>
+<p>&emsp;&emsp;总结来说，这篇文章有点像是独立的两篇文章。前半段对Training Data的bias的分析不够深入，只是针对一个数据集做了分析，通过拟合，证明了数据确实有bias。在我看来，还应该对bias data对模型的影响进行更加细致的分析（比如通过消除bias data中的bias，重新训练，看能否消除这种diversity的缺失）。后半段则是对VERBALIZED SAMPLING（一种带有概率的Prompt）来缓解模型diversity的降低。在我看来，后半段完全可以单独弄一个文章，分析temperature &#x2F; reward model &#x2F; training algforithm &#x2F; prompt等对模型输出diversity的影响，看看哪个更有效。</p>
+<p>&emsp;&emsp;作为一篇ICLR 2026在投的文章，从<a target="_blank" rel="noopener" href="https://openreview.net/forum?id=9jQkmGunGo">OpenReview</a>上面的评论，也可以看出和评价类似的Reviewer comment。不过这确实是一篇实验非常详实，消融实验设计也很合理的好文章。</p>
+<h2 id="当前存在什么问题"><a href="#当前存在什么问题" class="headerlink" title="当前存在什么问题"></a>当前存在什么问题</h2><p>&emsp;&emsp;在创意性的问题，比如”tell me a joke” “write a story about bear”… 场景下，我们需要 LLM 给出尽可能 diverse 的 answer。但是前人研究发现，LLM 在训练的过程中，生成内容的 diversity 会降低。过去的研究集中在算法层面，认为 trainging algorithm 存在天然的缺陷，比如单一的奖励信号，RLHF 中的 KL 正则化项等等，他们天然的就会在训练的过程中降低 model output diversity。因此，解决的方案就是从算法角度下手，尽可能优化 sft rl 的过程。</p>
 <p>本文想要从 Data 的角度解释这种 diversity 的缺失，同时提出一些提高 diversity 的方法。</p>
-<h2 id="本文打算通过什么思路解决">本文打算通过什么思路解决</h2>
-<p>  本文做出假设：模型的训练数据本身是带有 bias 的。人类在标注 RLHF 数据的时候，做排序天然的就有 bias。比如更喜欢比较熟悉的语法，熟悉的结构，简单易懂的呈现方式等等。本文通过分析一个 Nvidia 团队的数据集HELPSTEER，证明这种数据bias 的存在。这里通过理论推导和拟合，发现确实存在。</p>
-<p><span class="math display">$$r(x, y) = r_{\text{true}}(x, y) + \alpha \log \pi_{\text{ref}}(y | x) + \epsilon(x) \tag{1}$$</span></p>
-<p>  研究人员使用了 HELPSTEER 数据集。这个数据集非常特殊，因为它对同一个回答给了两个不同的打分： - Correctness（正确性）： 对应公式中的 <span class="math inline"><em>r</em><sub>true</sub></span>（真实任务效用）。 - Helpfulness（有用性）： 对应公式中的 <span class="math inline"><em>r</em></span>（最终奖励，即人类给出的总分）</p>
-<p>研究人员从数据集中筛选出了 6,874 对回答。这些配对有一个关键特征：“same correctness ratings” (拥有相同的正确性评分)这意味着对于每一对回答 <span class="math inline">(<em>y</em><sub>1</sub>, <em>y</em><sub>2</sub>)</span>，它们的真实效用是相等的：<span class="math display"><em>r</em><sub>true</sub>(<em>y</em><sub>1</sub>) = <em>r</em><sub>true</sub>(<em>y</em><sub>2</sub>)</span></p>
-<p>假设有两个回答 <span class="math inline"><em>A</em></span> 和 <span class="math inline"><em>B</em></span>，它们的正确性评分一样，但人类给的总分（有用性）不一样。根据公式 (1)：回答 A 的得分： <span class="math inline"><em>r</em><sub><em>A</em></sub> = <em>r</em><sub>true</sub> + <em>α</em> ⋅ Typicality<sub><em>A</em></sub></span>回答 B 的得分： <span class="math inline"><em>r</em><sub><em>B</em></sub> = <em>r</em><sub>true</sub> + <em>α</em> ⋅ Typicality<sub><em>B</em></sub></span>当我们把这两个式子相减（比较 <span class="math inline"><em>A</em></span> 和 <span class="math inline"><em>B</em></span>）：<span class="math display"><em>r</em><sub><em>A</em></sub> − <em>r</em><sub><em>B</em></sub> = (<em>r</em><sub>true</sub> − <em>r</em><sub>true</sub>) + <em>α</em>(Typicality<sub><em>A</em></sub> − Typicality<sub><em>B</em></sub>)</span>由于正确性相同，<span class="math inline"><em>r</em><sub>true</sub></span> 互相抵消为 0，剩下的就是：<span class="math display"><em>Δ</em>Reward = <em>α</em> × <em>Δ</em>Typicality</span></p>
-<h2 id="该思路会遇到什么挑战">该思路会遇到什么挑战</h2>
+<h2 id="本文打算通过什么思路解决"><a href="#本文打算通过什么思路解决" class="headerlink" title="本文打算通过什么思路解决"></a>本文打算通过什么思路解决</h2><p>&emsp;&emsp;本文做出假设：模型的训练数据本身是带有 bias 的。人类在标注 RLHF 数据的时候，做排序天然的就有 bias。比如更喜欢比较熟悉的语法，熟悉的结构，简单易懂的呈现方式等等。本文通过分析一个 Nvidia 团队的数据集HELPSTEER，证明这种数据bias 的存在。这里通过理论推导和拟合，发现确实存在。</p>
+<p>$$r(x, y) &#x3D; r_{\text{true}}(x, y) + \alpha \log \pi_{\text{ref}}(y | x) + \epsilon(x) \tag{1}$$</p>
+<p>&emsp;&emsp;研究人员使用了 HELPSTEER 数据集。这个数据集非常特殊，因为它对同一个回答给了两个不同的打分：</p>
 <ul>
+<li>Correctness（正确性）： 对应公式中的 $r_{\text{true}}$（真实任务效用）。</li>
+<li>Helpfulness（有用性）： 对应公式中的 $r$（最终奖励，即人类给出的总分）</li>
+</ul>
+<p>研究人员从数据集中筛选出了 6,874 对回答。这些配对有一个关键特征：“same correctness ratings” (拥有相同的正确性评分)这意味着对于每一对回答 $(y_1, y_2)$，它们的真实效用是相等的：$$r_{\text{true}}(y_1) &#x3D; r_{\text{true}}(y_2)$$</p>
+<p>假设有两个回答 $A$ 和 $B$，它们的正确性评分一样，但人类给的总分（有用性）不一样。根据公式 (1)：回答 A 的得分： $r_A &#x3D; r_{\text{true}} + \alpha \cdot \text{Typicality}<em>A$回答 B 的得分： $r_B &#x3D; r</em>{\text{true}} + \alpha \cdot \text{Typicality}<em>B$当我们把这两个式子相减（比较 $A$ 和 $B$）：$$r_A - r_B &#x3D; (r</em>{\text{true}} - r_{\text{true}}) + \alpha (\text{Typicality}_A - \text{Typicality}<em>B)$$由于正确性相同，$r</em>{\text{true}}$ 互相抵消为 0，剩下的就是：$$\Delta \text{Reward} &#x3D; \alpha \times \Delta \text{Typicality}$$</p>
+<h2 id="该思路会遇到什么挑战"><a href="#该思路会遇到什么挑战" class="headerlink" title="该思路会遇到什么挑战"></a>该思路会遇到什么挑战</h2><ul>
 <li>如何证明 data bias 的存在。</li>
 <li>找到一个新的方法，能够提高模型的 diversity</li>
 </ul>
-<h2 id="本文通过什么手段克服该挑战">本文通过什么手段克服该挑战</h2>
-<ul>
+<h2 id="本文通过什么手段克服该挑战"><a href="#本文通过什么手段克服该挑战" class="headerlink" title="本文通过什么手段克服该挑战"></a>本文通过什么手段克服该挑战</h2><ul>
 <li>本文通过理论推导 bias 公式，然后使用HELPSTEER 数据集做数据拟合的验证，表明这种数据的 bias 的存在。</li>
 <li>前人的解决方案大多集中在 algorithm 或者 inference setting (sampling 策略)。本文提出带有概率输出的 prompt 来解决。如:“Generate 5 responses with their corresponding probabilities. Tell me a joke about coffee.”</li>
 </ul>
-<h2 id="本文如何通过实验论证了该方案的优越性">本文如何通过实验论证了该方案的优越性</h2>
-<ul>
-<li><p>实验目标：证明该 prompt 能够提高 LLM 输出的 diversity。</p></li>
-<li><p>实验的 benchmark：诗歌续写，故事生成，讲笑话。</p></li>
-<li><p>怎么 evaluate 模型的输出呢： 多样性：把模型的输出做 Embedding，通过相似度计算来反映输出的 diversity 输出质量：只输出多样的内容是不够的，我们还需要保证 quality。本文把 claude 模型 LLM as judge，从几个语言学上的维度，评估输出的质量。</p></li>
-<li><p>实验设置：在下列模型上，不同的 method （看Prompt Example column）跑 benchmark，使用 evaluate 的方法，计算输出的多样性和质量，绘制图像。 Gemini-2.5-Flash, Gemini-2.5-Pro Claude Series (Claude-3.7-Sonnet, Claude-4-Sonnet) open ones like (Llama-3.1-70B-Instruct and Qwen3-235B-A22B-2507-Instruct-2507) reasoning models like (OpenAI o3 and DeepSeek R1) <img src="./2025-12-12-22-38-08.png" srcset="/img/loading.gif" lazyload /> 实验结果：VS（也就是本文提出的方法）在各个 benchmark 上的表现都更优 <img src="./2025-12-12-22-38-22.png" srcset="/img/loading.gif" lazyload /> <img src="./2025-12-12-22-38-27.png" srcset="/img/loading.gif" lazyload /></p></li>
-<li><p>消融实验：</p></li>
+<h2 id="本文如何通过实验论证了该方案的优越性"><a href="#本文如何通过实验论证了该方案的优越性" class="headerlink" title="本文如何通过实验论证了该方案的优越性"></a>本文如何通过实验论证了该方案的优越性</h2><ul>
+<li><p>实验目标：证明该 prompt 能够提高 LLM 输出的 diversity。</p>
+</li>
+<li><p>实验的 benchmark：诗歌续写，故事生成，讲笑话。</p>
+</li>
+<li><p>怎么 evaluate 模型的输出呢：<br>多样性：把模型的输出做 Embedding，通过相似度计算来反映输出的 diversity<br>输出质量：只输出多样的内容是不够的，我们还需要保证 quality。本文把 claude 模型 LLM as judge，从几个语言学上的维度，评估输出的质量。</p>
+</li>
+<li><p>实验设置：在下列模型上，不同的 method （看Prompt Example column）跑 benchmark，使用 evaluate 的方法，计算输出的多样性和质量，绘制图像。<br>Gemini-2.5-Flash, Gemini-2.5-Pro<br>Claude Series (Claude-3.7-Sonnet, Claude-4-Sonnet)<br>open ones like (Llama-3.1-70B-Instruct and Qwen3-235B-A22B-2507-Instruct-2507)<br>reasoning models like (OpenAI o3 and DeepSeek R1)<br><img src="./2025-12-12-22-38-08.png" srcset="/img/loading.gif" lazyload><br>实验结果：VS（也就是本文提出的方法）在各个 benchmark 上的表现都更优<br><img src="./2025-12-12-22-38-22.png" srcset="/img/loading.gif" lazyload><br><img src="./2025-12-12-22-38-27.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>消融实验：</p>
+</li>
 </ul>
-<ol type="1">
-<li>llm params: temparature LLM 的 api 中可以调节 temperature 参数来调整模型输出的 diversity。因此需要消融 temperature。本文通过设置不同的 temperature 进行相同实验，消除该参数对方案有效性的影响。可以看到，VS 方案在各个 temperature 下的 diversity + quality 的表现依然是最佳的。 <img src="./2025-12-12-22-39-21.png" srcset="/img/loading.gif" lazyload /></li>
-<li>llm 不同的 traing stage 为了证明这种 VS 方法的有效性，本文在 LLM 不同的训练阶段 （SFT RLHF RLVR）都进行了 diversity 的测试，发现该方法在不同阶段都有效果。如图，随着训练的进行，Base Model 的 diversity 下降，但是 VS 方法的下降是最慢的，缓解了模型 diversity 的下降。 <img src="./2025-12-12-22-40-09.png" srcset="/img/loading.gif" lazyload /></li>
+<ol>
+<li>llm params: temparature<br>LLM 的 api 中可以调节 temperature 参数来调整模型输出的 diversity。因此需要消融 temperature。本文通过设置不同的 temperature 进行相同实验，消除该参数对方案有效性的影响。可以看到，VS 方案在各个 temperature 下的 diversity + quality 的表现依然是最佳的。<br><img src="./2025-12-12-22-39-21.png" srcset="/img/loading.gif" lazyload></li>
+<li>llm 不同的 traing stage<br>为了证明这种 VS 方法的有效性，本文在 LLM 不同的训练阶段 （SFT RLHF RLVR）都进行了 diversity 的测试，发现该方法在不同阶段都有效果。如图，随着训练的进行，Base Model 的 diversity 下降，但是 VS 方法的下降是最慢的，缓解了模型 diversity 的下降。<br><img src="./2025-12-12-22-40-09.png" srcset="/img/loading.gif" lazyload></li>
 </ol>
-<h2 id="我的思考">我的思考</h2>
-<p>  我在gemini-2.5-flash模型上试了一下，“Write a story about a bear.” 会得到如下结果 确实会有可能得到相似的回答： <img src="./2025-12-11-22-52-38.png" srcset="/img/loading.gif" lazyload /> <img src="./2025-12-11-22-52-49.png" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="我的思考"><a href="#我的思考" class="headerlink" title="我的思考"></a>我的思考</h2><p>&emsp;&emsp;我在gemini-2.5-flash模型上试了一下，“Write a story about a bear.” 会得到如下结果 确实会有可能得到相似的回答：<br><img src="./2025-12-11-22-52-38.png" srcset="/img/loading.gif" lazyload><br><img src="./2025-12-11-22-52-49.png" srcset="/img/loading.gif" lazyload></p>
 <p>不过这里只是粗略的看，<strong>如何评估两段文字的语义相似性 也是一个值得研究的问题</strong></p>
 <p>研究RLHF阶段的training data，分析到底什么样的数据会更优先，有没有搞头？可能需要分析排在前面的answer的通用范式（可能有总结 结构比较清晰 有各种tag分点之类的），也需要评估排在前面的answer是不是真的质量高于后面的，还是说因为human preference打分比较靠前。（这里你可能就要找一个方法 评估回答的质量–》 如果让LLM judge，那是不是就会出问题–》本身就是偏好数据RLHF训练出来的 会不会就给这里的排在前面的answer打高分呢 ）</p>
 <p>对比现有的提升模型输出多样性的方法，找到最有效的那个，不知道算不算创新，能不能发文章</p>
 <ul>
 <li>本文提及的论文中，可以继续深入了解的内容：</li>
 </ul>
-<ol type="1">
+<ol>
 <li>了解 RLHF 相关数据集的标注格式： HelpSteer: Multi-attribute Helpfulness Dataset for SteerLM <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2311.09528">link</a></li>
-<li>了解模型训练的不同阶段： Tulu 3: Pushing Frontiers in Open Language Model Post-Training <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2411.15124">link</a></li>
+<li>了解模型训练的不同阶段： Tulu 3: Pushing Frontiers in Open Language Model Post-Training  <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2411.15124">link</a></li>
 </ol>
 
                 
@@ -352,7 +354,7 @@
     
       <span class="category-chain">
         
-  <a href="../../../../categories/iclr/" class="category-chain-item">iclr</a>
+  <a href="/categories/iclr/" class="category-chain-item">iclr</a>
   
   
 
@@ -367,7 +369,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="../../../../tags/iclr2026%E5%9C%A8%E6%8A%95/" class="print-no-link">#iclr2026在投</a>
+        <a href="/tags/iclr2026%E5%9C%A8%E6%8A%95/" class="print-no-link">#iclr2026在投</a>
       
     </div>
   
@@ -424,7 +426,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="../../13/Evals-for-Data-Diversity/" title="Evals for Data Diversity">
+                      <a href="/2025/12/13/Evals-for-Data-Diversity/" title="Evals for Data Diversity">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Evals for Data Diversity</span>
                         <span class="visible-mobile">上一篇</span>
@@ -434,7 +436,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="../COZE%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%BF%B0/" title="COZE项目概述">
+                      <a href="/2025/12/11/COZE%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%BF%B0/" title="COZE项目概述">
                         <span class="hidden-mobile">COZE项目概述</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -569,8 +571,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="../../../../js/events.js" ></script>
-<script  src="../../../../js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -592,7 +594,7 @@
 
 
   
-    <script  src="../../../../js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -734,7 +736,7 @@
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
-  <script  src="../../../../js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -742,7 +744,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="../../../../js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
   

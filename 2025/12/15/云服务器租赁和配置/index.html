@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="../../../../img/fluid.png">
-  <link rel="icon" href="../../../../img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -19,12 +19,12 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="link aliyun服务器定价 一方面，卡的定价比较贵，24GB的A10要8.5元&#x2F;h 而且还没有计算服务器的网费。另一方面显卡型号不全，便宜的卡如5090这种都没有。   AutoDL服务器定价 价格便宜得多，而且支持0.1元&#x2F;h的无GPU模式启动，这个模式下可以编写一些代码逻辑，很便宜。  购买服务器，并进行一些配置 这里选择32GB的5090服务器，并进行一些LLM相关配置：">
+    <meta name="description" content="link aliyun服务器定价一方面，卡的定价比较贵，24GB的A10要8.5元&#x2F;h 而且还没有计算服务器的网费。另一方面显卡型号不全，便宜的卡如5090这种都没有。 AutoDL服务器定价价格便宜得多，而且支持0.1元&#x2F;h的无GPU模式启动，这个模式下可以编写一些代码逻辑，很便宜。 购买服务器，并进行一些配置这里选择32GB的5090服务器，并进行一些LLM相关配置：  选">
 <meta property="og:type" content="article">
 <meta property="og:title" content="云服务器租赁和配置">
 <meta property="og:url" content="https://ycfywy.github.io/2025/12/15/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A7%9F%E8%B5%81%E5%92%8C%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="link aliyun服务器定价 一方面，卡的定价比较贵，24GB的A10要8.5元&#x2F;h 而且还没有计算服务器的网费。另一方面显卡型号不全，便宜的卡如5090这种都没有。   AutoDL服务器定价 价格便宜得多，而且支持0.1元&#x2F;h的无GPU模式启动，这个模式下可以编写一些代码逻辑，很便宜。  购买服务器，并进行一些配置 这里选择32GB的5090服务器，并进行一些LLM相关配置：">
+<meta property="og:description" content="link aliyun服务器定价一方面，卡的定价比较贵，24GB的A10要8.5元&#x2F;h 而且还没有计算服务器的网费。另一方面显卡型号不全，便宜的卡如5090这种都没有。 AutoDL服务器定价价格便宜得多，而且支持0.1元&#x2F;h的无GPU模式启动，这个模式下可以编写一些代码逻辑，很便宜。 购买服务器，并进行一些配置这里选择32GB的5090服务器，并进行一些LLM相关配置：  选">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ycfywy.github.io/2025/12/15/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A7%9F%E8%B5%81%E5%92%8C%E9%85%8D%E7%BD%AE/2025-12-17-10-45-30.png">
 <meta property="og:image" content="https://ycfywy.github.io/2025/12/15/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A7%9F%E8%B5%81%E5%92%8C%E9%85%8D%E7%BD%AE/2025-12-17-10-46-02.png">
@@ -64,12 +64,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="../../../../css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="../../../../css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="../../../../css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
@@ -85,8 +85,8 @@
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="../../../../js/utils.js" ></script>
-  <script  src="../../../../js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
 
 
@@ -103,7 +103,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="../../../../index.html">
+    <a class="navbar-brand" href="/">
       <strong>ycf blog</strong>
     </a>
 
@@ -122,7 +122,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../index.html" target="_self">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -134,7 +134,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../archives/" target="_self">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -146,7 +146,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../categories/" target="_self">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -158,7 +158,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../tags/" target="_self">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -170,7 +170,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../about/" target="_self">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -200,7 +200,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('../../../../images/index.png') no-repeat center center; background-size: cover;">
+     style="background: url('/images/index.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -229,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          211 字
+          213 字
         
       </span>
     
@@ -283,14 +283,17 @@
               <div class="markdown-body">
                 
                 <p><a target="_blank" rel="noopener" href="https://www.autodl.com/console/instance/list?tag_id=">link</a></p>
-<h2 id="aliyun服务器定价">aliyun服务器定价</h2>
-<p>一方面，卡的定价比较贵，24GB的A10要8.5元/h 而且还没有计算服务器的网费。另一方面显卡型号不全，便宜的卡如5090这种都没有。 <img src="./2025-12-17-10-45-30.png" srcset="/img/loading.gif" lazyload /> <img src="./2025-12-17-10-46-02.png" srcset="/img/loading.gif" lazyload /></p>
-<h2 id="autodl服务器定价">AutoDL服务器定价</h2>
-<p>价格便宜得多，而且支持0.1元/h的无GPU模式启动，这个模式下可以编写一些代码逻辑，很便宜。 <img src="./2025-12-17-10-51-11.png" srcset="/img/loading.gif" lazyload /></p>
-<h2 id="购买服务器并进行一些配置">购买服务器，并进行一些配置</h2>
-<p>这里选择32GB的5090服务器，并进行一些LLM相关配置： - 选好cuda版本 12.8 - 下载对应版本的vllm 用于测试GPU - 配置镜像的链接（AutoDL是国内的服务器 需要配置一下镜像） - vllm下载Qwen3-8B 测试GPU</p>
-<p><img src="./2025-12-15-13-35-31.png" srcset="/img/loading.gif" lazyload /> <img src="./2025-12-15-13-37-26.png" srcset="/img/loading.gif" lazyload /></p>
-<p>配置好vllm (中间发现了一个<a target="_blank" rel="noopener" href="https://github.com/vllm-project/vllm/issues/23517">bug</a>) 下载了Qwen3-8B 运行做测试，模型跑起来的GPU使用情况25GB/32GB <img src="./2025-12-15-13-39-39.png" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="aliyun服务器定价"><a href="#aliyun服务器定价" class="headerlink" title="aliyun服务器定价"></a>aliyun服务器定价</h2><p>一方面，卡的定价比较贵，24GB的A10要8.5元&#x2F;h 而且还没有计算服务器的网费。另一方面显卡型号不全，便宜的卡如5090这种都没有。<br><img src="./2025-12-17-10-45-30.png" srcset="/img/loading.gif" lazyload><br><img src="./2025-12-17-10-46-02.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="AutoDL服务器定价"><a href="#AutoDL服务器定价" class="headerlink" title="AutoDL服务器定价"></a>AutoDL服务器定价</h2><p>价格便宜得多，而且支持0.1元&#x2F;h的无GPU模式启动，这个模式下可以编写一些代码逻辑，很便宜。<br><img src="./2025-12-17-10-51-11.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="购买服务器，并进行一些配置"><a href="#购买服务器，并进行一些配置" class="headerlink" title="购买服务器，并进行一些配置"></a>购买服务器，并进行一些配置</h2><p>这里选择32GB的5090服务器，并进行一些LLM相关配置：</p>
+<ul>
+<li>选好cuda版本 12.8</li>
+<li>下载对应版本的vllm 用于测试GPU</li>
+<li>配置镜像的链接（AutoDL是国内的服务器 需要配置一下镜像）</li>
+<li>vllm下载Qwen3-8B 测试GPU</li>
+</ul>
+<p><img src="./2025-12-15-13-35-31.png" srcset="/img/loading.gif" lazyload><br><img src="./2025-12-15-13-37-26.png" srcset="/img/loading.gif" lazyload></p>
+<p>配置好vllm (中间发现了一个<a target="_blank" rel="noopener" href="https://github.com/vllm-project/vllm/issues/23517">bug</a>)<br>下载了Qwen3-8B 运行做测试，模型跑起来的GPU使用情况25GB&#x2F;32GB<br><img src="./2025-12-15-13-39-39.png" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
@@ -353,7 +356,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="../%E5%9B%BE%E5%83%8F-%E9%9F%B3%E9%A2%91%E7%94%9F%E6%88%90%E7%9A%84%E7%AD%96%E7%95%A5%E6%A6%82%E8%BF%B0/" title="图像/音频生成的套路概述">
+                      <a href="/2025/12/15/%E5%9B%BE%E5%83%8F-%E9%9F%B3%E9%A2%91%E7%94%9F%E6%88%90%E7%9A%84%E7%AD%96%E7%95%A5%E6%A6%82%E8%BF%B0/" title="图像/音频生成的套路概述">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">图像/音频生成的套路概述</span>
                         <span class="visible-mobile">上一篇</span>
@@ -363,7 +366,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="../../14/Tulu-3-Pushing-Frontiers-in-Open-Language-Model-Post-Training/" title="Tülu 3: Pushing Frontiers in Open Language Model Post-Training">
+                      <a href="/2025/12/14/Tulu-3-Pushing-Frontiers-in-Open-Language-Model-Post-Training/" title="Tülu 3: Pushing Frontiers in Open Language Model Post-Training">
                         <span class="hidden-mobile">Tülu 3: Pushing Frontiers in Open Language Model Post-Training</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -498,8 +501,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="../../../../js/events.js" ></script>
-<script  src="../../../../js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -521,7 +524,7 @@
 
 
   
-    <script  src="../../../../js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -663,7 +666,7 @@
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
-  <script  src="../../../../js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -671,7 +674,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="../../../../js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
   

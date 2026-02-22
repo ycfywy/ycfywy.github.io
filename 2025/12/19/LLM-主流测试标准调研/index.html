@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="../../../../img/fluid.png">
-  <link rel="icon" href="../../../../img/fluid.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -19,18 +19,18 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="总结   本文介绍了目前主流的测试LLM性能的benchmarks 增强版大模型评估基准对照表 (2025版)     数据集名称 测试主题 核心测试方法 选型建议 &#x2F; 适用场景 资源链接     GPQA 专家级科学 448道博士水平物理&#x2F;生物&#x2F;化学题。 必选。 用于测试模型在垂直领域硬科学推理的“天花板”水平。 Dataset   AIME 202">
+    <meta name="description" content="总结&emsp;&emsp;本文介绍了目前主流的测试LLM性能的benchmarks 增强版大模型评估基准对照表 (2025版)   数据集名称 测试主题 核心测试方法 选型建议 &#x2F; 适用场景 资源链接    GPQA 专家级科学 448道博士水平物理&#x2F;生物&#x2F;化学题。 必选。 用于测试模型在垂直领域硬科学推理的“天花板”水平。 Dataset   AIME 2025">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LLM 主流测试标准调研">
 <meta property="og:url" content="https://ycfywy.github.io/2025/12/19/LLM-%E4%B8%BB%E6%B5%81%E6%B5%8B%E8%AF%95%E6%A0%87%E5%87%86%E8%B0%83%E7%A0%94/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="总结   本文介绍了目前主流的测试LLM性能的benchmarks 增强版大模型评估基准对照表 (2025版)     数据集名称 测试主题 核心测试方法 选型建议 &#x2F; 适用场景 资源链接     GPQA 专家级科学 448道博士水平物理&#x2F;生物&#x2F;化学题。 必选。 用于测试模型在垂直领域硬科学推理的“天花板”水平。 Dataset   AIME 202">
+<meta property="og:description" content="总结&emsp;&emsp;本文介绍了目前主流的测试LLM性能的benchmarks 增强版大模型评估基准对照表 (2025版)   数据集名称 测试主题 核心测试方法 选型建议 &#x2F; 适用场景 资源链接    GPQA 专家级科学 448道博士水平物理&#x2F;生物&#x2F;化学题。 必选。 用于测试模型在垂直领域硬科学推理的“天花板”水平。 Dataset   AIME 2025">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="d:\MyDeskTop\%E5%90%88%E8%AE%A2%E6%9C%AC%E6%9D%90%E6%96%99\2025-12-19-23-33-02.png">
-<meta property="og:image" content="https://ycfywy.github.io/2025/12/19/LLM-%E4%B8%BB%E6%B5%81%E6%B5%8B%E8%AF%95%E6%A0%87%E5%87%86%E8%B0%83%E7%A0%94/LLM-%E4%B8%BB%E6%B5%81%E6%B5%8B%E8%AF%95%E6%A0%87%E5%87%86%E8%B0%83%E7%A0%94/2025-12-19-23-37-18.png">
-<meta property="og:image" content="https://ycfywy.github.io/2025/12/19/LLM-%E4%B8%BB%E6%B5%81%E6%B5%8B%E8%AF%95%E6%A0%87%E5%87%86%E8%B0%83%E7%A0%94/LLM-%E4%B8%BB%E6%B5%81%E6%B5%8B%E8%AF%95%E6%A0%87%E5%87%86%E8%B0%83%E7%A0%94/2025-12-19-23-39-37.png">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/19/LLM-%E4%B8%BB%E6%B5%81%E6%B5%8B%E8%AF%95%E6%A0%87%E5%87%86%E8%B0%83%E7%A0%94/2025-12-19-23-37-18.png">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/19/LLM-%E4%B8%BB%E6%B5%81%E6%B5%8B%E8%AF%95%E6%A0%87%E5%87%86%E8%B0%83%E7%A0%94/2025-12-19-23-39-37.png">
 <meta property="og:image" content="d:\MyDeskTop\%E5%90%88%E8%AE%A2%E6%9C%AC%E6%9D%90%E6%96%99\2025-12-19-23-41-04.png">
-<meta property="og:image" content="https://ycfywy.github.io/2025/12/19/LLM-%E4%B8%BB%E6%B5%81%E6%B5%8B%E8%AF%95%E6%A0%87%E5%87%86%E8%B0%83%E7%A0%94/LLM-%E4%B8%BB%E6%B5%81%E6%B5%8B%E8%AF%95%E6%A0%87%E5%87%86%E8%B0%83%E7%A0%94/2025-12-19-23-42-48.png">
+<meta property="og:image" content="https://ycfywy.github.io/2025/12/19/LLM-%E4%B8%BB%E6%B5%81%E6%B5%8B%E8%AF%95%E6%A0%87%E5%87%86%E8%B0%83%E7%A0%94/2025-12-19-23-42-48.png">
 <meta property="og:image" content="d:\MyDeskTop\%E5%90%88%E8%AE%A2%E6%9C%AC%E6%9D%90%E6%96%99\2025-12-19-23-43-59.png">
 <meta property="og:image" content="d:\MyDeskTop\%E5%90%88%E8%AE%A2%E6%9C%AC%E6%9D%90%E6%96%99\2025-12-19-23-44-25.png">
 <meta property="og:image" content="d:\MyDeskTop\%E5%90%88%E8%AE%A2%E6%9C%AC%E6%9D%90%E6%96%99\2025-12-19-23-46-46.png">
@@ -69,12 +69,12 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
-<link  rel="stylesheet" href="../../../../css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link id="highlight-css" rel="stylesheet" href="../../../../css/highlight.css" />
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="../../../../css/highlight-dark.css" />
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
@@ -90,8 +90,8 @@
       Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
     }
   </script>
-  <script  src="../../../../js/utils.js" ></script>
-  <script  src="../../../../js/color-schema.js" ></script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
 
 
@@ -108,7 +108,7 @@
 <div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="../../../../index.html">
+    <a class="navbar-brand" href="/">
       <strong>ycf blog</strong>
     </a>
 
@@ -127,7 +127,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../index.html" target="_self">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -139,7 +139,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../archives/" target="_self">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -151,7 +151,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../categories/" target="_self">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -163,7 +163,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../tags/" target="_self">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -175,7 +175,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="../../../../about/" target="_self">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -205,7 +205,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('../../../../images/index.png') no-repeat center center; background-size: cover;">
+     style="background: url('/images/index.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -234,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          2.1k 字
         
       </span>
     
@@ -245,7 +245,7 @@
         
         
         
-          17 分钟
+          18 分钟
         
       </span>
     
@@ -287,182 +287,167 @@
             
               <div class="markdown-body">
                 
-                <h2 id="总结">总结</h2>
-<p>  本文介绍了目前主流的测试LLM性能的benchmarks</p>
-<h3 id="增强版大模型评估基准对照表-2025版">增强版大模型评估基准对照表 (2025版)</h3>
-<table>
-
+                <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>&emsp;&emsp;本文介绍了目前主流的测试LLM性能的benchmarks</p>
+<h3 id="增强版大模型评估基准对照表-2025版"><a href="#增强版大模型评估基准对照表-2025版" class="headerlink" title="增强版大模型评估基准对照表 (2025版)"></a>增强版大模型评估基准对照表 (2025版)</h3><table>
 <thead>
-<tr class="header">
+<tr>
 <th>数据集名称</th>
 <th>测试主题</th>
 <th>核心测试方法</th>
-<th>选型建议 / 适用场景</th>
+<th>选型建议 &#x2F; 适用场景</th>
 <th>资源链接</th>
 </tr>
 </thead>
-<tbody>
-<tr class="odd">
+<tbody><tr>
 <td><strong>GPQA</strong></td>
 <td>专家级科学</td>
-<td>448道博士水平物理/生物/化学题。</td>
+<td>448道博士水平物理&#x2F;生物&#x2F;化学题。</td>
 <td><strong>必选。</strong> 用于测试模型在垂直领域硬科学推理的“天花板”水平。</td>
 <td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/Idavidrein/gpqa">Dataset</a></td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>AIME 2025</strong></td>
 <td>竞赛数学</td>
 <td>深度数学推理，非选择题。</td>
-<td><strong>进阶。</strong> 评估模型是否具备类似 o1/o3 的深度思维（Reasoning）能力。</td>
+<td><strong>进阶。</strong> 评估模型是否具备类似 o1&#x2F;o3 的深度思维（Reasoning）能力。</td>
 <td><a target="_blank" rel="noopener" href="http://huggingface.co/datasets/opencompass/AIME2025">Dataset</a></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>C-Eval</strong></td>
 <td><strong>中文综合能力</strong></td>
 <td>13948道涵盖52个学科的选择题。</td>
 <td><strong>中文必选。</strong> 国内大模型最基础的门槛测试，评估中文综合知识储备。</td>
 <td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/ceval/ceval-exam">Dataset</a></td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>CMMLU</strong></td>
 <td><strong>中文综合知识</strong></td>
 <td>涵盖67个学科，专门针对中文语境优化。</td>
 <td><strong>中文必选。</strong> 补充 C-Eval，更侧重中文文化背景下的多任务知识评估。</td>
 <td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/haonan-li/cmmlu">Dataset</a></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>SWE-bench</strong></td>
 <td>软件工程</td>
 <td>修改真实代码仓库并修复 Bug。</td>
 <td><strong>Agent必选。</strong> 评估模型作为“AI程序员”在复杂环境下的工程落地能力。</td>
 <td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/SWE-bench/SWE-bench">Dataset</a></td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>AlignBench</strong></td>
 <td><strong>中文指令对齐</strong></td>
 <td>涵盖数学、逻辑、中文理解等8大维度。</td>
 <td><strong>对齐评估。</strong> 衡量模型是否听话、回答是否符合中文用户的语言习惯。</td>
 <td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2311.16452">Paper</a></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>MMLU</strong></td>
 <td>通用世界知识</td>
 <td>57个学科，1.16万道题。</td>
 <td><strong>全球基准。</strong> 模型预训练阶段效果的最直观参考，用于横向对比模型量级。</td>
 <td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/cais/mmlu">Dataset</a></td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>HLE</strong></td>
 <td>前沿专家知识</td>
 <td>跨学科多模态，高难度。</td>
 <td><strong>前沿探索。</strong> 当 MMLU 达到 90%+ 产生饱和时，用此项测试拉开差距。</td>
 <td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/cais/hle">Dataset</a></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>Math-500</strong></td>
 <td>高难度数学</td>
 <td>从 MATH 中精选的 500 道难题。</td>
 <td><strong>推理基准。</strong> 快速评估模型逻辑链条（CoT）是否严密，适合小样本快评。</td>
 <td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/HuggingFaceH4/MATH-500">Dataset</a></td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>C-Math</strong></td>
 <td><strong>中文数学能力</strong></td>
 <td>专门针对中文表述的数学问题。</td>
 <td><strong>场景优化。</strong> 评估模型能否理解中文语境下的数学逻辑和数量关系。</td>
 <td><a target="_blank" rel="noopener" href="https://www.google.com/search?q=https://huggingface.co/datasets/Libert-S/C-Math">Dataset</a></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>IFBench</strong></td>
 <td>指令遵循</td>
-<td>自动化评估格式/字数约束。</td>
+<td>自动化评估格式&#x2F;字数约束。</td>
 <td><strong>指令遵循。</strong> 适合评估模型在 RAG、长文本总结等对格式要求严苛的任务表现。</td>
 <td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/allenai/IF_multi_constraints_upto5">Dataset</a></td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>GSM8K</strong></td>
 <td>小学数学应用</td>
 <td>8500道多步算术推理。</td>
-<td><strong>基础基准。</strong> 用于评估中轻量级模型（如 7B/14B）的基本逻辑能力。</td>
+<td><strong>基础基准。</strong> 用于评估中轻量级模型（如 7B&#x2F;14B）的基本逻辑能力。</td>
 <td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/openai/gsm8k">Dataset</a></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>HumanEval</strong></td>
 <td>代码生成</td>
 <td>164个 Python 编程问题。</td>
 <td><strong>代码必选。</strong> 评估模型生成算法代码的纯净度和逻辑性，最经典的代码集。</td>
 <td><a target="_blank" rel="noopener" href="https://huggingface.co/datasets/openai/openai_humaneval">Dataset</a></td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>SuperCLUE</strong></td>
 <td><strong>中文大模型总榜</strong></td>
 <td>分级评估（L1-L5）的多维度测试。</td>
 <td><strong>行业对比。</strong> 适合用于横向对比国内主流商用模型的地位。</td>
 <td><a target="_blank" rel="noopener" href="https://www.superclueai.com/">Link</a></td>
 </tr>
-</tbody>
-</table>
-<hr />
-<hr />
-<h3 id="gpqa">GPQA</h3>
-<p>paper: https://arxiv.org/abs/2311.12022 dataset:https://huggingface.co/datasets/Idavidrein/gpqa</p>
-<p>  GPQA，这是一个由生物学、物理和化学领域专家编写的 448 道选择题的复杂数据集。拥有或正在攻读相关领域博士学位的专家准确率为 65%（扣除专家事后识别的明显错误后为 74%），而高技能的非专家验证者即使平均在无限制访问网络上花费超过 30 分钟。</p>
+</tbody></table>
+<hr>
+<hr>
+<h3 id="GPQA"><a href="#GPQA" class="headerlink" title="GPQA"></a>GPQA</h3><p>paper: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2311.12022">https://arxiv.org/abs/2311.12022</a><br>dataset:<a target="_blank" rel="noopener" href="https://huggingface.co/datasets/Idavidrein/gpqa">https://huggingface.co/datasets/Idavidrein/gpqa</a></p>
+<p>&emsp;&emsp;GPQA，这是一个由生物学、物理和化学领域专家编写的 448 道选择题的复杂数据集。拥有或正在攻读相关领域博士学位的专家准确率为 65%（扣除专家事后识别的明显错误后为 74%），而高技能的非专家验证者即使平均在无限制访问网络上花费超过 30 分钟。</p>
 <ul>
-<li>case   Two quantum states with energies E1 and E2 have a lifetime of 10^-9 sec and 10^-8 sec, respectively. We want to clearly distinguish these two energy levels. Which one of the following options could be their energy difference so that they be clearly resolved?   能量分别为 E1 和 E2 的两个量子态的寿命分别为 10^-9 秒和 10^-8 秒。我们希望能够清晰地区分这两个能级。下列哪个选项可能是它们之间的能量差，以便能够清晰地区分它们？ <img src="D:\MyDeskTop\合订本材料\2025-12-19-23-33-02.png" srcset="/img/loading.gif" lazyload /></li>
+<li>case<br>&emsp;&emsp;Two quantum states with energies E1 and E2 have a lifetime of 10^-9 sec and 10^-8 sec, respectively. We want to clearly distinguish these two energy levels. Which one of the following options could be their energy difference so that they be clearly resolved?<br>&emsp;&emsp;能量分别为 E1 和 E2 的两个量子态的寿命分别为 10^-9 秒和 10^-8 秒。我们希望能够清晰地区分这两个能级。下列哪个选项可能是它们之间的能量差，以便能够清晰地区分它们？<br><img src="D:\MyDeskTop\合订本材料\2025-12-19-23-33-02.png" srcset="/img/loading.gif" lazyload></li>
 </ul>
-<hr />
-<h3 id="aime2025">AIME2025</h3>
-<p>dataset: http://huggingface.co/datasets/opencompass/AIME2025</p>
-<p>  该数据集包含了美国邀请数学考试（AIME）2025-I 和 II 的题目。主要测试LLM的math能力。</p>
+<hr>
+<h3 id="AIME2025"><a href="#AIME2025" class="headerlink" title="AIME2025"></a>AIME2025</h3><p>dataset: <a target="_blank" rel="noopener" href="http://huggingface.co/datasets/opencompass/AIME2025">http://huggingface.co/datasets/opencompass/AIME2025</a></p>
+<p>&emsp;&emsp;该数据集包含了美国邀请数学考试（AIME）2025-I 和 II 的题目。主要测试LLM的math能力。</p>
 <ul>
-<li>case:   On <span class="math inline">△<em>A</em><em>B</em><em>C</em></span> points <span class="math inline"><em>A</em>, <em>D</em>, <em>E</em></span>, and <span class="math inline"><em>B</em></span> lie that order on side <span class="math inline">$\overline{AB}$</span> with <span class="math inline"><em>A</em><em>D</em> = 4, <em>D</em><em>E</em> = 16</span>, and <span class="math inline"><em>E</em><em>B</em> = 8</span>. Points <span class="math inline"><em>A</em>, <em>F</em>, <em>G</em></span>, and <span class="math inline"><em>C</em></span> lie in that order on side <span class="math inline">$\overline{AC}$</span> with <span class="math inline"><em>A</em><em>F</em> = 13, <em>F</em><em>G</em> = 52</span>, and <span class="math inline"><em>G</em><em>C</em> = 26</span>. Let <span class="math inline"><em>M</em></span> be the reflection of <span class="math inline"><em>D</em></span> through <span class="math inline"><em>F</em></span>, and let <span class="math inline"><em>N</em></span> be the reflection of <span class="math inline"><em>G</em></span> through <span class="math inline"><em>E</em></span>. Quadrilateral <span class="math inline"><em>D</em><em>E</em><em>G</em><em>F</em></span> has area 288. Find the area of heptagon <span class="math inline"><em>A</em><em>F</em><em>N</em><em>B</em><em>C</em><em>E</em><em>M</em></span>.   在三角形 ABC 上，点 A、D、E、B 按顺序位于边 AB 上，且 AD=4，DE=16，EB=8。点 A、F、G、C 按顺序位于边 AC 上，且 AF=13，FG=52，GC=26。设 M 为点 D 关于点 F 的反射，N 为点 G 关于点 E 的反射。四边形 DEGF 的面积为 288。求七边形 AFNBCEM 的面积。588 <img src="LLM-主流测试标准调研/2025-12-19-23-37-18.png" srcset="/img/loading.gif" lazyload /></li>
+<li>case:<br>&emsp;&emsp;On $\triangle ABC$ points $A,D,E$, and $B$ lie that order on side $\overline{AB}$ with $AD&#x3D;4, DE&#x3D;16$, and $EB&#x3D;8$. Points $A,F,G$, and $C$ lie in that order on side $\overline{AC}$ with $AF&#x3D;13, FG&#x3D;52$, and $GC&#x3D;26$. Let $M$ be the reflection of $D$ through $F$, and let $N$ be the reflection of $G$ through $E$. Quadrilateral $DEGF$ has area 288. Find the area of heptagon $AFNBCEM$.<br>&emsp;&emsp;在三角形 ABC 上，点 A、D、E、B 按顺序位于边 AB 上，且 AD&#x3D;4，DE&#x3D;16，EB&#x3D;8。点 A、F、G、C 按顺序位于边 AC 上，且 AF&#x3D;13，FG&#x3D;52，GC&#x3D;26。设 M 为点 D 关于点 F 的反射，N 为点 G 关于点 E 的反射。四边形 DEGF 的面积为 288。求七边形 AFNBCEM 的面积。588<br><img src="/2025/12/19/LLM-%E4%B8%BB%E6%B5%81%E6%B5%8B%E8%AF%95%E6%A0%87%E5%87%86%E8%B0%83%E7%A0%94/2025-12-19-23-37-18.png" srcset="/img/loading.gif" lazyload></li>
 </ul>
-<h3 id="swe-bench">SWE-bench</h3>
-<p>dataset: https://huggingface.co/datasets/SWE-bench/SWE-bench</p>
-<p>  该数据集来自于12 个主流 Python 仓库爬取拉取请求和问题，收集了 2,294 个任务实例。每个实例基于一个拉取请求，（1）与某个问题相关，（2）修改的 1+测试相关文件。每个实例，构建一个执行环境（Docker Image），仓库在拉取请求所基于的提交处成功安装。没有拉取请求的更改，许多测试失败。拉取请求合并后，同样的测试集通过。这些“失败通过”测试是评估的主要信号。</p>
-<p>  SWE-bench 评估的工作原理如下。每个任务实例，给 AI 系统一个问题文本。随后 AI 系统应修改代码库以解决描述的问题。当 AI 系统完成后，我们运行上述失败-通过测试，以检查问题是否成功解决。 <img src="LLM-主流测试标准调研/2025-12-19-23-39-37.png" srcset="/img/loading.gif" lazyload /></p>
-<h3 id="humanitys-last-exam">Humanity’s Last Exam</h3>
-<p>dataset: https://huggingface.co/datasets/cais/hle</p>
-<p>  人类最后考试（HLE）是一个位于人类知识前沿的多模态基准，旨在成为同类中最后一个封闭式学术基准，涵盖广泛学科。人类最后考试包含 2500 道题目，涵盖数十个学科，包括数学、人文学科和自然科学。HLE 由全球各学科专家开发，包含适合自动评分的选择题和简答题。他的题目分布如下： <img src="D:\MyDeskTop\合订本材料\2025-12-19-23-41-04.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="SWE-bench"><a href="#SWE-bench" class="headerlink" title="SWE-bench"></a>SWE-bench</h3><p>dataset: <a target="_blank" rel="noopener" href="https://huggingface.co/datasets/SWE-bench/SWE-bench">https://huggingface.co/datasets/SWE-bench/SWE-bench</a></p>
+<p>&emsp;&emsp;该数据集来自于12 个主流 Python 仓库爬取拉取请求和问题，收集了 2,294 个任务实例。每个实例基于一个拉取请求，（1）与某个问题相关，（2）修改的 1+测试相关文件。每个实例，构建一个执行环境（Docker Image），仓库在拉取请求所基于的提交处成功安装。没有拉取请求的更改，许多测试失败。拉取请求合并后，同样的测试集通过。这些“失败通过”测试是评估的主要信号。</p>
+<p>&emsp;&emsp;SWE-bench 评估的工作原理如下。每个任务实例，给 AI 系统一个问题文本。随后 AI 系统应修改代码库以解决描述的问题。当 AI 系统完成后，我们运行上述失败-通过测试，以检查问题是否成功解决。<br><img src="/2025/12/19/LLM-%E4%B8%BB%E6%B5%81%E6%B5%8B%E8%AF%95%E6%A0%87%E5%87%86%E8%B0%83%E7%A0%94/2025-12-19-23-39-37.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="Humanity’s-Last-Exam"><a href="#Humanity’s-Last-Exam" class="headerlink" title="Humanity’s Last Exam"></a>Humanity’s Last Exam</h3><p>dataset: <a target="_blank" rel="noopener" href="https://huggingface.co/datasets/cais/hle">https://huggingface.co/datasets/cais/hle</a></p>
+<p>&emsp;&emsp;人类最后考试（HLE）是一个位于人类知识前沿的多模态基准，旨在成为同类中最后一个封闭式学术基准，涵盖广泛学科。人类最后考试包含 2500 道题目，涵盖数十个学科，包括数学、人文学科和自然科学。HLE 由全球各学科专家开发，包含适合自动评分的选择题和简答题。他的题目分布如下：<br><img src="D:\MyDeskTop\合订本材料\2025-12-19-23-41-04.png" srcset="/img/loading.gif" lazyload></p>
 <ul>
-<li>case <img src="LLM-主流测试标准调研/2025-12-19-23-42-48.png" srcset="/img/loading.gif" lazyload /></li>
+<li>case<br><img src="/2025/12/19/LLM-%E4%B8%BB%E6%B5%81%E6%B5%8B%E8%AF%95%E6%A0%87%E5%87%86%E8%B0%83%E7%A0%94/2025-12-19-23-42-48.png" srcset="/img/loading.gif" lazyload></li>
 </ul>
-<h3 id="mmlu">MMLU</h3>
-<p>dataset: https://huggingface.co/datasets/cais/mmlu</p>
-<p>  这是一个庞大的多任务测试，包含来自不同知识领域的多项选择题。该考试涵盖人文学科、社会科学、理科以及其他对某些人来说重要的领域。课程涵盖57项任务，包括基础数学、美国历史、计算机科学、法律等, 一共116K道题目。为了在该测试中获得高准确性，模型必须具备广泛的世界知识和解决问题的能力。</p>
+<h3 id="MMLU"><a href="#MMLU" class="headerlink" title="MMLU"></a>MMLU</h3><p>dataset: <a target="_blank" rel="noopener" href="https://huggingface.co/datasets/cais/mmlu">https://huggingface.co/datasets/cais/mmlu</a></p>
+<p>&emsp;&emsp;这是一个庞大的多任务测试，包含来自不同知识领域的多项选择题。该考试涵盖人文学科、社会科学、理科以及其他对某些人来说重要的领域。课程涵盖57项任务，包括基础数学、美国历史、计算机科学、法律等, 一共116K道题目。为了在该测试中获得高准确性，模型必须具备广泛的世界知识和解决问题的能力。</p>
 <ul>
-<li>case: <img src="D:\MyDeskTop\合订本材料\2025-12-19-23-43-59.png" srcset="/img/loading.gif" lazyload /></li>
+<li>case:<br><img src="D:\MyDeskTop\合订本材料\2025-12-19-23-43-59.png" srcset="/img/loading.gif" lazyload></li>
 </ul>
-<h3 id="math500">Math500</h3>
-<p>dataset: https://huggingface.co/datasets/HuggingFaceH4/MATH-500</p>
-<p>  MATH-500基准测试由OpenAI于2023年推出，作为评估其最新模型（如GPT-4o）数学能力的工具。该基准测试包含500道高难度的数学竞赛题目，旨在挑战模型的极限，评估其在复杂数学问题上的推理和解题能力。</p>
+<h3 id="Math500"><a href="#Math500" class="headerlink" title="Math500"></a>Math500</h3><p>dataset: <a target="_blank" rel="noopener" href="https://huggingface.co/datasets/HuggingFaceH4/MATH-500">https://huggingface.co/datasets/HuggingFaceH4/MATH-500</a></p>
+<p>&emsp;&emsp;MATH-500基准测试由OpenAI于2023年推出，作为评估其最新模型（如GPT-4o）数学能力的工具。该基准测试包含500道高难度的数学竞赛题目，旨在挑战模型的极限，评估其在复杂数学问题上的推理和解题能力。</p>
 <ul>
-<li>case: <img src="D:\MyDeskTop\合订本材料\2025-12-19-23-44-25.png" srcset="/img/loading.gif" lazyload /></li>
+<li>case:<br><img src="D:\MyDeskTop\合订本材料\2025-12-19-23-44-25.png" srcset="/img/loading.gif" lazyload></li>
 </ul>
-<h3 id="ifbench">IFBench</h3>
-<p>dataset: https://huggingface.co/datasets/allenai/IF_multi_constraints_upto5</p>
-<p>  大语言模型的“指令跟随”能力，是评价模型是否能够按照人类需求输出的重要指标。与一般的问答不同，指令往往包含多种约束，例如输出字数、格式、语言、是否禁止某些词、是否必须包含特定结构等。IFBench就是通过这些约束，自动化评估LLM指令遵循能力的Benchmark。</p>
+<h3 id="IFBench"><a href="#IFBench" class="headerlink" title="IFBench"></a>IFBench</h3><p>dataset: <a target="_blank" rel="noopener" href="https://huggingface.co/datasets/allenai/IF_multi_constraints_upto5">https://huggingface.co/datasets/allenai/IF_multi_constraints_upto5</a></p>
+<p>&emsp;&emsp;大语言模型的“指令跟随”能力，是评价模型是否能够按照人类需求输出的重要指标。与一般的问答不同，指令往往包含多种约束，例如输出字数、格式、语言、是否禁止某些词、是否必须包含特定结构等。IFBench就是通过这些约束，自动化评估LLM指令遵循能力的Benchmark。</p>
 <ul>
-<li>case <img src="D:\MyDeskTop\合订本材料\2025-12-19-23-46-46.png" srcset="/img/loading.gif" lazyload /></li>
+<li>case<br><img src="D:\MyDeskTop\合订本材料\2025-12-19-23-46-46.png" srcset="/img/loading.gif" lazyload></li>
 </ul>
-<h3 id="glue">GLUE</h3>
-<p>dataset: https://huggingface.co/datasets/nyu-mll/glue</p>
-<p>  GLUE, the General Language Understanding Evaluation benchmark，是一套用于训练、评估和分析自然语言理解系统的资源集合。</p>
+<h3 id="GLUE"><a href="#GLUE" class="headerlink" title="GLUE"></a>GLUE</h3><p>dataset: <a target="_blank" rel="noopener" href="https://huggingface.co/datasets/nyu-mll/glue">https://huggingface.co/datasets/nyu-mll/glue</a></p>
+<p>&emsp;&emsp;GLUE, the General Language Understanding Evaluation benchmark，是一套用于训练、评估和分析自然语言理解系统的资源集合。</p>
 <ul>
-<li>case <img src="D:\MyDeskTop\合订本材料\2025-12-19-23-52-40.png" srcset="/img/loading.gif" lazyload /></li>
+<li>case<br><img src="D:\MyDeskTop\合订本材料\2025-12-19-23-52-40.png" srcset="/img/loading.gif" lazyload></li>
 </ul>
-<h3 id="gsm8k">GSM8K</h3>
-<p>dataset: https://huggingface.co/datasets/openai/gsm8k</p>
-<p>  GSM8K（Grade School Math 8K）是一个包含 8500 道高质量、语言多样化的小学数学应用题的数据集。该数据集旨在支持对需要多步骤推理的基础数学问题进行问答的任务。</p>
-<p>  这些问题需要 2 到 8 个步骤才能解决。解决方案主要涉及使用基本算术运算（+ − ×÷）进行一系列初等计算，以得出最终答案。一个聪明的中学生应该能够解决所有问题：试卷中写道，“这些问题不需要超出初级代数水平的概念，而且绝大多数问题无需明确定义变量即可解决。”解决方案以自然语言而非纯数学表达式的形式提供。论文中写道：“我们认为这是最通用的数据格式，并期望它能揭示大型语言模型内部独白的特性。”</p>
+<h3 id="GSM8K"><a href="#GSM8K" class="headerlink" title="GSM8K"></a>GSM8K</h3><p>dataset: <a target="_blank" rel="noopener" href="https://huggingface.co/datasets/openai/gsm8k">https://huggingface.co/datasets/openai/gsm8k</a></p>
+<p>&emsp;&emsp;GSM8K（Grade School Math 8K）是一个包含 8500 道高质量、语言多样化的小学数学应用题的数据集。该数据集旨在支持对需要多步骤推理的基础数学问题进行问答的任务。</p>
+<p>&emsp;&emsp;这些问题需要 2 到 8 个步骤才能解决。解决方案主要涉及使用基本算术运算（+ − ×÷）进行一系列初等计算，以得出最终答案。一个聪明的中学生应该能够解决所有问题：试卷中写道，“这些问题不需要超出初级代数水平的概念，而且绝大多数问题无需明确定义变量即可解决。”解决方案以自然语言而非纯数学表达式的形式提供。论文中写道：“我们认为这是最通用的数据格式，并期望它能揭示大型语言模型内部独白的特性。”</p>
 <ul>
-<li>case <img src="D:\MyDeskTop\合订本材料\2025-12-19-23-55-08.png" srcset="/img/loading.gif" lazyload /></li>
+<li>case<br><img src="D:\MyDeskTop\合订本材料\2025-12-19-23-55-08.png" srcset="/img/loading.gif" lazyload></li>
 </ul>
-<h3 id="humaneval">HumanEval</h3>
-<p>dataset: https://huggingface.co/datasets/openai/openai_humaneval</p>
-<p>  OpenAI 发布的 HumanEval 数据集包含 164 个编程问题，每个问题都包含函数签名、特性、文档字符串、函数体以及若干单元测试。LLM需要根据问题编写代码，并通过单元测试。</p>
+<h3 id="HumanEval"><a href="#HumanEval" class="headerlink" title="HumanEval"></a>HumanEval</h3><p>dataset: <a target="_blank" rel="noopener" href="https://huggingface.co/datasets/openai/openai_humaneval">https://huggingface.co/datasets/openai/openai_humaneval</a></p>
+<p>&emsp;&emsp;OpenAI 发布的 HumanEval 数据集包含 164 个编程问题，每个问题都包含函数签名、特性、文档字符串、函数体以及若干单元测试。LLM需要根据问题编写代码，并通过单元测试。</p>
 <ul>
-<li>case <img src="D:\MyDeskTop\合订本材料\2025-12-19-23-56-32.png" srcset="/img/loading.gif" lazyload /></li>
+<li>case<br><img src="D:\MyDeskTop\合订本材料\2025-12-19-23-56-32.png" srcset="/img/loading.gif" lazyload></li>
 </ul>
 
                 
@@ -482,7 +467,7 @@
     
       <span class="category-chain">
         
-  <a href="../../../../categories/benchmark/" class="category-chain-item">benchmark</a>
+  <a href="/categories/benchmark/" class="category-chain-item">benchmark</a>
   
   
 
@@ -547,7 +532,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="../../20/%E7%A7%91%E7%A0%94%E6%83%B3%E6%B3%95%E6%B1%87%E6%80%BB/" title="科研想法汇总">
+                      <a href="/2025/12/20/%E7%A7%91%E7%A0%94%E6%83%B3%E6%B3%95%E6%B1%87%E6%80%BB/" title="科研想法汇总">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">科研想法汇总</span>
                         <span class="visible-mobile">上一篇</span>
@@ -557,7 +542,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="../../17/Does-Reinforcement-Learning-Really-Incentivize-Reasoning-Capacity-in-LLMs-Beyond-the-Base-Model/" title="Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?">
+                      <a href="/2025/12/17/Does-Reinforcement-Learning-Really-Incentivize-Reasoning-Capacity-in-LLMs-Beyond-the-Base-Model/" title="Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?">
                         <span class="hidden-mobile">Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -692,8 +677,8 @@
 
 <script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="../../../../js/events.js" ></script>
-<script  src="../../../../js/plugins.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 
   <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
@@ -715,7 +700,7 @@
 
 
   
-    <script  src="../../../../js/img-lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -857,7 +842,7 @@
 
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
-  <script  src="../../../../js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -865,7 +850,7 @@
 
 <!-- 主题的启动项，将它保持在最底部 -->
 <!-- the boot of the theme, keep it at the bottom -->
-<script  src="../../../../js/boot.js" ></script>
+<script  src="/js/boot.js" ></script>
 
 
   
