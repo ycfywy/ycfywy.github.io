@@ -19,21 +19,23 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="resource1 🚀 LLM 算法工程师面试考点通关清单 (2025-2026版)     主题分类 详细面试考点 &#x2F; 核心问题 复习进度     1. 模型架构 (Architecture) Attention 机制: MHA&#x2F;MQA&#x2F;GQA 的设计动机与显存收益；$Attention(Q, K, V) &#x3D; \text{softmax}(\frac{QK^T}{\">
+    <meta name="description" content="Leetcode 1461 给你一个二进制字符串 s 和一个整数 k 。如果所有长度为 k 的二进制字符串都是 s 的子串，请返回 true ，否则请返回 false 。 示例 1： 输入：s &#x3D; “00110110”, k &#x3D; 2 输出：true 解释：长度为 2 的二进制串包括 “00”，“01”，“10” 和 “11”。它们分别是 s 中下标为 0，1，3，2 开始的长度为 2 的子">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AI算法面经汇总">
-<meta property="og:url" content="https://ycfywy.github.io/2026/02/23/AI%E7%AE%97%E6%B3%95%E9%9D%A2%E7%BB%8F%E6%B1%87%E6%80%BB/index.html">
+<meta property="og:title" content="260223">
+<meta property="og:url" content="https://ycfywy.github.io/2026/02/23/260223/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="resource1 🚀 LLM 算法工程师面试考点通关清单 (2025-2026版)     主题分类 详细面试考点 &#x2F; 核心问题 复习进度     1. 模型架构 (Architecture) Attention 机制: MHA&#x2F;MQA&#x2F;GQA 的设计动机与显存收益；$Attention(Q, K, V) &#x3D; \text{softmax}(\frac{QK^T}{\">
+<meta property="og:description" content="Leetcode 1461 给你一个二进制字符串 s 和一个整数 k 。如果所有长度为 k 的二进制字符串都是 s 的子串，请返回 true ，否则请返回 false 。 示例 1： 输入：s &#x3D; “00110110”, k &#x3D; 2 输出：true 解释：长度为 2 的二进制串包括 “00”，“01”，“10” 和 “11”。它们分别是 s 中下标为 0，1，3，2 开始的长度为 2 的子">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-02-23T07:43:42.000Z">
-<meta property="article:modified_time" content="2026-02-23T07:49:53.091Z">
+<meta property="og:image" content="https://ycfywy.github.io/2026/02/23/260223/2026-02-23-19-25-26.png">
+<meta property="article:published_time" content="2026-02-23T11:41:14.000Z">
+<meta property="article:modified_time" content="2026-02-23T13:59:05.511Z">
 <meta property="article:author" content="ycf">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ycfywy.github.io/2026/02/23/260223/2026-02-23-19-25-26.png">
   
   
   
-  <title>AI算法面经汇总 - ycf blog</title>
+  <title>260223 - ycf blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="AI算法面经汇总"></span>
+            <span id="subtitle" data-typed-text="260223"></span>
           
         </div>
 
@@ -210,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-02-23 15:43" pubdate>
-          2026年2月23日 下午
+        <time datetime="2026-02-23 19:41" pubdate>
+          2026年2月23日 晚上
         </time>
       </span>
     
@@ -222,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          763 字
+          1.9k 字
         
       </span>
     
@@ -233,7 +235,7 @@
         
         
         
-          7 分钟
+          17 分钟
         
       </span>
     
@@ -270,135 +272,90 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">AI算法面经汇总</h1>
+            <h1 id="seo-header">260223</h1>
             
             
               <div class="markdown-body">
                 
-                <p><a target="_blank" rel="noopener" href="https://github.com/wdndev/llm_interview_note">resource1</a></p>
-<h1 id="llm-算法工程师面试考点通关清单-2025-2026版">🚀 LLM 算法工程师面试考点通关清单 (2025-2026版)</h1>
-<table>
-
-<thead>
-<tr class="header">
-<th style="text-align: left;">主题分类</th>
-<th style="text-align: left;">详细面试考点 / 核心问题</th>
-<th style="text-align: left;">复习进度</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>1. 模型架构 (Architecture)</strong></td>
-<td style="text-align: left;"><strong>Attention 机制</strong>: MHA/MQA/GQA 的设计动机与显存收益；<span class="math inline">$Attention(Q, K, V) = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V$</span> 中 <span class="math inline">$\sqrt{d_k}$</span> 的缩放意义。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>位置编码</strong>: RoPE (旋转位置编码) 的数学推导；为什么 RoPE 具备长文本外推性；ALiBi 与相对位置编码。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>归一化与激活</strong>: RMSNorm 与 LayerNorm 的计算差异；Pre-Norm 与 Post-Norm 的收敛稳定性对比；SwiGLU 激活函数的公式与优势。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>长文本处理</strong>: FlashAttention 1/2/3 硬件加速原理（Tiling &amp; Recomputation）；Ring Attention 并行逻辑；KV Cache 占用计算。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>新型架构</strong>: MoE (混合专家模型) 的 Router 负载均衡策略与 Top-K 选通；SSM (Mamba) 对比 Transformer 的线性复杂度优势。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>2. 数学与算法基础</strong></td>
-<td style="text-align: left;"><strong>优化器</strong>: AdamW 的权重衰减逻辑；Warmup 策略的必要性；一阶（SGD/Adam）与二阶优化器的优劣对比。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>损失函数与指标</strong>: Cross-Entropy 计算细节；KL 散度在 PPO 和 DPO 中的数学约束作用；困惑度 (Perplexity) 与 BPC 的换算。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>理论基石</strong>: Scaling Laws (Chinchilla 计算法则)；如何预估模型能力、训练数据量与算力 (FLOPs) 的关系。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>3. 预训练与微调 (Pre-train &amp; SFT)</strong></td>
-<td style="text-align: left;"><strong>数据工程</strong>: 网页数据清洗流水线；数据去重 (MinHash/LSH) 算法；Tokenization (BPE/WordPiece) 流程与 OOV 处理。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>高效微调 (PEFT)</strong>: LoRA (<span class="math inline"><em>B</em><em>A</em><em>x</em></span>) 秩 <span class="math inline"><em>r</em></span> 与 <span class="math inline"><em>α</em></span> 的选择；QLoRA 原理（4-bit NormalFloat）；Prefix Tuning 与 Prompt Tuning 区别。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>分布式训练</strong>: DP/DDP 原理；TP (张量并行) 与 PP (流水线并行) 的通信开销；ZeRO-1/2/3 (显存分片) 优化细节。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>训练稳定性</strong>: 梯度裁剪 (Clipping)；混合精度训练 (FP16/BF16/FP8) 的溢出问题与 Loss Scale 机制。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>4. 强化学习与对齐 (RLHF/DPO)</strong></td>
-<td style="text-align: left;"><strong>RLHF 三阶段</strong>: SFT -&gt; Reward Model (RM) -&gt; PPO；PPO 算法中的四个模型 (Actor/Critic/Ref/Reward) 协作流程。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>直接偏好优化 (DPO)</strong>: DPO 损失函数推导；为什么 DPO 放弃了奖励模型；DPO 的局限性（如对负样本的过度惩罚）。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>在线对齐</strong>: 拒绝采样 (Rejection Sampling)；KTO (Kahneman-Tversky Optimization) 及其对非配对数据的支持。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>5. AI Infra 与推理优化</strong></td>
-<td style="text-align: left;"><strong>KV Cache 优化</strong>: PageAttention (vLLM) 如何解决显存碎片化；Copy-on-Write 机制在多轮对话中的应用。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>量化技术</strong>: GPTQ vs AWQ 权重采样原理；FP8 训练与推理趋势；SmoothQuant 平滑激活值抑制离群点。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>推理加速</strong>: 连续批处理 (Continuous Batching)；投机采样 (Speculative Decoding) 提速比计算；Chunked Prefill 优化。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>显存分析</strong>: 估算 <span class="math inline"><em>N</em></span> 参数模型在不同精度下的显存占用（权重+梯度+优化器状态）；推理时的上下文显存估算。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>6. 应用工程 (RAG &amp; Agent)</strong></td>
-<td style="text-align: left;"><strong>RAG 链路</strong>: 向量检索 (HNSW/IVF)；Rerank 二阶段重排模型；处理长上下文下的 “Lost in the Middle” 现象。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>Agent 架构</strong>: ReAct (Reason + Act) 循环；Tool Use (Function Calling) 的实现链路；多 Agent 框架 (AutoGPT/MetaGPT)。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>评估体系</strong>: LLM-as-a-Judge 原理与偏见规避；代码/数学/逻辑能力的常用 Benchmark (HumanEval, GSM8K)。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-</tbody>
-</table>
+                <h2 id="leetcode">Leetcode</h2>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/check-if-a-string-contains-all-binary-codes-of-size-k/?envType=daily-question&amp;envId=2026-02-23">1461</a></p>
+<p>给你一个二进制字符串 s 和一个整数 k 。如果所有长度为 k 的二进制字符串都是 s 的子串，请返回 true ，否则请返回 false 。</p>
+<p>示例 1：</p>
+<p>输入：s = “00110110”, k = 2 输出：true 解释：长度为 2 的二进制串包括 “00”，“01”，“10” 和 “11”。它们分别是 s 中下标为 0，1，3，2 开始的长度为 2 的子串。</p>
+<p><img src="/2026/02/23/260223/2026-02-23-19-25-26.png" srcset="/img/loading.gif" lazyload /></p>
+<p>直接暴力也不会超时 $5 * 10^{5} $， 所以这里我们直接遍历。由于k比较小 可以使用字符串转int存储在一个set中来判重和计数(要有 1&lt;&lt; k 个数字)。</p>
+<p>这里如果把字符串转成10进制会爆int，所以转成二进制，具体写法就是</p>
+<p>int value = std::stoi(binaryStr, nullptr, 2);</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">hasAllCodes</span><span class="hljs-params">(string s, <span class="hljs-type">int</span> k)</span> </span>&#123;<br>       unordered_set&lt;<span class="hljs-type">int</span>&gt; set;<br>        <span class="hljs-type">int</span> cnt = <span class="hljs-number">1</span> &lt;&lt; k, n = s.<span class="hljs-built_in">size</span>();<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i + k - <span class="hljs-number">1</span> &lt; n;  i ++)&#123;<br>            string substr = s.<span class="hljs-built_in">substr</span>(i, k);<br>            <span class="hljs-type">int</span> t = <span class="hljs-built_in">stoi</span>(substr, <span class="hljs-literal">nullptr</span>, <span class="hljs-number">2</span>);<br>            set.<span class="hljs-built_in">insert</span>(t);<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> cnt - set.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>;<br><br>    &#125;<br>&#125;;<br><br></code></pre></td></tr></table></figure>
+<h2 id="codeforces">Codeforces</h2>
+<p>E. Idiot First Search https://codeforces.com/contest/2195/problem/E</p>
+<p>有点复杂 先放一放</p>
+<h2 id="ai-learning">AI Learning</h2>
+<ol type="1">
+<li><p>介绍下bm25的计算方式</p></li>
+<li><p>mcp function call的区别</p></li>
+</ol>
+<p>function call: LLM 推理的能力，能够根据user prompt中的api写出一个json request。然后你自己执行它。所以每有一个function 都要有一种交互格式的定义。 mcp: 把交互变成一套标准，一次编写可以通用。比如你提供service的api放在一个MCP Server上，定义好之后，大家都可以调用你，模型通过通用的标准进行function call就是mcp.</p>
+<ol start="3" type="1">
+<li><p>介绍下grpo算法原理</p></li>
+<li><p>transformer架构和特点</p></li>
+</ol>
+<p>编码器 (Encoder) 负责理解输入文本。它将输入的单词序列转换为高维的向量表示（Context Vector）。</p>
+<p>多头自注意力 (Multi-Head Self-Attention)： 让模型在处理一个词时，能“看见”句子中其他所有词，并理解它们之间的关系。</p>
+<p>前馈神经网络 (Feed-Forward Network)： 对注意力层提取的特征进行非线性变换。</p>
+<p>解码器 (Decoder) 负责生成输出。它不仅看编码器传来的信息，还要看已经生成的上文。</p>
+<p>掩码自注意力 (Masked Self-Attention)： 确保在生成当前词时，模型只能看到之前的词，不能“偷看”未来的答案。</p>
+<p>自注意力机制 (Self-Attention) 这是 Transformer 的“灵魂”。它通过计算 Query (查询)、Key (键) 和 Value (值) 之间的匹配度，给句子中的每个词分配权重。</p>
+<p>例子： 在“动物没过马路，因为它太累了”中，自注意力能让模型精准捕捉到“它”指的是“动物”而不是“马路”。</p>
+<p>位置编码 (Positional Encoding) 由于 Transformer 是并行处理所有词的（不像 RNN 那样一个接一个），它本身并不知道词的先后顺序。为了解决这个问题，它在输入向量中注入了位置编码，通过正弦和余弦函数赋予模型“位置感”。</p>
+<p>多头机制 (Multi-Head) 模型不只用一套注意力，而是并行运行多套（头）。</p>
+<p>有的“头”可能关注语法结构。</p>
+<p>有的“头”可能关注语义指代。</p>
+<p>最后将这些信息汇总，使模型对语言的理解更立体</p>
+<ol start="5" type="1">
+<li>经典强化学习算法有哪些</li>
+</ol>
+<h2 id="english">English</h2>
+<p>transformers is the pivot across frameworks: if a model definition is supported, it will be compatible with the majority of training frameworks (Axolotl, Unsloth, DeepSpeed, FSDP, PyTorch-Lightning, …), inference engines (vLLM, SGLang, TGI, …), and adjacent modeling libraries (llama.cpp, mlx, …) which leverage the model definition from transformers.</p>
+<p>compatible 兼容的 leverage plej 杠杆作用 Use a metal bar to increase the leverage | use (something) to maximum advantage 充分利用 adjacent əˈjās(ə)nt 邻近的 pledge 保证</p>
+<p>Transformers库的功能： define model for other framework</p>
+<p>主要的方法：</p>
+<ul>
+<li>pipeline</li>
+<li>Trainer</li>
+<li>generate</li>
+</ul>
+<p>To use Transformers in an offline or firewalled environment requires the downloaded and cached files ahead of time. Download a model repository from the Hub with the snapshot_download method.</p>
+<p>from huggingface_hub import snapshot_download</p>
+<p>snapshot_download(repo_id=“meta-llama/Llama-2-7b-hf”, repo_type=“model”)</p>
+<p>However, if you need to download files to a specific folder, you can pass a <strong>local_dir</strong> parameter to the download function. This is useful to get a workflow closer to what the git command offers. The downloaded files will maintain their original file structure within the specified folder. For example, if filename=“data/train.csv” and local_dir=“path/to/folder”, the resulting filepath will be “path/to/folder/data/train.csv”.</p>
+<h2 id="实习刷帖">实习刷帖</h2>
+<p>见AI Learning</p>
+<h2 id="ds杂谈">DS杂谈</h2>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=wjIAKSFR1Lo&amp;t=968s">（26052）“太祖爷”在整人前夕只给对手一次机会！叶帅总能在第一时间领取到“重磅私享信息”的原因是什么？叶帅发明的“冷板凳哲学”值得思考！</a></p>
+<p>叶剑英元帅在中共高层政治斗争中展现出的独特智慧，即所谓的 <strong>“冷板凳哲学”</strong> 。</p>
+<p>一、 引子：高层会议中的反常细节 通过周恩来卫士高振普的回忆录引出话题。高振普在1965年12月8日上海会议（处理罗瑞清的会议）中观察到一个奇怪的现象：</p>
+<p>叶群和林立衡：当时叶群既不是政治局成员也不是书记处成员，而林立衡只是个高干子女，却在如此重大的会议现场“跑前跑后”，表现得非常张扬。</p>
+<p>对比叶帅：温相指出，真正的政治高手如叶剑英，不仅早已掌握核心机密，而且在现场极其稳重，绝不随意外露。这种“沉得住气”是潜层次和高层次政治人物的分水岭 。</p>
+<p>二、 案例分析：罗瑞清出事前的“信息差”</p>
+<p>叶帅总能在第一时间获得“重磅私享信息”，并将其有选择地通报给值得信任的人： 提前通气（1965年11月4日）：在林彪正式告状和毛泽东表态（12月2日）之前，叶帅就从杭州密电罗瑞清的一位老部下，将其接到空军疗养院，开门见山地说：“家门不幸，罗瑞清出问题了” 。</p>
+<p>精准定性：叶帅当时就总结了罗瑞清的四大问题：想当国防部长、对林彪封锁消息、折磨林彪、对林彪搞突然袭击 。</p>
+<p>政治暗示：当罗的部下问该怎么办时，叶帅只给了一句金口：“该怎么办就怎么办” 。</p>
+<p>刘志坚的回忆：1965年12月8日凌晨，叶帅亲自给刘志坚打电话，要求他不惊动家属立即赶往机场。在飞往上海的飞机上，叶帅始终一言不发，保持高度机密，直到降落后刘才知晓是要打倒罗瑞清。</p>
+<p>三、 核心理论：“冷板凳哲学”</p>
+<p>温相认为，叶帅多次在历史转折点（如打倒罗瑞清、林彪、四人帮、华国锋等）立于不败之地，归功于他发明的<strong>冷板凳哲学</strong>：</p>
+<p>内涵：一个人要勇于、善于、甘于坐冷板凳。</p>
+<p>意义：这不仅是韬光养晦，更是在边缘化时期保持耐心，暗中观察局势，等待反击机会。</p>
+<p>四、 诗词中的政治信号（“诗言志”）</p>
+<p>视频重点解读了叶帅在1963年至1965年间写的三首诗，认为这是叶帅向毛泽东发送的“政治暗号”： 《题二号楼》（1963年）：在被冷落时期，叶帅写下“留下一年秋”，表达了在冷板凳上的隐忍与耐心 。</p>
+<p>送给演员的诗（1963年底）：引用“移宫换羽”的典故。温相分析，这不仅是谈音乐变调，更是谈政治变调。叶帅通过诗句向毛泽东喊话，暗示自己是能听懂政治风向的“知音” 。</p>
+<p>大连棒棰岛作诗（1965年9月4日）：写下“一篇持久重新读，眼底吴钩看不休”。</p>
+<p>解读：表面上是纪念抗战，实际上是向毛泽东表态支持“持久战、总体战”。</p>
+<p>关键词“吴钩”：暗示要动刀子、整人了。毛泽东读后非常欣赏，认为叶帅看懂了他的心思。</p>
+<p>五、 结论：权谋的默契</p>
+<p>视频最后总结，叶帅之所以能多次提前获得消息，是因为他深刻理解毛泽东的整人习惯：</p>
+<p>“太祖”的慈悲与残酷：毛泽东在收拾对手的最后关头，往往会给对手留出唯一一次机会（例如暗示或试探）。如果对手抓不住，下场就会很惨 。</p>
+<p>总结语：叶帅的智慧在于他能在政治寒冬中稳坐冷板凳，通过细腻的诗词与最高领导人达成心理契约，并在第一时间捕捉到最危险也最宝贵的政治信息。</p>
 
                 
               </div>
@@ -406,6 +363,27 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%97%A5%E8%AE%B0/" class="category-chain-item">日记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -416,8 +394,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>AI算法面经汇总</div>
-      <div>https://ycfywy.github.io/2026/02/23/AI算法面经汇总/</div>
+      <div>260223</div>
+      <div>https://ycfywy.github.io/2026/02/23/260223/</div>
     </div>
     <div class="license-meta">
       
@@ -461,9 +439,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/02/23/260223/" title="260223">
+                      <a href="/2026/02/24/260224/" title="260224">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">260223</span>
+                        <span class="hidden-mobile">260224</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -471,8 +449,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/02/22/test/" title="test">
-                        <span class="hidden-mobile">test</span>
+                      <a href="/2026/02/23/AI%E7%AE%97%E6%B3%95%E9%9D%A2%E7%BB%8F%E6%B1%87%E6%80%BB/" title="AI算法面经汇总">
+                        <span class="hidden-mobile">AI算法面经汇总</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -19,21 +19,23 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="resource1 🚀 LLM 算法工程师面试考点通关清单 (2025-2026版)     主题分类 详细面试考点 &#x2F; 核心问题 复习进度     1. 模型架构 (Architecture) Attention 机制: MHA&#x2F;MQA&#x2F;GQA 的设计动机与显存收益；$Attention(Q, K, V) &#x3D; \text{softmax}(\frac{QK^T}{\">
+    <meta name="description" content="Leetcode 1022 1022 从根到叶的二进制数之和 给出一棵二叉树，其上每个结点的值都是 0 或 1 。每一条从根到叶的路径都代表一个从最高有效位开始的二进制数。 例如，如果路径为 0 -&gt; 1 -&gt; 1 -&gt; 0 -&gt; 1，那么它表示二进制数 01101，也就是 13 。 对树上的每一片叶子，我们都要找出从根到该叶子的路径所表示的数字。 返回这些数字之">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AI算法面经汇总">
-<meta property="og:url" content="https://ycfywy.github.io/2026/02/23/AI%E7%AE%97%E6%B3%95%E9%9D%A2%E7%BB%8F%E6%B1%87%E6%80%BB/index.html">
+<meta property="og:title" content="260224">
+<meta property="og:url" content="https://ycfywy.github.io/2026/02/24/260224/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="resource1 🚀 LLM 算法工程师面试考点通关清单 (2025-2026版)     主题分类 详细面试考点 &#x2F; 核心问题 复习进度     1. 模型架构 (Architecture) Attention 机制: MHA&#x2F;MQA&#x2F;GQA 的设计动机与显存收益；$Attention(Q, K, V) &#x3D; \text{softmax}(\frac{QK^T}{\">
+<meta property="og:description" content="Leetcode 1022 1022 从根到叶的二进制数之和 给出一棵二叉树，其上每个结点的值都是 0 或 1 。每一条从根到叶的路径都代表一个从最高有效位开始的二进制数。 例如，如果路径为 0 -&gt; 1 -&gt; 1 -&gt; 0 -&gt; 1，那么它表示二进制数 01101，也就是 13 。 对树上的每一片叶子，我们都要找出从根到该叶子的路径所表示的数字。 返回这些数字之">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-02-23T07:43:42.000Z">
-<meta property="article:modified_time" content="2026-02-23T07:49:53.091Z">
+<meta property="og:image" content="https://ycfywy.github.io/2026/02/24/260224/2026-02-24-15-46-16.png">
+<meta property="article:published_time" content="2026-02-24T07:20:39.000Z">
+<meta property="article:modified_time" content="2026-02-24T07:48:23.193Z">
 <meta property="article:author" content="ycf">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ycfywy.github.io/2026/02/24/260224/2026-02-24-15-46-16.png">
   
   
   
-  <title>AI算法面经汇总 - ycf blog</title>
+  <title>260224 - ycf blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="AI算法面经汇总"></span>
+            <span id="subtitle" data-typed-text="260224"></span>
           
         </div>
 
@@ -210,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-02-23 15:43" pubdate>
-          2026年2月23日 下午
+        <time datetime="2026-02-24 15:20" pubdate>
+          2026年2月24日 下午
         </time>
       </span>
     
@@ -222,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          763 字
+          1.2k 字
         
       </span>
     
@@ -233,7 +235,7 @@
         
         
         
-          7 分钟
+          11 分钟
         
       </span>
     
@@ -270,135 +272,39 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">AI算法面经汇总</h1>
+            <h1 id="seo-header">260224</h1>
             
             
               <div class="markdown-body">
                 
-                <p><a target="_blank" rel="noopener" href="https://github.com/wdndev/llm_interview_note">resource1</a></p>
-<h1 id="llm-算法工程师面试考点通关清单-2025-2026版">🚀 LLM 算法工程师面试考点通关清单 (2025-2026版)</h1>
-<table>
-
-<thead>
-<tr class="header">
-<th style="text-align: left;">主题分类</th>
-<th style="text-align: left;">详细面试考点 / 核心问题</th>
-<th style="text-align: left;">复习进度</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>1. 模型架构 (Architecture)</strong></td>
-<td style="text-align: left;"><strong>Attention 机制</strong>: MHA/MQA/GQA 的设计动机与显存收益；<span class="math inline">$Attention(Q, K, V) = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V$</span> 中 <span class="math inline">$\sqrt{d_k}$</span> 的缩放意义。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>位置编码</strong>: RoPE (旋转位置编码) 的数学推导；为什么 RoPE 具备长文本外推性；ALiBi 与相对位置编码。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>归一化与激活</strong>: RMSNorm 与 LayerNorm 的计算差异；Pre-Norm 与 Post-Norm 的收敛稳定性对比；SwiGLU 激活函数的公式与优势。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>长文本处理</strong>: FlashAttention 1/2/3 硬件加速原理（Tiling &amp; Recomputation）；Ring Attention 并行逻辑；KV Cache 占用计算。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>新型架构</strong>: MoE (混合专家模型) 的 Router 负载均衡策略与 Top-K 选通；SSM (Mamba) 对比 Transformer 的线性复杂度优势。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>2. 数学与算法基础</strong></td>
-<td style="text-align: left;"><strong>优化器</strong>: AdamW 的权重衰减逻辑；Warmup 策略的必要性；一阶（SGD/Adam）与二阶优化器的优劣对比。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>损失函数与指标</strong>: Cross-Entropy 计算细节；KL 散度在 PPO 和 DPO 中的数学约束作用；困惑度 (Perplexity) 与 BPC 的换算。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>理论基石</strong>: Scaling Laws (Chinchilla 计算法则)；如何预估模型能力、训练数据量与算力 (FLOPs) 的关系。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>3. 预训练与微调 (Pre-train &amp; SFT)</strong></td>
-<td style="text-align: left;"><strong>数据工程</strong>: 网页数据清洗流水线；数据去重 (MinHash/LSH) 算法；Tokenization (BPE/WordPiece) 流程与 OOV 处理。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>高效微调 (PEFT)</strong>: LoRA (<span class="math inline"><em>B</em><em>A</em><em>x</em></span>) 秩 <span class="math inline"><em>r</em></span> 与 <span class="math inline"><em>α</em></span> 的选择；QLoRA 原理（4-bit NormalFloat）；Prefix Tuning 与 Prompt Tuning 区别。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>分布式训练</strong>: DP/DDP 原理；TP (张量并行) 与 PP (流水线并行) 的通信开销；ZeRO-1/2/3 (显存分片) 优化细节。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>训练稳定性</strong>: 梯度裁剪 (Clipping)；混合精度训练 (FP16/BF16/FP8) 的溢出问题与 Loss Scale 机制。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>4. 强化学习与对齐 (RLHF/DPO)</strong></td>
-<td style="text-align: left;"><strong>RLHF 三阶段</strong>: SFT -&gt; Reward Model (RM) -&gt; PPO；PPO 算法中的四个模型 (Actor/Critic/Ref/Reward) 协作流程。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>直接偏好优化 (DPO)</strong>: DPO 损失函数推导；为什么 DPO 放弃了奖励模型；DPO 的局限性（如对负样本的过度惩罚）。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>在线对齐</strong>: 拒绝采样 (Rejection Sampling)；KTO (Kahneman-Tversky Optimization) 及其对非配对数据的支持。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>5. AI Infra 与推理优化</strong></td>
-<td style="text-align: left;"><strong>KV Cache 优化</strong>: PageAttention (vLLM) 如何解决显存碎片化；Copy-on-Write 机制在多轮对话中的应用。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>量化技术</strong>: GPTQ vs AWQ 权重采样原理；FP8 训练与推理趋势；SmoothQuant 平滑激活值抑制离群点。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>推理加速</strong>: 连续批处理 (Continuous Batching)；投机采样 (Speculative Decoding) 提速比计算；Chunked Prefill 优化。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>显存分析</strong>: 估算 <span class="math inline"><em>N</em></span> 参数模型在不同精度下的显存占用（权重+梯度+优化器状态）；推理时的上下文显存估算。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>6. 应用工程 (RAG &amp; Agent)</strong></td>
-<td style="text-align: left;"><strong>RAG 链路</strong>: 向量检索 (HNSW/IVF)；Rerank 二阶段重排模型；处理长上下文下的 “Lost in the Middle” 现象。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>Agent 架构</strong>: ReAct (Reason + Act) 循环；Tool Use (Function Calling) 的实现链路；多 Agent 框架 (AutoGPT/MetaGPT)。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><strong>评估体系</strong>: LLM-as-a-Judge 原理与偏见规避；代码/数学/逻辑能力的常用 Benchmark (HumanEval, GSM8K)。</td>
-<td style="text-align: left;">[ ]</td>
-</tr>
-</tbody>
-</table>
+                <h2 id="leetcode">Leetcode</h2>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sum-of-root-to-leaf-binary-numbers/description/?envType=daily-question&amp;envId=2026-02-24">1022</a></p>
+<p>1022 从根到叶的二进制数之和</p>
+<p>给出一棵二叉树，其上每个结点的值都是 0 或 1 。每一条从根到叶的路径都代表一个从最高有效位开始的二进制数。</p>
+<p>例如，如果路径为 0 -&gt; 1 -&gt; 1 -&gt; 0 -&gt; 1，那么它表示二进制数 01101，也就是 13 。 对树上的每一片叶子，我们都要找出从根到该叶子的路径所表示的数字。</p>
+<p>返回这些数字之和。题目数据保证答案是一个 32 位 整数。</p>
+<p><img src="/2026/02/24/260224/2026-02-24-15-46-16.png" srcset="/img/loading.gif" lazyload /> 输入：root = [1,0,1,0,1,0,1] 输出：22 解释：(100) + (101) + (110) + (111) = 4 + 5 + 6 + 7 = 22</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * struct TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode *left;</span><br><span class="hljs-comment"> *     TreeNode *right;</span><br><span class="hljs-comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">sumRootToLeaf</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        <br>        <span class="hljs-type">int</span> res = <span class="hljs-number">0</span>;<br><br>        function&lt;<span class="hljs-type">int</span>(TreeNode*, <span class="hljs-type">int</span>)&gt; dfs = [&amp;](TreeNode* root, <span class="hljs-type">int</span> val)&#123;<br>            <br>            <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">nullptr</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>   <br>            val += root-&gt;val;<br><br>            <span class="hljs-keyword">if</span>(root-&gt;left == <span class="hljs-literal">nullptr</span> &amp;&amp; root-&gt;right == <span class="hljs-literal">nullptr</span>)&#123;<br>                res += val ;<br>                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>            &#125;<br><br>            <span class="hljs-keyword">if</span>(root-&gt;left != <span class="hljs-literal">nullptr</span>)&#123;<br>                <span class="hljs-built_in">dfs</span>(root-&gt;left, val &lt;&lt; <span class="hljs-number">1</span>);<br>            &#125;<br>            <span class="hljs-keyword">if</span>(root-&gt;right != <span class="hljs-literal">nullptr</span>)&#123;<br>                <span class="hljs-built_in">dfs</span>(root-&gt;right, val &lt;&lt; <span class="hljs-number">1</span>);<br>            &#125;<br><br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;;<br><br><br>        <span class="hljs-built_in">dfs</span>(root, <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;;<br><br></code></pre></td></tr></table></figure>
+<p>刚写的时候想了好久。。 一会想着递归 一会想着xxx 其实本质就是dfs同时要维护depth信息，到达leaf node就是一种方案加到答案里。不过这里的depth不需要记录，只需要用一次。</p>
+<h2 id="codeforces">Codeforces</h2>
+<h2 id="ai-learning">AI Learning</h2>
+<h2 id="english">English</h2>
+<h2 id="实习刷帖">实习刷帖</h2>
+<h2 id="ds杂谈">DS杂谈</h2>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=2BmWf6Yn3WU">（26054）毛大帅爱“吃”小菇子！他说：“小菇子有特殊记忆，我还是吃小的”！罗瑞卿的“炫酷”！</a></p>
+<p>权力场中的“嫡系”：罗瑞卿的性格侧写与政治命运</p>
+<h3 id="资历底蕴与监军本色">资历底蕴与“监军”本色</h3>
+<p>在开国大将的序列中，罗瑞卿的资历处于相对末位。相比于粟裕、陈赓等在战场上统率千军万马、建立尺寸军功的战将，罗瑞卿的晋升路径更多地依赖于对核心权力的忠诚与职能的特殊性。</p>
+<p>在解放战争时期的“杨罗耿”兵团中，其角色定位极具象征意义：司令员杨得志负责实战指挥，参谋长耿彪负责制定方案，而作为政委的罗瑞卿，其实际职能更偏向于<strong>“监督”</strong>。在战火纷飞的前线，他曾手持驳壳枪督战，严惩擅自撤退者。这种“监军”色彩决定了他的威慑力并非来自战功积累，而是源于对纪律的极端贯彻和对领袖意图的绝对代理。</p>
+<h3 id="井冈山上的政治显白">井冈山上的政治显白</h3>
+<p>1965年6月，罗瑞卿紧随毛泽东的足迹重登井冈山。在井冈山革命博物馆，他曾公开感叹自己自1959年以来一直想上山，却因忙于“反右倾机会主义”斗争而无暇抽身。</p>
+<p>这段独白在当时的语境下，是一场高层政治中的“炫酷”。表面上是感叹身兼数职、公务繁忙，深层意图则是向官场宣示自己在庐山会议期间的政治站位——正是他在1959年7月23日晚间的观察与汇报，为彭德怀等人定性为“军事俱乐部”接上了关键引线。这种作为“嫡系”的优越感，使其在政治表达上呈现出一种带有“撒娇”意味的豪横。</p>
+<h3 id="小菇子情结与权力的温情">“小菇子”情结与权力的温情</h3>
+<p>1965年6月中旬的杭州汪庄会议上，毛泽东曾对周恩来、罗瑞卿等人谈起一段关于食欲与历史的往事。他回忆起1927年井冈山时期的艰苦，战士们因群众纪律只能吃个头矮小的野蘑菇（小菇子）。</p>
+<p>即便到了1961年物资相对丰富时，毛泽东依然拒绝厨师提供的大个蘑菇，坚持表示：“小菇子有特殊记忆，我还是吃小的。” 这段关于“小菇子”的论述，不仅是对艰苦岁月的怀念，也是一种对特定历史纽带的强调。在场的罗瑞卿作为当年的亲历者，自认深处这层“特殊记忆”的核心圈层。</p>
+<h3 id="嫡系的宿命与落幕">嫡系的宿命与落幕</h3>
+<p>罗瑞卿的政治轨迹揭示了权力结构中的一种悖论：最受信任的“嫡系”往往在风暴来临时最先被抛弃。由于长期处于领袖身边，且表现出极高的政治敏感度与优越感，罗瑞卿在权力平衡中逐渐显得过于“炫酷”与张扬。</p>
+<p>尽管他在多次政治斗争中立下“投名状”，但在1965年12月举行的上海特别会议上，他成为了文革前夜第一个被正式打倒的高层人物。这种从巅峰到谷底的坠落，标志着这种依附于领袖个人信任的政治地位，在绝对权力面前呈现出极度的脆弱性。</p>
 
                 
               </div>
@@ -406,6 +312,27 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%97%A5%E8%AE%B0/" class="category-chain-item">日记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -416,8 +343,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>AI算法面经汇总</div>
-      <div>https://ycfywy.github.io/2026/02/23/AI算法面经汇总/</div>
+      <div>260224</div>
+      <div>https://ycfywy.github.io/2026/02/24/260224/</div>
     </div>
     <div class="license-meta">
       
@@ -429,7 +356,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年2月23日</div>
+          <div>2026年2月24日</div>
         </div>
       
       
@@ -461,9 +388,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/02/23/260223/" title="260223">
+                      <a href="/2026/02/25/260225/" title="260225">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">260223</span>
+                        <span class="hidden-mobile">260225</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -471,8 +398,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/02/22/test/" title="test">
-                        <span class="hidden-mobile">test</span>
+                      <a href="/2026/02/23/260223/" title="260223">
+                        <span class="hidden-mobile">260223</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
