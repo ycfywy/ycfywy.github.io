@@ -19,19 +19,19 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Leetcode 1356 给你一个整数数组 arr 。请你将数组中的元素按照其二进制表示中数字 1 的数目升序排序。 如果存在多个数字二进制中 1 的数目相同，则必须将它们按照数值大小升序排列。 请你返回排序后的数组。 示例 1： 输入：arr &#x3D; [0,1,2,3,4,5,6,7,8] 输出：[0,1,2,4,8,3,5,6,7] 解释：[0] 是唯一一个有 0 个 1 的数。 [">
+    <meta name="description" content="Leetcode1356 给你一个整数数组 arr 。请你将数组中的元素按照其二进制表示中数字 1 的数目升序排序。 如果存在多个数字二进制中 1 的数目相同，则必须将它们按照数值大小升序排列。 请你返回排序后的数组。 示例 1： 输入：arr &#x3D; [0,1,2,3,4,5,6,7,8]输出：[0,1,2,4,8,3,5,6,7]解释：[0] 是唯一一个有 0 个 1 的数。[1,2,4">
 <meta property="og:type" content="article">
 <meta property="og:title" content="260225">
 <meta property="og:url" content="https://ycfywy.github.io/2026/02/25/260225/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="Leetcode 1356 给你一个整数数组 arr 。请你将数组中的元素按照其二进制表示中数字 1 的数目升序排序。 如果存在多个数字二进制中 1 的数目相同，则必须将它们按照数值大小升序排列。 请你返回排序后的数组。 示例 1： 输入：arr &#x3D; [0,1,2,3,4,5,6,7,8] 输出：[0,1,2,4,8,3,5,6,7] 解释：[0] 是唯一一个有 0 个 1 的数。 [">
+<meta property="og:description" content="Leetcode1356 给你一个整数数组 arr 。请你将数组中的元素按照其二进制表示中数字 1 的数目升序排序。 如果存在多个数字二进制中 1 的数目相同，则必须将它们按照数值大小升序排列。 请你返回排序后的数组。 示例 1： 输入：arr &#x3D; [0,1,2,3,4,5,6,7,8]输出：[0,1,2,4,8,3,5,6,7]解释：[0] 是唯一一个有 0 个 1 的数。[1,2,4">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ycfywy.github.io/2026/02/25/260225/2026-02-25-11-26-32.png">
 <meta property="og:image" content="https://ycfywy.github.io/2026/02/25/260225/2026-02-25-11-26-50.png">
 <meta property="og:image" content="https://ycfywy.github.io/2026/02/25/260225/2026-02-25-11-27-16.png">
 <meta property="og:image" content="https://ycfywy.github.io/2026/02/25/260225/2026-02-25-11-29-20.png">
 <meta property="article:published_time" content="2026-02-25T02:14:48.000Z">
-<meta property="article:modified_time" content="2026-02-25T12:11:17.101Z">
+<meta property="article:modified_time" content="2026-02-25T15:59:19.330Z">
 <meta property="article:author" content="ycf">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://ycfywy.github.io/2026/02/25/260225/2026-02-25-11-26-32.png">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          2.6k 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          12 分钟
+          23 分钟
         
       </span>
     
@@ -280,66 +280,62 @@
             
               <div class="markdown-body">
                 
-                <h2 id="leetcode">Leetcode</h2>
-<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sort-integers-by-the-number-of-1-bits/?envType=daily-question&amp;envId=2026-02-25">1356</a></p>
+                <h2 id="Leetcode"><a href="#Leetcode" class="headerlink" title="Leetcode"></a>Leetcode</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sort-integers-by-the-number-of-1-bits/?envType=daily-question&envId=2026-02-25">1356</a></p>
 <p>给你一个整数数组 arr 。请你将数组中的元素按照其二进制表示中数字 1 的数目升序排序。</p>
 <p>如果存在多个数字二进制中 1 的数目相同，则必须将它们按照数值大小升序排列。</p>
 <p>请你返回排序后的数组。</p>
 <p>示例 1：</p>
-<p>输入：arr = [0,1,2,3,4,5,6,7,8] 输出：[0,1,2,4,8,3,5,6,7] 解释：[0] 是唯一一个有 0 个 1 的数。 [1,2,4,8] 都有 1 个 1 。 [3,5,6] 有 2 个 1 。 [7] 有 3 个 1 。 按照 1 的个数排序得到的结果数组为 [0,1,2,4,8,3,5,6,7]</p>
-<h2 id="codeforces">Codeforces</h2>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/2193/E">Product Queries</a></p>
+<p>输入：arr &#x3D; [0,1,2,3,4,5,6,7,8]<br>输出：[0,1,2,4,8,3,5,6,7]<br>解释：[0] 是唯一一个有 0 个 1 的数。<br>[1,2,4,8] 都有 1 个 1 。<br>[3,5,6] 有 2 个 1 。<br>[7] 有 3 个 1 。<br>按照 1 的个数排序得到的结果数组为 [0,1,2,4,8,3,5,6,7]</p>
+<h2 id="Codeforces"><a href="#Codeforces" class="headerlink" title="Codeforces"></a>Codeforces</h2><p><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/2193/E">Product Queries</a></p>
 <p>Today, Sabyrzhan was called to the board with an array a of length n and was assigned an officer’s task — to answer n questions.</p>
 <p>In the i-th question, it is required to determine the minimum number of elements from the array that need to be selected from the board (it is allowed to use the same element multiple times) so that their product is exactly equal to i, or to report that it is impossible to achieve such a product.</p>
 <p>Note that at least one element must be selected.</p>
 <p>input:</p>
-<p>8 3 2 2 3 7 3 6 7</p>
+<p>8<br>3 2 2 3 7 3 6 7</p>
 <p>output:</p>
 <p>-1 1 1 2 -1 1 1 3</p>
 <p>其实就是给定 i， 需要判断数组中元素的product能不能构成（可以重复选择 ） 以及 最少的元素个数。</p>
-<p>借着这个题目，复习了一下01背包 完全背包，以及bfs。说实话没想到可以用bfs，只要你每一轮能扩展到，那么就直接到了最优。下一轮只需要用上一轮的num就够了。在复杂度计算上，假设你第一轮有2，3，4，5…. n。那么对每个元素，需要操作 N / k次，求和起来其实是的nlogn的。</p>
+<p>借着这个题目，复习了一下01背包 完全背包，以及bfs。说实话没想到可以用bfs，只要你每一轮能扩展到，那么就直接到了最优。下一轮只需要用上一轮的num就够了。在复杂度计算上，假设你第一轮有2，3，4，5…. n。那么对每个元素，需要操作 N &#x2F; k次，求和起来其实是的nlogn的。 </p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">3e5</span> + <span class="hljs-number">10</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> INF = <span class="hljs-number">1e9</span>;<br><span class="hljs-type">int</span> n;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span></span>&#123;<br><br>    cin &gt;&gt; n;<br><br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">f</span><span class="hljs-params">(n + <span class="hljs-number">1</span>, INF)</span></span>;<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">bool</span>&gt; <span class="hljs-title">has</span><span class="hljs-params">(n + <span class="hljs-number">1</span>, <span class="hljs-literal">false</span>)</span></span>;<br><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i ++)&#123;<br>    <br>        <span class="hljs-type">int</span> x;<br>        cin &gt;&gt; x;<br>        <span class="hljs-keyword">if</span>(x &lt;= n) has[x] = <span class="hljs-literal">true</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">if</span>(has[<span class="hljs-number">1</span>]) f[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;<br><br>    vector&lt;<span class="hljs-type">int</span>&gt; nums;<br><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt;= n; i ++)&#123;<br>        <span class="hljs-keyword">if</span>(has[i])&#123;<br>            f[i] = <span class="hljs-number">1</span>;<br>            nums.<span class="hljs-built_in">push_back</span>(i);  <br>        &#125;<br>    &#125;<br>    <br>    vector&lt;<span class="hljs-type">int</span>&gt; cur = nums;<br>    <br>    <span class="hljs-comment">// 这个方案超时了，考虑优化： 可以用上一层，根据可达性更新下一层，第一次到达就是最少的数字相乘 其实就是bfs只不过扩展用 product</span><br>    <span class="hljs-comment">// for(int v : nums)&#123;</span><br>    <span class="hljs-comment">//     for(int i = 1; i &lt;= n; i ++)&#123;</span><br>    <span class="hljs-comment">//         if(i % v == 0)&#123;</span><br>    <span class="hljs-comment">//             f[i] = min(f[i], f[i / v] + 1);</span><br>    <span class="hljs-comment">//         &#125; </span><br>    <span class="hljs-comment">//     &#125;</span><br>    <span class="hljs-comment">// &#125;</span><br><br><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> depth = <span class="hljs-number">2</span>; depth &lt;= <span class="hljs-number">20</span>; depth ++)&#123;<br><br>        vector&lt;<span class="hljs-type">int</span>&gt; next_layer;<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> x: cur)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> v: nums)&#123;<br>                ll t = <span class="hljs-number">1ll</span> * x * v;<br>                <span class="hljs-keyword">if</span>(t &gt; n) <span class="hljs-keyword">break</span>;    <br>                <span class="hljs-keyword">if</span>(f[t] == INF)&#123;<br>                    f[t] = depth;<br>                    next_layer.<span class="hljs-built_in">push_back</span>(t); <br>                &#125;<br>            &#125; <br>        &#125;<br><br>        cur = next_layer;<br><br>    &#125;<br><br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>        cout &lt;&lt; (f[i] == INF ? <span class="hljs-number">-1</span> : f[i]) &lt;&lt; (i == n ? <span class="hljs-string">&quot;&quot;</span> : <span class="hljs-string">&quot; &quot;</span>);<br>    &#125;<br>    cout &lt;&lt; <span class="hljs-string">&quot;\n&quot;</span>;<br><br><br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">    写两个模板</span><br><span class="hljs-comment">        1. 01背包问题</span><br><span class="hljs-comment">        f[i][j] 从前i个拿，背包容量不超过j的最大val</span><br><span class="hljs-comment">        </span><br><span class="hljs-comment">        f[i][j] = max(f[i - 1][j], f[i - 1][j - w[i]] + v[i])</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">        降低一维: f[j] = max(f[j], f[j - w[i]] + v[i]) j要从后往前枚举</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">        2. 完全背包问题</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">        f[i][j] = max(f[i - 1][j], f[i - 1][j - w[i]] + v[i], f[i - 1][j - 2 * w[i]] + 2 * v[i], ......)</span><br><span class="hljs-comment">        f[i][j - w[i]] = max(f[i - 1][j - w[i]], f[i - 1][j - 2 * w[i]] + w[i], ....)</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">        --&gt; f[i][j] = max(f[i - 1][j], f[i][j - w[i]] + v[i])</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">        降低一维： f[j] = max(f[j], f[j - w[i]] + v[i]) j要从前往后枚举</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">    */</span> <br>    <br><br>&#125;<br><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br><br>    <span class="hljs-type">int</span> t;<br>    cin &gt;&gt; t;<br>    <span class="hljs-keyword">while</span>(t --) &#123;<br>        <span class="hljs-built_in">solve</span>();<br>    &#125;<br><br>&#125;<br><br></code></pre></td></tr></table></figure>
-<h2 id="ai-learning">AI Learning</h2>
-<h3 id="数据偏度介绍和处理方法介绍">数据偏度介绍和处理方法介绍</h3>
-<p>偏度（skewness）是用来衡量概率分布或数据集中不对称程度的统计量。它描述了数据分布的尾部（tail）在平均值的哪一侧更重或更长。偏度可以帮助我们了解数据的偏斜性质，即数据相对于平均值的分布情况。</p>
+
+
+<h2 id="AI-Learning"><a href="#AI-Learning" class="headerlink" title="AI Learning"></a>AI Learning</h2><h3 id="数据偏度介绍和处理方法介绍"><a href="#数据偏度介绍和处理方法介绍" class="headerlink" title="数据偏度介绍和处理方法介绍"></a>数据偏度介绍和处理方法介绍</h3><p>偏度（skewness）是用来衡量概率分布或数据集中不对称程度的统计量。它描述了数据分布的尾部（tail）在平均值的哪一侧更重或更长。偏度可以帮助我们了解数据的偏斜性质，即数据相对于平均值的分布情况。</p>
 <p>当一个分布的偏度为零时，它是对称的。它的左右两边是镜像。正态分布的偏度为零，但不是只有正态分布的偏度为零。任何对称分布，如均匀分布或某些双峰分布，偏度都是零。检查变量是否具有倾斜分布的最简单方法是将其绘制成直方图。</p>
-<p><img src="/2026/02/25/260225/2026-02-25-11-26-32.png" srcset="/img/loading.gif" lazyload /></p>
-<p>在零偏度的分布中，平均值和中位数是相等的，也就是说：mean = median</p>
+<p><img src="/2026/02/25/260225/2026-02-25-11-26-32.png" srcset="/img/loading.gif" lazyload></p>
+<p>在零偏度的分布中，平均值和中位数是相等的，也就是说：mean &#x3D; median</p>
 <p>右偏分布在其峰值的右侧比其左侧更长。右偏也被称为正偏。它表明在分布的极端一端有观测值，但它们相对较少。右偏分布的右侧有一条长尾。</p>
-<p><img src="/2026/02/25/260225/2026-02-25-11-26-50.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/2026/02/25/260225/2026-02-25-11-26-50.png" srcset="/img/loading.gif" lazyload></p>
 <p>mean &gt; median</p>
 <p>左偏分布的峰值左侧比右侧更长。左偏分布的左侧有一条长尾。左偏也被称为负偏。</p>
-<p><img src="/2026/02/25/260225/2026-02-25-11-27-16.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/2026/02/25/260225/2026-02-25-11-27-16.png" srcset="/img/loading.gif" lazyload></p>
 <p>mean &lt; median</p>
 <p>以上引入了“长尾分布的概念”，此外还有一种特殊的分布：多峰分布。 比如统计全校的学生身高，由于男女生的问题，会出现双峰。</p>
-<p><img src="/2026/02/25/260225/2026-02-25-11-29-20.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/2026/02/25/260225/2026-02-25-11-29-20.png" srcset="/img/loading.gif" lazyload></p>
 <p>总结一下：</p>
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: left;">特性</th>
-<th style="text-align: left;">长尾数据</th>
-<th style="text-align: left;">多峰数据</th>
+<tr>
+<th align="left">特性</th>
+<th align="left">长尾数据</th>
+<th align="left">多峰数据</th>
 </tr>
 </thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">核心矛盾</td>
-<td style="text-align: left;">数量极其不平衡（贫富差距）</td>
-<td style="text-align: left;">存在多个聚集中心（物以类聚）</td>
+<tbody><tr>
+<td align="left">核心矛盾</td>
+<td align="left">数量极其不平衡（贫富差距）</td>
+<td align="left">存在多个聚集中心（物以类聚）</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">视觉特征</td>
-<td style="text-align: left;">一个极高的尖峰 + 漫长的右侧拖尾</td>
-<td style="text-align: left;">两个或多个明显隆起的波峰</td>
+<tr>
+<td align="left">视觉特征</td>
+<td align="left">一个极高的尖峰 + 漫长的右侧拖尾</td>
+<td align="left">两个或多个明显隆起的波峰</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">解决思路</td>
-<td style="text-align: left;">重采样、加权损失函数、迁移学习</td>
-<td style="text-align: left;">聚类分析、混合专家模型 (MoE)、非线性建模</td>
+<tr>
+<td align="left">解决思路</td>
+<td align="left">重采样、加权损失函数、迁移学习</td>
+<td align="left">聚类分析、混合专家模型 (MoE)、非线性建模</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>长尾数据 (Long-tailed Data)</p>
 <ul>
 <li>重采样 (Resampling): 过采样少数类，欠采样多数类。</li>
@@ -352,11 +348,48 @@
 <li>混合专家模型 (MoE): 让不同的子网络（Experts）学习不同的数据分布。</li>
 <li>增加模型复杂度: 单一简单的线性模型无法拟合多峰，需引入非线性激活和更深的网络。</li>
 </ul>
-<h2 id="english">English</h2>
-<p>the board 董事会</p>
-<h2 id="实习刷帖">实习刷帖</h2>
-<h2 id="ds杂谈">DS杂谈</h2>
-
+<h3 id="主流的开源大模型结构有哪些？"><a href="#主流的开源大模型结构有哪些？" class="headerlink" title="主流的开源大模型结构有哪些？"></a>主流的开源大模型结构有哪些？</h3><ul>
+<li>Decoder-only : 其核心特点是单向注意力机制,模型在生成每一个词时，只能看到之前已经生成的词。</li>
+<li>Moe: 算不上架构，是对Transformer block做的改进，它将传统的全连接层（FFN）替换为多个并行的“专家”网络。</li>
+<li>Encoder-Decoder 架构: 比较适合翻译，摘要生成，文本重写</li>
+</ul>
+<h3 id="介绍一下layernorm和batchnorm的区别？"><a href="#介绍一下layernorm和batchnorm的区别？" class="headerlink" title="介绍一下layernorm和batchnorm的区别？"></a>介绍一下layernorm和batchnorm的区别？</h3><ul>
+<li><p>LayerNorm: 单个样本所有feature一起做Normilize</p>
+</li>
+<li><p>BatchNorm: 一个batch上所有样本，每个feature分别Normilize。BN可以强行规范每一层的数据分布，这可以让深层网络训练更加稳定。想象你在训练一个深层网络（比如 20 层）。第一层的参数更新了一点点，它的输出分布就变了。第二层接收到的输入变了，它也要跟着适应。这种变化层层累加，到了第 20 层，输入数据的分布可能已经发生了翻天覆地的变化。</p>
+</li>
+</ul>
+<p>NLP中必须用LayerNorm， 因为不同的样本不一样长，短句子有padding会造成影响。CV领域在使用CNN后，一般会卷积层 (Conv) -&gt; 归一化层 (BatchNorm) -&gt; 激活层 (ReLU)。</p>
+<h3 id="怎么解决模型的冷启动问题，你觉得LLM在冷启动方面能够起到什么作用？"><a href="#怎么解决模型的冷启动问题，你觉得LLM在冷启动方面能够起到什么作用？" class="headerlink" title="怎么解决模型的冷启动问题，你觉得LLM在冷启动方面能够起到什么作用？"></a>怎么解决模型的冷启动问题，你觉得LLM在冷启动方面能够起到什么作用？</h3><p>这里的cold start是推荐算法吗？不太清楚了.。这里当作普通的cold start（模型没有能力按照某个范式回答）吧。</p>
+<p>那就使用一些标记数据做一下sft就好了 后面让模型自己生成</p>
+<p>LLM能起到什么作用? -&gt; 合成数据 </p>
+<h3 id="为什么Adam不一定最优而SGD最优的？怎么理解分析？"><a href="#为什么Adam不一定最优而SGD最优的？怎么理解分析？" class="headerlink" title="为什么Adam不一定最优而SGD最优的？怎么理解分析？"></a>为什么Adam不一定最优而SGD最优的？怎么理解分析？</h3><p>这东西我自己也不是很懂。。。</p>
+<p>SGD 的搜索路径比较“乱”，这种随机性反而让它不容易停留在窄小的局部最优解里，而是倾向于找到一个平坦的最小值（Flat Minimum）。在平坦区域，即使测试集和训练集有微小偏移，预测结果依然稳定。</p>
+<p>Adam 拥有自适应学习率，收敛极快，但也正因为它太快、太聪明，容易钻进一个尖锐的最小值（Sharp Minimum）。这种解在训练集上 Loss 极低，但只要测试数据稍有变动，表现就会断崖式下跌。</p>
+<p>说人话就是： Adam训练比较稳定，SGD训练的最优更优。</p>
+<h3 id="介绍对比损失"><a href="#介绍对比损失" class="headerlink" title="介绍对比损失"></a>介绍对比损失</h3><p>何为对比损失? 与传统的分类损失(交叉熵)不同，对比损失是一种用于度量学习（Metric Learning）的损失函数。它不直接预测标签，而是学习一个特征空间（Embedding Space）。在理想的特征空间里：相似的样本（如：两张不同角度的猫）距离尽可能近。不相似的样本（如：一张猫和一张课桌）距离尽可能远。</p>
+<p>对比损失主要用于非监督学习，如  </p>
+<ul>
+<li>人脸识别： 全球有几十亿人，我们不可能给每个人建一个分类标签。对比损失让模型学会判断“这两张脸是不是同一个人”。</li>
+<li>签名&#x2F;指纹验证： 判断输入的指纹与数据库中存储的指纹是否匹配。</li>
+<li>跨模态检索： 比如“搜文词找图片”，让文字的语义向量和图片的特征向量在空间上靠拢。</li>
+</ul>
+<p>对比损失的常见公式：</p>
+<p>原始对比损失 (Contrastive Loss)如果是同类（$y&#x3D;1$），缩小距离 $d$；如果是异类（$y&#x3D;0$），当距离小于某个阈值 $margin$ 时，才推开它们。$$L &#x3D; y \cdot d^2 + (1-y) \cdot \max(0, margin - d)^2$$</p>
+<p>三元组损失 (Triplet Loss)它每次看三个样本：锚点 (Anchor)、正样本 (Positive)、负样本 (Negative)。目标是让 $(A, P)$ 的距离比 $(A, N)$ 的距离至少小一个 $margin$。$$L &#x3D; \max(0, d(A, P) - d(A, N) + margin)$$</p>
+<p>InfoNCE Loss (当前大模型最常用)在 CLIP 或大模型预训练中广泛使用。</p>
+<p>它像是在做一道“多选题”：在一堆样本里，准确找出哪一个是我的“双胞胎”，把其他所有样本都当做干扰项。</p>
+<p>想象你在做一道单选题：</p>
+<ul>
+<li>题目（Query, $q$）： 给出一张“猫”的图片。</li>
+<li>正确答案（Positive Key, $k_+$）： 这张猫经过裁剪或旋转后的副本。</li>
+<li>干扰项（Negative Keys, $k_i$）： 几千个其他不相关的图片（狗、汽车、树等）。</li>
+</ul>
+<p>InfoNCE 的目标： 调整模型的参数，使得 $q$ 与 $k_+$ 的相似度尽可能大，而与所有 $k_i$ 的相似度尽可能小。</p>
+<p>$$L &#x3D; -\log \frac{\exp(sim(q, k_+)&#x2F;\tau)}{\sum_{i&#x3D;0}^{K} \exp(sim(q, k_i)&#x2F;\tau)}$$</p>
+<p>InfoNCE在负样本比较多的时候，模型见识越广，表现越好。所以需要更大的batch size。$\tau$ 越小，模型对“错误答案”越敏感，惩罚更重，促使模型学到更具区分度的特征。（这里和LLM output param中的temperature类似，温度高的时候会拉平不同类别的区分度，使模型不那么敏感）</p>
+<h2 id="English"><a href="#English" class="headerlink" title="English"></a>English</h2><p>the board 董事会</p>
+<h2 id="实习刷帖"><a href="#实习刷帖" class="headerlink" title="实习刷帖"></a>实习刷帖</h2><h2 id="DS杂谈"><a href="#DS杂谈" class="headerlink" title="DS杂谈"></a>DS杂谈</h2>
                 
               </div>
             
@@ -438,6 +471,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2026/02/26/260226/" title="260226">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">260226</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
