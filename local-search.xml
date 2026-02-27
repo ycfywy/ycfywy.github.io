@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>260227</title>
+    <link href="/2026/02/27/260227/"/>
+    <url>/2026/02/27/260227/</url>
+    
+    <content type="html"><![CDATA[<h2 id="codeforces">Codeforces</h2><p><a href="https://codeforces.com/problemset/problem/2193/C">2193C</a> 比较简单 无压力</p><p><a href="https://codeforces.com/problemset/problem/2191/B">2191B</a> 这里的贪心讨论值得学习一下，其他的倒没什么</p><p>7.手撕：m行n列矩阵，行内严格递增，找到这个矩阵里第k大的数</p><h2 id="ai-learning">AI Learning</h2><h3 id="transformer原理">transformer原理</h3><p><img src="/2026/02/27/260227/2026-02-27-21-47-40.png" /></p><ol type="1"><li>输入处理层</li></ol><p><span class="math display">$$PE_{(pos, 2i)} = \sin\left(\frac{pos}{10000^{2i/d_{model}}}\right)$$</span><span class="math display">$$PE_{(pos, 2i+1)} = \cos\left(\frac{pos}{10000^{2i/d_{model}}}\right)$$</span></p><p><span class="math display"><em>X</em> = <em>E</em><em>m</em><em>b</em><em>e</em><em>d</em><em>d</em><em>i</em><em>n</em><em>g</em>(<em>t</em><em>o</em><em>k</em><em>e</em><em>n</em><em>s</em>) + <em>P</em><em>E</em></span></p><ol start="2" type="1"><li>Encoder</li></ol><p><span class="math display"><em>Q</em><em>u</em><em>e</em><em>r</em><em>y</em> = <em>X</em><em>W</em><sup><em>Q</em></sup>,  <em>K</em><em>e</em><em>y</em> = <em>X</em><em>W</em><sup><em>K</em></sup>,  <em>V</em><em>a</em><em>l</em><em>u</em><em>e</em> = <em>X</em><em>W</em><sup><em>V</em></sup></span><span class="math display">$$Attention(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$</span></p><p><span class="math display"><em>F</em><em>F</em><em>N</em>(<em>x</em>) = max (0, <em>x</em><em>W</em><sub>1</sub> + <em>b</em><sub>1</sub>)<em>W</em><sub>2</sub> + <em>b</em><sub>2</sub></span></p><p><span class="math display">Add &amp;Norm = LayerNorm(<em>x</em> + Sublayer(<em>x</em>))</span></p><p>这里FFN用的是2层, 所以有W1 W2。Encoder的作用是处理当前已知的token信息，将其编码为K V，用于Decoder使用。(注意： 这里Decoder使用的是经过了N个Encoder Block加工后的信息。此外这里也是和Decoder-only架构不同点之一 –》 Encoder加工出来的KV Decoder加工出来Q 再做Attention)</p><ol start="3" type="1"><li>Decoder</li></ol><p><span class="math display">$$MaskedAttention(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}} + M\right)V$$</span></p><p><span class="math display">$$CrossAttention = \text{softmax}\left(\frac{Q_{dec}(K_{enc})^T}{\sqrt{d_k}}\right)V_{enc}$$</span></p><p><span class="math display"><em>P</em> = softmax(<em>L</em><em>i</em><em>n</em><em>e</em><em>a</em><em>r</em>(<em>O</em><em>u</em><em>t</em><em>p</em><em>u</em><em>t</em><sub><em>d</em><em>e</em><em>c</em><em>o</em><em>d</em><em>e</em><em>r</em></sub>))</span></p><p>每个Decoder会拿到当前的ouput tokens，然后使用MaskedAttention做一下特征提取。为什么这里使用Masked ? 因为在训练的时候比如翻译 “我是猫”的时候，我们已经知道答案是 “I am a cat”。当我们输出的时候，我们希望在predict next token的时候，第i个token只通过Attention 前面i - 1个token来输出。但是实际上，我们训练的时候会一次性给出所有的内容，每个token predict next token的时候都会算损失，一次过掉所有的数据。所以这里需要mask</p><p>想象你在翻译“I love China”到“我爱中国”：</p><p>第一步（Self-Attention）： Decoder 看到自己刚写了“我”和“爱”，意识到接下来的词应该是一个宾语。</p><p>第二步（Cross-Attention）： Decoder 带着“我需要一个宾语”这个念头（Q），去扫视原文（K, V），发现原文中“China”这个词最符合需求。</p><p>结果： 最终输出“中国”。</p><p>如果没有第一层： 句子会失去连贯性，可能写出“我爱爱爱”或者语法不通的句子。 如果没有第二层： Decoder 根本不知道原文在说什么，只能瞎编。</p><p>综合一下：讲解一下transformer在training 和 testing的时候的流程：</p><ol type="1"><li>训练阶段：并行化的“填空题” 在训练时，我们确实是一次性把所有数据喂给模型的，但这并不代表模型能直接看到答案。</li></ol><p>数据输入： Encoder 输入： I, love, you</p><p>Decoder 输入： [BOS], 我, 爱, 你 （注意：这里没有最后一个词，或者说由于偏移，它在预测“你”之后的结束符）</p><p>Target (标签)： 我, 爱, 你, [EOS]</p><p>计算过程： 并行计算： Decoder 接收到整个序列 [BOS], 我, 爱, 你。</p><p>掩码屏障： * 当模型计算到“我”这个位置时，Masked Self-Attention 会遮住后面的“爱”和“你”。它只能看到 [BOS]。</p><p>当模型计算到“爱”这个位置时，它只能看到 [BOS] 和 “我”。</p><p>输出预测： 模型会同时产生四个输出向量，分别代表它预测的词。</p><p>计算 Loss： * 第一位置预测出的词，与标签 我 算 Cross-Entropy Loss。</p><p>第二位置预测出的词，与标签 爱 算 Cross-Entropy Loss。</p><p>依此类推。</p><p>为什么“不对”的感觉被消除了？ 因为虽然物理上你把 [BOS], 我, 爱, 你 都传进去了，但 Mask 矩阵在数学上断绝了信息往后流动的可能。模型在预测“爱”的时候，其计算路径里完全不包含“你”的信息。</p><ol start="2" type="1"><li>推理阶段：串行化的“接龙游戏” 在推理时，没有“上帝视角”，没有提前准备好的完整 Target，只能一个词一个词地蹦。</li></ol><p>过程演示： 第一步： * 输入：Encoder 看到 I love you；Decoder 只输入 [BOS]。</p><p>输出：模型预测出 我。</p><p>第二步： * 输入：Encoder 不变；Decoder 输入 [BOS], 我（把上一步的输出拼接到输入里）。</p><p>输出：模型预测出 爱。</p><p>第三步： * 输入：Decoder 输入 [BOS], 我, 爱。</p><p>输出：模型预测出 你。</p><p>第四步： * 输入：Decoder 输入 [BOS], 我, 爱, 你。</p><p>输出：预测出 [EOS]，生成结束。</p><p>在 Decoder-only 架构中，只有一个 Masked Self-Attention。在老架构中，Encoder 处理原文，Decoder 处理译文，所以需要 Cross-Attention 来连接。在现在的 GPT 模式中，Prompt（提示词）和 Response（回答）被拼成了一个长序列。模型不再区分“这是我要翻译的原文”和“这是我正在写的回答”。对它来说，一切都是历史上下文。它只需要通过 Self-Attention 回看前面的所有 Token（包括你的提问和它已经写出的字），就能自动学到它们之间的关联。</p><p>研究发现，如果你在超大规模语料上训练模型“预测下一个词”，模型会自动演化出逻辑推理、常识理解等能力。</p><ul><li>Encoder-Decoder 强于“转换”（翻译、摘要）。</li><li>Decoder-only 强于“生成”和“通用任务”。</li></ul><p>为什么除以根号d ? d (q k dimension) q k的dimension越大，那么相乘之后的value就越大, varience也越大。</p><p>为什么是根号d 而不是d或者什么和d相关的内容– 》 原始论文似乎也没有讨论</p><h2 id="english">English</h2><h2 id="ds杂谈">DS杂谈</h2>]]></content>
+    
+    
+    <categories>
+      
+      <category>日记</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>260226</title>
     <link href="/2026/02/26/260226/"/>
     <url>/2026/02/26/260226/</url>
