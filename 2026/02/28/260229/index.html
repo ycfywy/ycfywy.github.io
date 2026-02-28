@@ -19,23 +19,21 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Codeforces 2193C 比较简单 无压力 2191B 这里的贪心讨论值得学习一下，其他的倒没什么 7.手撕：m行n列矩阵，行内严格递增，找到这个矩阵里第k大的数 AI Learning transformer原理   输入处理层  $$PE_{(pos, 2i)} &#x3D; \sin\left(\frac{pos}{10000^{2i&#x2F;d_{model}}}\right)$">
+    <meta name="description" content="Codeforces AI Learning 发点面经攒攒人品 1、你在线上或离线训练时，过拟合怎么处理？直接说你最有效的三个方法和拿到的收益。 2、把 BN 讲透：原理是什么；训练期和推理期用的统计量有何不同；跟 LN、GN 比，分别什么时候用、怎么取舍。 3、分类和回归你最常用哪些损失？你更偏好哪几个，为什么（从鲁棒性、梯度、数值稳定性上谈）。 4、L1 和 L2 正则你怎么选？它们各自的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="260227">
-<meta property="og:url" content="https://ycfywy.github.io/2026/02/27/260227/index.html">
+<meta property="og:title" content="260229">
+<meta property="og:url" content="https://ycfywy.github.io/2026/02/28/260229/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="Codeforces 2193C 比较简单 无压力 2191B 这里的贪心讨论值得学习一下，其他的倒没什么 7.手撕：m行n列矩阵，行内严格递增，找到这个矩阵里第k大的数 AI Learning transformer原理   输入处理层  $$PE_{(pos, 2i)} &#x3D; \sin\left(\frac{pos}{10000^{2i&#x2F;d_{model}}}\right)$">
+<meta property="og:description" content="Codeforces AI Learning 发点面经攒攒人品 1、你在线上或离线训练时，过拟合怎么处理？直接说你最有效的三个方法和拿到的收益。 2、把 BN 讲透：原理是什么；训练期和推理期用的统计量有何不同；跟 LN、GN 比，分别什么时候用、怎么取舍。 3、分类和回归你最常用哪些损失？你更偏好哪几个，为什么（从鲁棒性、梯度、数值稳定性上谈）。 4、L1 和 L2 正则你怎么选？它们各自的">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ycfywy.github.io/2026/02/27/260227/2026-02-27-21-47-40.png">
-<meta property="article:published_time" content="2026-02-27T07:33:54.000Z">
-<meta property="article:modified_time" content="2026-02-27T14:21:58.029Z">
+<meta property="article:published_time" content="2026-02-28T03:45:14.000Z">
+<meta property="article:modified_time" content="2026-02-28T03:45:20.036Z">
 <meta property="article:author" content="ycf">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://ycfywy.github.io/2026/02/27/260227/2026-02-27-21-47-40.png">
   
   
   
-  <title>260227 - ycf blog</title>
+  <title>260229 - ycf blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="260227"></span>
+            <span id="subtitle" data-typed-text="260229"></span>
           
         </div>
 
@@ -212,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-02-27 15:33" pubdate>
-          2026年2月27日 下午
+        <time datetime="2026-02-28 11:45" pubdate>
+          2026年2月28日 中午
         </time>
       </span>
     
@@ -224,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          586 字
         
       </span>
     
@@ -235,7 +233,7 @@
         
         
         
-          11 分钟
+          5 分钟
         
       </span>
     
@@ -272,76 +270,15 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">260227</h1>
+            <h1 id="seo-header">260229</h1>
             
             
               <div class="markdown-body">
                 
                 <h2 id="codeforces">Codeforces</h2>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/2193/C">2193C</a> 比较简单 无压力</p>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/2191/B">2191B</a> 这里的贪心讨论值得学习一下，其他的倒没什么</p>
-<p>7.手撕：m行n列矩阵，行内严格递增，找到这个矩阵里第k大的数</p>
 <h2 id="ai-learning">AI Learning</h2>
-<h3 id="transformer原理">transformer原理</h3>
-<p><img src="/2026/02/27/260227/2026-02-27-21-47-40.png" srcset="/img/loading.gif" lazyload /></p>
-<ol type="1">
-<li>输入处理层</li>
-</ol>
-<p><span class="math display">$$PE_{(pos, 2i)} = \sin\left(\frac{pos}{10000^{2i/d_{model}}}\right)$$</span><span class="math display">$$PE_{(pos, 2i+1)} = \cos\left(\frac{pos}{10000^{2i/d_{model}}}\right)$$</span></p>
-<p><span class="math display"><em>X</em> = <em>E</em><em>m</em><em>b</em><em>e</em><em>d</em><em>d</em><em>i</em><em>n</em><em>g</em>(<em>t</em><em>o</em><em>k</em><em>e</em><em>n</em><em>s</em>) + <em>P</em><em>E</em></span></p>
-<ol start="2" type="1">
-<li>Encoder</li>
-</ol>
-<p><span class="math display"><em>Q</em><em>u</em><em>e</em><em>r</em><em>y</em> = <em>X</em><em>W</em><sup><em>Q</em></sup>,  <em>K</em><em>e</em><em>y</em> = <em>X</em><em>W</em><sup><em>K</em></sup>,  <em>V</em><em>a</em><em>l</em><em>u</em><em>e</em> = <em>X</em><em>W</em><sup><em>V</em></sup></span><span class="math display">$$Attention(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$</span></p>
-<p><span class="math display"><em>F</em><em>F</em><em>N</em>(<em>x</em>) = max (0, <em>x</em><em>W</em><sub>1</sub> + <em>b</em><sub>1</sub>)<em>W</em><sub>2</sub> + <em>b</em><sub>2</sub></span></p>
-<p><span class="math display">Add &amp;Norm = LayerNorm(<em>x</em> + Sublayer(<em>x</em>))</span></p>
-<p>这里FFN用的是2层, 所以有W1 W2。Encoder的作用是处理当前已知的token信息，将其编码为K V，用于Decoder使用。(注意： 这里Decoder使用的是经过了N个Encoder Block加工后的信息。此外这里也是和Decoder-only架构不同点之一 –》 Encoder加工出来的KV Decoder加工出来Q 再做Attention)</p>
-<ol start="3" type="1">
-<li>Decoder</li>
-</ol>
-<p><span class="math display">$$MaskedAttention(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}} + M\right)V$$</span></p>
-<p><span class="math display">$$CrossAttention = \text{softmax}\left(\frac{Q_{dec}(K_{enc})^T}{\sqrt{d_k}}\right)V_{enc}$$</span></p>
-<p><span class="math display"><em>P</em> = softmax(<em>L</em><em>i</em><em>n</em><em>e</em><em>a</em><em>r</em>(<em>O</em><em>u</em><em>t</em><em>p</em><em>u</em><em>t</em><sub><em>d</em><em>e</em><em>c</em><em>o</em><em>d</em><em>e</em><em>r</em></sub>))</span></p>
-<p>每个Decoder会拿到当前的ouput tokens，然后使用MaskedAttention做一下特征提取。为什么这里使用Masked ? 因为在训练的时候比如翻译 “我是猫”的时候，我们已经知道答案是 “I am a cat”。当我们输出的时候，我们希望在predict next token的时候，第i个token只通过Attention 前面i - 1个token来输出。但是实际上，我们训练的时候会一次性给出所有的内容，每个token predict next token的时候都会算损失，一次过掉所有的数据。所以这里需要mask</p>
-<p>想象你在翻译“I love China”到“我爱中国”：</p>
-<p>第一步（Self-Attention）： Decoder 看到自己刚写了“我”和“爱”，意识到接下来的词应该是一个宾语。</p>
-<p>第二步（Cross-Attention）： Decoder 带着“我需要一个宾语”这个念头（Q），去扫视原文（K, V），发现原文中“China”这个词最符合需求。</p>
-<p>结果： 最终输出“中国”。</p>
-<p>如果没有第一层： 句子会失去连贯性，可能写出“我爱爱爱”或者语法不通的句子。 如果没有第二层： Decoder 根本不知道原文在说什么，只能瞎编。</p>
-<p>综合一下：讲解一下transformer在training 和 testing的时候的流程：</p>
-<ol type="1">
-<li>训练阶段：并行化的“填空题” 在训练时，我们确实是一次性把所有数据喂给模型的，但这并不代表模型能直接看到答案。</li>
-</ol>
-<p>数据输入： Encoder 输入： I, love, you</p>
-<p>Decoder 输入： [BOS], 我, 爱, 你 （注意：这里没有最后一个词，或者说由于偏移，它在预测“你”之后的结束符）</p>
-<p>Target (标签)： 我, 爱, 你, [EOS]</p>
-<p>计算过程： 并行计算： Decoder 接收到整个序列 [BOS], 我, 爱, 你。</p>
-<p>掩码屏障： * 当模型计算到“我”这个位置时，Masked Self-Attention 会遮住后面的“爱”和“你”。它只能看到 [BOS]。</p>
-<p>当模型计算到“爱”这个位置时，它只能看到 [BOS] 和 “我”。</p>
-<p>输出预测： 模型会同时产生四个输出向量，分别代表它预测的词。</p>
-<p>计算 Loss： * 第一位置预测出的词，与标签 我 算 Cross-Entropy Loss。</p>
-<p>第二位置预测出的词，与标签 爱 算 Cross-Entropy Loss。</p>
-<p>依此类推。</p>
-<p>为什么“不对”的感觉被消除了？ 因为虽然物理上你把 [BOS], 我, 爱, 你 都传进去了，但 Mask 矩阵在数学上断绝了信息往后流动的可能。模型在预测“爱”的时候，其计算路径里完全不包含“你”的信息。</p>
-<ol start="2" type="1">
-<li>推理阶段：串行化的“接龙游戏” 在推理时，没有“上帝视角”，没有提前准备好的完整 Target，只能一个词一个词地蹦。</li>
-</ol>
-<p>过程演示： 第一步： * 输入：Encoder 看到 I love you；Decoder 只输入 [BOS]。</p>
-<p>输出：模型预测出 我。</p>
-<p>第二步： * 输入：Encoder 不变；Decoder 输入 [BOS], 我（把上一步的输出拼接到输入里）。</p>
-<p>输出：模型预测出 爱。</p>
-<p>第三步： * 输入：Decoder 输入 [BOS], 我, 爱。</p>
-<p>输出：模型预测出 你。</p>
-<p>第四步： * 输入：Decoder 输入 [BOS], 我, 爱, 你。</p>
-<p>输出：预测出 [EOS]，生成结束。</p>
-<p>在 Decoder-only 架构中，只有一个 Masked Self-Attention。在老架构中，Encoder 处理原文，Decoder 处理译文，所以需要 Cross-Attention 来连接。在现在的 GPT 模式中，Prompt（提示词）和 Response（回答）被拼成了一个长序列。模型不再区分“这是我要翻译的原文”和“这是我正在写的回答”。对它来说，一切都是历史上下文。它只需要通过 Self-Attention 回看前面的所有 Token（包括你的提问和它已经写出的字），就能自动学到它们之间的关联。</p>
-<p>研究发现，如果你在超大规模语料上训练模型“预测下一个词”，模型会自动演化出逻辑推理、常识理解等能力。</p>
-<ul>
-<li>Encoder-Decoder 强于“转换”（翻译、摘要）。</li>
-<li>Decoder-only 强于“生成”和“通用任务”。</li>
-</ul>
-<p>为什么除以根号d ? d (q k dimension) q k的dimension越大，那么相乘之后的value就越大, varience也越大。</p>
-<p>为什么是根号d 而不是d或者什么和d相关的内容– 》 原始论文似乎也没有讨论</p>
+<p>发点面经攒攒人品 1、你在线上或离线训练时，过拟合怎么处理？直接说你最有效的三个方法和拿到的收益。 2、把 BN 讲透：原理是什么；训练期和推理期用的统计量有何不同；跟 LN、GN 比，分别什么时候用、怎么取舍。 3、分类和回归你最常用哪些损失？你更偏好哪几个，为什么（从鲁棒性、梯度、数值稳定性上谈）。 4、L1 和 L2 正则你怎么选？它们各自的效果与风险是什么，工程里你是怎么权衡的。 5、二元和多分类的交叉熵你怎么写？在工程里你怎么做数值稳定实现。 6、AUC 到底在统计上代表什么？你怎么计算它，在线上业务里你如何解释“这次 AUC 提升”的含义。 7、你做 CTR/CVR/CTCVR 联合建模时，ESMM/ESMM2 是怎么推导与工程落地的？线上到底带来了什么收益。 8、Transformer 里因果注意力的 Q/K/V 各从哪来？Mask 具体怎么实现。 9、Scaled Dot‑Product Attention 为啥要除以 √dk？如果不除会出什么数值或训练问题。 10、把 Transformer / Decoder‑only 的整体结构过一遍，各个组件分别在干什么，有哪些常见变体。 11、位置编码这条线你怎么选：绝对 PE、相对 PE、RoPE 各自的思路、优势和局限，结合你的项目谈取舍。 12、长上下文怎么搞？Rope scaling、Position Interpolation、KV Cache 管理、检索增强、窗口注意力，你的实战方案是什么。 13、KV Cache 在训练和推理中的差异是什么？它的加速价值有多大，吞吐与延迟你是如何权衡的，vLLM/paged‑attention 需要注意什么。 14、PEFT 方案里（LoRA/QLoRA/Prefix/Prompt‑Tuning/Adapter）你怎么选？说说稳定训练的经验。 15、SFT 和对齐（RLHF/DPO/IPO/PPO）原理差在哪？在不同数据与资源条件下，你怎么选路线。 16、RAG 系统你怎么设计？切分、索引、召回/重排、压缩/融合、兜底策略怎么串。 17、提示词工程你是怎么搞的？System/角色/约束/分步指令怎么写，如何防越狱</p>
+<p>作者：MarCus 链接：https://www.nowcoder.com/interview/center?entranceType=%E5%AF%BC%E8%88%AA%E6%A0%8F 来源：牛客网</p>
 <h2 id="english">English</h2>
 <h2 id="ds杂谈">DS杂谈</h2>
 
@@ -382,8 +319,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>260227</div>
-      <div>https://ycfywy.github.io/2026/02/27/260227/</div>
+      <div>260229</div>
+      <div>https://ycfywy.github.io/2026/02/28/260229/</div>
     </div>
     <div class="license-meta">
       
@@ -395,7 +332,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年2月27日</div>
+          <div>2026年2月28日</div>
         </div>
       
       
@@ -427,18 +364,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/02/28/260228/" title="260228">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">260228</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/02/26/260226/" title="260226">
-                        <span class="hidden-mobile">260226</span>
+                      <a href="/2026/02/28/260228/" title="260228">
+                        <span class="hidden-mobile">260228</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
