@@ -19,12 +19,12 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Leetcode1404. 将二进制表示减到 1 的步骤数 给你一个以二进制形式表示的数字 s 。请你返回按下述规则将其减少到 1 所需要的步骤数：如果当前数字为偶数，则将其除以 2 。如果当前数字为奇数，则将其加上 1 。题目保证你总是可以按上述规则将测试用例变为 1 。 可以考虑每一个pos需要多少次操作，且会不会进位 如果当前pos是1，那么就需要2次操作，同时贡献给上一位1个进位如果当前p">
+    <meta name="description" content="Leetcode 1404. 将二进制表示减到 1 的步骤数 给你一个以二进制形式表示的数字 s 。请你返回按下述规则将其减少到 1 所需要的步骤数： 如果当前数字为偶数，则将其除以 2 。 如果当前数字为奇数，则将其加上 1 。 题目保证你总是可以按上述规则将测试用例变为 1 。 可以考虑每一个pos需要多少次操作，且会不会进位 如果当前pos是1，那么就需要2次操作，同时贡献给上一位1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="260226">
 <meta property="og:url" content="https://ycfywy.github.io/2026/02/26/260226/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="Leetcode1404. 将二进制表示减到 1 的步骤数 给你一个以二进制形式表示的数字 s 。请你返回按下述规则将其减少到 1 所需要的步骤数：如果当前数字为偶数，则将其除以 2 。如果当前数字为奇数，则将其加上 1 。题目保证你总是可以按上述规则将测试用例变为 1 。 可以考虑每一个pos需要多少次操作，且会不会进位 如果当前pos是1，那么就需要2次操作，同时贡献给上一位1个进位如果当前p">
+<meta property="og:description" content="Leetcode 1404. 将二进制表示减到 1 的步骤数 给你一个以二进制形式表示的数字 s 。请你返回按下述规则将其减少到 1 所需要的步骤数： 如果当前数字为偶数，则将其除以 2 。 如果当前数字为奇数，则将其加上 1 。 题目保证你总是可以按上述规则将测试用例变为 1 。 可以考虑每一个pos需要多少次操作，且会不会进位 如果当前pos是1，那么就需要2次操作，同时贡献给上一位1">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-02-26T07:12:45.000Z">
 <meta property="article:modified_time" content="2026-02-26T16:36:16.811Z">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          792 字
+          786 字
         
       </span>
     
@@ -275,25 +275,30 @@
             
               <div class="markdown-body">
                 
-                <h2 id="Leetcode"><a href="#Leetcode" class="headerlink" title="Leetcode"></a>Leetcode</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/number-of-steps-to-reduce-a-number-in-binary-representation-to-one/description/?envType=daily-question&envId=2026-02-27">1404. 将二进制表示减到 1 的步骤数</a></p>
-<p>给你一个以二进制形式表示的数字 s 。请你返回按下述规则将其减少到 1 所需要的步骤数：<br>如果当前数字为偶数，则将其除以 2 。<br>如果当前数字为奇数，则将其加上 1 。<br>题目保证你总是可以按上述规则将测试用例变为 1 。</p>
+                <h2 id="leetcode">Leetcode</h2>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/number-of-steps-to-reduce-a-number-in-binary-representation-to-one/description/?envType=daily-question&amp;envId=2026-02-27">1404. 将二进制表示减到 1 的步骤数</a></p>
+<p>给你一个以二进制形式表示的数字 s 。请你返回按下述规则将其减少到 1 所需要的步骤数： 如果当前数字为偶数，则将其除以 2 。 如果当前数字为奇数，则将其加上 1 。 题目保证你总是可以按上述规则将测试用例变为 1 。</p>
 <p>可以考虑每一个pos需要多少次操作，且会不会进位</p>
-<p>如果当前pos是1，那么就需要2次操作，同时贡献给上一位1个进位<br>如果当前pos是0，那么就直接消除掉</p>
+<p>如果当前pos是1，那么就需要2次操作，同时贡献给上一位1个进位 如果当前pos是0，那么就直接消除掉</p>
 <p>直到遍历完所有的pos</p>
-<p>这里要注意一下特例：对于常规案例，你只需要到 idx &#x3D; 0就停下，因为题目保证一定有解，所以当你消除掉n-1位后，最后一位大概率是1。但是当你有进位的时候，比如111变成了1000那么此时就需要处理idx &#x3D; 0的情况。</p>
+<p>这里要注意一下特例：对于常规案例，你只需要到 idx = 0就停下，因为题目保证一定有解，所以当你消除掉n-1位后，最后一位大概率是1。但是当你有进位的时候，比如111变成了1000那么此时就需要处理idx = 0的情况。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">numSteps</span><span class="hljs-params">(string s)</span> </span>&#123;<br>        <span class="hljs-type">int</span> plus = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> n = s.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-type">int</span> res = <span class="hljs-number">0</span>;<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i --)&#123;<br>            <span class="hljs-type">int</span> t = s[i] - <span class="hljs-string">&#x27;0&#x27;</span> + plus;<br>            <span class="hljs-keyword">if</span>(!i &amp;&amp; t == <span class="hljs-number">1</span>)<span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">if</span>(t % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)&#123;<br>                plus = t / <span class="hljs-number">2</span>;<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>                plus = (t + <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>;<br>                res ++;<br>            <br>            &#125;<br><br>            res ++;<br>        &#125;<br>    <br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;;<br><br><br></code></pre></td></tr></table></figure>
-
-<h2 id="Codeforces"><a href="#Codeforces" class="headerlink" title="Codeforces"></a>Codeforces</h2><p><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/2193/D">Monster Game </a></p>
-<p>你被赠送了一款名为“Elatyh”的新游戏。在游戏中，你拥有 $n$ 把剑，每把剑都有自己的强度。具体来说，编号为 $i$ 的剑强度为 $a_i$。游戏共有 $n$ 个关卡，每个关卡都有一只怪物。</p>
-<p>你从第 1 关开始并不断闯关。为了通过第 $i$ 关并进入第 $i+1$ 关，你需要对第 $i$ 关的怪物进行 $b_i$ 次挥剑攻击。游戏中的剑非常脆弱，每把剑在折断前只能进行一次攻击。如果你完成了全部 $n$ 个关卡，或者用完了所有的剑，游戏结束并进入得分计算环节。</p>
-<p>在游戏开始前，你可以选择<strong>难度等级</strong>。如果你选择难度 $x$，那么强度小于 $x$ 的剑将无法对怪物造成伤害（即无效）。在这种情况下，游戏得分等于 $x$ 乘以你<strong>完成的关卡总数</strong>。</p>
+<h2 id="codeforces">Codeforces</h2>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/2193/D">Monster Game</a></p>
+<p>你被赠送了一款名为“Elatyh”的新游戏。在游戏中，你拥有 <span class="math inline"><em>n</em></span> 把剑，每把剑都有自己的强度。具体来说，编号为 <span class="math inline"><em>i</em></span> 的剑强度为 <span class="math inline"><em>a</em><sub><em>i</em></sub></span>。游戏共有 <span class="math inline"><em>n</em></span> 个关卡，每个关卡都有一只怪物。</p>
+<p>你从第 1 关开始并不断闯关。为了通过第 <span class="math inline"><em>i</em></span> 关并进入第 <span class="math inline"><em>i</em> + 1</span> 关，你需要对第 <span class="math inline"><em>i</em></span> 关的怪物进行 <span class="math inline"><em>b</em><sub><em>i</em></sub></span> 次挥剑攻击。游戏中的剑非常脆弱，每把剑在折断前只能进行一次攻击。如果你完成了全部 <span class="math inline"><em>n</em></span> 个关卡，或者用完了所有的剑，游戏结束并进入得分计算环节。</p>
+<p>在游戏开始前，你可以选择<strong>难度等级</strong>。如果你选择难度 <span class="math inline"><em>x</em></span>，那么强度小于 <span class="math inline"><em>x</em></span> 的剑将无法对怪物造成伤害（即无效）。在这种情况下，游戏得分等于 <span class="math inline"><em>x</em></span> 乘以你<strong>完成的关卡总数</strong>。</p>
 <p>你的任务是：选择一个合适的难度等级，使游戏得分最大化。</p>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>x越小，你能够使用的sword越多，能通过的关卡越多。但x制约了得分。你需要尽可能贪心的选择x。考虑把强度排序，保留每个强度的sword数目。可选择的x其实就是各个不同的强度。(选其他的没意义，比如一个强度b，你选择b + 1，那么sword用不了了，选择b - 1没意义，因为并不影响可用的sword(这里假设相邻的两个强度a !&#x3D;  b - 1))。</p>
+<h3 id="解题思路">解题思路</h3>
+<p>x越小，你能够使用的sword越多，能通过的关卡越多。但x制约了得分。你需要尽可能贪心的选择x。考虑把强度排序，保留每个强度的sword数目。可选择的x其实就是各个不同的强度。(选其他的没意义，比如一个强度b，你选择b + 1，那么sword用不了了，选择b - 1没意义，因为并不影响可用的sword(这里假设相邻的两个强度a != b - 1))。</p>
 <p>这样先统计，然后枚举x即可。随着x的减小，可以通过的关卡数目单调增加。因此可以采用双指针，使用当前可以用的sword通过最大的关卡数。然后取max</p>
-<h2 id="AI-Learning"><a href="#AI-Learning" class="headerlink" title="AI Learning"></a>AI Learning</h2><p>手撕mha</p>
-<p>rope应该加在哪里<br>kvcache怎么加</p>
-<p>dropout加在哪<br>mask怎么加</p>
-<h2 id="English"><a href="#English" class="headerlink" title="English"></a>English</h2><h2 id="DS杂谈"><a href="#DS杂谈" class="headerlink" title="DS杂谈"></a>DS杂谈</h2>
+<h2 id="ai-learning">AI Learning</h2>
+<p>手撕mha</p>
+<p>rope应该加在哪里 kvcache怎么加</p>
+<p>dropout加在哪 mask怎么加</p>
+<h2 id="english">English</h2>
+<h2 id="ds杂谈">DS杂谈</h2>
+
                 
               </div>
             

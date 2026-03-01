@@ -19,12 +19,12 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="我的评价&emsp;&emsp;有时候我都在想，这么抽象的方法真的有人用吗？？ 什么是混合模型？&emsp;&emsp;混合模型指的是，你的数据的分布，可能是来源于其他的分布按照一定的比例混合而成的。说人话，就是数据分布是由一组分布混合而成。如果你从里面采样一个数据，实际操作是先按照$\pi_k$采样一个分布，再从这个分布中采样数据。(数据只能属于一组分布之一)$$p(x) &#x3D; \sum">
+    <meta name="description" content="我的评价   有时候我都在想，这么抽象的方法真的有人用吗？？ 什么是混合模型？   混合模型指的是，你的数据的分布，可能是来源于其他的分布按照一定的比例混合而成的。说人话，就是数据分布是由一组分布混合而成。如果你从里面采样一个数据，实际操作是先按照πk采样一个分布，再从这个分布中采样数据。(数据只能属于一组分布之一) $$p(x) &#x3D; \sum_{k&#x3D;1}^{K} \pi_k p(x | z">
 <meta property="og:type" content="article">
 <meta property="og:title" content="混合分布的概述">
 <meta property="og:url" content="https://ycfywy.github.io/2025/12/16/%E6%B7%B7%E5%90%88%E5%88%86%E5%B8%83%E7%9A%84%E6%A6%82%E8%BF%B0/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="我的评价&emsp;&emsp;有时候我都在想，这么抽象的方法真的有人用吗？？ 什么是混合模型？&emsp;&emsp;混合模型指的是，你的数据的分布，可能是来源于其他的分布按照一定的比例混合而成的。说人话，就是数据分布是由一组分布混合而成。如果你从里面采样一个数据，实际操作是先按照$\pi_k$采样一个分布，再从这个分布中采样数据。(数据只能属于一组分布之一)$$p(x) &#x3D; \sum">
+<meta property="og:description" content="我的评价   有时候我都在想，这么抽象的方法真的有人用吗？？ 什么是混合模型？   混合模型指的是，你的数据的分布，可能是来源于其他的分布按照一定的比例混合而成的。说人话，就是数据分布是由一组分布混合而成。如果你从里面采样一个数据，实际操作是先按照πk采样一个分布，再从这个分布中采样数据。(数据只能属于一组分布之一) $$p(x) &#x3D; \sum_{k&#x3D;1}^{K} \pi_k p(x | z">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-12-16T08:26:44.000Z">
 <meta property="article:modified_time" content="2025-12-16T09:24:49.857Z">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.9k 字
+          3.3k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          33 分钟
+          28 分钟
         
       </span>
     
@@ -275,627 +275,668 @@
             
               <div class="markdown-body">
                 
-                <h2 id="我的评价"><a href="#我的评价" class="headerlink" title="我的评价"></a>我的评价</h2><p>&emsp;&emsp;有时候我都在想，这么抽象的方法真的有人用吗？？</p>
-<h2 id="什么是混合模型？"><a href="#什么是混合模型？" class="headerlink" title="什么是混合模型？"></a>什么是混合模型？</h2><p>&emsp;&emsp;混合模型指的是，你的数据的分布，可能是来源于其他的分布按照一定的比例混合而成的。说人话，就是数据分布是由一组分布混合而成。如果你从里面采样一个数据，实际操作是先按照$\pi_k$采样一个分布，再从这个分布中采样数据。(数据只能属于一组分布之一)<br>$$p(x) &#x3D; \sum_{k&#x3D;1}^{K} \pi_k p(x | z&#x3D;k)$$<br>$K$ 是混合分量的数量。$\pi_k$ 是混合权重（或先验概率），$\sum_{k&#x3D;1}^{K} \pi_k &#x3D; 1$ 且 $\pi_k \ge 0$。$p(x | z&#x3D;k)$ 是第 $k$ 个混合分量的条件概率密度函数。$z$ 是隐变量 (Latent Variable)，表示数据点 $x$ 来源于哪个分量 ($z \in {1, 2, \dots, K}$)。</p>
-<h2 id="Gaussian-Mixture-Model-GMM"><a href="#Gaussian-Mixture-Model-GMM" class="headerlink" title="Gaussian Mixture Model (GMM)"></a>Gaussian Mixture Model (GMM)</h2><p>&emsp;&emsp;顾名思义，在 GMM 中，每个分量 $k$ 的条件概率密度函数 $p(x | z&#x3D;k)$ 都是一个正态分布（根据你的data dimension可能是多维正态分布）。<br>$$p(\mathbf{x}) &#x3D; \sum_{k&#x3D;1}^{K} \pi_k \mathcal{N}(\mathbf{x} | \boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)$$<br>$\mathcal{N}(\mathbf{x} | \boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)$: 第 $k$ 个高斯分量的概率密度函数，由其均值向量 $\boldsymbol{\mu}_k$ 和协方差矩阵 $\boldsymbol{\Sigma}_k$ 决定。</p>
+                <h2 id="我的评价">我的评价</h2>
+<p>  有时候我都在想，这么抽象的方法真的有人用吗？？</p>
+<h2 id="什么是混合模型">什么是混合模型？</h2>
+<p>  混合模型指的是，你的数据的分布，可能是来源于其他的分布按照一定的比例混合而成的。说人话，就是数据分布是由一组分布混合而成。如果你从里面采样一个数据，实际操作是先按照<span class="math inline"><em>π</em><sub><em>k</em></sub></span>采样一个分布，再从这个分布中采样数据。(数据只能属于一组分布之一) <span class="math display">$$p(x) = \sum_{k=1}^{K} \pi_k p(x | z=k)$$</span> <span class="math inline"><em>K</em></span> 是混合分量的数量。<span class="math inline"><em>π</em><sub><em>k</em></sub></span> 是混合权重（或先验概率），<span class="math inline">$\sum_{k=1}^{K} \pi_k = 1$</span> 且 <span class="math inline"><em>π</em><sub><em>k</em></sub> ≥ 0</span>。<span class="math inline"><em>p</em>(<em>x</em>|<em>z</em> = <em>k</em>)</span> 是第 <span class="math inline"><em>k</em></span> 个混合分量的条件概率密度函数。<span class="math inline"><em>z</em></span> 是隐变量 (Latent Variable)，表示数据点 <span class="math inline"><em>x</em></span> 来源于哪个分量 (<span class="math inline"><em>z</em> ∈ {1, 2, …, <em>K</em>}</span>)。</p>
+<h2 id="gaussian-mixture-model-gmm">Gaussian Mixture Model (GMM)</h2>
+<p>  顾名思义，在 GMM 中，每个分量 <span class="math inline"><em>k</em></span> 的条件概率密度函数 <span class="math inline"><em>p</em>(<em>x</em>|<em>z</em> = <em>k</em>)</span> 都是一个正态分布（根据你的data dimension可能是多维正态分布）。 <span class="math display">$$p(\mathbf{x}) = \sum_{k=1}^{K} \pi_k \mathcal{N}(\mathbf{x} | \boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)$$</span> <span class="math inline">𝒩(<strong>x</strong>|<strong>μ</strong><sub><em>k</em></sub>, <strong>Σ</strong><sub><em>k</em></sub>)</span>: 第 <span class="math inline"><em>k</em></span> 个高斯分量的概率密度函数，由其均值向量 <span class="math inline"><strong>μ</strong><sub><em>k</em></sub></span> 和协方差矩阵 <span class="math inline"><strong>Σ</strong><sub><em>k</em></sub></span> 决定。</p>
 <p>这东西有什么用？GMM 能够近似任何形状的概率分布，学习数据的概率分布。比如我们可以做聚类，下面是一个例子。</p>
-<p>假设我们从一个班级中随机抽取了 $N&#x3D;5$ 个人的身高数据（单位：厘米），我们认为这些数据可能来源于 $K&#x3D;2$ 个高斯分布的混合（例如，男生群体的身高分布和女生群体的身高分布）。</p>
-<h4 id="1-数据集-一维"><a href="#1-数据集-一维" class="headerlink" title="1. 数据集 (一维)"></a>1. 数据集 (一维)</h4><table>
+<p>假设我们从一个班级中随机抽取了 <span class="math inline"><em>N</em> = 5</span> 个人的身高数据（单位：厘米），我们认为这些数据可能来源于 <span class="math inline"><em>K</em> = 2</span> 个高斯分布的混合（例如，男生群体的身高分布和女生群体的身高分布）。</p>
+<h4 id="数据集-一维">1. 数据集 (一维)</h4>
+<table>
 <thead>
-<tr>
-<th align="center">样本 $i$</th>
-<th align="center">身高 $x_i$ (cm)</th>
+<tr class="header">
+<th style="text-align: center;">样本 <span class="math inline"><em>i</em></span></th>
+<th style="text-align: center;">身高 <span class="math inline"><em>x</em><sub><em>i</em></sub></span> (cm)</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">1</td>
-<td align="center">165</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">165</td>
 </tr>
-<tr>
-<td align="center">2</td>
-<td align="center">170</td>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">170</td>
 </tr>
-<tr>
-<td align="center">3</td>
-<td align="center">175</td>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">175</td>
 </tr>
-<tr>
-<td align="center">4</td>
-<td align="center">185</td>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">185</td>
 </tr>
-<tr>
-<td align="center">5</td>
-<td align="center">190</td>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">190</td>
 </tr>
-</tbody></table>
-<h4 id="2-模型设置与初始化"><a href="#2-模型设置与初始化" class="headerlink" title="2. 模型设置与初始化"></a>2. 模型设置与初始化</h4><ul>
-<li><strong>模型:</strong> $K&#x3D;2$ 个高斯分量 (簇 1 和 簇 2)。</li>
-<li><strong>模型参数:</strong> $\Theta &#x3D; { \pi_1, \mu_1, \sigma_1^2, \pi_2, \mu_2, \sigma_2^2 }$。</li>
+</tbody>
+</table>
+<h4 id="模型设置与初始化">2. 模型设置与初始化</h4>
+<ul>
+<li><strong>模型:</strong> <span class="math inline"><em>K</em> = 2</span> 个高斯分量 (簇 1 和 簇 2)。</li>
+<li><strong>模型参数:</strong> <span class="math inline"><em>Θ</em> = {<em>π</em><sub>1</sub>, <em>μ</em><sub>1</sub>, <em>σ</em><sub>1</sub><sup>2</sup>, <em>π</em><sub>2</sub>, <em>μ</em><sub>2</sub>, <em>σ</em><sub>2</sub><sup>2</sup>}</span>。</li>
 </ul>
 <p>我们进行<strong>随机初始化</strong>（第 0 步迭代）：</p>
 <table>
 <thead>
-<tr>
-<th align="center">参数</th>
-<th align="center">值</th>
-<th align="center">含义</th>
+<tr class="header">
+<th style="text-align: center;">参数</th>
+<th style="text-align: center;">值</th>
+<th style="text-align: center;">含义</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">$\pi_1$</td>
-<td align="center">0.5</td>
-<td align="center">属于簇 1 的先验概率</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline"><em>π</em><sub>1</sub></span></td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">属于簇 1 的先验概率</td>
 </tr>
-<tr>
-<td align="center">$\pi_2$</td>
-<td align="center">0.5</td>
-<td align="center">属于簇 2 的先验概率</td>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline"><em>π</em><sub>2</sub></span></td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">属于簇 2 的先验概率</td>
 </tr>
-<tr>
-<td align="center">$\mu_1$</td>
-<td align="center">170</td>
-<td align="center">簇 1 的初始均值</td>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline"><em>μ</em><sub>1</sub></span></td>
+<td style="text-align: center;">170</td>
+<td style="text-align: center;">簇 1 的初始均值</td>
 </tr>
-<tr>
-<td align="center">$\sigma_1^2$</td>
-<td align="center">25</td>
-<td align="center">簇 1 的初始方差 ( $\sigma_1&#x3D;5$ )</td>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline"><em>σ</em><sub>1</sub><sup>2</sup></span></td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">簇 1 的初始方差 ( <span class="math inline"><em>σ</em><sub>1</sub> = 5</span> )</td>
 </tr>
-<tr>
-<td align="center">$\mu_2$</td>
-<td align="center">185</td>
-<td align="center">簇 2 的初始均值</td>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline"><em>μ</em><sub>2</sub></span></td>
+<td style="text-align: center;">185</td>
+<td style="text-align: center;">簇 2 的初始均值</td>
 </tr>
-<tr>
-<td align="center">$\sigma_2^2$</td>
-<td align="center">25</td>
-<td align="center">簇 2 的初始方差 ( $\sigma_2&#x3D;5$ )</td>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline"><em>σ</em><sub>2</sub><sup>2</sup></span></td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">簇 2 的初始方差 ( <span class="math inline"><em>σ</em><sub>2</sub> = 5</span> )</td>
 </tr>
-</tbody></table>
-<h4 id="3-EM-算法迭代-第一轮"><a href="#3-EM-算法迭代-第一轮" class="headerlink" title="3. EM 算法迭代 (第一轮)"></a>3. EM 算法迭代 (第一轮)</h4><p>我们使用一维高斯分布的概率密度函数：<br>$$\mathcal{N}(x | \mu, \sigma^2) &#x3D; \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$</p>
-<hr>
-<p>我们要计算每个数据点 $x_i$ 属于每个簇 $k$ 的后验概率 $\gamma(z_{ik}) &#x3D; p(z&#x3D;k | x_i, \Theta^{\text{old}})$。</p>
-<p><strong>以 $x_1 &#x3D; 165$ 为例计算：</strong></p>
-<p><strong>1. 计算似然 $p(x_1 | z&#x3D;k)$：</strong></p>
+</tbody>
+</table>
+<h4 id="em-算法迭代-第一轮">3. EM 算法迭代 (第一轮)</h4>
+<p>我们使用一维高斯分布的概率密度函数： <span class="math display">$$\mathcal{N}(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$</span></p>
+<hr />
+<p>我们要计算每个数据点 <span class="math inline"><em>x</em><sub><em>i</em></sub></span> 属于每个簇 <span class="math inline"><em>k</em></span> 的后验概率 <span class="math inline"><em>γ</em>(<em>z</em><sub><em>i</em><em>k</em></sub>) = <em>p</em>(<em>z</em> = <em>k</em>|<em>x</em><sub><em>i</em></sub>, <em>Θ</em><sup>old</sup>)</span>。</p>
+<p><strong>以 <span class="math inline"><em>x</em><sub>1</sub> = 165</span> 为例计算：</strong></p>
+<p><strong>1. 计算似然 <span class="math inline"><em>p</em>(<em>x</em><sub>1</sub>|<em>z</em> = <em>k</em>)</span>：</strong></p>
 <ul>
-<li><p><strong>簇 1 似然 ($\mu_1&#x3D;170, \sigma_1^2&#x3D;25$):</strong><br>  $$p(165|z&#x3D;1) \propto e^{-\frac{(165-170)^2}{2 \times 25}} &#x3D; e^{-\frac{25}{50}} &#x3D; e^{-0.5} \approx \mathbf{0.6065}$$<br>  (注：为简化计算，我们忽略了常数项 $\frac{1}{\sqrt{2\pi\sigma^2}}$，因为它在下一步的比例计算中会抵消，或者您认为 $\sigma_k$ 相同，常数项也相同。)</p>
-</li>
-<li><p><strong>簇 2 似然 ($\mu_2&#x3D;185, \sigma_2^2&#x3D;25$):</strong><br>  $$p(165|z&#x3D;2) \propto e^{-\frac{(165-185)^2}{2 \times 25}} &#x3D; e^{-\frac{400}{50}} &#x3D; e^{-8} \approx \mathbf{0.000335}$$</p>
-</li>
+<li><p><strong>簇 1 似然 (<span class="math inline"><em>μ</em><sub>1</sub> = 170, <em>σ</em><sub>1</sub><sup>2</sup> = 25</span>):</strong> <span class="math display">$$p(165|z=1) \propto e^{-\frac{(165-170)^2}{2 \times 25}} = e^{-\frac{25}{50}} = e^{-0.5} \approx \mathbf{0.6065}$$</span> (注：为简化计算，我们忽略了常数项 <span class="math inline">$\frac{1}{\sqrt{2\pi\sigma^2}}$</span>，因为它在下一步的比例计算中会抵消，或者您认为 <span class="math inline"><em>σ</em><sub><em>k</em></sub></span> 相同，常数项也相同。)</p></li>
+<li><p><strong>簇 2 似然 (<span class="math inline"><em>μ</em><sub>2</sub> = 185, <em>σ</em><sub>2</sub><sup>2</sup> = 25</span>):</strong> <span class="math display">$$p(165|z=2) \propto e^{-\frac{(165-185)^2}{2 \times 25}} = e^{-\frac{400}{50}} = e^{-8} \approx \mathbf{0.000335}$$</span></p></li>
 </ul>
-<p><strong>2. 计算责任 $\gamma(z_{1k})$：</strong></p>
+<p><strong>2. 计算责任 <span class="math inline"><em>γ</em>(<em>z</em><sub>1<em>k</em></sub>)</span>：</strong></p>
 <ul>
-<li><p><strong>分母:</strong> $M &#x3D; \pi_1 p(x_1|z&#x3D;1) + \pi_2 p(x_1|z&#x3D;2)$<br>  $$M &#x3D; 0.5 \times 0.6065 + 0.5 \times 0.000335 \approx 0.30325 + 0.0001675 &#x3D; \mathbf{0.3034}$$</p>
-</li>
-<li><p><strong>$\gamma(z_{11})$ (属于簇 1):</strong><br>  $$\frac{0.5 \times 0.6065}{0.3034} \approx \mathbf{0.9995}$$</p>
-</li>
-<li><p><strong>$\gamma(z_{12})$ (属于簇 2):</strong><br>  $$\frac{0.5 \times 0.000335}{0.3034} \approx \mathbf{0.0005}$$</p>
-</li>
+<li><p><strong>分母:</strong> <span class="math inline"><em>M</em> = <em>π</em><sub>1</sub><em>p</em>(<em>x</em><sub>1</sub>|<em>z</em> = 1) + <em>π</em><sub>2</sub><em>p</em>(<em>x</em><sub>1</sub>|<em>z</em> = 2)</span> <span class="math display"><em>M</em> = 0.5 × 0.6065 + 0.5 × 0.000335 ≈ 0.30325 + 0.0001675 = <strong>0.3034</strong></span></p></li>
+<li><p><strong><span class="math inline"><em>γ</em>(<em>z</em><sub>11</sub>)</span> (属于簇 1):</strong> <span class="math display">$$\frac{0.5 \times 0.6065}{0.3034} \approx \mathbf{0.9995}$$</span></p></li>
+<li><p><strong><span class="math inline"><em>γ</em>(<em>z</em><sub>12</sub>)</span> (属于簇 2):</strong> <span class="math display">$$\frac{0.5 \times 0.000335}{0.3034} \approx \mathbf{0.0005}$$</span></p></li>
 </ul>
-<p><strong>责任矩阵 $\gamma$ (所有样本的计算结果):</strong></p>
+<p><strong>责任矩阵 <span class="math inline"><em>γ</em></span> (所有样本的计算结果):</strong></p>
 <table>
 <thead>
-<tr>
-<th align="center">样本 $i$</th>
-<th align="center">$x_i$</th>
-<th align="center">$\gamma(z_{i1})$ (簇 1 责任)</th>
-<th align="center">$\gamma(z_{i2})$ (簇 2 责任)</th>
+<tr class="header">
+<th style="text-align: center;">样本 <span class="math inline"><em>i</em></span></th>
+<th style="text-align: center;"><span class="math inline"><em>x</em><sub><em>i</em></sub></span></th>
+<th style="text-align: center;"><span class="math inline"><em>γ</em>(<em>z</em><sub><em>i</em>1</sub>)</span> (簇 1 责任)</th>
+<th style="text-align: center;"><span class="math inline"><em>γ</em>(<em>z</em><sub><em>i</em>2</sub>)</span> (簇 2 责任)</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">1</td>
-<td align="center">165</td>
-<td align="center">0.9995</td>
-<td align="center">0.0005</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">165</td>
+<td style="text-align: center;">0.9995</td>
+<td style="text-align: center;">0.0005</td>
 </tr>
-<tr>
-<td align="center">2</td>
-<td align="center">170</td>
-<td align="center">0.9999</td>
-<td align="center">0.0001</td>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">170</td>
+<td style="text-align: center;">0.9999</td>
+<td style="text-align: center;">0.0001</td>
 </tr>
-<tr>
-<td align="center">3</td>
-<td align="center">175</td>
-<td align="center">0.9995</td>
-<td align="center">0.0005</td>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">175</td>
+<td style="text-align: center;">0.9995</td>
+<td style="text-align: center;">0.0005</td>
 </tr>
-<tr>
-<td align="center">4</td>
-<td align="center">185</td>
-<td align="center">0.0005</td>
-<td align="center">0.9995</td>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">185</td>
+<td style="text-align: center;">0.0005</td>
+<td style="text-align: center;">0.9995</td>
 </tr>
-<tr>
-<td align="center">5</td>
-<td align="center">190</td>
-<td align="center">0.0001</td>
-<td align="center">0.9999</td>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">190</td>
+<td style="text-align: center;">0.0001</td>
+<td style="text-align: center;">0.9999</td>
 </tr>
-<tr>
-<td align="center"><strong>总和 $N_k$</strong></td>
-<td align="center"></td>
-<td align="center"><strong>3.0095</strong></td>
-<td align="center"><strong>1.9905</strong></td>
+<tr class="even">
+<td style="text-align: center;"><strong>总和 <span class="math inline"><em>N</em><sub><em>k</em></sub></span></strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>3.0095</strong></td>
+<td style="text-align: center;"><strong>1.9905</strong></td>
 </tr>
-</tbody></table>
-<hr>
-<h4 id="4-更新参数"><a href="#4-更新参数" class="headerlink" title="4.更新参数"></a>4.更新参数</h4><p>我们使用责任总和 $N_k$ 和加权数据来更新参数。</p>
-<p><strong>1. 更新混合权重 $\pi_k$</strong></p>
-<p>$$N_k &#x3D; \sum_{i&#x3D;1}^{5} \gamma(z_{ik})$$<br>$$\pi_k^{\text{new}} &#x3D; N_k &#x2F; N$$</p>
+</tbody>
+</table>
+<hr />
+<h4 id="更新参数">4.更新参数</h4>
+<p>我们使用责任总和 <span class="math inline"><em>N</em><sub><em>k</em></sub></span> 和加权数据来更新参数。</p>
+<p><strong>1. 更新混合权重 <span class="math inline"><em>π</em><sub><em>k</em></sub></span></strong></p>
+<p><span class="math display">$$N_k = \sum_{i=1}^{5} \gamma(z_{ik})$$</span> <span class="math display"><em>π</em><sub><em>k</em></sub><sup>new</sup> = <em>N</em><sub><em>k</em></sub>/<em>N</em></span></p>
 <ul>
-<li>$\pi_1^{\text{new}} &#x3D; 3.0095 &#x2F; 5 \approx \mathbf{0.6019}$</li>
-<li>$\pi_2^{\text{new}} &#x3D; 1.9905 &#x2F; 5 \approx \mathbf{0.3981}$</li>
+<li><span class="math inline"><em>π</em><sub>1</sub><sup>new</sup> = 3.0095/5 ≈ <strong>0.6019</strong></span></li>
+<li><span class="math inline"><em>π</em><sub>2</sub><sup>new</sup> = 1.9905/5 ≈ <strong>0.3981</strong></span></li>
 </ul>
-<p><strong>2. 更新均值 $\mu_k$</strong></p>
-<p>$$\mu_k^{\text{new}} &#x3D; \frac{\sum_{i&#x3D;1}^{N} \gamma(z_{ik}) x_i}{N_k}$$</p>
+<p><strong>2. 更新均值 <span class="math inline"><em>μ</em><sub><em>k</em></sub></span></strong></p>
+<p><span class="math display">$$\mu_k^{\text{new}} = \frac{\sum_{i=1}^{N} \gamma(z_{ik}) x_i}{N_k}$$</span></p>
 <ul>
-<li><p><strong>簇 1 均值 $\mu_1^{\text{new}}$:</strong><br>  $$\frac{0.9995 \times 165 + 0.9999 \times 170 + 0.9995 \times 175 + \dots}{3.0095} \approx \frac{510.015}{3.0095} \approx \mathbf{169.49}$$</p>
-</li>
-<li><p><strong>簇 2 均值 $\mu_2^{\text{new}}$:</strong><br>  $$\frac{\dots + 0.0005 \times 185 + 0.9999 \times 190}{1.9905} \approx \frac{375.025}{1.9905} \approx \mathbf{188.47}$$</p>
-</li>
+<li><p><strong>簇 1 均值 <span class="math inline"><em>μ</em><sub>1</sub><sup>new</sup></span>:</strong> <span class="math display">$$\frac{0.9995 \times 165 + 0.9999 \times 170 + 0.9995 \times 175 + \dots}{3.0095} \approx \frac{510.015}{3.0095} \approx \mathbf{169.49}$$</span></p></li>
+<li><p><strong>簇 2 均值 <span class="math inline"><em>μ</em><sub>2</sub><sup>new</sup></span>:</strong> <span class="math display">$$\frac{\dots + 0.0005 \times 185 + 0.9999 \times 190}{1.9905} \approx \frac{375.025}{1.9905} \approx \mathbf{188.47}$$</span></p></li>
 </ul>
-<p><strong>3. 更新方差 $\sigma_k^2$</strong></p>
-<p>$$\sigma_k^{2, \text{new}} &#x3D; \frac{\sum_{i&#x3D;1}^{N} \gamma(z_{ik}) (x_i - \mu_k^{\text{new}})^2}{N_k}$$</p>
+<p><strong>3. 更新方差 <span class="math inline"><em>σ</em><sub><em>k</em></sub><sup>2</sup></span></strong></p>
+<p><span class="math display">$$\sigma_k^{2, \text{new}} = \frac{\sum_{i=1}^{N} \gamma(z_{ik}) (x_i - \mu_k^{\text{new}})^2}{N_k}$$</span></p>
 <ul>
-<li><p><strong>簇 1 方差 $\sigma_1^{2, \text{new}}$:</strong><br>  $$\frac{0.9995 \times (165 - 169.49)^2 + 0.9999 \times (170 - 169.49)^2 + \dots}{3.0095} \approx \mathbf{25.0}$$ (方差变化很小)</p>
-</li>
-<li><p><strong>簇 2 方差 $\sigma_2^{2, \text{new}}$:</strong><br>  $$\frac{\dots + 0.9999 \times (190 - 188.47)^2}{1.9905} \approx \mathbf{12.5}$$ (方差显著减小)</p>
-</li>
+<li><p><strong>簇 1 方差 <span class="math inline"><em>σ</em><sub>1</sub><sup>2, new</sup></span>:</strong> <span class="math display">$$\frac{0.9995 \times (165 - 169.49)^2 + 0.9999 \times (170 - 169.49)^2 + \dots}{3.0095} \approx \mathbf{25.0}$$</span> (方差变化很小)</p></li>
+<li><p><strong>簇 2 方差 <span class="math inline"><em>σ</em><sub>2</sub><sup>2, new</sup></span>:</strong> <span class="math display">$$\frac{\dots + 0.9999 \times (190 - 188.47)^2}{1.9905} \approx \mathbf{12.5}$$</span> (方差显著减小)</p></li>
 </ul>
-<h4 id="5-结论-一轮迭代后的结果"><a href="#5-结论-一轮迭代后的结果" class="headerlink" title="5. 结论 (一轮迭代后的结果)"></a>5. 结论 (一轮迭代后的结果)</h4><table>
+<h4 id="结论-一轮迭代后的结果">5. 结论 (一轮迭代后的结果)</h4>
+<table>
 <thead>
-<tr>
-<th align="center">参数</th>
-<th align="center">迭代前 (初始)</th>
-<th align="center">迭代后 (新值)</th>
-<th align="center">变化</th>
+<tr class="header">
+<th style="text-align: center;">参数</th>
+<th style="text-align: center;">迭代前 (初始)</th>
+<th style="text-align: center;">迭代后 (新值)</th>
+<th style="text-align: center;">变化</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">$\pi_1$</td>
-<td align="center">0.5</td>
-<td align="center"><strong>0.6019</strong></td>
-<td align="center">$\uparrow$</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline"><em>π</em><sub>1</sub></span></td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;"><strong>0.6019</strong></td>
+<td style="text-align: center;"><span class="math inline">↑</span></td>
 </tr>
-<tr>
-<td align="center">$\mu_1$</td>
-<td align="center">170</td>
-<td align="center"><strong>169.49</strong></td>
-<td align="center">$\downarrow$</td>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline"><em>μ</em><sub>1</sub></span></td>
+<td style="text-align: center;">170</td>
+<td style="text-align: center;"><strong>169.49</strong></td>
+<td style="text-align: center;"><span class="math inline">↓</span></td>
 </tr>
-<tr>
-<td align="center">$\sigma_1^2$</td>
-<td align="center">25</td>
-<td align="center"><strong>25.0</strong></td>
-<td align="center">$\approx$</td>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline"><em>σ</em><sub>1</sub><sup>2</sup></span></td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;"><strong>25.0</strong></td>
+<td style="text-align: center;"><span class="math inline">≈</span></td>
 </tr>
-<tr>
-<td align="center">$\pi_2$</td>
-<td align="center">0.5</td>
-<td align="center"><strong>0.3981</strong></td>
-<td align="center">$\downarrow$</td>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline"><em>π</em><sub>2</sub></span></td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;"><strong>0.3981</strong></td>
+<td style="text-align: center;"><span class="math inline">↓</span></td>
 </tr>
-<tr>
-<td align="center">$\mu_2$</td>
-<td align="center">185</td>
-<td align="center"><strong>188.47</strong></td>
-<td align="center">$\uparrow$</td>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline"><em>μ</em><sub>2</sub></span></td>
+<td style="text-align: center;">185</td>
+<td style="text-align: center;"><strong>188.47</strong></td>
+<td style="text-align: center;"><span class="math inline">↑</span></td>
 </tr>
-<tr>
-<td align="center">$\sigma_2^2$</td>
-<td align="center">25</td>
-<td align="center"><strong>12.5</strong></td>
-<td align="center">$\downarrow$</td>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline"><em>σ</em><sub>2</sub><sup>2</sup></span></td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;"><strong>12.5</strong></td>
+<td style="text-align: center;"><span class="math inline">↓</span></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p><strong>解释：</strong></p>
-<ol>
-<li><strong>聚类效果明显:</strong> 在第一轮迭代中，模型已经将 ${165, 170, 175}$ 这三个点坚定地分配给了<strong>簇 1</strong> (责任接近 1)，将 ${185, 190}$ 分配给了<strong>簇 2</strong> (责任接近 1)。</li>
-<li><strong>参数更新合理:</strong><ul>
+<ol type="1">
+<li><strong>聚类效果明显:</strong> 在第一轮迭代中，模型已经将 <span class="math inline">{165, 170, 175}</span> 这三个点坚定地分配给了<strong>簇 1</strong> (责任接近 1)，将 <span class="math inline">{185, 190}</span> 分配给了<strong>簇 2</strong> (责任接近 1)。</li>
+<li><strong>参数更新合理:</strong>
+<ul>
 <li>簇 1 的均值从 170 调整到 169.49，更贴近它所负责的三个点 (165, 170, 175) 的平均值。</li>
 <li>簇 2 的均值从 185 调整到 188.47，更贴近它所负责的两个点 (185, 190) 的平均值。</li>
-</ul>
-</li>
-<li><strong>方差收缩:</strong> 簇 2 的方差 $\sigma_2^2$ 从 25 减小到 12.5，反映了点 185 和 190 之间的距离比初始设定的要紧凑。<br>如果继续迭代，参数将逐渐收敛到这两个“自然簇”的统计估计值。</li>
+</ul></li>
+<li><strong>方差收缩:</strong> 簇 2 的方差 <span class="math inline"><em>σ</em><sub>2</sub><sup>2</sup></span> 从 25 减小到 12.5，反映了点 185 和 190 之间的距离比初始设定的要紧凑。 如果继续迭代，参数将逐渐收敛到这两个“自然簇”的统计估计值。</li>
 </ol>
 <p>(这是真的麻烦 想不明白谁发明的..)</p>
-<h2 id="Multinomial-Mixture-Model"><a href="#Multinomial-Mixture-Model" class="headerlink" title="Multinomial Mixture Model"></a>Multinomial Mixture Model</h2><p>&emsp;&emsp;多项混合分布，其实就是把分量的概率分布变为多项分布。什么是多项分布？就是用于描述有限次独立试验中，各种可能结果发生次数的一种离散概率分布。说人话：进行 $N$ 次独立的试验。每次试验的结果只能属于 $D$ 个互斥的类别 $C_1, C_2, \dots, C_D$ 中的一个。多项分布给出了在 $N$ 次试验中，类别 $C_1$ 发生 $x_1$ 次、类别 $C_2$ 发生 $x_2$ 次、…、类别 $C_D$ 发生 $x_D$ 次的概率 $P(\mathbf{x})$。$$P(\mathbf{x} | N, \boldsymbol{\theta}) &#x3D; \frac{N!}{x_1! x_2! \dots x_D!} \prod_{j&#x3D;1}^{D} \theta_j^{x_j}$$</p>
-<p>$\frac{N!}{x_1! x_2! \dots x_D!}$其实就是组合数，总的N次实验方案（不考虑顺序）是${N!}$，但是我们不需要顺序，所以还要除一下消除。而$\theta_j$是单次实验$C_j$发生的概率。</p>
-<p>假设我们有 $N&#x3D;4$ 篇短文档，只关注 $D&#x3D;3$ 个词汇（A, B, C）。我们希望将文档聚类成 $K&#x3D;2$ 个主题（主题 1 和 主题 2）。</p>
-<h4 id="1-数据集-词频计数"><a href="#1-数据集-词频计数" class="headerlink" title="1. 数据集 (词频计数)"></a>1. 数据集 (词频计数)</h4><table>
+<h2 id="multinomial-mixture-model">Multinomial Mixture Model</h2>
+<p>  多项混合分布，其实就是把分量的概率分布变为多项分布。什么是多项分布？就是用于描述有限次独立试验中，各种可能结果发生次数的一种离散概率分布。说人话：进行 <span class="math inline"><em>N</em></span> 次独立的试验。每次试验的结果只能属于 <span class="math inline"><em>D</em></span> 个互斥的类别 <span class="math inline"><em>C</em><sub>1</sub>, <em>C</em><sub>2</sub>, …, <em>C</em><sub><em>D</em></sub></span> 中的一个。多项分布给出了在 <span class="math inline"><em>N</em></span> 次试验中，类别 <span class="math inline"><em>C</em><sub>1</sub></span> 发生 <span class="math inline"><em>x</em><sub>1</sub></span> 次、类别 <span class="math inline"><em>C</em><sub>2</sub></span> 发生 <span class="math inline"><em>x</em><sub>2</sub></span> 次、…、类别 <span class="math inline"><em>C</em><sub><em>D</em></sub></span> 发生 <span class="math inline"><em>x</em><sub><em>D</em></sub></span> 次的概率 <span class="math inline"><em>P</em>(<strong>x</strong>)</span>。<span class="math display">$$P(\mathbf{x} | N, \boldsymbol{\theta}) = \frac{N!}{x_1! x_2! \dots x_D!} \prod_{j=1}^{D} \theta_j^{x_j}$$</span></p>
+<p><span class="math inline">$\frac{N!}{x_1! x_2! \dots x_D!}$</span>其实就是组合数，总的N次实验方案（不考虑顺序）是<span class="math inline"><em>N</em>!</span>，但是我们不需要顺序，所以还要除一下消除。而<span class="math inline"><em>θ</em><sub><em>j</em></sub></span>是单次实验<span class="math inline"><em>C</em><sub><em>j</em></sub></span>发生的概率。</p>
+<p>假设我们有 <span class="math inline"><em>N</em> = 4</span> 篇短文档，只关注 <span class="math inline"><em>D</em> = 3</span> 个词汇（A, B, C）。我们希望将文档聚类成 <span class="math inline"><em>K</em> = 2</span> 个主题（主题 1 和 主题 2）。</p>
+<h4 id="数据集-词频计数">1. 数据集 (词频计数)</h4>
+<table>
 <thead>
-<tr>
-<th align="center">文档 $i$</th>
-<th align="center">$x_{i, \text{A}}$</th>
-<th align="center">$x_{i, \text{B}}$</th>
-<th align="center">$x_{i, \text{C}}$</th>
-<th align="center">总词数 $N_i$</th>
+<tr class="header">
+<th style="text-align: center;">文档 <span class="math inline"><em>i</em></span></th>
+<th style="text-align: center;"><span class="math inline"><em>x</em><sub><em>i</em>, A</sub></span></th>
+<th style="text-align: center;"><span class="math inline"><em>x</em><sub><em>i</em>, B</sub></span></th>
+<th style="text-align: center;"><span class="math inline"><em>x</em><sub><em>i</em>, C</sub></span></th>
+<th style="text-align: center;">总词数 <span class="math inline"><em>N</em><sub><em>i</em></sub></span></th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">1</td>
-<td align="center">4</td>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">5</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">5</td>
 </tr>
-<tr>
-<td align="center">2</td>
-<td align="center">1</td>
-<td align="center">5</td>
-<td align="center">0</td>
-<td align="center">6</td>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">6</td>
 </tr>
-<tr>
-<td align="center">3</td>
-<td align="center">0</td>
-<td align="center">2</td>
-<td align="center">3</td>
-<td align="center">5</td>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">5</td>
 </tr>
-<tr>
-<td align="center">4</td>
-<td align="center">0</td>
-<td align="center">1</td>
-<td align="center">4</td>
-<td align="center">5</td>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
 </tr>
-</tbody></table>
-<h4 id="2-模型设置和初始化"><a href="#2-模型设置和初始化" class="headerlink" title="2. 模型设置和初始化"></a>2. 模型设置和初始化</h4><table>
+</tbody>
+</table>
+<h4 id="模型设置和初始化">2. 模型设置和初始化</h4>
+<table>
 <thead>
-<tr>
-<th align="center">参数</th>
-<th align="center">值</th>
-<th align="center">含义</th>
+<tr class="header">
+<th style="text-align: center;">参数</th>
+<th style="text-align: center;">值</th>
+<th style="text-align: center;">含义</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">$\pi_1$</td>
-<td align="center">0.5</td>
-<td align="center">文档属于主题 1 的先验概率</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline"><em>π</em><sub>1</sub></span></td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">文档属于主题 1 的先验概率</td>
 </tr>
-<tr>
-<td align="center">$\pi_2$</td>
-<td align="center">0.5</td>
-<td align="center">文档属于主题 2 的先验概率</td>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline"><em>π</em><sub>2</sub></span></td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">文档属于主题 2 的先验概率</td>
 </tr>
-<tr>
-<td align="center">$\theta_{1}$</td>
-<td align="center">(0.8, 0.1, 0.1)</td>
-<td align="center">主题 1 下 (A, B, C) 的生成概率</td>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline"><em>θ</em><sub>1</sub></span></td>
+<td style="text-align: center;">(0.8, 0.1, 0.1)</td>
+<td style="text-align: center;">主题 1 下 (A, B, C) 的生成概率</td>
 </tr>
-<tr>
-<td align="center">$\theta_{2}$</td>
-<td align="center">(0.1, 0.4, 0.5)</td>
-<td align="center">主题 2 下 (A, B, C) 的生成概率</td>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline"><em>θ</em><sub>2</sub></span></td>
+<td style="text-align: center;">(0.1, 0.4, 0.5)</td>
+<td style="text-align: center;">主题 2 下 (A, B, C) 的生成概率</td>
 </tr>
-</tbody></table>
-<hr>
-<h4 id="3-EM-算法第一轮迭代"><a href="#3-EM-算法第一轮迭代" class="headerlink" title="3. EM 算法第一轮迭代"></a>3. EM 算法第一轮迭代</h4><h4 id="计算责任-gamma-z-ik"><a href="#计算责任-gamma-z-ik" class="headerlink" title="计算责任 $\gamma(z_{ik})$"></a>计算责任 $\gamma(z_{ik})$</h4><p>责任 $\gamma(z_{ik})$ 是文档 $i$ 属于主题 $k$ 的后验概率。</p>
-<p>$$\gamma(z_{ik}) &#x3D; \frac{\pi_k L_k}{\sum_{l&#x3D;1}^{2} \pi_l L_l}$$</p>
-<p>其中 $L_k &#x3D; \prod_{j&#x3D;\text{A}}^{\text{C}} \theta_{kj}^{x_{ij}}$ 是忽略多项系数的似然比例。</p>
-<p><strong>以文档 2 ($\mathbf{x}_2&#x3D;(1, 5, 0)$, $N_2&#x3D;6$) 为例计算：</strong></p>
-<ol>
-<li><strong>主题 1 的似然比例 $L_1$:</strong><br>$$L_1 &#x3D; 0.8^1 \times 0.1^5 \times 0.1^0 &#x3D; 0.8 \times 0.00001 \times 1 &#x3D; \mathbf{0.000008}$$</li>
-<li><strong>主题 2 的似然比例 $L_2$:</strong><br>$$L_2 &#x3D; 0.1^1 \times 0.4^5 \times 0.5^0 &#x3D; 0.1 \times 0.01024 \times 1 &#x3D; \mathbf{0.001024}$$</li>
-<li><strong>计算 $\gamma(z_{21})$:</strong><br>$$\gamma(z_{21}) &#x3D; \frac{0.5 \times 0.000008}{0.5 \times 0.000008 + 0.5 \times 0.001024} &#x3D; \frac{0.000004}{0.000004 + 0.000512} \approx \mathbf{0.0078}$$</li>
-<li><strong>计算 $\gamma(z_{22})$:</strong><br>$$\gamma(z_{22}) &#x3D; 1 - 0.0078 \approx \mathbf{0.9922}$$</li>
+</tbody>
+</table>
+<hr />
+<h4 id="em-算法第一轮迭代">3. EM 算法第一轮迭代</h4>
+<h4 id="计算责任-gammaz_ik">计算责任 <span class="math inline"><em>γ</em>(<em>z</em><sub><em>i</em><em>k</em></sub>)</span></h4>
+<p>责任 <span class="math inline"><em>γ</em>(<em>z</em><sub><em>i</em><em>k</em></sub>)</span> 是文档 <span class="math inline"><em>i</em></span> 属于主题 <span class="math inline"><em>k</em></span> 的后验概率。</p>
+<p><span class="math display">$$\gamma(z_{ik}) = \frac{\pi_k L_k}{\sum_{l=1}^{2} \pi_l L_l}$$</span></p>
+<p>其中 <span class="math inline">$L_k = \prod_{j=\text{A}}^{\text{C}} \theta_{kj}^{x_{ij}}$</span> 是忽略多项系数的似然比例。</p>
+<p><strong>以文档 2 (<span class="math inline"><strong>x</strong><sub>2</sub> = (1, 5, 0)</span>, <span class="math inline"><em>N</em><sub>2</sub> = 6</span>) 为例计算：</strong></p>
+<ol type="1">
+<li><strong>主题 1 的似然比例 <span class="math inline"><em>L</em><sub>1</sub></span>:</strong> <span class="math display"><em>L</em><sub>1</sub> = 0.8<sup>1</sup> × 0.1<sup>5</sup> × 0.1<sup>0</sup> = 0.8 × 0.00001 × 1 = <strong>0.000008</strong></span></li>
+<li><strong>主题 2 的似然比例 <span class="math inline"><em>L</em><sub>2</sub></span>:</strong> <span class="math display"><em>L</em><sub>2</sub> = 0.1<sup>1</sup> × 0.4<sup>5</sup> × 0.5<sup>0</sup> = 0.1 × 0.01024 × 1 = <strong>0.001024</strong></span></li>
+<li><strong>计算 <span class="math inline"><em>γ</em>(<em>z</em><sub>21</sub>)</span>:</strong> <span class="math display">$$\gamma(z_{21}) = \frac{0.5 \times 0.000008}{0.5 \times 0.000008 + 0.5 \times 0.001024} = \frac{0.000004}{0.000004 + 0.000512} \approx \mathbf{0.0078}$$</span></li>
+<li><strong>计算 <span class="math inline"><em>γ</em>(<em>z</em><sub>22</sub>)</span>:</strong> <span class="math display"><em>γ</em>(<em>z</em><sub>22</sub>) = 1 − 0.0078 ≈ <strong>0.9922</strong></span></li>
 </ol>
-<p><strong>完整的责任矩阵 $\gamma$</strong></p>
+<p><strong>完整的责任矩阵 <span class="math inline"><em>γ</em></span></strong></p>
 <table>
 <thead>
-<tr>
-<th align="center">文档 $i$</th>
-<th align="center">$N_i$</th>
-<th align="center">$\gamma(z_{i1})$ (主题 1)</th>
-<th align="center">$\gamma(z_{i2})$ (主题 2)</th>
+<tr class="header">
+<th style="text-align: center;">文档 <span class="math inline"><em>i</em></span></th>
+<th style="text-align: center;"><span class="math inline"><em>N</em><sub><em>i</em></sub></span></th>
+<th style="text-align: center;"><span class="math inline"><em>γ</em>(<em>z</em><sub><em>i</em>1</sub>)</span> (主题 1)</th>
+<th style="text-align: center;"><span class="math inline"><em>γ</em>(<em>z</em><sub><em>i</em>2</sub>)</span> (主题 2)</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">1 (4, 1, 0)</td>
-<td align="center">5</td>
-<td align="center">0.9999</td>
-<td align="center">0.0001</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1 (4, 1, 0)</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">0.9999</td>
+<td style="text-align: center;">0.0001</td>
 </tr>
-<tr>
-<td align="center">2 (1, 5, 0)</td>
-<td align="center">6</td>
-<td align="center">0.0078</td>
-<td align="center">0.9922</td>
+<tr class="even">
+<td style="text-align: center;">2 (1, 5, 0)</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">0.0078</td>
+<td style="text-align: center;">0.9922</td>
 </tr>
-<tr>
-<td align="center">3 (0, 2, 3)</td>
-<td align="center">5</td>
-<td align="center">0.0000</td>
-<td align="center">1.0000</td>
+<tr class="odd">
+<td style="text-align: center;">3 (0, 2, 3)</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">0.0000</td>
+<td style="text-align: center;">1.0000</td>
 </tr>
-<tr>
-<td align="center">4 (0, 1, 4)</td>
-<td align="center">5</td>
-<td align="center">0.0000</td>
-<td align="center">1.0000</td>
+<tr class="even">
+<td style="text-align: center;">4 (0, 1, 4)</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">0.0000</td>
+<td style="text-align: center;">1.0000</td>
 </tr>
-<tr>
-<td align="center"><strong>总和 $N_k$</strong></td>
-<td align="center"></td>
-<td align="center"><strong>1.0077</strong></td>
-<td align="center"><strong>2.9923</strong></td>
+<tr class="odd">
+<td style="text-align: center;"><strong>总和 <span class="math inline"><em>N</em><sub><em>k</em></sub></span></strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>1.0077</strong></td>
+<td style="text-align: center;"><strong>2.9923</strong></td>
 </tr>
-</tbody></table>
-<h4 id="更新参数"><a href="#更新参数" class="headerlink" title="更新参数"></a>更新参数</h4><p><strong>1. 更新混合权重 $\pi_k$</strong></p>
-<p>$$N_k &#x3D; \sum_{i&#x3D;1}^{N} \gamma(z_{ik}) \quad \pi_k^{\text{new}} &#x3D; N_k &#x2F; N$$</p>
+</tbody>
+</table>
+<h4 id="更新参数-1">更新参数</h4>
+<p><strong>1. 更新混合权重 <span class="math inline"><em>π</em><sub><em>k</em></sub></span></strong></p>
+<p><span class="math display">$$N_k = \sum_{i=1}^{N} \gamma(z_{ik}) \quad \pi_k^{\text{new}} = N_k / N$$</span></p>
 <ul>
-<li>$\pi_1^{\text{new}} &#x3D; 1.0077 &#x2F; 4 \approx \mathbf{0.2519}$</li>
-<li>$\pi_2^{\text{new}} &#x3D; 2.9923 &#x2F; 4 \approx \mathbf{0.7481}$</li>
+<li><span class="math inline"><em>π</em><sub>1</sub><sup>new</sup> = 1.0077/4 ≈ <strong>0.2519</strong></span></li>
+<li><span class="math inline"><em>π</em><sub>2</sub><sup>new</sup> = 2.9923/4 ≈ <strong>0.7481</strong></span></li>
 </ul>
-<p><strong>2. 更新多项概率 $\theta_{kj}$</strong></p>
-<p>$$\theta_{kj}^{\text{new}} &#x3D; \frac{\sum_{i&#x3D;1}^{N} \gamma(z_{ik}) x_{ij}}{\sum_{i&#x3D;1}^{N} \gamma(z_{ik}) N_i} &#x3D; \frac{\text{词 } j \text{ 的总加权计数}}{T_k (\text{总加权词数})}$$</p>
-<p>首先计算<strong>总加权词数</strong> $T_k$:<br>$$T_k &#x3D; \sum_{i&#x3D;1}^{4} \gamma(z_{ik}) N_i$$</p>
+<p><strong>2. 更新多项概率 <span class="math inline"><em>θ</em><sub><em>k</em><em>j</em></sub></span></strong></p>
+<p><span class="math display">$$\theta_{kj}^{\text{new}} = \frac{\sum_{i=1}^{N} \gamma(z_{ik}) x_{ij}}{\sum_{i=1}^{N} \gamma(z_{ik}) N_i} = \frac{\text{词 } j \text{ 的总加权计数}}{T_k (\text{总加权词数})}$$</span></p>
+<p>首先计算<strong>总加权词数</strong> <span class="math inline"><em>T</em><sub><em>k</em></sub></span>: <span class="math display">$$T_k = \sum_{i=1}^{4} \gamma(z_{ik}) N_i$$</span></p>
 <ul>
-<li>$T_1 &#x3D; 0.9999 \times 5 + 0.0078 \times 6 + 0.0000 \times 5 + 0.0000 \times 5 \approx \mathbf{5.0468}$</li>
-<li>$T_2 &#x3D; 0.0001 \times 5 + 0.9922 \times 6 + 1.0000 \times 5 + 1.0000 \times 5 \approx \mathbf{15.9538}$</li>
+<li><span class="math inline"><em>T</em><sub>1</sub> = 0.9999 × 5 + 0.0078 × 6 + 0.0000 × 5 + 0.0000 × 5 ≈ <strong>5.0468</strong></span></li>
+<li><span class="math inline"><em>T</em><sub>2</sub> = 0.0001 × 5 + 0.9922 × 6 + 1.0000 × 5 + 1.0000 × 5 ≈ <strong>15.9538</strong></span></li>
 </ul>
-<p><strong>计算词 A 的加权计数 $C_{k, \text{A}}$:</strong><br>$$C_{k, \text{A}} &#x3D; \sum_{i&#x3D;1}^{4} \gamma(z_{ik}) x_{i, \text{A}}$$</p>
+<p><strong>计算词 A 的加权计数 <span class="math inline"><em>C</em><sub><em>k</em>, A</sub></span>:</strong> <span class="math display">$$C_{k, \text{A}} = \sum_{i=1}^{4} \gamma(z_{ik}) x_{i, \text{A}}$$</span></p>
 <ul>
-<li>$C_{1, \text{A}} &#x3D; 0.9999 \times 4 + 0.0078 \times 1 + 0 + 0 \approx \mathbf{4.0074}$</li>
-<li>$C_{2, \text{A}} &#x3D; 0.0001 \times 4 + 0.9922 \times 1 + 0 + 0 \approx \mathbf{0.9926}$</li>
+<li><span class="math inline"><em>C</em><sub>1, A</sub> = 0.9999 × 4 + 0.0078 × 1 + 0 + 0 ≈ <strong>4.0074</strong></span></li>
+<li><span class="math inline"><em>C</em><sub>2, A</sub> = 0.0001 × 4 + 0.9922 × 1 + 0 + 0 ≈ <strong>0.9926</strong></span></li>
 </ul>
-<p><strong>更新 $\theta_{kj}$:</strong></p>
+<p><strong>更新 <span class="math inline"><em>θ</em><sub><em>k</em><em>j</em></sub></span>:</strong></p>
 <table>
+
 <thead>
-<tr>
-<th align="center">参数</th>
-<th align="center">词 A ($j&#x3D;\text{A}$)</th>
-<th align="center">词 B ($j&#x3D;\text{B}$)</th>
-<th align="center">词 C ($j&#x3D;\text{C}$)</th>
+<tr class="header">
+<th style="text-align: center;">参数</th>
+<th style="text-align: center;">词 A (<span class="math inline"><em>j</em> = A</span>)</th>
+<th style="text-align: center;">词 B (<span class="math inline"><em>j</em> = B</span>)</th>
+<th style="text-align: center;">词 C (<span class="math inline"><em>j</em> = C</span>)</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center"><strong>主题 1</strong></td>
-<td align="center">$\theta_{1, \text{A}}^{\text{new}} &#x3D; 4.0074 &#x2F; 5.0468 \approx \mathbf{0.794}$</td>
-<td align="center">$\theta_{1, \text{B}}^{\text{new}} &#x3D; 1.0078 &#x2F; 5.0468 \approx \mathbf{0.200}$</td>
-<td align="center">$\theta_{1, \text{C}}^{\text{new}} &#x3D; 0 &#x2F; 5.0468 \approx \mathbf{0.000}$</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>主题 1</strong></td>
+<td style="text-align: center;"><span class="math inline"><em>θ</em><sub>1, A</sub><sup>new</sup> = 4.0074/5.0468 ≈ <strong>0.794</strong></span></td>
+<td style="text-align: center;"><span class="math inline"><em>θ</em><sub>1, B</sub><sup>new</sup> = 1.0078/5.0468 ≈ <strong>0.200</strong></span></td>
+<td style="text-align: center;"><span class="math inline"><em>θ</em><sub>1, C</sub><sup>new</sup> = 0/5.0468 ≈ <strong>0.000</strong></span></td>
 </tr>
-<tr>
-<td align="center"><strong>主题 2</strong></td>
-<td align="center">$\theta_{2, \text{A}}^{\text{new}} &#x3D; 0.9926 &#x2F; 15.9538 \approx \mathbf{0.062}$</td>
-<td align="center">$\theta_{2, \text{B}}^{\text{new}} &#x3D; 8.0156 &#x2F; 15.9538 \approx \mathbf{0.502}$</td>
-<td align="center">$\theta_{2, \text{C}}^{\text{new}} &#x3D; 6.9456 &#x2F; 15.9538 \approx \mathbf{0.436}$</td>
+<tr class="even">
+<td style="text-align: center;"><strong>主题 2</strong></td>
+<td style="text-align: center;"><span class="math inline"><em>θ</em><sub>2, A</sub><sup>new</sup> = 0.9926/15.9538 ≈ <strong>0.062</strong></span></td>
+<td style="text-align: center;"><span class="math inline"><em>θ</em><sub>2, B</sub><sup>new</sup> = 8.0156/15.9538 ≈ <strong>0.502</strong></span></td>
+<td style="text-align: center;"><span class="math inline"><em>θ</em><sub>2, C</sub><sup>new</sup> = 6.9456/15.9538 ≈ <strong>0.436</strong></span></td>
 </tr>
-</tbody></table>
-<h3 id="4-结论-第一轮迭代后的结果"><a href="#4-结论-第一轮迭代后的结果" class="headerlink" title="4. 结论 (第一轮迭代后的结果)"></a>4. 结论 (第一轮迭代后的结果)</h3><p>经过一轮 EM 迭代，模型参数发生了显著变化：</p>
-<ol>
-<li><strong>主题 1 ( $\pi_1&#x3D;0.25$ ):</strong> 权重下降。它的核心是<strong>词 A (0.794)</strong>。</li>
-<li><strong>主题 2 ( $\pi_2&#x3D;0.75$ ):</strong> 权重上升。它的核心是<strong>词 B (0.502) 和 词 C (0.436)</strong>。</li>
+</tbody>
+</table>
+<h3 id="结论-第一轮迭代后的结果">4. 结论 (第一轮迭代后的结果)</h3>
+<p>经过一轮 EM 迭代，模型参数发生了显著变化：</p>
+<ol type="1">
+<li><strong>主题 1 ( <span class="math inline"><em>π</em><sub>1</sub> = 0.25</span> ):</strong> 权重下降。它的核心是<strong>词 A (0.794)</strong>。</li>
+<li><strong>主题 2 ( <span class="math inline"><em>π</em><sub>2</sub> = 0.75</span> ):</strong> 权重上升。它的核心是<strong>词 B (0.502) 和 词 C (0.436)</strong>。</li>
 <li><strong>聚类强化:</strong> E 步的责任显示，模型已经明确地将<strong>文档 1</strong> 分配给主题 1，将<strong>文档 2, 3, 4</strong> 分配给主题 2。</li>
 </ol>
-<p>这个例子清晰地展示了 EM 算法如何通过<strong>责任</strong> ($\gamma$) 来软分配数据点，并使用这些分配的权重来重新计算每个主题的<strong>生成概率</strong> ($\theta$)，从而迭代优化主题模型。</p>
-<h2 id="Bernoulli-Mixture-Model"><a href="#Bernoulli-Mixture-Model" class="headerlink" title="Bernoulli Mixture Model"></a>Bernoulli Mixture Model</h2><p>&emsp;&emsp;BMM 适用于建模 $D$ 维的二元特征向量 $\mathbf{x} &#x3D; (x_1, x_2, \dots, x_D)$，其中每个特征 $x_j \in {0, 1}$。应用场景: 用户是否点击了某个广告 (1&#x2F;0)、一个基因是否表达 (1&#x2F;0)、文档中某个词汇是否出现 (1&#x2F;0)。</p>
-<p>每个分量 $k$ 的条件概率 $p(\mathbf{x} | z&#x3D;k)$ 是 $D$ 个伯努利分布的乘积。说人话就是：每个分量都是D维数据，而且每一个feature都是伯努利分布。<br>$$p(\mathbf{x} | z&#x3D;k) &#x3D; \prod_{j&#x3D;1}^{D} p(x_j | z&#x3D;k) &#x3D; \prod_{j&#x3D;1}^{D} \theta_{kj}^{x_j} (1 - \theta_{kj})^{1 - x_j}$$<br>整体的分布就是要乘上一个$\pi_k$ 求和<br>$$p(\mathbf{x}) &#x3D; \sum_{k&#x3D;1}^{K} \pi_k p(\mathbf{x} | z&#x3D;k) &#x3D; \sum_{k&#x3D;1}^{K} \pi_k \left[ \prod_{j&#x3D;1}^{D} \theta_{kj}^{x_j} (1 - \theta_{kj})^{1 - x_j} \right]$$</p>
-<p>$$\gamma(z_{ik}) &#x3D; p(z_i&#x3D;k | \mathbf{x}_i, \Theta^{\text{old}}) &#x3D; \frac{p(\mathbf{x}<em>i | z_i&#x3D;k, \Theta^{\text{old}}) p(z_i&#x3D;k)}{\sum</em>{l&#x3D;1}^{K} p(\mathbf{x}_i | z_i&#x3D;l, \Theta^{\text{old}}) p(z_i&#x3D;l)}$$</p>
-<p>$$\gamma(z_{ik}) &#x3D; \frac{\pi_k^{\text{old}} \left[ \prod_{j&#x3D;1}^{D} (\theta_{kj}^{\text{old}})^{x_{ij}} (1 - \theta_{kj}^{\text{old}})^{1 - x_{ij}} \right]}{\sum_{l&#x3D;1}^{K} \pi_l^{\text{old}} \left[ \prod_{j&#x3D;1}^{D} (\theta_{lj}^{\text{old}})^{x_{ij}} (1 - \theta_{lj}^{\text{old}})^{1 - x_{ij}} \right]}$$</p>
-<p>$$N_k &#x3D; \sum_{i&#x3D;1}^{N} \gamma(z_{ik})$$</p>
-<p>$$\pi_k^{\text{new}} &#x3D; \frac{N_k}{N} &#x3D; \frac{\sum_{i&#x3D;1}^{N} \gamma(z_{ik})}{N}$$</p>
-<p>$$\sum_{i&#x3D;1}^{N} \gamma(z_{ik}) x_{ij}$$</p>
-<p>$$\theta_{kj}^{\text{new}} &#x3D; \frac{\sum_{i&#x3D;1}^{N} \gamma(z_{ik}) x_{ij}}{N_k}$$</p>
-<p>假设我们有 $N&#x3D;5$ 位客户，记录了他们在 $D&#x3D;3$ 种行为上的二元（$0&#x2F;1$）数据。目标是将他们聚类成 $K&#x3D;2$ 个客户群体（簇 1 和 簇 2）。</p>
-<h4 id="1-数据集-二元数据-mathbf-x-i"><a href="#1-数据集-二元数据-mathbf-x-i" class="headerlink" title="1. 数据集 (二元数据 $\mathbf{x}_i$)"></a>1. 数据集 (二元数据 $\mathbf{x}_i$)</h4><table>
-<thead>
-<tr>
-<th align="center">客户 $i$</th>
-<th align="center">$x_{i1}$ (浏览商品)</th>
-<th align="center">$x_{i2}$ (加入购物车)</th>
-<th align="center">$x_{i3}$ (最终购买)</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">1</td>
-</tr>
-<tr>
-<td align="center">2</td>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">0</td>
-</tr>
-<tr>
-<td align="center">3</td>
-<td align="center">0</td>
-<td align="center">1</td>
-<td align="center">0</td>
-</tr>
-<tr>
-<td align="center">4</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">1</td>
-</tr>
-<tr>
-<td align="center">5</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">0</td>
-</tr>
-</tbody></table>
-<h4 id="2-模型设置和初始化-第-0-轮迭代"><a href="#2-模型设置和初始化-第-0-轮迭代" class="headerlink" title="2. 模型设置和初始化 (第 0 轮迭代)"></a>2. 模型设置和初始化 (第 0 轮迭代)</h4><p>我们初始化 $K&#x3D;2$ 个簇的参数 $\Theta &#x3D; { \pi_k, \theta_k }_{k&#x3D;1}^{2}$：</p>
+<p>这个例子清晰地展示了 EM 算法如何通过<strong>责任</strong> (<span class="math inline"><em>γ</em></span>) 来软分配数据点，并使用这些分配的权重来重新计算每个主题的<strong>生成概率</strong> (<span class="math inline"><em>θ</em></span>)，从而迭代优化主题模型。</p>
+<h2 id="bernoulli-mixture-model">Bernoulli Mixture Model</h2>
+<p>  BMM 适用于建模 <span class="math inline"><em>D</em></span> 维的二元特征向量 <span class="math inline"><strong>x</strong> = (<em>x</em><sub>1</sub>, <em>x</em><sub>2</sub>, …, <em>x</em><sub><em>D</em></sub>)</span>，其中每个特征 <span class="math inline"><em>x</em><sub><em>j</em></sub> ∈ {0, 1}</span>。应用场景: 用户是否点击了某个广告 (1/0)、一个基因是否表达 (1/0)、文档中某个词汇是否出现 (1/0)。</p>
+<p>每个分量 <span class="math inline"><em>k</em></span> 的条件概率 <span class="math inline"><em>p</em>(<strong>x</strong>|<em>z</em> = <em>k</em>)</span> 是 <span class="math inline"><em>D</em></span> 个伯努利分布的乘积。说人话就是：每个分量都是D维数据，而且每一个feature都是伯努利分布。 <span class="math display">$$p(\mathbf{x} | z=k) = \prod_{j=1}^{D} p(x_j | z=k) = \prod_{j=1}^{D} \theta_{kj}^{x_j} (1 - \theta_{kj})^{1 - x_j}$$</span> 整体的分布就是要乘上一个<span class="math inline"><em>π</em><sub><em>k</em></sub></span> 求和 <span class="math display">$$p(\mathbf{x}) = \sum_{k=1}^{K} \pi_k p(\mathbf{x} | z=k) = \sum_{k=1}^{K} \pi_k \left[ \prod_{j=1}^{D} \theta_{kj}^{x_j} (1 - \theta_{kj})^{1 - x_j} \right]$$</span></p>
+<p><span class="math display">$$\gamma(z_{ik}) = p(z_i=k | \mathbf{x}_i, \Theta^{\text{old}}) = \frac{p(\mathbf{x}_i | z_i=k, \Theta^{\text{old}}) p(z_i=k)}{\sum_{l=1}^{K} p(\mathbf{x}_i | z_i=l, \Theta^{\text{old}}) p(z_i=l)}$$</span></p>
+<p><span class="math display">$$\gamma(z_{ik}) = \frac{\pi_k^{\text{old}} \left[ \prod_{j=1}^{D} (\theta_{kj}^{\text{old}})^{x_{ij}} (1 - \theta_{kj}^{\text{old}})^{1 - x_{ij}} \right]}{\sum_{l=1}^{K} \pi_l^{\text{old}} \left[ \prod_{j=1}^{D} (\theta_{lj}^{\text{old}})^{x_{ij}} (1 - \theta_{lj}^{\text{old}})^{1 - x_{ij}} \right]}$$</span></p>
+<p><span class="math display">$$N_k = \sum_{i=1}^{N} \gamma(z_{ik})$$</span></p>
+<p><span class="math display">$$\pi_k^{\text{new}} = \frac{N_k}{N} = \frac{\sum_{i=1}^{N} \gamma(z_{ik})}{N}$$</span></p>
+<p><span class="math display">$$\sum_{i=1}^{N} \gamma(z_{ik}) x_{ij}$$</span></p>
+<p><span class="math display">$$\theta_{kj}^{\text{new}} = \frac{\sum_{i=1}^{N} \gamma(z_{ik}) x_{ij}}{N_k}$$</span></p>
+<p>假设我们有 <span class="math inline"><em>N</em> = 5</span> 位客户，记录了他们在 <span class="math inline"><em>D</em> = 3</span> 种行为上的二元（<span class="math inline">0/1</span>）数据。目标是将他们聚类成 <span class="math inline"><em>K</em> = 2</span> 个客户群体（簇 1 和 簇 2）。</p>
+<h4 id="数据集-二元数据-mathbfx_i">1. 数据集 (二元数据 <span class="math inline"><strong>x</strong><sub><em>i</em></sub></span>)</h4>
 <table>
 <thead>
-<tr>
-<th align="center">参数</th>
-<th align="center">值</th>
-<th align="center">含义</th>
+<tr class="header">
+<th style="text-align: center;">客户 <span class="math inline"><em>i</em></span></th>
+<th style="text-align: center;"><span class="math inline"><em>x</em><sub><em>i</em>1</sub></span> (浏览商品)</th>
+<th style="text-align: center;"><span class="math inline"><em>x</em><sub><em>i</em>2</sub></span> (加入购物车)</th>
+<th style="text-align: center;"><span class="math inline"><em>x</em><sub><em>i</em>3</sub></span> (最终购买)</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">$\pi_1$</td>
-<td align="center">0.5</td>
-<td align="center">客户属于簇 1 的先验概率</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
 </tr>
-<tr>
-<td align="center">$\pi_2$</td>
-<td align="center">0.5</td>
-<td align="center">客户属于簇 2 的先验概率</td>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
 </tr>
-<tr>
-<td align="center">$\theta_{1}$</td>
-<td align="center">(0.8, 0.4, 0.1)</td>
-<td align="center">簇 1 中 3 种行为发生的概率</td>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
 </tr>
-<tr>
-<td align="center">$\theta_{2}$</td>
-<td align="center">(0.2, 0.6, 0.9)</td>
-<td align="center">簇 2 中 3 种行为发生的概率</td>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
 </tr>
-</tbody></table>
-<hr>
-<h4 id="3-EM-算法第一轮迭代-1"><a href="#3-EM-算法第一轮迭代-1" class="headerlink" title="3. EM 算法第一轮迭代"></a>3. EM 算法第一轮迭代</h4><h4 id="A-E-步-期望步骤：计算责任-gamma-z-ik"><a href="#A-E-步-期望步骤：计算责任-gamma-z-ik" class="headerlink" title="A. E 步 (期望步骤：计算责任 $\gamma(z_{ik})$)"></a>A. E 步 (期望步骤：计算责任 $\gamma(z_{ik})$)</h4><p>责任是 $\mathbf{x}<em>i$ 属于 $k$ 簇的后验概率 $\gamma(z</em>{ik}) &#x3D; p(z&#x3D;k | \mathbf{x}_i)$。</p>
-<p><strong>以客户 1 ($\mathbf{x}_1&#x3D;(1, 1, 1)$) 为例计算：</strong></p>
-<ol>
-<li><p><strong>簇 1 的似然 $p(\mathbf{x}_1 | z&#x3D;1)$:</strong><br>$$0.8^{1} (1-0.8)^{0} \times 0.4^{1} (1-0.4)^{0} \times 0.1^{1} (1-0.1)^{0} &#x3D; 0.8 \times 0.4 \times 0.1 &#x3D; \mathbf{0.032}$$</p>
-</li>
-<li><p><strong>簇 2 的似然 $p(\mathbf{x}_1 | z&#x3D;2)$:</strong><br>$$0.2^{1} (1-0.2)^{0} \times 0.6^{1} (1-0.6)^{0} \times 0.9^{1} (1-0.9)^{0} &#x3D; 0.2 \times 0.6 \times 0.9 &#x3D; \mathbf{0.108}$$</p>
-</li>
-<li><p><strong>计算责任 $\gamma(z_{11})$ (客户 1 属于簇 1 的概率):</strong><br>$$\gamma(z_{11}) &#x3D; \frac{0.5 \times 0.032}{0.5 \times 0.032 + 0.5 \times 0.108} &#x3D; \frac{0.016}{0.070} \approx \mathbf{0.2286}$$</p>
-</li>
-<li><p><strong>计算责任 $\gamma(z_{12})$ (客户 1 属于簇 2 的概率):</strong><br>$$\gamma(z_{12}) &#x3D; 1 - 0.2286 \approx \mathbf{0.7714}$$</p>
-</li>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+</tr>
+</tbody>
+</table>
+<h4 id="模型设置和初始化-第-0-轮迭代">2. 模型设置和初始化 (第 0 轮迭代)</h4>
+<p>我们初始化 <span class="math inline"><em>K</em> = 2</span> 个簇的参数 <span class="math inline"><em>Θ</em> = {<em>π</em><sub><em>k</em></sub>, <em>θ</em><sub><em>k</em></sub>}<sub><em>k</em> = 1</sub><sup>2</sup></span>：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">参数</th>
+<th style="text-align: center;">值</th>
+<th style="text-align: center;">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline"><em>π</em><sub>1</sub></span></td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">客户属于簇 1 的先验概率</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline"><em>π</em><sub>2</sub></span></td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">客户属于簇 2 的先验概率</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline"><em>θ</em><sub>1</sub></span></td>
+<td style="text-align: center;">(0.8, 0.4, 0.1)</td>
+<td style="text-align: center;">簇 1 中 3 种行为发生的概率</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline"><em>θ</em><sub>2</sub></span></td>
+<td style="text-align: center;">(0.2, 0.6, 0.9)</td>
+<td style="text-align: center;">簇 2 中 3 种行为发生的概率</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="em-算法第一轮迭代-1">3. EM 算法第一轮迭代</h4>
+<h4 id="a.-e-步-期望步骤计算责任-gammaz_ik">A. E 步 (期望步骤：计算责任 <span class="math inline"><em>γ</em>(<em>z</em><sub><em>i</em><em>k</em></sub>)</span>)</h4>
+<p>责任是 <span class="math inline"><strong>x</strong><sub><em>i</em></sub></span> 属于 <span class="math inline"><em>k</em></span> 簇的后验概率 <span class="math inline"><em>γ</em>(<em>z</em><sub><em>i</em><em>k</em></sub>) = <em>p</em>(<em>z</em> = <em>k</em>|<strong>x</strong><sub><em>i</em></sub>)</span>。</p>
+<p><strong>以客户 1 (<span class="math inline"><strong>x</strong><sub>1</sub> = (1, 1, 1)</span>) 为例计算：</strong></p>
+<ol type="1">
+<li><p><strong>簇 1 的似然 <span class="math inline"><em>p</em>(<strong>x</strong><sub>1</sub>|<em>z</em> = 1)</span>:</strong> <span class="math display">0.8<sup>1</sup>(1 − 0.8)<sup>0</sup> × 0.4<sup>1</sup>(1 − 0.4)<sup>0</sup> × 0.1<sup>1</sup>(1 − 0.1)<sup>0</sup> = 0.8 × 0.4 × 0.1 = <strong>0.032</strong></span></p></li>
+<li><p><strong>簇 2 的似然 <span class="math inline"><em>p</em>(<strong>x</strong><sub>1</sub>|<em>z</em> = 2)</span>:</strong> <span class="math display">0.2<sup>1</sup>(1 − 0.2)<sup>0</sup> × 0.6<sup>1</sup>(1 − 0.6)<sup>0</sup> × 0.9<sup>1</sup>(1 − 0.9)<sup>0</sup> = 0.2 × 0.6 × 0.9 = <strong>0.108</strong></span></p></li>
+<li><p><strong>计算责任 <span class="math inline"><em>γ</em>(<em>z</em><sub>11</sub>)</span> (客户 1 属于簇 1 的概率):</strong> <span class="math display">$$\gamma(z_{11}) = \frac{0.5 \times 0.032}{0.5 \times 0.032 + 0.5 \times 0.108} = \frac{0.016}{0.070} \approx \mathbf{0.2286}$$</span></p></li>
+<li><p><strong>计算责任 <span class="math inline"><em>γ</em>(<em>z</em><sub>12</sub>)</span> (客户 1 属于簇 2 的概率):</strong> <span class="math display"><em>γ</em>(<em>z</em><sub>12</sub>) = 1 − 0.2286 ≈ <strong>0.7714</strong></span></p></li>
 </ol>
-<p><strong>完整的责任矩阵 $\gamma$ (所有客户的计算结果):</strong></p>
+<p><strong>完整的责任矩阵 <span class="math inline"><em>γ</em></span> (所有客户的计算结果):</strong></p>
 <table>
 <thead>
-<tr>
-<th align="center">客户 $i$</th>
-<th align="center">$\mathbf{x}_i$</th>
-<th align="center">$\gamma(z_{i1})$ (属于簇 1)</th>
-<th align="center">$\gamma(z_{i2})$ (属于簇 2)</th>
+<tr class="header">
+<th style="text-align: center;">客户 <span class="math inline"><em>i</em></span></th>
+<th style="text-align: center;"><span class="math inline"><strong>x</strong><sub><em>i</em></sub></span></th>
+<th style="text-align: center;"><span class="math inline"><em>γ</em>(<em>z</em><sub><em>i</em>1</sub>)</span> (属于簇 1)</th>
+<th style="text-align: center;"><span class="math inline"><em>γ</em>(<em>z</em><sub><em>i</em>2</sub>)</span> (属于簇 2)</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">1</td>
-<td align="center">(1, 1, 1)</td>
-<td align="center">0.2286</td>
-<td align="center">0.7714</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">(1, 1, 1)</td>
+<td style="text-align: center;">0.2286</td>
+<td style="text-align: center;">0.7714</td>
 </tr>
-<tr>
-<td align="center">2</td>
-<td align="center">(1, 0, 0)</td>
-<td align="center">0.9855</td>
-<td align="center">0.0145</td>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">(1, 0, 0)</td>
+<td style="text-align: center;">0.9855</td>
+<td style="text-align: center;">0.0145</td>
 </tr>
-<tr>
-<td align="center">3</td>
-<td align="center">(0, 1, 0)</td>
-<td align="center">0.1379</td>
-<td align="center">0.8621</td>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">(0, 1, 0)</td>
+<td style="text-align: center;">0.1379</td>
+<td style="text-align: center;">0.8621</td>
 </tr>
-<tr>
-<td align="center">4</td>
-<td align="center">(0, 0, 1)</td>
-<td align="center">0.0033</td>
-<td align="center">0.9967</td>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">(0, 0, 1)</td>
+<td style="text-align: center;">0.0033</td>
+<td style="text-align: center;">0.9967</td>
 </tr>
-<tr>
-<td align="center">5</td>
-<td align="center">(1, 1, 0)</td>
-<td align="center">0.8351</td>
-<td align="center">0.1649</td>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">(1, 1, 0)</td>
+<td style="text-align: center;">0.8351</td>
+<td style="text-align: center;">0.1649</td>
 </tr>
-<tr>
-<td align="center"><strong>总和 $N_k$</strong></td>
-<td align="center"></td>
-<td align="center"><strong>2.1904</strong></td>
-<td align="center"><strong>2.8096</strong></td>
+<tr class="even">
+<td style="text-align: center;"><strong>总和 <span class="math inline"><em>N</em><sub><em>k</em></sub></span></strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>2.1904</strong></td>
+<td style="text-align: center;"><strong>2.8096</strong></td>
 </tr>
-</tbody></table>
-<hr>
-<h4 id="更新参数-1"><a href="#更新参数-1" class="headerlink" title="更新参数"></a>更新参数</h4><p><strong>1. 更新混合权重 $\pi_k$</strong></p>
-<p>$$\pi_k^{\text{new}} &#x3D; N_k &#x2F; N$$</p>
+</tbody>
+</table>
+<hr />
+<h4 id="更新参数-2">更新参数</h4>
+<p><strong>1. 更新混合权重 <span class="math inline"><em>π</em><sub><em>k</em></sub></span></strong></p>
+<p><span class="math display"><em>π</em><sub><em>k</em></sub><sup>new</sup> = <em>N</em><sub><em>k</em></sub>/<em>N</em></span></p>
 <ul>
-<li>$\pi_1^{\text{new}} &#x3D; 2.1904 &#x2F; 5 \approx \mathbf{0.4381}$</li>
-<li>$\pi_2^{\text{new}} &#x3D; 2.8096 &#x2F; 5 \approx \mathbf{0.5619}$</li>
+<li><span class="math inline"><em>π</em><sub>1</sub><sup>new</sup> = 2.1904/5 ≈ <strong>0.4381</strong></span></li>
+<li><span class="math inline"><em>π</em><sub>2</sub><sup>new</sup> = 2.8096/5 ≈ <strong>0.5619</strong></span></li>
 </ul>
-<p><strong>2. 更新伯努利参数 $\theta_{kj}$</strong></p>
-<p>$$\theta_{kj}^{\text{new}} &#x3D; \frac{\sum_{i&#x3D;1}^{N} \gamma(z_{ik}) x_{ij}}{N_k}$$</p>
-<p>计算分子 $\sum_{i&#x3D;1}^{N} \gamma(z_{ik}) x_{ij}$ (特征 $j$ 的加权计数，只需对 $x_{ij}&#x3D;1$ 的客户进行求和)：</p>
+<p><strong>2. 更新伯努利参数 <span class="math inline"><em>θ</em><sub><em>k</em><em>j</em></sub></span></strong></p>
+<p><span class="math display">$$\theta_{kj}^{\text{new}} = \frac{\sum_{i=1}^{N} \gamma(z_{ik}) x_{ij}}{N_k}$$</span></p>
+<p>计算分子 <span class="math inline">$\sum_{i=1}^{N} \gamma(z_{ik}) x_{ij}$</span> (特征 <span class="math inline"><em>j</em></span> 的加权计数，只需对 <span class="math inline"><em>x</em><sub><em>i</em><em>j</em></sub> = 1</span> 的客户进行求和)：</p>
 <table>
+
 <thead>
-<tr>
-<th align="center">特征 $j$</th>
-<th align="center"><strong>分子 $C_{1j}$ (簇 1 加权计数)</strong></th>
-<th align="center"><strong>分子 $C_{2j}$ (簇 2 加权计数)</strong></th>
+<tr class="header">
+<th style="text-align: center;">特征 <span class="math inline"><em>j</em></span></th>
+<th style="text-align: center;"><strong>分子 <span class="math inline"><em>C</em><sub>1<em>j</em></sub></span> (簇 1 加权计数)</strong></th>
+<th style="text-align: center;"><strong>分子 <span class="math inline"><em>C</em><sub>2<em>j</em></sub></span> (簇 2 加权计数)</strong></th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center"><strong>$x_{j&#x3D;1}$ (浏览)</strong></td>
-<td align="center">$\gamma(z_{11})+\gamma(z_{21})+\gamma(z_{51}) \approx \mathbf{2.0492}$</td>
-<td align="center">$\gamma(z_{12})+\gamma(z_{22})+\gamma(z_{52}) \approx \mathbf{0.9508}$</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong><span class="math inline"><em>x</em><sub><em>j</em> = 1</sub></span> (浏览)</strong></td>
+<td style="text-align: center;"><span class="math inline"><em>γ</em>(<em>z</em><sub>11</sub>) + <em>γ</em>(<em>z</em><sub>21</sub>) + <em>γ</em>(<em>z</em><sub>51</sub>) ≈ <strong>2.0492</strong></span></td>
+<td style="text-align: center;"><span class="math inline"><em>γ</em>(<em>z</em><sub>12</sub>) + <em>γ</em>(<em>z</em><sub>22</sub>) + <em>γ</em>(<em>z</em><sub>52</sub>) ≈ <strong>0.9508</strong></span></td>
 </tr>
-<tr>
-<td align="center"><strong>$x_{j&#x3D;2}$ (购物车)</strong></td>
-<td align="center">$\gamma(z_{11})+\gamma(z_{31})+\gamma(z_{51}) \approx \mathbf{1.2016}$</td>
-<td align="center">$\gamma(z_{12})+\gamma(z_{32})+\gamma(z_{52}) \approx \mathbf{1.7984}$</td>
+<tr class="even">
+<td style="text-align: center;"><strong><span class="math inline"><em>x</em><sub><em>j</em> = 2</sub></span> (购物车)</strong></td>
+<td style="text-align: center;"><span class="math inline"><em>γ</em>(<em>z</em><sub>11</sub>) + <em>γ</em>(<em>z</em><sub>31</sub>) + <em>γ</em>(<em>z</em><sub>51</sub>) ≈ <strong>1.2016</strong></span></td>
+<td style="text-align: center;"><span class="math inline"><em>γ</em>(<em>z</em><sub>12</sub>) + <em>γ</em>(<em>z</em><sub>32</sub>) + <em>γ</em>(<em>z</em><sub>52</sub>) ≈ <strong>1.7984</strong></span></td>
 </tr>
-<tr>
-<td align="center"><strong>$x_{j&#x3D;3}$ (购买)</strong></td>
-<td align="center">$\gamma(z_{11})+\gamma(z_{41}) \approx \mathbf{0.2319}$</td>
-<td align="center">$\gamma(z_{12})+\gamma(z_{42}) \approx \mathbf{1.7681}$</td>
+<tr class="odd">
+<td style="text-align: center;"><strong><span class="math inline"><em>x</em><sub><em>j</em> = 3</sub></span> (购买)</strong></td>
+<td style="text-align: center;"><span class="math inline"><em>γ</em>(<em>z</em><sub>11</sub>) + <em>γ</em>(<em>z</em><sub>41</sub>) ≈ <strong>0.2319</strong></span></td>
+<td style="text-align: center;"><span class="math inline"><em>γ</em>(<em>z</em><sub>12</sub>) + <em>γ</em>(<em>z</em><sub>42</sub>) ≈ <strong>1.7681</strong></span></td>
 </tr>
-</tbody></table>
-<p>最后，除以各自的 $N_k$：</p>
+</tbody>
+</table>
+<p>最后，除以各自的 <span class="math inline"><em>N</em><sub><em>k</em></sub></span>：</p>
 <table>
+
 <thead>
-<tr>
-<th align="center">簇 $k$</th>
-<th align="center">$x_1$ (浏览)</th>
-<th align="center">$x_2$ (购物车)</th>
-<th align="center">$x_3$ (购买)</th>
+<tr class="header">
+<th style="text-align: center;">簇 <span class="math inline"><em>k</em></span></th>
+<th style="text-align: center;"><span class="math inline"><em>x</em><sub>1</sub></span> (浏览)</th>
+<th style="text-align: center;"><span class="math inline"><em>x</em><sub>2</sub></span> (购物车)</th>
+<th style="text-align: center;"><span class="math inline"><em>x</em><sub>3</sub></span> (购买)</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center"><strong>$\theta_{1}^{\text{new}}$</strong></td>
-<td align="center">$2.0492 &#x2F; 2.1904 \approx \mathbf{0.936}$</td>
-<td align="center">$1.2016 &#x2F; 2.1904 \approx \mathbf{0.548}$</td>
-<td align="center">$0.2319 &#x2F; 2.1904 \approx \mathbf{0.106}$</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong><span class="math inline"><em>θ</em><sub>1</sub><sup>new</sup></span></strong></td>
+<td style="text-align: center;"><span class="math inline">2.0492/2.1904 ≈ <strong>0.936</strong></span></td>
+<td style="text-align: center;"><span class="math inline">1.2016/2.1904 ≈ <strong>0.548</strong></span></td>
+<td style="text-align: center;"><span class="math inline">0.2319/2.1904 ≈ <strong>0.106</strong></span></td>
 </tr>
-<tr>
-<td align="center"><strong>$\theta_{2}^{\text{new}}$</strong></td>
-<td align="center">$0.9508 &#x2F; 2.8096 \approx \mathbf{0.339}$</td>
-<td align="center">$1.7984 &#x2F; 2.8096 \approx \mathbf{0.640}$</td>
-<td align="center">$1.7681 &#x2F; 2.8096 \approx \mathbf{0.629}$</td>
+<tr class="even">
+<td style="text-align: center;"><strong><span class="math inline"><em>θ</em><sub>2</sub><sup>new</sup></span></strong></td>
+<td style="text-align: center;"><span class="math inline">0.9508/2.8096 ≈ <strong>0.339</strong></span></td>
+<td style="text-align: center;"><span class="math inline">1.7984/2.8096 ≈ <strong>0.640</strong></span></td>
+<td style="text-align: center;"><span class="math inline">1.7681/2.8096 ≈ <strong>0.629</strong></span></td>
 </tr>
-</tbody></table>
-<h4 id="4-结论-一轮迭代后的特征解读"><a href="#4-结论-一轮迭代后的特征解读" class="headerlink" title="4. 结论 (一轮迭代后的特征解读)"></a>4. 结论 (一轮迭代后的特征解读)</h4><p>迭代后的参数清晰地定义了两个不同的客户群体：</p>
-<table>
+</tbody>
+</table>
+<h4 id="结论-一轮迭代后的特征解读">4. 结论 (一轮迭代后的特征解读)</h4>
+<p>迭代后的参数清晰地定义了两个不同的客户群体：</p>
+<table style="width:100%;">
+
 <thead>
-<tr>
-<th align="center">簇 $k$</th>
-<th align="center">$\pi_k$</th>
-<th align="center">$\theta_{\text{浏览}}$</th>
-<th align="center">$\theta_{\text{购物车}}$</th>
-<th align="center">$\theta_{\text{购买}}$</th>
-<th align="center"><strong>客户群体特征</strong></th>
+<tr class="header">
+<th style="text-align: center;">簇 <span class="math inline"><em>k</em></span></th>
+<th style="text-align: center;"><span class="math inline"><em>π</em><sub><em>k</em></sub></span></th>
+<th style="text-align: center;"><span class="math inline"><em>θ</em><sub>浏览</sub></span></th>
+<th style="text-align: center;"><span class="math inline"><em>θ</em><sub>购物车</sub></span></th>
+<th style="text-align: center;"><span class="math inline"><em>θ</em><sub>购买</sub></span></th>
+<th style="text-align: center;"><strong>客户群体特征</strong></th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center"><strong>簇 1</strong></td>
-<td align="center">$\approx 44%$</td>
-<td align="center"><strong>高 (0.936)</strong></td>
-<td align="center">中 (0.548)</td>
-<td align="center">低 (0.106)</td>
-<td align="center"><strong>“浏览型客户”</strong>: 非常活跃地浏览商品，但购买意愿&#x2F;转化率较低。</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>簇 1</strong></td>
+<td style="text-align: center;"><span class="math inline"> ≈ 44%</span></td>
+<td style="text-align: center;"><strong>高 (0.936)</strong></td>
+<td style="text-align: center;">中 (0.548)</td>
+<td style="text-align: center;">低 (0.106)</td>
+<td style="text-align: center;"><strong>“浏览型客户”</strong>: 非常活跃地浏览商品，但购买意愿/转化率较低。</td>
 </tr>
-<tr>
-<td align="center"><strong>簇 2</strong></td>
-<td align="center">$\approx 56%$</td>
-<td align="center">低 (0.339)</td>
-<td align="center">中高 (0.640)</td>
-<td align="center"><strong>高 (0.629)</strong></td>
-<td align="center"><strong>“高转化客户”</strong>: 可能直接搜索目标商品，购买转化率极高。</td>
+<tr class="even">
+<td style="text-align: center;"><strong>簇 2</strong></td>
+<td style="text-align: center;"><span class="math inline"> ≈ 56%</span></td>
+<td style="text-align: center;">低 (0.339)</td>
+<td style="text-align: center;">中高 (0.640)</td>
+<td style="text-align: center;"><strong>高 (0.629)</strong></td>
+<td style="text-align: center;"><strong>“高转化客户”</strong>: 可能直接搜索目标商品，购买转化率极高。</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
                 
               </div>

@@ -19,12 +19,12 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="CodeforcesAI Learning发点面经攒攒人品1、你在线上或离线训练时，过拟合怎么处理？直接说你最有效的三个方法和拿到的收益。2、把 BN 讲透：原理是什么；训练期和推理期用的统计量有何不同；跟 LN、GN 比，分别什么时候用、怎么取舍。3、分类和回归你最常用哪些损失？你更偏好哪几个，为什么（从鲁棒性、梯度、数值稳定性上谈）。4、L1 和 L2 正则你怎么选？它们各自的效果与风险是什么">
+    <meta name="description" content="Codeforces AI Learning 发点面经攒攒人品 1、你在线上或离线训练时，过拟合怎么处理？直接说你最有效的三个方法和拿到的收益。 2、把 BN 讲透：原理是什么；训练期和推理期用的统计量有何不同；跟 LN、GN 比，分别什么时候用、怎么取舍。 3、分类和回归你最常用哪些损失？你更偏好哪几个，为什么（从鲁棒性、梯度、数值稳定性上谈）。 4、L1 和 L2 正则你怎么选？它们各自的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="260302">
 <meta property="og:url" content="https://ycfywy.github.io/2026/03/01/260302/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="CodeforcesAI Learning发点面经攒攒人品1、你在线上或离线训练时，过拟合怎么处理？直接说你最有效的三个方法和拿到的收益。2、把 BN 讲透：原理是什么；训练期和推理期用的统计量有何不同；跟 LN、GN 比，分别什么时候用、怎么取舍。3、分类和回归你最常用哪些损失？你更偏好哪几个，为什么（从鲁棒性、梯度、数值稳定性上谈）。4、L1 和 L2 正则你怎么选？它们各自的效果与风险是什么">
+<meta property="og:description" content="Codeforces AI Learning 发点面经攒攒人品 1、你在线上或离线训练时，过拟合怎么处理？直接说你最有效的三个方法和拿到的收益。 2、把 BN 讲透：原理是什么；训练期和推理期用的统计量有何不同；跟 LN、GN 比，分别什么时候用、怎么取舍。 3、分类和回归你最常用哪些损失？你更偏好哪几个，为什么（从鲁棒性、梯度、数值稳定性上谈）。 4、L1 和 L2 正则你怎么选？它们各自的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-01T08:51:04.000Z">
 <meta property="article:modified_time" content="2026-03-01T08:51:14.192Z">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          605 字
+          586 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          6 分钟
+          5 分钟
         
       </span>
     
@@ -275,9 +275,13 @@
             
               <div class="markdown-body">
                 
-                <h2 id="Codeforces"><a href="#Codeforces" class="headerlink" title="Codeforces"></a>Codeforces</h2><h2 id="AI-Learning"><a href="#AI-Learning" class="headerlink" title="AI Learning"></a>AI Learning</h2><p>发点面经攒攒人品<br>1、你在线上或离线训练时，过拟合怎么处理？直接说你最有效的三个方法和拿到的收益。<br>2、把 BN 讲透：原理是什么；训练期和推理期用的统计量有何不同；跟 LN、GN 比，分别什么时候用、怎么取舍。<br>3、分类和回归你最常用哪些损失？你更偏好哪几个，为什么（从鲁棒性、梯度、数值稳定性上谈）。<br>4、L1 和 L2 正则你怎么选？它们各自的效果与风险是什么，工程里你是怎么权衡的。<br>5、二元和多分类的交叉熵你怎么写？在工程里你怎么做数值稳定实现。<br>6、AUC 到底在统计上代表什么？你怎么计算它，在线上业务里你如何解释“这次 AUC 提升”的含义。<br>7、你做 CTR&#x2F;CVR&#x2F;CTCVR 联合建模时，ESMM&#x2F;ESMM2 是怎么推导与工程落地的？线上到底带来了什么收益。<br>8、Transformer 里因果注意力的 Q&#x2F;K&#x2F;V 各从哪来？Mask 具体怎么实现。<br>9、Scaled Dot‑Product Attention 为啥要除以 √dk？如果不除会出什么数值或训练问题。<br>10、把 Transformer &#x2F; Decoder‑only 的整体结构过一遍，各个组件分别在干什么，有哪些常见变体。<br>11、位置编码这条线你怎么选：绝对 PE、相对 PE、RoPE 各自的思路、优势和局限，结合你的项目谈取舍。<br>12、长上下文怎么搞？Rope scaling、Position Interpolation、KV Cache 管理、检索增强、窗口注意力，你的实战方案是什么。<br>13、KV Cache 在训练和推理中的差异是什么？它的加速价值有多大，吞吐与延迟你是如何权衡的，vLLM&#x2F;paged‑attention 需要注意什么。<br>14、PEFT 方案里（LoRA&#x2F;QLoRA&#x2F;Prefix&#x2F;Prompt‑Tuning&#x2F;Adapter）你怎么选？说说稳定训练的经验。<br>15、SFT 和对齐（RLHF&#x2F;DPO&#x2F;IPO&#x2F;PPO）原理差在哪？在不同数据与资源条件下，你怎么选路线。<br>16、RAG 系统你怎么设计？切分、索引、召回&#x2F;重排、压缩&#x2F;融合、兜底策略怎么串。<br>17、提示词工程你是怎么搞的？System&#x2F;角色&#x2F;约束&#x2F;分步指令怎么写，如何防越狱</p>
-<p>作者：MarCus<br>链接：<a target="_blank" rel="noopener" href="https://www.nowcoder.com/interview/center?entranceType=%E5%AF%BC%E8%88%AA%E6%A0%8F">https://www.nowcoder.com/interview/center?entranceType=%E5%AF%BC%E8%88%AA%E6%A0%8F</a><br>来源：牛客网</p>
-<h2 id="English"><a href="#English" class="headerlink" title="English"></a>English</h2><h2 id="DS杂谈"><a href="#DS杂谈" class="headerlink" title="DS杂谈"></a>DS杂谈</h2>
+                <h2 id="codeforces">Codeforces</h2>
+<h2 id="ai-learning">AI Learning</h2>
+<p>发点面经攒攒人品 1、你在线上或离线训练时，过拟合怎么处理？直接说你最有效的三个方法和拿到的收益。 2、把 BN 讲透：原理是什么；训练期和推理期用的统计量有何不同；跟 LN、GN 比，分别什么时候用、怎么取舍。 3、分类和回归你最常用哪些损失？你更偏好哪几个，为什么（从鲁棒性、梯度、数值稳定性上谈）。 4、L1 和 L2 正则你怎么选？它们各自的效果与风险是什么，工程里你是怎么权衡的。 5、二元和多分类的交叉熵你怎么写？在工程里你怎么做数值稳定实现。 6、AUC 到底在统计上代表什么？你怎么计算它，在线上业务里你如何解释“这次 AUC 提升”的含义。 7、你做 CTR/CVR/CTCVR 联合建模时，ESMM/ESMM2 是怎么推导与工程落地的？线上到底带来了什么收益。 8、Transformer 里因果注意力的 Q/K/V 各从哪来？Mask 具体怎么实现。 9、Scaled Dot‑Product Attention 为啥要除以 √dk？如果不除会出什么数值或训练问题。 10、把 Transformer / Decoder‑only 的整体结构过一遍，各个组件分别在干什么，有哪些常见变体。 11、位置编码这条线你怎么选：绝对 PE、相对 PE、RoPE 各自的思路、优势和局限，结合你的项目谈取舍。 12、长上下文怎么搞？Rope scaling、Position Interpolation、KV Cache 管理、检索增强、窗口注意力，你的实战方案是什么。 13、KV Cache 在训练和推理中的差异是什么？它的加速价值有多大，吞吐与延迟你是如何权衡的，vLLM/paged‑attention 需要注意什么。 14、PEFT 方案里（LoRA/QLoRA/Prefix/Prompt‑Tuning/Adapter）你怎么选？说说稳定训练的经验。 15、SFT 和对齐（RLHF/DPO/IPO/PPO）原理差在哪？在不同数据与资源条件下，你怎么选路线。 16、RAG 系统你怎么设计？切分、索引、召回/重排、压缩/融合、兜底策略怎么串。 17、提示词工程你是怎么搞的？System/角色/约束/分步指令怎么写，如何防越狱</p>
+<p>作者：MarCus 链接：https://www.nowcoder.com/interview/center?entranceType=%E5%AF%BC%E8%88%AA%E6%A0%8F 来源：牛客网</p>
+<h2 id="english">English</h2>
+<h2 id="ds杂谈">DS杂谈</h2>
+
                 
               </div>
             

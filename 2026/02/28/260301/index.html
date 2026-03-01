@@ -19,12 +19,12 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="CodeforcesAI Learning对比学习 loss：负样本和正样本拉不开&#x2F;太像了，你会怎么改损失或采样 FlashAttention 跟普通 attention 的差异？实现里 QK^T、softmax、PV 这几步怎么落 3D 并行里 DP&#x2F;DDP 你怎么理解；实际落地时通信瓶颈一般卡在哪些环节 14B：FP16 权重大概多大；训练还要加哪些；INT8 大概能省多少">
+    <meta name="description" content="Codeforces AI Learning 对比学习 loss：负样本和正样本拉不开&#x2F;太像了，你会怎么改损失或采样 FlashAttention 跟普通 attention 的差异？实现里 QK^T、softmax、PV 这几步怎么落 3D 并行里 DP&#x2F;DDP 你怎么理解；实际落地时通信瓶颈一般卡在哪些环节 14B：FP16 权重大概多大；训练还要加哪些；INT8 大概能省多少 t">
 <meta property="og:type" content="article">
 <meta property="og:title" content="260229">
 <meta property="og:url" content="https://ycfywy.github.io/2026/02/28/260301/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="CodeforcesAI Learning对比学习 loss：负样本和正样本拉不开&#x2F;太像了，你会怎么改损失或采样 FlashAttention 跟普通 attention 的差异？实现里 QK^T、softmax、PV 这几步怎么落 3D 并行里 DP&#x2F;DDP 你怎么理解；实际落地时通信瓶颈一般卡在哪些环节 14B：FP16 权重大概多大；训练还要加哪些；INT8 大概能省多少">
+<meta property="og:description" content="Codeforces AI Learning 对比学习 loss：负样本和正样本拉不开&#x2F;太像了，你会怎么改损失或采样 FlashAttention 跟普通 attention 的差异？实现里 QK^T、softmax、PV 这几步怎么落 3D 并行里 DP&#x2F;DDP 你怎么理解；实际落地时通信瓶颈一般卡在哪些环节 14B：FP16 权重大概多大；训练还要加哪些；INT8 大概能省多少 t">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-02-28T03:45:14.000Z">
 <meta property="article:modified_time" content="2026-03-01T09:07:54.425Z">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          597 字
+          585 字
         
       </span>
     
@@ -275,29 +275,44 @@
             
               <div class="markdown-body">
                 
-                <h2 id="Codeforces"><a href="#Codeforces" class="headerlink" title="Codeforces"></a>Codeforces</h2><h2 id="AI-Learning"><a href="#AI-Learning" class="headerlink" title="AI Learning"></a>AI Learning</h2><p>对比学习 loss：负样本和正样本拉不开&#x2F;太像了，你会怎么改损失或采样</p>
+                <h2 id="codeforces">Codeforces</h2>
+<h2 id="ai-learning">AI Learning</h2>
+<p>对比学习 loss：负样本和正样本拉不开/太像了，你会怎么改损失或采样</p>
 <p>FlashAttention 跟普通 attention 的差异？实现里 QK^T、softmax、PV 这几步怎么落</p>
-<p>3D 并行里 DP&#x2F;DDP 你怎么理解；实际落地时通信瓶颈一般卡在哪些环节</p>
+<p>3D 并行里 DP/DDP 你怎么理解；实际落地时通信瓶颈一般卡在哪些环节</p>
 <p>14B：FP16 权重大概多大；训练还要加哪些；INT8 大概能省多少</p>
-<h3 id="torch-contiguous-干嘛的？推理为什么在意连续性"><a href="#torch-contiguous-干嘛的？推理为什么在意连续性" class="headerlink" title="torch.contiguous() 干嘛的？推理为什么在意连续性"></a>torch.contiguous() 干嘛的？推理为什么在意连续性</h3><ul>
-<li>Transpose: 它不会移动内存里的任何数据，只是修改了tensor的Metadata: stride(a, b)。a代表进入下一行需要走几步，b代表进入下一列需要走几步。一旦 Stride 的顺序不再是递减的（即：大维度的步长 &lt; 小维度的步长），PyTorch 就会把这个 Tensor 标记为 is_contiguous &#x3D; False。</li>
+<h3 id="torch.contiguous-干嘛的推理为什么在意连续性">torch.contiguous() 干嘛的？推理为什么在意连续性</h3>
+<ul>
+<li>Transpose: 它不会移动内存里的任何数据，只是修改了tensor的Metadata: stride(a, b)。a代表进入下一行需要走几步，b代表进入下一列需要走几步。一旦 Stride 的顺序不再是递减的（即：大维度的步长 &lt; 小维度的步长），PyTorch 就会把这个 Tensor 标记为 is_contiguous = False。</li>
 <li>View: 改变tensor观察的方式，把一段连续的存储重新划分。View默认tensor存储是连续的。因此如果你做了transpose之后坐view，需要执行transpose().contiguous().view()来把原来的tensor拷贝一下，保证存储的连续。</li>
 <li>Reshape: 如果张量是连续的，reshape 效果等同于 view; 如果张量是不连续的（比如刚转置完），reshape 会自动帮你调用 .contiguous()，把数据拷贝一份排好序，再进行重塑。</li>
 </ul>
 <p>举个例子：</p>
 <p>在内存里，它是水平排开的：[0, 1, 2, 3, 4, 5]。Contiguous</p>
-<p>$$\begin{bmatrix}<br>0 &amp; 1 &amp; 2 \<br>3 &amp; 4 &amp; 5<br>\end{bmatrix}$$</p>
+<p><span class="math display">$$\begin{bmatrix}
+0 &amp; 1 &amp; 2 \\
+3 &amp; 4 &amp; 5
+\end{bmatrix}$$</span></p>
 <p>transpose(0, 1)</p>
-<p>$$\begin{bmatrix}<br>0 &amp; 3 \<br>1 &amp; 4 \<br>2 &amp; 5<br>\end{bmatrix}$$</p>
+<p><span class="math display">$$\begin{bmatrix}
+0 &amp; 3 \\
+1 &amp; 4 \\
+2 &amp; 5
+\end{bmatrix}$$</span></p>
 <p>内存里的顺序依然是 [0, 1, 2, 3, 4, 5]。但是变得不连续了，逻辑上的存储03连续，但是物理上不连续。</p>
 <p>reshape(-1)</p>
 <p>reshape 发现数据不连续，先偷偷调用了 .contiguous()。 内存里重新开辟空间，把数据排成 [0, 3, 1, 4, 2, 5]</p>
 <ul>
 <li>pytorch关于contigous的定义：</li>
 </ul>
-<p>对于一个 $n$ 维张量，其每一个维度的步长 $stride[i]$ 必须等于后一个维度的步长乘以该维度的长度，即 $stride[i] &#x3D; stride[i+1] \times size[i+1]$。</p>
-<p>举个例子：创建一个 Shape &#x3D; (2, 3, 4) 的张量。Size (Shape): (d0&#x3D;2, d1&#x3D;3, d2&#x3D;4)。最内层的stride &#x3D; 1,然后依次计算得到：Stride &#x3D; (12, 4, 1)</p>
-<h3 id="读-txt-井字棋（3×3），判断当前玩家是否获胜"><a href="#读-txt-井字棋（3×3），判断当前玩家是否获胜" class="headerlink" title="读 txt 井字棋（3×3），判断当前玩家是否获胜"></a>读 txt 井字棋（3×3），判断当前玩家是否获胜</h3><h3 id="交叉熵损失：解释-怎么写"><a href="#交叉熵损失：解释-怎么写" class="headerlink" title="交叉熵损失：解释&#x2F;怎么写"></a>交叉熵损失：解释&#x2F;怎么写</h3><h3 id="线性回归用-SGD：更新公式怎么推-怎么写"><a href="#线性回归用-SGD：更新公式怎么推-怎么写" class="headerlink" title="线性回归用 SGD：更新公式怎么推&#x2F;怎么写"></a>线性回归用 SGD：更新公式怎么推&#x2F;怎么写</h3><h2 id="English"><a href="#English" class="headerlink" title="English"></a>English</h2><h2 id="DS杂谈"><a href="#DS杂谈" class="headerlink" title="DS杂谈"></a>DS杂谈</h2>
+<p>对于一个 <span class="math inline"><em>n</em></span> 维张量，其每一个维度的步长 <span class="math inline"><em>s</em><em>t</em><em>r</em><em>i</em><em>d</em><em>e</em>[<em>i</em>]</span> 必须等于后一个维度的步长乘以该维度的长度，即 <span class="math inline"><em>s</em><em>t</em><em>r</em><em>i</em><em>d</em><em>e</em>[<em>i</em>] = <em>s</em><em>t</em><em>r</em><em>i</em><em>d</em><em>e</em>[<em>i</em> + 1] × <em>s</em><em>i</em><em>z</em><em>e</em>[<em>i</em> + 1]</span>。</p>
+<p>举个例子：创建一个 Shape = (2, 3, 4) 的张量。Size (Shape): (d0=2, d1=3, d2=4)。最内层的stride = 1,然后依次计算得到：Stride = (12, 4, 1)</p>
+<h3 id="读-txt-井字棋33判断当前玩家是否获胜">读 txt 井字棋（3×3），判断当前玩家是否获胜</h3>
+<h3 id="交叉熵损失解释怎么写">交叉熵损失：解释/怎么写</h3>
+<h3 id="线性回归用-sgd更新公式怎么推怎么写">线性回归用 SGD：更新公式怎么推/怎么写</h3>
+<h2 id="english">English</h2>
+<h2 id="ds杂谈">DS杂谈</h2>
+
                 
               </div>
             

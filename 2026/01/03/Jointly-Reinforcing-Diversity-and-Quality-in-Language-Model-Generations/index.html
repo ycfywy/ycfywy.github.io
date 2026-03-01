@@ -19,12 +19,12 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="阅读总结&emsp;&emsp;该文章承接之前关于LLM Diversity的研究。我们之前已经阅读的文章主要是通过采样、数据合成的方式提高LLM Diversity。今天阅读的文章是通过在RL阶段引入Diversity reward，从Quality + Diversity的角度约束RL阶段的参数更新，从而提高LLM Diversity。 &emsp;&emsp;本文的写作逻辑非常清晰。算法的f">
+    <meta name="description" content="阅读总结   该文章承接之前关于LLM Diversity的研究。我们之前已经阅读的文章主要是通过采样、数据合成的方式提高LLM Diversity。今天阅读的文章是通过在RL阶段引入Diversity reward，从Quality + Diversity的角度约束RL阶段的参数更新，从而提高LLM Diversity。   本文的写作逻辑非常清晰。算法的formula讨论，模型训练的数据集">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jointly Reinforcing Diversity and Quality in Language Model Generations">
 <meta property="og:url" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="阅读总结&emsp;&emsp;该文章承接之前关于LLM Diversity的研究。我们之前已经阅读的文章主要是通过采样、数据合成的方式提高LLM Diversity。今天阅读的文章是通过在RL阶段引入Diversity reward，从Quality + Diversity的角度约束RL阶段的参数更新，从而提高LLM Diversity。 &emsp;&emsp;本文的写作逻辑非常清晰。算法的f">
+<meta property="og:description" content="阅读总结   该文章承接之前关于LLM Diversity的研究。我们之前已经阅读的文章主要是通过采样、数据合成的方式提高LLM Diversity。今天阅读的文章是通过在RL阶段引入Diversity reward，从Quality + Diversity的角度约束RL阶段的参数更新，从而提高LLM Diversity。   本文的写作逻辑非常清晰。算法的formula讨论，模型训练的数据集">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-16-31-57.png">
 <meta property="og:image" content="https://ycfywy.github.io/2026/01/03/Jointly-Reinforcing-Diversity-and-Quality-in-Language-Model-Generations/2026-01-03-16-39-42.png">
@@ -243,7 +243,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          1.8k 字
         
       </span>
     
@@ -296,51 +296,66 @@
             
               <div class="markdown-body">
                 
-                <h2 id="阅读总结"><a href="#阅读总结" class="headerlink" title="阅读总结"></a>阅读总结</h2><p>&emsp;&emsp;该文章承接之前关于LLM Diversity的研究。我们之前已经阅读的文章主要是通过采样、数据合成的方式提高LLM Diversity。今天阅读的文章是通过在RL阶段引入Diversity reward，从Quality + Diversity的角度约束RL阶段的参数更新，从而提高LLM Diversity。</p>
-<p>&emsp;&emsp;本文的写作逻辑非常清晰。算法的formula讨论，模型训练的数据集、框架，测试使用的benchmarks，消融实验的设计都非常棒，很有学习意义。</p>
-<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>&emsp;&emsp;先来谈一谈Reinforce Learning。现有的大部分LLM做强化学习首选的方案就是GRPO。通俗地将，GRPO的原理就是：给定一个prompt，让LLM输出n个回答。Reward model对这些回答进行打分。将n个回答视为一组，我们希望鼓励LLM输出组内Reward在平均值以上的回答，拒绝组内Reward在平均值以下的回答。具体的数学原理参见<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/23066650797">link</a>，强化学习台湾大学李宏毅老师视频<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15hw9euExZ/?spm_id_from=333.337.search-card.all.click&vd_source=f849fb0704d7dc059fbab19eff482313">link</a>。</p>
-<p>&emsp;&emsp;现有的Reward model在打分时，只针对单个回答的质量，而没有考虑组内的样本的多样性。当我们组内的多个回答质量相当时，我们应该给组内比较Diversity的回答额外的Reward，鼓励更加多样的回答。为了能够提高LLM Diversity，本文提出在RL阶段引入Diversity Reward的方法，鼓励模型输出更加多样性的内容。</p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>&emsp;&emsp;如何设计Diversity Reward以及将该Reward融入到现有的RL算法中，是本文需要解决的问题。</p>
-<h3 id="Diversity-Reward的设计"><a href="#Diversity-Reward的设计" class="headerlink" title="Diversity Reward的设计"></a>Diversity Reward的设计</h3><p>&emsp;&emsp;考虑给定一个prompt后LLM的n个回答。我们可以从语义的角度对n个回答做聚类。位于相同聚类的回答语义近似，不同聚类的回答语义不同。如图所示，LLM的回答可以划分出3个聚类，其中绿色回答的Quality Reward与蓝色回答一样，但因为是更加Diversity的回答，Reward被放大。<br><img src="./2026-01-03-16-31-57.png" srcset="/img/loading.gif" lazyload></p>
-<p>&emsp;&emsp;为了从语义的角度衡量两个回答是否相似，本文训练了一个classifier。(<strong>这里比较奇怪：作者并没有详细讨论classifier的设计与实现 而是放在Appendix里面 可能是技术含量比较低吧。这里为了更全面的了解文章，我们做一下讲解</strong>)</p>
+                <h2 id="阅读总结">阅读总结</h2>
+<p>  该文章承接之前关于LLM Diversity的研究。我们之前已经阅读的文章主要是通过采样、数据合成的方式提高LLM Diversity。今天阅读的文章是通过在RL阶段引入Diversity reward，从Quality + Diversity的角度约束RL阶段的参数更新，从而提高LLM Diversity。</p>
+<p>  本文的写作逻辑非常清晰。算法的formula讨论，模型训练的数据集、框架，测试使用的benchmarks，消融实验的设计都非常棒，很有学习意义。</p>
+<h2 id="研究背景">研究背景</h2>
+<p>  先来谈一谈Reinforce Learning。现有的大部分LLM做强化学习首选的方案就是GRPO。通俗地将，GRPO的原理就是：给定一个prompt，让LLM输出n个回答。Reward model对这些回答进行打分。将n个回答视为一组，我们希望鼓励LLM输出组内Reward在平均值以上的回答，拒绝组内Reward在平均值以下的回答。具体的数学原理参见<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/23066650797">link</a>，强化学习台湾大学李宏毅老师视频<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15hw9euExZ/?spm_id_from=333.337.search-card.all.click&amp;vd_source=f849fb0704d7dc059fbab19eff482313">link</a>。</p>
+<p>  现有的Reward model在打分时，只针对单个回答的质量，而没有考虑组内的样本的多样性。当我们组内的多个回答质量相当时，我们应该给组内比较Diversity的回答额外的Reward，鼓励更加多样的回答。为了能够提高LLM Diversity，本文提出在RL阶段引入Diversity Reward的方法，鼓励模型输出更加多样性的内容。</p>
+<h2 id="解决方法">解决方法</h2>
+<p>  如何设计Diversity Reward以及将该Reward融入到现有的RL算法中，是本文需要解决的问题。</p>
+<h3 id="diversity-reward的设计">Diversity Reward的设计</h3>
+<p>  考虑给定一个prompt后LLM的n个回答。我们可以从语义的角度对n个回答做聚类。位于相同聚类的回答语义近似，不同聚类的回答语义不同。如图所示，LLM的回答可以划分出3个聚类，其中绿色回答的Quality Reward与蓝色回答一样，但因为是更加Diversity的回答，Reward被放大。 <img src="./2026-01-03-16-31-57.png" srcset="/img/loading.gif" lazyload /></p>
+<p>  为了从语义的角度衡量两个回答是否相似，本文训练了一个classifier。(<strong>这里比较奇怪：作者并没有详细讨论classifier的设计与实现 而是放在Appendix里面 可能是技术含量比较低吧。这里为了更全面的了解文章，我们做一下讲解</strong>)</p>
 <ul>
-<li>Base model: <a target="_blank" rel="noopener" href="https://huggingface.co/answerdotai/ModernBERT-base">ModernBERT-base</a>(一个预训练transformer模型 参数量1GB) </li>
-<li>Traning dataset: 1000 NoveltyBench annotations (2000 responses) 拼接annotations和response，模型需要预测response1 和 response2是否相似。<br><img src="./2026-01-03-16-39-42.png" srcset="/img/loading.gif" lazyload></li>
-<li>testing: 预留100个data，和现有的classifier以及LLM Judge(GPT-4o, o1-mini, o1-mini-cot)做性能对比，优于LLM Judge。(选用这些模型也是研究惯例吧， 一开始的LLM judge大家用的都是OpenAI的model)<br><img src="./2026-01-03-16-47-37.png" srcset="/img/loading.gif" lazyload></li>
+<li>Base model: <a target="_blank" rel="noopener" href="https://huggingface.co/answerdotai/ModernBERT-base">ModernBERT-base</a>(一个预训练transformer模型 参数量1GB)</li>
+<li>Traning dataset: 1000 NoveltyBench annotations (2000 responses) 拼接annotations和response，模型需要预测response1 和 response2是否相似。 <img src="./2026-01-03-16-39-42.png" srcset="/img/loading.gif" lazyload /></li>
+<li>testing: 预留100个data，和现有的classifier以及LLM Judge(GPT-4o, o1-mini, o1-mini-cot)做性能对比，优于LLM Judge。(选用这些模型也是研究惯例吧， 一开始的LLM judge大家用的都是OpenAI的model) <img src="./2026-01-03-16-47-37.png" srcset="/img/loading.gif" lazyload /></li>
 </ul>
-<p>&emsp;&emsp;一旦我们有了一个classifier，就可以逐个pair判断回答是否相似。使用如下的公式计算单个Diversity Reward。举个例子：对于4个answer，以蓝色answer为例，有1个回答和他类似，2个回答和他不一样，计算出的Diversity Reward就是 2 &#x2F; (4 - 1) &#x3D; 2&#x2F;3。<br><img src="./2026-01-03-17-12-09.png" srcset="/img/loading.gif" lazyload><br><img src="./2026-01-03-17-12-17.png" srcset="/img/loading.gif" lazyload><br><img src="./2026-01-03-17-12-26.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="将Diversity-Reward融入RL"><a href="#将Diversity-Reward融入RL" class="headerlink" title="将Diversity Reward融入RL"></a>将Diversity Reward融入RL</h3><p>&emsp;&emsp;前面已经讲过GRPO算法的基本原理，这里给出公式。为了将Diversity Reward引入RL过程，需要对$r(x, y)$进行改写。<br><img src="./2026-01-03-17-15-06.png" srcset="/img/loading.gif" lazyload></p>
-<p>&emsp;&emsp;如下，作者对GRPO做了3处修改：(1)将Diversity Reward作为一个0-1的放缩因子乘到原理的Reward function。(2)将图中的$\Sigma$部分修改为token level：计算损失时，直接除以整个 Batch 中所有 token 的总数。而不是除以句子的总数。之所以这样处理，是因为前人的研究发现，除以句子的总数放大了短句的reward。(3)去除了Advantage function的normalization。作者认为标准化的操作会放大噪声，后续也会有消融实验。<br><img src="./2026-01-03-17-23-56.png" srcset="/img/loading.gif" lazyload><br><img src="./2026-01-03-17-24-03.png" srcset="/img/loading.gif" lazyload></p>
-<p>&emsp;&emsp;至此，讲述完了整篇文章的Method部分，方法比较常规，但是是LLM Diversity领域的重要尝试。下面是实验部分，证明该方法的表现。</p>
-<h2 id="实验部分"><a href="#实验部分" class="headerlink" title="实验部分"></a>实验部分</h2><p>&emsp;&emsp;本文将Non-verifiable Tasks和Verifiable Tasks分开进行实验。具体来说，就是将开放式问题和数学问题分开进行实验，因为一个是有具体答案的，另一个是没有的。</p>
-<h3 id="Non-verifiable-Tasks"><a href="#Non-verifiable-Tasks" class="headerlink" title="Non-verifiable Tasks"></a>Non-verifiable Tasks</h3><h4 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h4><ul>
+<p>  一旦我们有了一个classifier，就可以逐个pair判断回答是否相似。使用如下的公式计算单个Diversity Reward。举个例子：对于4个answer，以蓝色answer为例，有1个回答和他类似，2个回答和他不一样，计算出的Diversity Reward就是 2 / (4 - 1) = 2/3。 <img src="./2026-01-03-17-12-09.png" srcset="/img/loading.gif" lazyload /> <img src="./2026-01-03-17-12-17.png" srcset="/img/loading.gif" lazyload /> <img src="./2026-01-03-17-12-26.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="将diversity-reward融入rl">将Diversity Reward融入RL</h3>
+<p>  前面已经讲过GRPO算法的基本原理，这里给出公式。为了将Diversity Reward引入RL过程，需要对<span class="math inline"><em>r</em>(<em>x</em>, <em>y</em>)</span>进行改写。 <img src="./2026-01-03-17-15-06.png" srcset="/img/loading.gif" lazyload /></p>
+<p>  如下，作者对GRPO做了3处修改：(1)将Diversity Reward作为一个0-1的放缩因子乘到原理的Reward function。(2)将图中的<span class="math inline"><em>Σ</em></span>部分修改为token level：计算损失时，直接除以整个 Batch 中所有 token 的总数。而不是除以句子的总数。之所以这样处理，是因为前人的研究发现，除以句子的总数放大了短句的reward。(3)去除了Advantage function的normalization。作者认为标准化的操作会放大噪声，后续也会有消融实验。 <img src="./2026-01-03-17-23-56.png" srcset="/img/loading.gif" lazyload /> <img src="./2026-01-03-17-24-03.png" srcset="/img/loading.gif" lazyload /></p>
+<p>  至此，讲述完了整篇文章的Method部分，方法比较常规，但是是LLM Diversity领域的重要尝试。下面是实验部分，证明该方法的表现。</p>
+<h2 id="实验部分">实验部分</h2>
+<p>  本文将Non-verifiable Tasks和Verifiable Tasks分开进行实验。具体来说，就是将开放式问题和数学问题分开进行实验，因为一个是有具体答案的，另一个是没有的。</p>
+<h3 id="non-verifiable-tasks">Non-verifiable Tasks</h3>
+<h4 id="实验设置">实验设置</h4>
+<ul>
 <li>baseline: 未修改的GRPO | DivPO(强行把“最具有多样性”的作为 Chosen，把“最缺乏多样性”的作为 Rejected。) | GRPO-Unlikeliness(给那些概率较低（低似然）的回答更高的奖励，强迫模型去探索“冷门”路径。) | Our method</li>
 <li>model: Llama-3.1-8B-Instruct | Llama-3.3-70B-Instruct</li>
-<li>data: subset of 10k prompts in WildChat<br><img src="./2026-01-03-17-41-21.png" srcset="/img/loading.gif" lazyload></li>
-<li>benchmarks: <strong>AlpacaEval 2.0</strong>(评估模型通用指令遵循，对输出长度进行控制的能力，使用LCWR length control win rate指标)&emsp; <strong>ArenaHard v2.0</strong>(复杂逻辑与创意写作，模型需要根据指令进行特定格式、长度的输出，使用WR win rate指标)&emsp; <strong>EQ-Bench</strong>(创意写作&#x2F;情感智能任务，使用LLM judge的评分指标) &emsp; &emsp;(开放式问题，使用Distinct-n计算n-gram的多样性来 评估模型输出的多样性)</li>
+<li>data: subset of 10k prompts in WildChat <img src="./2026-01-03-17-41-21.png" srcset="/img/loading.gif" lazyload /></li>
+<li>benchmarks: <strong>AlpacaEval 2.0</strong>(评估模型通用指令遵循，对输出长度进行控制的能力，使用LCWR length control win rate指标)  <strong>ArenaHard v2.0</strong>(复杂逻辑与创意写作，模型需要根据指令进行特定格式、长度的输出，使用WR win rate指标)  <strong>EQ-Bench</strong>(创意写作/情感智能任务，使用LLM judge的评分指标)    (开放式问题，使用Distinct-n计算n-gram的多样性来 评估模型输出的多样性)</li>
 </ul>
-<h4 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h4><p>&emsp;&emsp;Darling 在所有基准测试中均实现了质量与多样性的双重最佳。 具体而言，在所有基准模型中，Darling 取得了最高的质量评分（AlpacaEval 和 ArenaHard ），同时在语义层面（Distinct）和词汇层面（Distinct-4）也都达到了最高的多样性。此外，尽管本文并未显式地在创意写作提示词上进行训练，但与所有基准模型相比，Darling 在 EQ-Bench（创意写作）中获得了最高的 ELO 分数，证明了提升多样性对创意类任务的显著效果。<br><img src="./2026-01-03-17-53-56.png" srcset="/img/loading.gif" lazyload></p>
-<p>&emsp;&emsp;进一步的，本文绘制Quality-Diversity曲线，发现本文提出的方法扩展了Quality-Diversity的边界(将图像的右上角做了延申)。<br><img src="./2026-01-03-17-57-16.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="Verifiable-Tasks"><a href="#Verifiable-Tasks" class="headerlink" title="Verifiable Tasks"></a>Verifiable Tasks</h3><h4 id="实验设置-1"><a href="#实验设置-1" class="headerlink" title="实验设置"></a>实验设置</h4><ul>
+<h4 id="实验结果">实验结果</h4>
+<p>  Darling 在所有基准测试中均实现了质量与多样性的双重最佳。 具体而言，在所有基准模型中，Darling 取得了最高的质量评分（AlpacaEval 和 ArenaHard ），同时在语义层面（Distinct）和词汇层面（Distinct-4）也都达到了最高的多样性。此外，尽管本文并未显式地在创意写作提示词上进行训练，但与所有基准模型相比，Darling 在 EQ-Bench（创意写作）中获得了最高的 ELO 分数，证明了提升多样性对创意类任务的显著效果。 <img src="./2026-01-03-17-53-56.png" srcset="/img/loading.gif" lazyload /></p>
+<p>  进一步的，本文绘制Quality-Diversity曲线，发现本文提出的方法扩展了Quality-Diversity的边界(将图像的右上角做了延申)。 <img src="./2026-01-03-17-57-16.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="verifiable-tasks">Verifiable Tasks</h3>
+<h4 id="实验设置-1">实验设置</h4>
+<ul>
 <li>baseline: 与前面设置一样</li>
 <li>model: Qwen3-4B-Base | Qwen3-14B-Base</li>
-<li>data: subset of 10k data in DeepscaleR dataset<br><img src="./2026-01-03-18-01-07.png" srcset="/img/loading.gif" lazyload></li>
+<li>data: subset of 10k data in DeepscaleR dataset <img src="./2026-01-03-18-01-07.png" srcset="/img/loading.gif" lazyload /></li>
 <li>benchmarks: <strong>AIME25</strong> (极其强调深度推理，通常需要模型进行多步复杂的逻辑推导。) <strong>HMMT &amp; Brumo 2025</strong> (2025 年最新的竞赛题目，题型新颖，能够有效解决数据污染的问题。)</li>
 </ul>
-<h4 id="实验结果-1"><a href="#实验结果-1" class="headerlink" title="实验结果"></a>实验结果</h4><p>&emsp;&emsp;根据实验结果，在不同的pass@k下，本文提出的训练方法有效地提高了模型在Verifiable Tasks上的表现。<br><img src="./2026-01-03-18-03-56.png" srcset="/img/loading.gif" lazyload><br><img src="./2026-01-03-18-03-41.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h2><p>&emsp;&emsp;本文主要做了3个消融实验：</p>
-<ol>
+<h4 id="实验结果-1">实验结果</h4>
+<p>  根据实验结果，在不同的pass@k下，本文提出的训练方法有效地提高了模型在Verifiable Tasks上的表现。 <img src="./2026-01-03-18-03-56.png" srcset="/img/loading.gif" lazyload /> <img src="./2026-01-03-18-03-41.png" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="消融实验">消融实验</h2>
+<p>  本文主要做了3个消融实验：</p>
+<ol type="1">
 <li>对比融合Diversity Reward的加法方式与乘法方式(本文的方法)</li>
 <li>对比语义多样性与Classifier(本文的方法)</li>
 <li>GRPO Normalization的消融</li>
 </ol>
-<h3 id="Diversity-Reward应该加法融合还是乘法融合？"><a href="#Diversity-Reward应该加法融合还是乘法融合？" class="headerlink" title="Diversity Reward应该加法融合还是乘法融合？"></a>Diversity Reward应该加法融合还是乘法融合？</h3><p>&emsp;&emsp;实验结果：乘法聚合（Darling 采用的方案）在 AlpacaEval 2.0 上的表现优于加法聚合，而在 ArenaHard v2.0 和 NoveltyBench 上的表现则与之持平。本文之所以选择乘法聚合，是因为它具有简洁性：它不需要额外处理不同奖励尺度不匹配的问题，也不需要对各项独立奖励的混合权重进行繁琐的超参数调优。<br><img src="./2026-01-03-18-13-46.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="Classifier有没有用？"><a href="#Classifier有没有用？" class="headerlink" title="Classifier有没有用？"></a>Classifier有没有用？</h3><p>&emsp;&emsp;将训练的classifier替换成词汇多样性指标，使用4-gram来评估某个回答的多样性。实验结果：虽然将 4-gram 多样性与质量相结合在AlpacaEval 2.0, ArenaHard v2.0）能够达到与Darling 相当的水平，但在NoveltyBench中，其表现显著逊于 Darling。此外，在数学题目中，使用词汇多样性作为奖励的效果在 pass@1 性能上甚至不如原生的 GRPO 基准。<br><img src="./2026-01-03-18-16-25.png" srcset="/img/loading.gif" lazyload><br><img src="./2026-01-03-18-15-36.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="去掉Normalization有没有影响"><a href="#去掉Normalization有没有影响" class="headerlink" title="去掉Normalization有没有影响"></a>去掉Normalization有没有影响</h3><p>&emsp;&emsp;从结果上看，RL中有没有Normalization影响不大。反而是性能有微小提升。<br><img src="./2026-01-03-18-19-34.png" srcset="/img/loading.gif" lazyload><br><img src="./2026-01-03-18-19-56.png" srcset="/img/loading.gif" lazyload> </p>
-<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=115960878996056&bvid=BV171zaBJEp3&cid=35624452519&p=1" 
-    scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" 
-    width="100%" height="500"> 
+<h3 id="diversity-reward应该加法融合还是乘法融合">Diversity Reward应该加法融合还是乘法融合？</h3>
+<p>  实验结果：乘法聚合（Darling 采用的方案）在 AlpacaEval 2.0 上的表现优于加法聚合，而在 ArenaHard v2.0 和 NoveltyBench 上的表现则与之持平。本文之所以选择乘法聚合，是因为它具有简洁性：它不需要额外处理不同奖励尺度不匹配的问题，也不需要对各项独立奖励的混合权重进行繁琐的超参数调优。 <img src="./2026-01-03-18-13-46.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="classifier有没有用">Classifier有没有用？</h3>
+<p>  将训练的classifier替换成词汇多样性指标，使用4-gram来评估某个回答的多样性。实验结果：虽然将 4-gram 多样性与质量相结合在AlpacaEval 2.0, ArenaHard v2.0）能够达到与Darling 相当的水平，但在NoveltyBench中，其表现显著逊于 Darling。此外，在数学题目中，使用词汇多样性作为奖励的效果在 pass@1 性能上甚至不如原生的 GRPO 基准。 <img src="./2026-01-03-18-16-25.png" srcset="/img/loading.gif" lazyload /> <img src="./2026-01-03-18-15-36.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="去掉normalization有没有影响">去掉Normalization有没有影响</h3>
+<p>  从结果上看，RL中有没有Normalization影响不大。反而是性能有微小提升。 <img src="./2026-01-03-18-19-34.png" srcset="/img/loading.gif" lazyload /> <img src="./2026-01-03-18-19-56.png" srcset="/img/loading.gif" lazyload /></p>
+<iframe src="//player.bilibili.com/player.html?isOutside=true&amp;aid=115960878996056&amp;bvid=BV171zaBJEp3&amp;cid=35624452519&amp;p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="500">
 </iframe>
+
                 
               </div>
             

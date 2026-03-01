@@ -19,12 +19,12 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="研究背景&emsp;&emsp;现有的LLM在解答问题时，通过产生chain-of-thought 思维链，显著提升了能力。但是我们观察到一个现象：LLM在解题时消耗的token数越来越大了，有时候为了解决一个很简单的乘法问题，都要输出几百上千的tokens。可以说，COT在提升模型性能的同时，带来了极大的token消耗。&emsp;&emsp;本文作者通过观察现有的LLM在解数学题时的COT数据">
+    <meta name="description" content="研究背景   现有的LLM在解答问题时，通过产生chain-of-thought 思维链，显著提升了能力。但是我们观察到一个现象：LLM在解题时消耗的token数越来越大了，有时候为了解决一个很简单的乘法问题，都要输出几百上千的tokens。可以说，COT在提升模型性能的同时，带来了极大的token消耗。   本文作者通过观察现有的LLM在解数学题时的COT数据集，发现了token消耗的原因：L">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FOCUSED CHAIN OF THOUGHT EFFICIENT LLM REA SONING VIA STRUCTURED INPUT INFORMATION">
 <meta property="og:url" content="https://ycfywy.github.io/2025/12/25/FOCUSED-CHAIN-OF-THOUGHT-EFFICIENT-LLM-REA-SONING-VIA-STRUCTURED-INPUT-INFORMATION/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="研究背景&emsp;&emsp;现有的LLM在解答问题时，通过产生chain-of-thought 思维链，显著提升了能力。但是我们观察到一个现象：LLM在解题时消耗的token数越来越大了，有时候为了解决一个很简单的乘法问题，都要输出几百上千的tokens。可以说，COT在提升模型性能的同时，带来了极大的token消耗。&emsp;&emsp;本文作者通过观察现有的LLM在解数学题时的COT数据">
+<meta property="og:description" content="研究背景   现有的LLM在解答问题时，通过产生chain-of-thought 思维链，显著提升了能力。但是我们观察到一个现象：LLM在解题时消耗的token数越来越大了，有时候为了解决一个很简单的乘法问题，都要输出几百上千的tokens。可以说，COT在提升模型性能的同时，带来了极大的token消耗。   本文作者通过观察现有的LLM在解数学题时的COT数据集，发现了token消耗的原因：L">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ycfywy.github.io/2025/12/25/FOCUSED-CHAIN-OF-THOUGHT-EFFICIENT-LLM-REA-SONING-VIA-STRUCTURED-INPUT-INFORMATION/2025-12-25-17-27-32.png">
 <meta property="og:image" content="https://ycfywy.github.io/2025/12/25/FOCUSED-CHAIN-OF-THOUGHT-EFFICIENT-LLM-REA-SONING-VIA-STRUCTURED-INPUT-INFORMATION/2025-12-25-17-28-06.png">
@@ -234,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          1.2k 字
         
       </span>
     
@@ -287,30 +287,36 @@
             
               <div class="markdown-body">
                 
-                <h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>&emsp;&emsp;现有的LLM在解答问题时，通过产生chain-of-thought 思维链，显著提升了能力。但是我们观察到一个现象：LLM在解题时消耗的token数越来越大了，有时候为了解决一个很简单的乘法问题，都要输出几百上千的tokens。可以说，COT在提升模型性能的同时，带来了极大的token消耗。<br>&emsp;&emsp;本文作者通过观察现有的LLM在解数学题时的COT数据集，发现了token消耗的原因：LLM在解题的时候，输出的很大一部分不是解题的计算步骤，而是对题目的分析过程。进一步的，作者把LLM Output分成3类：Extraction （从题干中抽取相关信息）、Reasoning（计算和分析的步骤）、Filter（如”Wait, let me re-read the problem” 之类的无关短语）。<br><img src="./2025-12-25-17-27-32.png" srcset="/img/loading.gif" lazyload><br><img src="./2025-12-25-17-28-06.png" srcset="/img/loading.gif" lazyload></p>
-<p>&emsp;&emsp;如何让LLM用更少的token达到同样的表现，更大比例的token用于真正的思考，而不是输出无关或者非解题的内容，是当前需要解决的问题。</p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>&emsp;&emsp;本文借鉴了人类解题时候的思路: 先从题目题干中抽取所有已知的信息，以及需要求解的问题，再执行真正的解题步骤。而不是像现在的LLM一样，边分析别解题。具体来说，LLM在解答题目之前，需要先从Question中抽取出关键信息和问题，在进行COT。如图，作者把一个具体的问题建模成结构化的形式。<br><img src="./2025-12-25-17-35-29.png" srcset="/img/loading.gif" lazyload><br><img src="./2025-12-25-17-35-17.png" srcset="/img/loading.gif" lazyload></p>
-<p>&emsp;&emsp;在实验过程中，作者发现：对参数量比较小的模型(0.6B 1B)，将问题修改为结构化的形式会比较困难。因此，实际的解决策略包含两种：</p>
+                <h2 id="研究背景">研究背景</h2>
+<p>  现有的LLM在解答问题时，通过产生chain-of-thought 思维链，显著提升了能力。但是我们观察到一个现象：LLM在解题时消耗的token数越来越大了，有时候为了解决一个很简单的乘法问题，都要输出几百上千的tokens。可以说，COT在提升模型性能的同时，带来了极大的token消耗。   本文作者通过观察现有的LLM在解数学题时的COT数据集，发现了token消耗的原因：LLM在解题的时候，输出的很大一部分不是解题的计算步骤，而是对题目的分析过程。进一步的，作者把LLM Output分成3类：Extraction （从题干中抽取相关信息）、Reasoning（计算和分析的步骤）、Filter（如“Wait, let me re-read the problem” 之类的无关短语）。 <img src="./2025-12-25-17-27-32.png" srcset="/img/loading.gif" lazyload /> <img src="./2025-12-25-17-28-06.png" srcset="/img/loading.gif" lazyload /></p>
+<p>  如何让LLM用更少的token达到同样的表现，更大比例的token用于真正的思考，而不是输出无关或者非解题的内容，是当前需要解决的问题。</p>
+<h2 id="解决方法">解决方法</h2>
+<p>  本文借鉴了人类解题时候的思路: 先从题目题干中抽取所有已知的信息，以及需要求解的问题，再执行真正的解题步骤。而不是像现在的LLM一样，边分析别解题。具体来说，LLM在解答题目之前，需要先从Question中抽取出关键信息和问题，在进行COT。如图，作者把一个具体的问题建模成结构化的形式。 <img src="./2025-12-25-17-35-29.png" srcset="/img/loading.gif" lazyload /> <img src="./2025-12-25-17-35-17.png" srcset="/img/loading.gif" lazyload /></p>
+<p>  在实验过程中，作者发现：对参数量比较小的模型(0.6B 1B)，将问题修改为结构化的形式会比较困难。因此，实际的解决策略包含两种：</p>
 <ul>
 <li>Pre-formatting：使用GPT5这类能力比较强的LLM进行结构化，再把结构化后的问题传给测试模型。</li>
 <li>Two-step prompting: 让测试模型自己先输出结构化问题，再进行回答。</li>
 </ul>
-<h2 id="本文如何通过实验论证了该方案的优越性"><a href="#本文如何通过实验论证了该方案的优越性" class="headerlink" title="本文如何通过实验论证了该方案的优越性"></a>本文如何通过实验论证了该方案的优越性</h2><h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><ul>
+<h2 id="本文如何通过实验论证了该方案的优越性">本文如何通过实验论证了该方案的优越性</h2>
+<h3 id="实验设置">实验设置</h3>
+<ul>
 <li>models: Qwen-3 (0.6B, 4B, 14B, 32B)作为测试的模型</li>
 <li>benchmarks: SVAMP, GSM-Hard, MATH-500 (都是数学问题，该场景更能体现模型的reasoning能力)</li>
-<li>metrics: Pass@5 metric(衡量模型解题的准确率)  #Tokens(衡量模型消耗的token数)</li>
+<li>metrics: Pass@5 metric(衡量模型解题的准确率) #Tokens(衡量模型消耗的token数)</li>
 </ul>
-<h3 id="COT和F-COT-本文提出的方法-的对比"><a href="#COT和F-COT-本文提出的方法-的对比" class="headerlink" title="COT和F-COT(本文提出的方法)的对比"></a>COT和F-COT(本文提出的方法)的对比</h3><p>&emsp;&emsp;图中的100%虚线是传统COT的accuracy和token count的baseline。蓝色色柱为accuracy，黄色色柱为token count。可以明显的看到，F-COT解题时算上结构化的题目和推理的过程，在性能与baseline相当的情况下，token消耗平均只有50%不到。<br><img src="./2025-12-25-17-44-05.png" srcset="/img/loading.gif" lazyload></p>
-<p>更具体的，在保持差不多表现的情况下，这些模型解题时消耗的token都有大幅的下降。<br><img src="./2025-12-25-18-04-59.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="Overthinking-score的计算"><a href="#Overthinking-score的计算" class="headerlink" title="Overthinking score的计算"></a>Overthinking score的计算</h3><p>&emsp;&emsp;<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2502.08235">Cuadron et al. (2025)</a>在论文中提到了Overthinking score这个指标：它反映了模型倾向于优先进行抽象的反思、推测或多分支规划，而非执行能直接推进问题解决的具体数学步骤。该评分范围为 0 到 10，用于衡量模型在内部思考与具体解题之间的侧重程度。低分表示模型进行的是专注、循序渐进的推理，且极少进行推测性讨论；而高分则反映出模型存在大量的Meta-reasoning、频繁切换方法，或是在未推导中间结果的情况下便过早得出结论。</p>
-<p>&emsp;&emsp; 具体的实验过程就是：使用LLM-as-judge，让大的LLM使用特定的Prompt对模型在COT和F-COT场景下的回答打分，并计算出一个平均的overthinking score。经过实验，作者发现LLM的overthinking score从2.35 ± 1.5 降低至1.74±1.4。<br><img src="./2025-12-25-17-54-04.png" srcset="/img/loading.gif" lazyload><br><img src="./2025-12-25-17-53-33.png" srcset="/img/loading.gif" lazyload><br><img src="./2025-12-25-17-53-50.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h3><ol>
-<li><p>context format会影响结果吗？现在的结构化问题描述是使用&lt;contex&gt;标签包裹的结构化数据。如果是没有这些标签，使用有序列表、无序列表、直接拼接的情况下，会影响结果吗？<br>如图Listing15 16 17分别对应上述的3种结构化的格式，可以看到，不同的格式基本不影响模型的表现，且都节省了大量的token输出。<br><img src="./2025-12-25-18-00-44.png" srcset="/img/loading.gif" lazyload></p>
-</li>
-<li><p>让模型自己生成结构化的问题描述，会影响模型表现吗？本文测试了不同size的LLM生成context的情况下的表现，除了Qwen3.0-0.6B由于模型能力不足，不能产生完整的context，导致accuracy显著下降外，其余的情况下模型表现都很好。<br><img src="./2025-12-25-18-06-28.png" srcset="/img/loading.gif" lazyload></p>
-</li>
+<h3 id="cot和f-cot本文提出的方法的对比">COT和F-COT(本文提出的方法)的对比</h3>
+<p>  图中的100%虚线是传统COT的accuracy和token count的baseline。蓝色色柱为accuracy，黄色色柱为token count。可以明显的看到，F-COT解题时算上结构化的题目和推理的过程，在性能与baseline相当的情况下，token消耗平均只有50%不到。 <img src="./2025-12-25-17-44-05.png" srcset="/img/loading.gif" lazyload /></p>
+<p>更具体的，在保持差不多表现的情况下，这些模型解题时消耗的token都有大幅的下降。 <img src="./2025-12-25-18-04-59.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="overthinking-score的计算">Overthinking score的计算</h3>
+<p>  <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2502.08235">Cuadron et al. (2025)</a>在论文中提到了Overthinking score这个指标：它反映了模型倾向于优先进行抽象的反思、推测或多分支规划，而非执行能直接推进问题解决的具体数学步骤。该评分范围为 0 到 10，用于衡量模型在内部思考与具体解题之间的侧重程度。低分表示模型进行的是专注、循序渐进的推理，且极少进行推测性讨论；而高分则反映出模型存在大量的Meta-reasoning、频繁切换方法，或是在未推导中间结果的情况下便过早得出结论。</p>
+<p>   具体的实验过程就是：使用LLM-as-judge，让大的LLM使用特定的Prompt对模型在COT和F-COT场景下的回答打分，并计算出一个平均的overthinking score。经过实验，作者发现LLM的overthinking score从2.35 ± 1.5 降低至1.74±1.4。 <img src="./2025-12-25-17-54-04.png" srcset="/img/loading.gif" lazyload /> <img src="./2025-12-25-17-53-33.png" srcset="/img/loading.gif" lazyload /> <img src="./2025-12-25-17-53-50.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="消融实验">消融实验</h3>
+<ol type="1">
+<li><p>context format会影响结果吗？现在的结构化问题描述是使用&lt;contex&gt;标签包裹的结构化数据。如果是没有这些标签，使用有序列表、无序列表、直接拼接的情况下，会影响结果吗？ 如图Listing15 16 17分别对应上述的3种结构化的格式，可以看到，不同的格式基本不影响模型的表现，且都节省了大量的token输出。 <img src="./2025-12-25-18-00-44.png" srcset="/img/loading.gif" lazyload /></p></li>
+<li><p>让模型自己生成结构化的问题描述，会影响模型表现吗？本文测试了不同size的LLM生成context的情况下的表现，除了Qwen3.0-0.6B由于模型能力不足，不能产生完整的context，导致accuracy显著下降外，其余的情况下模型表现都很好。 <img src="./2025-12-25-18-06-28.png" srcset="/img/loading.gif" lazyload /></p></li>
 </ol>
-<h2 id="阅读总结"><a href="#阅读总结" class="headerlink" title="阅读总结"></a>阅读总结</h2><p>&emsp;&emsp;本文聚焦LLM COT，发现LLM输出COT的内容中有相当一部分是无关内容。如果模型一直在输出”Wait, let me re-read the problem”这样的无关内容，消耗了大量的token且对实际表现没有提升。针对该问题，本文提出先extract再reasoning的方法，显著降低了reasoning的token消耗。此外，本文在分析COT内容时，使用的”Extraction Reasoning Filter”分类的方法也很有借鉴意义。</p>
+<h2 id="阅读总结">阅读总结</h2>
+<p>  本文聚焦LLM COT，发现LLM输出COT的内容中有相当一部分是无关内容。如果模型一直在输出“Wait, let me re-read the problem”这样的无关内容，消耗了大量的token且对实际表现没有提升。针对该问题，本文提出先extract再reasoning的方法，显著降低了reasoning的token消耗。此外，本文在分析COT内容时，使用的“Extraction Reasoning Filter”分类的方法也很有借鉴意义。</p>
 
                 
               </div>

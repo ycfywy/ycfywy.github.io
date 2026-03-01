@@ -19,12 +19,12 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="计算 $a &#x3D; g^{x} mod \ p$离散对数计算的问题 最坏情况下是$O(p)$这里可以使用Sherwood算法引入随机性，降低进入最坏情况的概率。  这个改写利用了随机预处理来改变求解的实例，使得原本可能在特定输入下性能不佳的确定性离散对数算法 $log_{g,p}$，能够以接近平均性能的效率求解。 🔬 $dlog_{RH}$ 算法工作原理分析1. 算法目标 问题: 离散对数">
+    <meta name="description" content="计算 a &#x3D; gxmod p 离散对数计算的问题 最坏情况下是O(p) 这里可以使用Sherwood算法引入随机性，降低进入最坏情况的概率。  这个改写利用了随机预处理来改变求解的实例，使得原本可能在特定输入下性能不佳的确定性离散对数算法 logg, p，能够以接近平均性能的效率求解。 🔬 dlogRH 算法工作原理分析 1. 算法目标  问题: 离散对数问题。 输入: 基数 g，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="概率算法ppt总结">
 <meta property="og:url" content="https://ycfywy.github.io/2025/12/10/%E6%A6%82%E7%8E%87%E7%AE%97%E6%B3%95ppt%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="计算 $a &#x3D; g^{x} mod \ p$离散对数计算的问题 最坏情况下是$O(p)$这里可以使用Sherwood算法引入随机性，降低进入最坏情况的概率。  这个改写利用了随机预处理来改变求解的实例，使得原本可能在特定输入下性能不佳的确定性离散对数算法 $log_{g,p}$，能够以接近平均性能的效率求解。 🔬 $dlog_{RH}$ 算法工作原理分析1. 算法目标 问题: 离散对数">
+<meta property="og:description" content="计算 a &#x3D; gxmod p 离散对数计算的问题 最坏情况下是O(p) 这里可以使用Sherwood算法引入随机性，降低进入最坏情况的概率。  这个改写利用了随机预处理来改变求解的实例，使得原本可能在特定输入下性能不佳的确定性离散对数算法 logg, p，能够以接近平均性能的效率求解。 🔬 dlogRH 算法工作原理分析 1. 算法目标  问题: 离散对数问题。 输入: 基数 g，">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ycfywy.github.io/2025/12/10/%E6%A6%82%E7%8E%87%E7%AE%97%E6%B3%95ppt%E6%80%BB%E7%BB%93/2025-12-10-14-09-30.png">
 <meta property="og:image" content="https://ycfywy.github.io/2025/12/10/%E6%A6%82%E7%8E%87%E7%AE%97%E6%B3%95ppt%E6%80%BB%E7%BB%93/2025-12-10-15-52-43.png">
@@ -230,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k 字
+          910 字
         
       </span>
     
@@ -241,7 +241,7 @@
         
         
         
-          9 分钟
+          8 分钟
         
       </span>
     
@@ -283,89 +283,99 @@
             
               <div class="markdown-body">
                 
-                <p>计算 $a &#x3D; g^{x} mod \ p$<br>离散对数计算的问题 最坏情况下是$O(p)$<br>这里可以使用Sherwood算法引入随机性，降低进入最坏情况的概率。</p>
-<p><img src="./2025-12-10-14-09-30.png" srcset="/img/loading.gif" lazyload></p>
-<p>这个改写利用了随机预处理来改变求解的实例，使得原本可能在特定输入下性能不佳的确定性离散对数算法 $log_{g,p}$，能够以接近平均性能的效率求解。</p>
-<h2 id="🔬-dlog-RH-算法工作原理分析"><a href="#🔬-dlog-RH-算法工作原理分析" class="headerlink" title="🔬 $dlog_{RH}$ 算法工作原理分析"></a>🔬 $dlog_{RH}$ 算法工作原理分析</h2><h3 id="1-算法目标"><a href="#1-算法目标" class="headerlink" title="1. 算法目标"></a>1. 算法目标</h3><ul>
+                <p>计算 <span class="math inline"><em>a</em> = <em>g</em><sup><em>x</em></sup><em>m</em><em>o</em><em>d</em> <em>p</em></span> 离散对数计算的问题 最坏情况下是<span class="math inline"><em>O</em>(<em>p</em>)</span> 这里可以使用Sherwood算法引入随机性，降低进入最坏情况的概率。</p>
+<p><img src="./2025-12-10-14-09-30.png" srcset="/img/loading.gif" lazyload /></p>
+<p>这个改写利用了随机预处理来改变求解的实例，使得原本可能在特定输入下性能不佳的确定性离散对数算法 <span class="math inline"><em>l</em><em>o</em><em>g</em><sub><em>g</em>, <em>p</em></sub></span>，能够以接近平均性能的效率求解。</p>
+<h2 id="dlog_rh-算法工作原理分析">🔬 <span class="math inline"><em>d</em><em>l</em><em>o</em><em>g</em><sub><em>R</em><em>H</em></sub></span> 算法工作原理分析</h2>
+<h3 id="算法目标">1. 算法目标</h3>
+<ul>
 <li><strong>问题</strong>: 离散对数问题。</li>
-<li><strong>输入</strong>: 基数 $g$，目标值 $a$，模数 $p$。</li>
-<li><strong>求解</strong>: 找到指数 $x$，使得 $g^x \equiv a \pmod{p}$。</li>
-<li><strong>模</strong>: 运算发生在 $\mathbb{Z}<em>p^*$ (模 $p$ 乘法群) 中。指数 $x$ 在 $\mathbb{Z}</em>{p-1}$ (模 $p-1$ 加法群) 中，即 $x \in {0, 1, \dots, p-2}$。</li>
+<li><strong>输入</strong>: 基数 <span class="math inline"><em>g</em></span>，目标值 <span class="math inline"><em>a</em></span>，模数 <span class="math inline"><em>p</em></span>。</li>
+<li><strong>求解</strong>: 找到指数 <span class="math inline"><em>x</em></span>，使得 <span class="math inline"><em>g</em><sup><em>x</em></sup> ≡ <em>a</em> (mod  <em>p</em>)</span>。</li>
+<li><strong>模</strong>: 运算发生在 <span class="math inline">ℤ<sub><em>p</em></sub><sup>*</sup></span> (模 <span class="math inline"><em>p</em></span> 乘法群) 中。指数 <span class="math inline"><em>x</em></span> 在 <span class="math inline">ℤ<sub><em>p</em> − 1</sub></span> (模 <span class="math inline"><em>p</em> − 1</span> 加法群) 中，即 <span class="math inline"><em>x</em> ∈ {0, 1, …, <em>p</em> − 2}</span>。</li>
 </ul>
-<h3 id="2-dlog-RH-步骤解析"><a href="#2-dlog-RH-步骤解析" class="headerlink" title="2. $dlog_{RH}$ 步骤解析"></a>2. $dlog_{RH}$ 步骤解析</h3><table>
+<h3 id="dlog_rh-步骤解析">2. <span class="math inline"><em>d</em><em>l</em><em>o</em><em>g</em><sub><em>R</em><em>H</em></sub></span> 步骤解析</h3>
+<table>
+
 <thead>
-<tr>
-<th align="left">步骤</th>
-<th align="left">代码</th>
-<th align="left">解释</th>
-<th align="left">作用</th>
+<tr class="header">
+<th style="text-align: left;">步骤</th>
+<th style="text-align: left;">代码</th>
+<th style="text-align: left;">解释</th>
+<th style="text-align: left;">作用</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left"><strong>I. 随机数</strong></td>
-<td align="left"><code>r ← uniform(0..p-2);</code></td>
-<td align="left">随机选择一个指数 $r \in {0, 1, \dots, p-2}$。<strong>这是随机性的来源。</strong></td>
-<td align="left">引入随机变量 $r$。</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>I. 随机数</strong></td>
+<td style="text-align: left;"><code>r ← uniform(0..p-2);</code></td>
+<td style="text-align: left;">随机选择一个指数 <span class="math inline"><em>r</em> ∈ {0, 1, …, <em>p</em> − 2}</span>。<strong>这是随机性的来源。</strong></td>
+<td style="text-align: left;">引入随机变量 <span class="math inline"><em>r</em></span>。</td>
 </tr>
-<tr>
-<td align="left"><strong>II. 预处理 (实例 $y$)</strong></td>
-<td align="left"><code>b ← ModularExponent(g, r, p);</code></td>
-<td align="left">计算 $b &#x3D; g^r \pmod{p}$。</td>
-<td align="left"></td>
+<tr class="even">
+<td style="text-align: left;"><strong>II. 预处理 (实例 <span class="math inline"><em>y</em></span>)</strong></td>
+<td style="text-align: left;"><code>b ← ModularExponent(g, r, p);</code></td>
+<td style="text-align: left;">计算 <span class="math inline"><em>b</em> = <em>g</em><sup><em>r</em></sup> (mod  <em>p</em>)</span>。</td>
+<td style="text-align: left;"></td>
 </tr>
-<tr>
-<td align="left"></td>
-<td align="left"><code>c ← b \cdot a \pmod{p};</code></td>
-<td align="left">计算 $c &#x3D; b \cdot a \pmod{p} &#x3D; g^r \cdot g^x \pmod{p} &#x3D; g^{r+x} \pmod{p}$。</td>
-<td align="left"><strong>原实例 $a$ 变换为随机实例 $c$。</strong></td>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>c ← b \cdot a \pmod{p};</code></td>
+<td style="text-align: left;">计算 <span class="math inline"><em>c</em> = <em>b</em> ⋅ <em>a</em> (mod  <em>p</em>) = <em>g</em><sup><em>r</em></sup> ⋅ <em>g</em><sup><em>x</em></sup> (mod  <em>p</em>) = <em>g</em><sup><em>r</em> + <em>x</em></sup> (mod  <em>p</em>)</span>。</td>
+<td style="text-align: left;"><strong>原实例 <span class="math inline"><em>a</em></span> 变换为随机实例 <span class="math inline"><em>c</em></span>。</strong></td>
 </tr>
-<tr>
-<td align="left"><strong>III. 确定求解 ($f$)</strong></td>
-<td align="left"><code>y ← logg,pc;</code></td>
-<td align="left">使用<strong>确定性算法</strong> $log_{g,p}$ 求解实例 $c$。<strong>目标是找到 $y$，使得 $g^y \equiv c \pmod{p}$。</strong></td>
-<td align="left">$y$ 是 $r+x$ 的解。</td>
+<tr class="even">
+<td style="text-align: left;"><strong>III. 确定求解 (<span class="math inline"><em>f</em></span>)</strong></td>
+<td style="text-align: left;"><code>y ← logg,pc;</code></td>
+<td style="text-align: left;">使用<strong>确定性算法</strong> <span class="math inline"><em>l</em><em>o</em><em>g</em><sub><em>g</em>, <em>p</em></sub></span> 求解实例 <span class="math inline"><em>c</em></span>。<strong>目标是找到 <span class="math inline"><em>y</em></span>，使得 <span class="math inline"><em>g</em><sup><em>y</em></sup> ≡ <em>c</em> (mod  <em>p</em>)</span>。</strong></td>
+<td style="text-align: left;"><span class="math inline"><em>y</em></span> 是 <span class="math inline"><em>r</em> + <em>x</em></span> 的解。</td>
 </tr>
-<tr>
-<td align="left"><strong>IV. 后处理 ($v$)</strong></td>
-<td align="left"><code>return (y-r) mod (p-1);</code></td>
-<td align="left">$y$ 是 $r+x$ 的解，所以 $y \equiv r+x \pmod{p-1}$。因此，$x \equiv y-r \pmod{p-1}$。<strong>这是将解 $y$ 变回 $x$ 的步骤。</strong></td>
-<td align="left">恢复原实例 $a$ 的解 $x$。</td>
+<tr class="odd">
+<td style="text-align: left;"><strong>IV. 后处理 (<span class="math inline"><em>v</em></span>)</strong></td>
+<td style="text-align: left;"><code>return (y-r) mod (p-1);</code></td>
+<td style="text-align: left;"><span class="math inline"><em>y</em></span> 是 <span class="math inline"><em>r</em> + <em>x</em></span> 的解，所以 <span class="math inline"><em>y</em> ≡ <em>r</em> + <em>x</em> (mod  <em>p</em> − 1)</span>。因此，<span class="math inline"><em>x</em> ≡ <em>y</em> − <em>r</em> (mod  <em>p</em> − 1)</span>。<strong>这是将解 <span class="math inline"><em>y</em></span> 变回 <span class="math inline"><em>x</em></span> 的步骤。</strong></td>
+<td style="text-align: left;">恢复原实例 <span class="math inline"><em>a</em></span> 的解 <span class="math inline"><em>x</em></span>。</td>
 </tr>
-</tbody></table>
-<h3 id="3-u-和-v-函数的确定"><a href="#3-u-和-v-函数的确定" class="headerlink" title="3. $u$ 和 $v$ 函数的确定"></a>3. $u$ 和 $v$ 函数的确定</h3><p>根据 Sherwood 算法的<strong>随机预处理一般方法</strong>：</p>
+</tbody>
+</table>
+<h3 id="u-和-v-函数的确定">3. <span class="math inline"><em>u</em></span> 和 <span class="math inline"><em>v</em></span> 函数的确定</h3>
+<p>根据 Sherwood 算法的<strong>随机预处理一般方法</strong>：</p>
 <ul>
-<li><strong>原实例 $x$</strong>: 在离散对数问题中，原实例是<strong>目标值 $a$</strong>。</li>
-<li><strong>随机变量 $r$</strong>: 在 ${0, 1, \dots, p-2}$ 中随机抽取。</li>
-<li><strong>确定性算法 $f$</strong>: 是 $log_{g,p}$，即 $f(a) &#x3D; x$。</li>
+<li><strong>原实例 <span class="math inline"><em>x</em></span></strong>: 在离散对数问题中，原实例是<strong>目标值 <span class="math inline"><em>a</em></span></strong>。</li>
+<li><strong>随机变量 <span class="math inline"><em>r</em></span></strong>: 在 <span class="math inline">{0, 1, …, <em>p</em> − 2}</span> 中随机抽取。</li>
+<li><strong>确定性算法 <span class="math inline"><em>f</em></span></strong>: 是 <span class="math inline"><em>l</em><em>o</em><em>g</em><sub><em>g</em>, <em>p</em></sub></span>，即 <span class="math inline"><em>f</em>(<em>a</em>) = <em>x</em></span>。</li>
 </ul>
-<h4 id="1-预处理函数-u"><a href="#1-预处理函数-u" class="headerlink" title="1. 预处理函数 $u$"></a>1. 预处理函数 $u$</h4><p>$u(a, r)$ 的作用是将原实例 $a$ 变换为随机实例 $c$。</p>
-<p>$$\text{原实例 } a \xrightarrow{u(a, r)} \text{随机实例 } c$$</p>
-<p>根据代码 $c \leftarrow (g^r \pmod{p}) \cdot a \pmod{p}$：</p>
-<p>$$u(a, r) &#x3D; (g^r \cdot a) \pmod{p}$$</p>
-<h4 id="2-后处理函数-v"><a href="#2-后处理函数-v" class="headerlink" title="2. 后处理函数 $v$"></a>2. 后处理函数 $v$</h4><p>$v(r, s)$ 的作用是将确定性算法的解 $s$ (即代码中的 $y$) 结合随机变量 $r$，变换回原实例的解 $x$。</p>
-<p>$$\text{随机变量 } r \text{ 和 解 } s \xrightarrow{v(r, s)} \text{原实例的解 } x$$</p>
-<p>根据代码 $x \leftarrow (y-r) \pmod{p-1}$：</p>
-<p>$$v(r, s) &#x3D; (s - r) \pmod{p-1}$$</p>
-<hr>
-<h3 id="5-2-素数判定问题-p124"><a href="#5-2-素数判定问题-p124" class="headerlink" title="5.2 素数判定问题 p124"></a>5.2 素数判定问题 p124</h3><ul>
+<h4 id="预处理函数-u">1. 预处理函数 <span class="math inline"><em>u</em></span></h4>
+<p><span class="math inline"><em>u</em>(<em>a</em>, <em>r</em>)</span> 的作用是将原实例 <span class="math inline"><em>a</em></span> 变换为随机实例 <span class="math inline"><em>c</em></span>。</p>
+<p><span class="math display">$$\text{原实例 } a \xrightarrow{u(a, r)} \text{随机实例 } c$$</span></p>
+<p>根据代码 <span class="math inline"><em>c</em> ← (<em>g</em><sup><em>r</em></sup> (mod  <em>p</em>)) ⋅ <em>a</em> (mod  <em>p</em>)</span>：</p>
+<p><span class="math display"><em>u</em>(<em>a</em>, <em>r</em>) = (<em>g</em><sup><em>r</em></sup> ⋅ <em>a</em>) (mod  <em>p</em>)</span></p>
+<h4 id="后处理函数-v">2. 后处理函数 <span class="math inline"><em>v</em></span></h4>
+<p><span class="math inline"><em>v</em>(<em>r</em>, <em>s</em>)</span> 的作用是将确定性算法的解 <span class="math inline"><em>s</em></span> (即代码中的 <span class="math inline"><em>y</em></span>) 结合随机变量 <span class="math inline"><em>r</em></span>，变换回原实例的解 <span class="math inline"><em>x</em></span>。</p>
+<p><span class="math display">$$\text{随机变量 } r \text{ 和 解 } s \xrightarrow{v(r, s)} \text{原实例的解 } x$$</span></p>
+<p>根据代码 <span class="math inline"><em>x</em> ← (<em>y</em> − <em>r</em>) (mod  <em>p</em> − 1)</span>：</p>
+<p><span class="math display"><em>v</em>(<em>r</em>, <em>s</em>) = (<em>s</em> − <em>r</em>) (mod  <em>p</em> − 1)</span></p>
+<hr />
+<h3 id="素数判定问题-p124">5.2 素数判定问题 p124</h3>
+<ul>
 <li>方法1：随机因子</li>
 </ul>
-<p><img src="./2025-12-10-15-52-43.png" srcset="/img/loading.gif" lazyload><br>在 n &#x3D; 2623 的情况下 $2 - \sqrt{2623}$随机选择有98%的概率正确</p>
+<p><img src="./2025-12-10-15-52-43.png" srcset="/img/loading.gif" lazyload /> 在 n = 2623 的情况下 <span class="math inline">$2 - \sqrt{2623}$</span>随机选择有98%的概率正确</p>
 <ul>
 <li>方法2：费马小定理的逆否命题</li>
 </ul>
-<p><img src="./2025-12-10-15-55-14.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="./2025-12-10-15-57-53.png" srcset="/img/loading.gif" lazyload></p>
-<p>显然这种判定比较不负责（只要有 mod n &#x3D;&#x3D; 1就是素数 不等于1就不是）<br>满足$a^{n - 1} mod \ n &#x3D; 1$的数我们称为伪素数</p>
-<p><img src="./2025-12-10-16-00-10.png" srcset="/img/loading.gif" lazyload></p>
-<p>也就是说，仅仅使用费马小定理，会有一些合数比较特殊，他们有很多的a做了运算后<br>均为1。这就迎来了我们的方法3</p>
+<p><img src="./2025-12-10-15-55-14.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="./2025-12-10-15-57-53.png" srcset="/img/loading.gif" lazyload /></p>
+<p>显然这种判定比较不负责（只要有 mod n == 1就是素数 不等于1就不是） 满足<span class="math inline"><em>a</em><sup><em>n</em> − 1</sup><em>m</em><em>o</em><em>d</em> <em>n</em> = 1</span>的数我们称为伪素数</p>
+<p><img src="./2025-12-10-16-00-10.png" srcset="/img/loading.gif" lazyload /></p>
+<p>也就是说，仅仅使用费马小定理，会有一些合数比较特殊，他们有很多的a做了运算后 均为1。这就迎来了我们的方法3</p>
 <ul>
 <li>方法3： Miller-Rabin测试</li>
 </ul>
-<p><img src="./2025-12-10-16-18-12.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="./2025-12-10-16-21-17.png" srcset="/img/loading.gif" lazyload></p>
-<p>判断一个底数 $a$ 是否为强伪证据：<br>分解 $n-1$：<br>将 $n-1$ 分解为 $2^s t$（$t$ 为奇数）。<br>计算初始值：<br>计算 $x \leftarrow a^t \pmod{n}$。<br>检查条件 ① 和 $i&#x3D;0$ 的条件 ②：<br>如果 $x&#x3D;1$ 或 $x&#x3D;n-1$（即 $a^t \equiv 1 \pmod{n}$ 或 $a^t \equiv -1 \pmod{n}$），则 $a$ 满足条件，返回 $true$（$a$ 是强伪证据）。<br>循环检查其余的条件 ②：<br>执行 $s-1$ 次循环，在每次循环中计算 $x \leftarrow x^2 \pmod{n}$（相当于检查 $a^{2^i t} \pmod{n}$）。如果在循环中发现 $x&#x3D;n-1$，则满足条件②，返回 $true$（$a$ 是强伪证据）。</p>
-<p>返回 $false$：如果所有检查都未通过，则 $a$ 不是强伪证据。此时 $a$ 是 $n$ 是合数的强证据，所以 $n$ 必定是合数，返回 $false$（测试成功）。</p>
+<p><img src="./2025-12-10-16-18-12.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="./2025-12-10-16-21-17.png" srcset="/img/loading.gif" lazyload /></p>
+<p>判断一个底数 <span class="math inline"><em>a</em></span> 是否为强伪证据： 分解 <span class="math inline"><em>n</em> − 1</span>： 将 <span class="math inline"><em>n</em> − 1</span> 分解为 <span class="math inline">2<sup><em>s</em></sup><em>t</em></span>（<span class="math inline"><em>t</em></span> 为奇数）。 计算初始值： 计算 <span class="math inline"><em>x</em> ← <em>a</em><sup><em>t</em></sup> (mod  <em>n</em>)</span>。 检查条件 ① 和 <span class="math inline"><em>i</em> = 0</span> 的条件 ②： 如果 <span class="math inline"><em>x</em> = 1</span> 或 <span class="math inline"><em>x</em> = <em>n</em> − 1</span>（即 <span class="math inline"><em>a</em><sup><em>t</em></sup> ≡ 1 (mod  <em>n</em>)</span> 或 <span class="math inline"><em>a</em><sup><em>t</em></sup> ≡  − 1 (mod  <em>n</em>)</span>），则 <span class="math inline"><em>a</em></span> 满足条件，返回 <span class="math inline"><em>t</em><em>r</em><em>u</em><em>e</em></span>（<span class="math inline"><em>a</em></span> 是强伪证据）。 循环检查其余的条件 ②： 执行 <span class="math inline"><em>s</em> − 1</span> 次循环，在每次循环中计算 <span class="math inline"><em>x</em> ← <em>x</em><sup>2</sup> (mod  <em>n</em>)</span>（相当于检查 <span class="math inline"><em>a</em><sup>2<sup><em>i</em></sup><em>t</em></sup> (mod  <em>n</em>)</span>）。如果在循环中发现 <span class="math inline"><em>x</em> = <em>n</em> − 1</span>，则满足条件②，返回 <span class="math inline"><em>t</em><em>r</em><em>u</em><em>e</em></span>（<span class="math inline"><em>a</em></span> 是强伪证据）。</p>
+<p>返回 <span class="math inline"><em>f</em><em>a</em><em>l</em><em>s</em><em>e</em></span>：如果所有检查都未通过，则 <span class="math inline"><em>a</em></span> 不是强伪证据。此时 <span class="math inline"><em>a</em></span> 是 <span class="math inline"><em>n</em></span> 是合数的强证据，所以 <span class="math inline"><em>n</em></span> 必定是合数，返回 <span class="math inline"><em>f</em><em>a</em><em>l</em><em>s</em><em>e</em></span>（测试成功）。</p>
 <p>这种方法大大缩减了伪证据数目</p>
 
                 
