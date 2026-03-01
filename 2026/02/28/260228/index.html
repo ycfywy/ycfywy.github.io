@@ -19,18 +19,18 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Codeforcesonehot100的2d接雨水 AI Learning奖励函数的坍缩现象和问题RL中，奖励函数坍缩指的是Agent发现一个漏洞，通过一些非预期的手段来刷高Reward Score，但是违背了设计者的目标。 具体来说有：  Shortcutting: 寻找捷径 Reward Hacking: Agent直接操纵奖励信号 Over-optimization: 为了追求Reward，">
+    <meta name="description" content="Codeforces onehot100的2d接雨水 AI Learning 奖励函数的坍缩现象和问题 RL中，奖励函数坍缩指的是Agent发现一个漏洞，通过一些非预期的手段来刷高Reward Score，但是违背了设计者的目标。 具体来说有：  Shortcutting: 寻找捷径 Reward Hacking: Agent直接操纵奖励信号 Over-optimization:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="260228">
 <meta property="og:url" content="https://ycfywy.github.io/2026/02/28/260228/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="Codeforcesonehot100的2d接雨水 AI Learning奖励函数的坍缩现象和问题RL中，奖励函数坍缩指的是Agent发现一个漏洞，通过一些非预期的手段来刷高Reward Score，但是违背了设计者的目标。 具体来说有：  Shortcutting: 寻找捷径 Reward Hacking: Agent直接操纵奖励信号 Over-optimization: 为了追求Reward，">
+<meta property="og:description" content="Codeforces onehot100的2d接雨水 AI Learning 奖励函数的坍缩现象和问题 RL中，奖励函数坍缩指的是Agent发现一个漏洞，通过一些非预期的手段来刷高Reward Score，但是违背了设计者的目标。 具体来说有：  Shortcutting: 寻找捷径 Reward Hacking: Agent直接操纵奖励信号 Over-optimization:">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ycfywy.github.io/2026/02/28/260228/2026-02-28-22-58-11.png">
 <meta property="og:image" content="https://ycfywy.github.io/2026/02/28/260228/2026-02-28-23-05-02.png">
 <meta property="og:image" content="https://ycfywy.github.io/2026/02/28/260228/2026-02-28-23-05-33.png">
 <meta property="article:published_time" content="2026-02-28T02:34:25.000Z">
-<meta property="article:modified_time" content="2026-03-01T09:11:16.034Z">
+<meta property="article:modified_time" content="2026-03-01T09:14:11.897Z">
 <meta property="article:author" content="ycf">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://ycfywy.github.io/2026/02/28/260228/2026-02-28-22-58-11.png">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.2k 字
+          3.1k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          27 分钟
+          26 分钟
         
       </span>
     
@@ -279,8 +279,11 @@
             
               <div class="markdown-body">
                 
-                <h2 id="Codeforces"><a href="#Codeforces" class="headerlink" title="Codeforces"></a>Codeforces</h2><p>onehot100的2d接雨水</p>
-<h2 id="AI-Learning"><a href="#AI-Learning" class="headerlink" title="AI Learning"></a>AI Learning</h2><h3 id="奖励函数的坍缩现象和问题"><a href="#奖励函数的坍缩现象和问题" class="headerlink" title="奖励函数的坍缩现象和问题"></a>奖励函数的坍缩现象和问题</h3><p>RL中，奖励函数坍缩指的是Agent发现一个漏洞，通过一些非预期的手段来刷高Reward Score，但是违背了设计者的目标。</p>
+                <h2 id="codeforces">Codeforces</h2>
+<p>onehot100的2d接雨水</p>
+<h2 id="ai-learning">AI Learning</h2>
+<h3 id="奖励函数的坍缩现象和问题">奖励函数的坍缩现象和问题</h3>
+<p>RL中，奖励函数坍缩指的是Agent发现一个漏洞，通过一些非预期的手段来刷高Reward Score，但是违背了设计者的目标。</p>
 <p>具体来说有：</p>
 <ul>
 <li>Shortcutting: 寻找捷径</li>
@@ -294,28 +297,23 @@
 <li>字数膨胀（Verbosity Bias）： RM 往往倾向于给更长的回答打高分。坍缩的模型会疯狂输出废话，只为了通过长度来“贿赂”奖励模型。</li>
 <li>无论什么问题都强行排版成 1, 2, 3 点。(RM认为结构清晰是好的)</li>
 </ul>
-<p>为什么会出现奖励函数探索？</p>
-<ul>
-<li>奖励函数设计不完善：人类</li>
-<li>设计出来的奖励函数很难完美表达意图，如果奖励函数只关注结果，忽略了过程以及约束，Agent就会在灰色地带试探。</li>
-<li>Proxy Reward与真实目标不一致。比如我们希望让用户使用更多我们的产品，我们的Proxy Reward就是CTR点击率。那么算法可能灰推送标题党或者虚假新闻，违背了真是目标。</li>
-<li>奖励函数正负偏差失衡：如果加分太难，Agent可能会选择自杀或者原地不动。</li>
-</ul>
-<p>奖励函数探索的解决方法： </p>
+<p>为什么会出现奖励函数探索？ - 奖励函数设计不完善：人类 - 设计出来的奖励函数很难完美表达意图，如果奖励函数只关注结果，忽略了过程以及约束，Agent就会在灰色地带试探。 - Proxy Reward与真实目标不一致。比如我们希望让用户使用更多我们的产品，我们的Proxy Reward就是CTR点击率。那么算法可能灰推送标题党或者虚假新闻，违背了真是目标。 - 奖励函数正负偏差失衡：如果加分太难，Agent可能会选择自杀或者原地不动。</p>
+<p>奖励函数探索的解决方法：</p>
 <ul>
 <li>不直接写Reward function。通过RLHF动态学习Reward function</li>
 <li>Constrained RL。约束Agent执行</li>
 <li>多目标优化。引入多个互斥的奖励指标，防止Agent在单一维度走极端</li>
 </ul>
-<p>如何防止LLM RL的奖励坍缩？ </p>
+<p>如何防止LLM RL的奖励坍缩？</p>
 <ul>
-<li>KL Penalty: $$Reward &#x3D; R(s, a) - \beta \cdot D_{KL}(P_{\theta} || P_{ref})$$</li>
+<li>KL Penalty: <span class="math display"><em>R</em><em>e</em><em>w</em><em>a</em><em>r</em><em>d</em> = <em>R</em>(<em>s</em>, <em>a</em>) − <em>β</em> ⋅ <em>D</em><sub><em>K</em><em>L</em></sub>(<em>P</em><sub><em>θ</em></sub>||<em>P</em><sub><em>r</em><em>e</em><em>f</em></sub>)</span></li>
 <li>Reward Clipping: 限制奖励分数的最高值和最低值，防止某些异常的高分信号误导整个梯度方向。</li>
 <li>Ensemble RMs:同时训练多个不同的奖励模型，取它们的平均值或最小值。如果一个模型被骗了，其他模型还能把它拉回来。</li>
 <li>迭代训练：不要一次性练到底。练一段 RL，发现模型开始产生奇怪的回答，就把这些回答拿去让人类重新标注，告诉 RM：“这些是垃圾，不准给高分”，然后继续训练。</li>
 <li>DPO: 直接根据偏好学习，没有RM</li>
 </ul>
-<h3 id="多目标优化奖励函数冲突"><a href="#多目标优化奖励函数冲突" class="headerlink" title="多目标优化奖励函数冲突"></a>多目标优化奖励函数冲突</h3><p>上面提到，可以使用多目标优化奖励函数来缓解奖励函数坍缩的问题。但是多个Reward Function会带来新的问题：Reward Function Confiction。</p>
+<h3 id="多目标优化奖励函数冲突">多目标优化奖励函数冲突</h3>
+<p>上面提到，可以使用多目标优化奖励函数来缓解奖励函数坍缩的问题。但是多个Reward Function会带来新的问题：Reward Function Confiction。</p>
 <p>举个例子，我们希望LLM有Helpful和Harmless。当用户提问“如何制作炸弹”时，为了Helpful，LLM应该给出详细步骤，为了Harmless，LLM应该拒绝回答。这种冲突意味着，要提高一个Reward Fuction的得分，会导致另一个的下降。</p>
 <p>不过在多目标优化中，我们需要的是帕累托最优（Pareto Optimality）</p>
 <p>如果没有任何一个目标函数的值可以在不降低其他目标函数值的情况下得到改善，那么这个解就被称为非支配解、帕累托最优解、帕累托有效解或非劣解。在没有额外的、主观的偏好信息的情况下，所有帕累托最优解都被认为是同样好的。</p>
@@ -324,34 +322,50 @@
 <li>动态加权：不使用固定的权重，而是根据训练进程动态调整。例如，如果发现安全性得分跌破红线，就自动增加安全性奖励的权重。</li>
 <li>限制性优化：将一个目标作为主轴，其他目标作为约束条件。在保证“安全性分数 &gt; 0.9”的前提下，最大化“帮助性分数”。</li>
 </ul>
-<h3 id="离线强化学习和在线强化学习"><a href="#离线强化学习和在线强化学习" class="headerlink" title="离线强化学习和在线强化学习"></a>离线强化学习和在线强化学习</h3><p>On-policy: 产生数据的Agent和Training的Agent是同一个(自己玩游戏)。需要大量实时交互 效率比较低 -》 PPO TRPO A2C</p>
+<h3 id="离线强化学习和在线强化学习">离线强化学习和在线强化学习</h3>
+<p>On-policy: 产生数据的Agent和Training的Agent是同一个(自己玩游戏)。需要大量实时交互 效率比较低 -》 PPO TRPO A2C</p>
 <p>Off-policy: 从数据池中抽出数据进行学习(类似于看厉害的人的录像带) 但是存在分布偏移。–&gt; Q-Learing DQN…</p>
-<h3 id="GRPO-公式？为什么公式里面-clip-了外面还要计算一次-mean-呢？"><a href="#GRPO-公式？为什么公式里面-clip-了外面还要计算一次-mean-呢？" class="headerlink" title="GRPO 公式？为什么公式里面 clip 了外面还要计算一次 mean 呢？"></a>GRPO 公式？为什么公式里面 clip 了外面还要计算一次 mean 呢？</h3><p>$$\begin{aligned}<br>J_{GRPO}(\theta) &#x3D; \mathbb{E} &amp; \left[ q \sim P(Q), {o_i}<em>{i&#x3D;1}^G \sim \pi</em>{\theta_{old}}(O|q) \right] \bigg[ \<br>&amp; \frac{1}{G} \sum_{i&#x3D;1}^G \bigg( \min \left( \frac{\pi_\theta(o_i|q)}{\pi_{\theta_{old}}(o_i|q)} \hat{A}<em>i, \text{clip} \left( \frac{\pi</em>\theta(o_i|q)}{\pi_{\theta_{old}}(o_i|q)}, 1-\epsilon, 1+\epsilon \right) \hat{A}<em>i \right) \<br>&amp; \quad - \beta D</em>{KL}(\pi_\theta || \pi_{ref}) \bigg) \bigg]<br>\end{aligned}$$</p>
+<h3 id="grpo-公式为什么公式里面-clip-了外面还要计算一次-mean-呢">GRPO 公式？为什么公式里面 clip 了外面还要计算一次 mean 呢？</h3>
+<p><span class="math display">$$\begin{aligned}
+J_{GRPO}(\theta) = \mathbb{E} &amp; \left[ q \sim P(Q), \{o_i\}_{i=1}^G \sim \pi_{\theta_{old}}(O|q) \right] \bigg[ \\
+&amp; \frac{1}{G} \sum_{i=1}^G \bigg( \min \left( \frac{\pi_\theta(o_i|q)}{\pi_{\theta_{old}}(o_i|q)} \hat{A}_i, \text{clip} \left( \frac{\pi_\theta(o_i|q)}{\pi_{\theta_{old}}(o_i|q)}, 1-\epsilon, 1+\epsilon \right) \hat{A}_i \right) \\
+&amp; \quad - \beta D_{KL}(\pi_\theta || \pi_{ref}) \bigg) \bigg]
+\end{aligned}
+$$</span></p>
 <ul>
-<li>$q$: 代表从问题池中随机抽样的一个问题（Prompt）。</li>
-<li>${o_i}_{i&#x3D;1}^G$:对于同一个问题 $q$，模型会连续生成 $G$ 个不同的回答（Output）。这 $G$ 个样本组成了一个“组（Group）”。</li>
-<li>$\pi_{\theta_{old}}$: 指的是采样时使用的旧模型（即更新前的模型参数）。</li>
-<li>$\frac{\pi_\theta(o_i|q)}{\pi_{\theta_{old}}(o_i|q)}$  Importance Sampling（重要性采样） 比值。它衡量了当前正在训练的模型 $\pi_\theta$ 与采样时的旧模型 $\pi_{\theta_{old}}$ 之间的差异。如果比值大于 1，说明当前模型生成这个回答的概率变大了。(这里可能会比较奇怪，为什么出来一个old，这不就成了off-policy了吗。实际上这里是因为，我们每次采样数据要花很长时间，用一次数据update就丢掉太浪费了，所以使用Importance Sampling来多用几次数据，所以就像是off-policy可以用不是Agent自己采样出来的数据来做Training。)</li>
-<li>相对优势函数：$\hat{A}_i$。在 PPO 中，$\hat{A}_i$ 是由另一个巨大的神经网络（Critic）预测出来的。在 GRPO 中，它是直接计算出来的：<br>$$\hat{A}_i &#x3D; \frac{r_i - \text{mean}(r_1, r_2, …, r_G)}{\text{std}(r_1, r_2, …, r_G)}$$它不再看绝对分数，而是看这个回答在组内是不是“出类拔萃”。如果 $A_i &gt; 0$，说明该回答好于平均水平，模型就会被鼓励向这个方向优化。</li>
-<li>$r_i$: 第 $i$ 个回答获得的奖励分数（来自 Reward Model 或规则判断）。</li>
-<li>$\text{clip}(\dots, 1-\epsilon, 1+\epsilon)$: 为了防止模型在一次更新中跑得太快（导致策略崩溃），GRPO 继承了 PPO 的裁剪逻辑。如果概率变化超过了 $\epsilon$（通常设为 0.1 或 0.2），梯度就会被强行截断。这保证了训练的稳定性。</li>
-<li>KL 散度约束：$- \beta D_{KL}(\pi_\theta || \pi_{ref}) $ 这是一个惩罚项。它告诉模型：你可以优化回答，但你的语言风格不能和原始模型偏离太远。如果没有这一项，模型很容易发生“奖励坍缩”，变成一堆只会刷分但人类看不懂的乱码。</li>
-<li>$\pi_{ref}$: 原始的参考模型（通常是 SFT 后的模型）。</li>
+<li><span class="math inline"><em>q</em></span>: 代表从问题池中随机抽样的一个问题（Prompt）。</li>
+<li><span class="math inline">{<em>o</em><sub><em>i</em></sub>}<sub><em>i</em> = 1</sub><sup><em>G</em></sup></span>:对于同一个问题 <span class="math inline"><em>q</em></span>，模型会连续生成 <span class="math inline"><em>G</em></span> 个不同的回答（Output）。这 <span class="math inline"><em>G</em></span> 个样本组成了一个“组（Group）”。</li>
+<li><span class="math inline"><em>π</em><sub><em>θ</em><sub><em>o</em><em>l</em><em>d</em></sub></sub></span>: 指的是采样时使用的旧模型（即更新前的模型参数）。</li>
+<li><span class="math inline">$\frac{\pi_\theta(o_i|q)}{\pi_{\theta_{old}}(o_i|q)}$</span> Importance Sampling（重要性采样） 比值。它衡量了当前正在训练的模型 <span class="math inline"><em>π</em><sub><em>θ</em></sub></span> 与采样时的旧模型 <span class="math inline"><em>π</em><sub><em>θ</em><sub><em>o</em><em>l</em><em>d</em></sub></sub></span> 之间的差异。如果比值大于 1，说明当前模型生成这个回答的概率变大了。(这里可能会比较奇怪，为什么出来一个old，这不就成了off-policy了吗。实际上这里是因为，我们每次采样数据要花很长时间，用一次数据update就丢掉太浪费了，所以使用Importance Sampling来多用几次数据，所以就像是off-policy可以用不是Agent自己采样出来的数据来做Training。)</li>
+<li>相对优势函数：<span class="math inline"><em>Â</em><sub><em>i</em></sub></span>。在 PPO 中，<span class="math inline"><em>Â</em><sub><em>i</em></sub></span> 是由另一个巨大的神经网络（Critic）预测出来的。在 GRPO 中，它是直接计算出来的： <span class="math display">$$\hat{A}_i = \frac{r_i - \text{mean}(r_1, r_2, ..., r_G)}{\text{std}(r_1, r_2, ..., r_G)}$$</span>它不再看绝对分数，而是看这个回答在组内是不是“出类拔萃”。如果 <span class="math inline"><em>A</em><sub><em>i</em></sub> &gt; 0</span>，说明该回答好于平均水平，模型就会被鼓励向这个方向优化。</li>
+<li><span class="math inline"><em>r</em><sub><em>i</em></sub></span>: 第 <span class="math inline"><em>i</em></span> 个回答获得的奖励分数（来自 Reward Model 或规则判断）。</li>
+<li><span class="math inline">clip(…, 1 − <em>ϵ</em>, 1 + <em>ϵ</em>)</span>: 为了防止模型在一次更新中跑得太快（导致策略崩溃），GRPO 继承了 PPO 的裁剪逻辑。如果概率变化超过了 <span class="math inline"><em>ϵ</em></span>（通常设为 0.1 或 0.2），梯度就会被强行截断。这保证了训练的稳定性。</li>
+<li>KL 散度约束：$- D_{KL}(<em>|| </em>{ref}) $ 这是一个惩罚项。它告诉模型：你可以优化回答，但你的语言风格不能和原始模型偏离太远。如果没有这一项，模型很容易发生“奖励坍缩”，变成一堆只会刷分但人类看不懂的乱码。</li>
+<li><span class="math inline"><em>π</em><sub><em>r</em><em>e</em><em>f</em></sub></span>: 原始的参考模型（通常是 SFT 后的模型）。</li>
 </ul>
-<p>clip: A &gt; 0的时候，增加出现这个 action state pair的概率，但是也不要增加使得和原来的参数比值超过 1 + $\epsilon$  同理 A &lt; 0时 xxxx<br><img src="/2026/02/28/260228/2026-02-28-22-58-11.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="介绍一下Importance-Sampling"><a href="#介绍一下Importance-Sampling" class="headerlink" title="介绍一下Importance Sampling"></a>介绍一下Importance Sampling</h3><p>重要性采样 是一种统计学上的采样技巧，在强化学习（尤其是 PPO 算法）中起着至关重要的作用。简单来说：当你想计算函数 $f(x)$ 在分布 $P$ 下的期望，但你手里只有分布 $Q$ 产生的数据时，你可以通过一个“修正系数”来完成计算。</p>
-<p>在强化学习中，我们想优化当前的策略 $\pi_{\theta}$。但在更新过程中，直接用 $\pi_{\theta}$ 去环境里采样的代价太高了（每次更新一点参数都要重新跑一遍环境）。如果我们能用旧策略 $\pi_{\theta_{old}}$ 采到的数据来更新新策略 $\pi_{\theta}$，就能大大提高效率。</p>
-<p>假设我们要计算 $f(x)$ 在分布 $p(x)$ 下的期望值 $E_{x \sim p}[f(x)]$：$$E_{x \sim p}[f(x)] &#x3D; \int f(x) p(x) dx$$</p>
-<p>我们把式子乘以一个 $\frac{q(x)}{q(x)}$（假设 $q(x) \neq 0$）：$$E_{x \sim p}[f(x)] &#x3D; \int f(x) \frac{p(x)}{q(x)} q(x) dx &#x3D; E_{x \sim q} \left[ f(x) \frac{p(x)}{q(x)} \right]$$这个 $\frac{p(x)}{q(x)}$ 就是重要性权重（Importance Weight）。你只需要在用 $q$ 分布采样的结果上，乘一个权重 $\frac{p(x)}{q(x)}$，就能得到在 $p$ 分布下的真实期望。</p>
-<p>但是Importance Sampling存在一些问题：<br><img src="/2026/02/28/260228/2026-02-28-23-05-02.png" srcset="/img/loading.gif" lazyload></p>
-<p>有可能因为P Q的分布差别太大，导致我们采样Q的时候，可能只采样到f(x) &gt; 0的x，这样就会影响我们算出来的期望。(当然这是因为我们不可能采样完全)<br><img src="/2026/02/28/260228/2026-02-28-23-05-33.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="介绍一下-QKV-的计算"><a href="#介绍一下-QKV-的计算" class="headerlink" title="介绍一下 QKV 的计算"></a>介绍一下 QKV 的计算</h3><p>$$Attention_Weights &#x3D; \text{Softmax}\left(\frac{Q \cdot K^T}{\sqrt{d_k}}\right)$$<br>$$Output &#x3D; Attention_Weights \cdot V$$</p>
-<p>q [bsz, seq, head, head_dim]<br>-&gt; transpose<br>[bsz, head, seq, head_dim]<br>-&gt; @ k(transpose, T) [bsz, head, head_dim, seq]<br>[bsz, head, seq, seq]<br>-&gt; @ v(transpose) [bsz, head, seq, head_dim]<br>[bsz, head, seq, head_dim]<br>-&gt; transpose, reshape(bsz, seq, -1)<br>[bsz, seq, head, head_dim]</p>
+<p>clip: A &gt; 0的时候，增加出现这个 action state pair的概率，但是也不要增加使得和原来的参数比值超过 1 + <span class="math inline"><em>ϵ</em></span> 同理 A &lt; 0时 xxxx <img src="/2026/02/28/260228/2026-02-28-22-58-11.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="介绍一下importance-sampling">介绍一下Importance Sampling</h3>
+<p>重要性采样 是一种统计学上的采样技巧，在强化学习（尤其是 PPO 算法）中起着至关重要的作用。简单来说：当你想计算函数 <span class="math inline"><em>f</em>(<em>x</em>)</span> 在分布 <span class="math inline"><em>P</em></span> 下的期望，但你手里只有分布 <span class="math inline"><em>Q</em></span> 产生的数据时，你可以通过一个“修正系数”来完成计算。</p>
+<p>在强化学习中，我们想优化当前的策略 <span class="math inline"><em>π</em><sub><em>θ</em></sub></span>。但在更新过程中，直接用 <span class="math inline"><em>π</em><sub><em>θ</em></sub></span> 去环境里采样的代价太高了（每次更新一点参数都要重新跑一遍环境）。如果我们能用旧策略 <span class="math inline"><em>π</em><sub><em>θ</em><sub><em>o</em><em>l</em><em>d</em></sub></sub></span> 采到的数据来更新新策略 <span class="math inline"><em>π</em><sub><em>θ</em></sub></span>，就能大大提高效率。</p>
+<p>假设我们要计算 <span class="math inline"><em>f</em>(<em>x</em>)</span> 在分布 <span class="math inline"><em>p</em>(<em>x</em>)</span> 下的期望值 <span class="math inline"><em>E</em><sub><em>x</em> ∼ <em>p</em></sub>[<em>f</em>(<em>x</em>)]</span>：<span class="math display"><em>E</em><sub><em>x</em> ∼ <em>p</em></sub>[<em>f</em>(<em>x</em>)] = ∫<em>f</em>(<em>x</em>)<em>p</em>(<em>x</em>)<em>d</em><em>x</em></span></p>
+<p>我们把式子乘以一个 <span class="math inline">$\frac{q(x)}{q(x)}$</span>（假设 <span class="math inline"><em>q</em>(<em>x</em>) ≠ 0</span>）：<span class="math display">$$E_{x \sim p}[f(x)] = \int f(x) \frac{p(x)}{q(x)} q(x) dx = E_{x \sim q} \left[ f(x) \frac{p(x)}{q(x)} \right]$$</span>这个 <span class="math inline">$\frac{p(x)}{q(x)}$</span> 就是重要性权重（Importance Weight）。你只需要在用 <span class="math inline"><em>q</em></span> 分布采样的结果上，乘一个权重 <span class="math inline">$\frac{p(x)}{q(x)}$</span>，就能得到在 <span class="math inline"><em>p</em></span> 分布下的真实期望。</p>
+<p>但是Importance Sampling存在一些问题： <img src="/2026/02/28/260228/2026-02-28-23-05-02.png" srcset="/img/loading.gif" lazyload /></p>
+<p>有可能因为P Q的分布差别太大，导致我们采样Q的时候，可能只采样到f(x) &gt; 0的x，这样就会影响我们算出来的期望。(当然这是因为我们不可能采样完全) <img src="/2026/02/28/260228/2026-02-28-23-05-33.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="介绍一下-qkv-的计算">介绍一下 QKV 的计算</h3>
+<p><span class="math display">$$Attention\_Weights = \text{Softmax}\left(\frac{Q \cdot K^T}{\sqrt{d_k}}\right)$$</span> <span class="math display"><em>O</em><em>u</em><em>t</em><em>p</em><em>u</em><em>t</em> = <em>A</em><em>t</em><em>t</em><em>e</em><em>n</em><em>t</em><em>i</em><em>o</em><em>n</em>_<em>W</em><em>e</em><em>i</em><em>g</em><em>h</em><em>t</em><em>s</em> ⋅ <em>V</em></span></p>
+<p>q [bsz, seq, head, head_dim] -&gt; transpose [bsz, head, seq, head_dim] -&gt; @ k(transpose, T) [bsz, head, head_dim, seq] [bsz, head, seq, seq] -&gt; @ v(transpose) [bsz, head, seq, head_dim] [bsz, head, seq, head_dim] -&gt; transpose, reshape(bsz, seq, -1) [bsz, seq, head, head_dim]</p>
 <p>在经过一个o_proj即可</p>
-<h2 id="English"><a href="#English" class="headerlink" title="English"></a>English</h2><h2 id="DS杂谈"><a href="#DS杂谈" class="headerlink" title="DS杂谈"></a>DS杂谈</h2><h3 id="伊朗政权的生死考验：德黑兰遭袭、历史循环与宣传战的演进"><a href="#伊朗政权的生死考验：德黑兰遭袭、历史循环与宣传战的演进" class="headerlink" title="伊朗政权的生死考验：德黑兰遭袭、历史循环与宣传战的演进"></a>伊朗政权的生死考验：德黑兰遭袭、历史循环与宣传战的演进</h3><h3 id="1-历史的“228”巧合与地缘政治的宿命"><a href="#1-历史的“228”巧合与地缘政治的宿命" class="headerlink" title="1. 历史的“228”巧合与地缘政治的宿命"></a>1. 历史的“228”巧合与地缘政治的宿命</h3><p>2026年2月28日，美以联军对伊朗德黑兰发动大规模空袭，这一日期在现代史上具有特殊的符号意义。历史并非简单的重复，却有着惊人的相似性：1953年8月19日（伊朗历5月28日），美国艾森豪威尔政府策划政变推翻摩萨台，扶持巴列维王朝，开启了二十多年的统治。从艾森豪威尔的“武力更迭”、卡特的“默许革命”、奥巴马的“巨额现钞”支持，到如今美军直接动用先进武装对德黑兰政权进行“考打”，美国对伊政策在近八十年间经历了从暗中操纵到直接军事摧毁的剧烈演变。</p>
-<h3 id="2-意识形态的“地下游击队”：霍梅尼的夺权逻辑"><a href="#2-意识形态的“地下游击队”：霍梅尼的夺权逻辑" class="headerlink" title="2. 意识形态的“地下游击队”：霍梅尼的夺权逻辑"></a>2. 意识形态的“地下游击队”：霍梅尼的夺权逻辑</h3><p>伊朗现政权的根基源于1979年霍梅尼领导的革命。当时霍梅尼之所以能取得成功，除了美苏的双重加持，更依赖于其独创的“地下意识形态游击队”。这是一支由大学和神学院骨干组成的隐性武装，名为“强化团结署”。这股力量以思想宣传为武器，率先攻占美国驻德黑兰大使馆，将美国置于极度尴尬的境地。前总统内贾德便是这一时期的活跃分子。他上台后曾宣称“革命浪潮将切断世界不公正的根源”，这种强烈的左翼革命色彩和“草根翻身”的逻辑，构成了伊朗现政权长期对抗西方霸权的精神支柱。</p>
-<h3 id="3-从“细菌战”到“轰炸女校”：舆论宣传的路径演化"><a href="#3-从“细菌战”到“轰炸女校”：舆论宣传的路径演化" class="headerlink" title="3. 从“细菌战”到“轰炸女校”：舆论宣传的路径演化"></a>3. 从“细菌战”到“轰炸女校”：舆论宣传的路径演化</h3><p>在本次德黑兰遭袭的报道中，伊朗媒体宣称轰炸击中了女子小学并造成大量伤亡。回顾历史，1952年朝鲜战争期间，人民日报曾大规模宣传美军发动“细菌战”，引发国际舆论哗然。然而，据志愿军卫生部原部长吴之理的回忆录披露，所谓的细菌战其实是当时国内的一种舆论动员，事后专家调查并未发现实据。如今，面对伊朗方面的伤亡数据，中国主流媒体的角色已从当年的“原创者”转变为“转发者”。这种从制造舆论引导到选择性转发他方信源的变化，折射出大国在现代战争信息对抗中策略的演进与审慎。</p>
-<h3 id="4-无法触达的喊话：和平斡旋与现实主义的碰撞"><a href="#4-无法触达的喊话：和平斡旋与现实主义的碰撞" class="headerlink" title="4. 无法触达的喊话：和平斡旋与现实主义的碰撞"></a>4. 无法触达的喊话：和平斡旋与现实主义的碰撞</h3><p>面对德黑兰的硝烟，中国外交部呼吁“立即停止军事行动，恢复对话谈判”。然而在现实主义的地缘政治博弈中，这种喊话往往难以产生即时约束力。伊朗政权目前正面临历史与现实的双重考验：对内是意识形态红利的消耗，对外是美以联军的硬核打击。这场由长期对峙、谈判拉锯引发的耐力战已演变为彻底的火力对决。对于德黑兰而言，这不仅是一次主权领土的防御战，更是对其革命政权合法性与生存韧性的终极测试。</p>
+<h2 id="english">English</h2>
+<h2 id="ds杂谈">DS杂谈</h2>
+<h3 id="伊朗政权的生死考验德黑兰遭袭历史循环与宣传战的演进">伊朗政权的生死考验：德黑兰遭袭、历史循环与宣传战的演进</h3>
+<h3 id="历史的228巧合与地缘政治的宿命">1. 历史的“228”巧合与地缘政治的宿命</h3>
+<p>2026年2月28日，美以联军对伊朗德黑兰发动大规模空袭，这一日期在现代史上具有特殊的符号意义。历史并非简单的重复，却有着惊人的相似性：1953年8月19日（伊朗历5月28日），美国艾森豪威尔政府策划政变推翻摩萨台，扶持巴列维王朝，开启了二十多年的统治。从艾森豪威尔的“武力更迭”、卡特的“默许革命”、奥巴马的“巨额现钞”支持，到如今美军直接动用先进武装对德黑兰政权进行“考打”，美国对伊政策在近八十年间经历了从暗中操纵到直接军事摧毁的剧烈演变。</p>
+<h3 id="意识形态的地下游击队霍梅尼的夺权逻辑">2. 意识形态的“地下游击队”：霍梅尼的夺权逻辑</h3>
+<p>伊朗现政权的根基源于1979年霍梅尼领导的革命。当时霍梅尼之所以能取得成功，除了美苏的双重加持，更依赖于其独创的“地下意识形态游击队”。这是一支由大学和神学院骨干组成的隐性武装，名为“强化团结署”。这股力量以思想宣传为武器，率先攻占美国驻德黑兰大使馆，将美国置于极度尴尬的境地。前总统内贾德便是这一时期的活跃分子。他上台后曾宣称“革命浪潮将切断世界不公正的根源”，这种强烈的左翼革命色彩和“草根翻身”的逻辑，构成了伊朗现政权长期对抗西方霸权的精神支柱。</p>
+<h3 id="从细菌战到轰炸女校舆论宣传的路径演化">3. 从“细菌战”到“轰炸女校”：舆论宣传的路径演化</h3>
+<p>在本次德黑兰遭袭的报道中，伊朗媒体宣称轰炸击中了女子小学并造成大量伤亡。回顾历史，1952年朝鲜战争期间，人民日报曾大规模宣传美军发动“细菌战”，引发国际舆论哗然。然而，据志愿军卫生部原部长吴之理的回忆录披露，所谓的细菌战其实是当时国内的一种舆论动员，事后专家调查并未发现实据。如今，面对伊朗方面的伤亡数据，中国主流媒体的角色已从当年的“原创者”转变为“转发者”。这种从制造舆论引导到选择性转发他方信源的变化，折射出大国在现代战争信息对抗中策略的演进与审慎。</p>
+<h3 id="无法触达的喊话和平斡旋与现实主义的碰撞">4. 无法触达的喊话：和平斡旋与现实主义的碰撞</h3>
+<p>面对德黑兰的硝烟，中国外交部呼吁“立即停止军事行动，恢复对话谈判”。然而在现实主义的地缘政治博弈中，这种喊话往往难以产生即时约束力。伊朗政权目前正面临历史与现实的双重考验：对内是意识形态红利的消耗，对外是美以联军的硬核打击。这场由长期对峙、谈判拉锯引发的耐力战已演变为彻底的火力对决。对于德黑兰而言，这不仅是一次主权领土的防御战，更是对其革命政权合法性与生存韧性的终极测试。</p>
 
                 
               </div>
