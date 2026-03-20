@@ -27,7 +27,7 @@
 <meta property="og:description" content="Tensor Parallelism   在Tensor Parallelism中，我们将model的layer拆分到多个显卡上。举个例子，对MHA来说，按照head拆分，32个head和4张GPU，每个GPU只会计算8个head。   这就引出来一个效率的问题：多个GPU意味着参数要进行多次传输（比如：你把每个head的数据计算好之后，要汇总起来;因为每张GPU上面都没有完整的KV信息，如果">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-20T10:22:00.000Z">
-<meta property="article:modified_time" content="2026-03-20T10:59:02.058Z">
+<meta property="article:modified_time" content="2026-03-20T11:02:08.507Z">
 <meta property="article:author" content="ycf">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          811 字
+          895 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          7 分钟
+          8 分钟
         
       </span>
     
@@ -284,6 +284,43 @@
 <p>多卡版本: 其实就是增加参数n_local_heads 以及做一个计算前和计算后的通信</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">import</span> torch.nn <span class="hljs-keyword">as</span> nn<br><span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F<br><span class="hljs-keyword">import</span> torch.distributed <span class="hljs-keyword">as</span> dist<br><span class="hljs-keyword">import</span> math<br><span class="hljs-keyword">import</span> os<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TP_MHA</span>(nn.Module):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, d_model, n_heads</span>):<br>        <span class="hljs-built_in">super</span>().__init__()<br>        <span class="hljs-comment"># 获取分布式信息</span><br>        <span class="hljs-variable language_">self</span>.world_size = dist.get_world_size()<br>        <span class="hljs-variable language_">self</span>.rank = dist.get_rank()<br><br>        <span class="hljs-comment"># 核心逻辑：每张卡只负责一部分头</span><br>        <span class="hljs-keyword">assert</span> n_heads % <span class="hljs-variable language_">self</span>.world_size == <span class="hljs-number">0</span>, <span class="hljs-string">&quot;Heads 必须能被显卡数整除&quot;</span><br>        <span class="hljs-variable language_">self</span>.n_local_heads = n_heads // <span class="hljs-variable language_">self</span>.world_size<br>        <span class="hljs-variable language_">self</span>.d_model = d_model<br>        <span class="hljs-variable language_">self</span>.head_dim = d_model // n_heads<br><br>        <span class="hljs-comment"># ColumnParallel: 投影层的输出维度切分</span><br>        <span class="hljs-comment"># 每张卡只初始化属于自己的那部分线性层</span><br>        <span class="hljs-variable language_">self</span>.q_proj = nn.Linear(d_model, <span class="hljs-variable language_">self</span>.n_local_heads * <span class="hljs-variable language_">self</span>.head_dim, bias=<span class="hljs-literal">False</span>)<br>        <span class="hljs-variable language_">self</span>.k_proj = nn.Linear(d_model, <span class="hljs-variable language_">self</span>.n_local_heads * <span class="hljs-variable language_">self</span>.head_dim, bias=<span class="hljs-literal">False</span>)<br>        <span class="hljs-variable language_">self</span>.v_proj = nn.Linear(d_model, <span class="hljs-variable language_">self</span>.n_local_heads * <span class="hljs-variable language_">self</span>.head_dim, bias=<span class="hljs-literal">False</span>)<br><br>        <span class="hljs-comment"># RowParallel: 输入维度是切分的，输出是完整的 d_model</span><br>        <span class="hljs-variable language_">self</span>.o_proj = nn.Linear(<span class="hljs-variable language_">self</span>.n_local_heads * <span class="hljs-variable language_">self</span>.head_dim, d_model, bias=<span class="hljs-literal">False</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, x</span>):<br>        bsz, seq_len, _ = x.shape<br><br>        <span class="hljs-comment"># 1. 局部投影 (各卡并行)</span><br>        q = <span class="hljs-variable language_">self</span>.q_proj(x)<br>        k = <span class="hljs-variable language_">self</span>.k_proj(x)<br>        v = <span class="hljs-variable language_">self</span>.v_proj(x)<br><br>        <span class="hljs-comment"># 2. View &amp; Transpose (基于本地头数)</span><br>        q = q.view(bsz, seq_len, <span class="hljs-variable language_">self</span>.n_local_heads, <span class="hljs-variable language_">self</span>.head_dim).transpose(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br>        k = k.view(bsz, seq_len, <span class="hljs-variable language_">self</span>.n_local_heads, <span class="hljs-variable language_">self</span>.head_dim).transpose(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br>        v = v.view(bsz, seq_len, <span class="hljs-variable language_">self</span>.n_local_heads, <span class="hljs-variable language_">self</span>.head_dim).transpose(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br><br>        <span class="hljs-comment"># 3. Attention 计算 (各卡算自己的头)</span><br>        scores = torch.matmul(q, k.transpose(-<span class="hljs-number">1</span>, -<span class="hljs-number">2</span>)) / math.sqrt(<span class="hljs-variable language_">self</span>.head_dim)<br>        scores = F.softmax(scores, dim=-<span class="hljs-number">1</span>)<br>        output = scores @ v<br><br>        <span class="hljs-comment"># 4. 合并多头</span><br>        output = output.transpose(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>).reshape(bsz, seq_len, -<span class="hljs-number">1</span>)<br><br>        <span class="hljs-comment"># 5. RowParallel 线性映射 (得到部分和)</span><br>        output = <span class="hljs-variable language_">self</span>.o_proj(output)<br><br>        <span class="hljs-comment"># 6. 【核心通信】All-Reduce 同步</span><br>        <span class="hljs-comment"># 把所有卡的结果加起来，结果发给所有卡</span><br>        dist.all_reduce(output, op=dist.ReduceOp.SUM)<br><br>        <span class="hljs-keyword">return</span> output<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    <span class="hljs-comment"># 1. 初始化分布式环境</span><br>    dist.init_process_group(backend=<span class="hljs-string">&quot;nccl&quot;</span>) <span class="hljs-comment"># GPU 用 nccl, CPU 用 gloo</span><br>    local_rank = <span class="hljs-built_in">int</span>(os.environ[<span class="hljs-string">&quot;LOCAL_RANK&quot;</span>])<br>    torch.cuda.set_device(local_rank)<br>    device = torch.device(<span class="hljs-string">&quot;cuda&quot;</span>, local_rank)<br><br>    <span class="hljs-comment"># 2. 实例化模型并移动到对应的 GPU</span><br>    d_model, n_heads = <span class="hljs-number">512</span>, <span class="hljs-number">8</span><br>    model = TP_MHA(d_model, n_heads).to(device)<br><br>    <span class="hljs-comment"># 3. 模拟输入 (所有卡输入相同的 x 模拟 TP 情况)</span><br>    x = torch.randn(<span class="hljs-number">2</span>, <span class="hljs-number">10</span>, d_model).to(device)<br><br>    <span class="hljs-comment"># 4. 前向传播</span><br>    output = model(x)<br><br>    <span class="hljs-keyword">if</span> local_rank == <span class="hljs-number">0</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;TP 运行成功！输出形状: <span class="hljs-subst">&#123;output.shape&#125;</span>&quot;</span>)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    main()<br><br><br></code></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">torchrun --nproc_per_node=2 tp_mha.py<br></code></pre></td></tr></table></figure>
+<h3 id="介绍一下一些通信常用名词">介绍一下一些通信常用名词</h3>
+<table>
+<thead>
+<tr class="header">
+<th>操作名称</th>
+<th>输入 (每张卡)</th>
+<th>输出 (每张卡)</th>
+<th>核心逻辑</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>All-Reduce</td>
+<td>部分数据</td>
+<td>完整加和</td>
+<td>求和 + 同步</td>
+</tr>
+<tr class="even">
+<td>All-Gather</td>
+<td>部分数据</td>
+<td>完整拼接</td>
+<td>堆叠 + 同步</td>
+</tr>
+<tr class="odd">
+<td>Broadcast</td>
+<td>仅主卡有</td>
+<td>主卡的副本</td>
+<td>1 传多</td>
+</tr>
+<tr class="even">
+<td>Reduce</td>
+<td>部分数据</td>
+<td>仅主卡有加和</td>
+<td>多传 1 + 求和</td>
+</tr>
+</tbody>
+</table>
 
                 
               </div>
