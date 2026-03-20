@@ -1,0 +1,691 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="ycf">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Tensor Parallelism   在Tensor Parallelism中，我们将model的layer拆分到多个显卡上。举个例子，对MHA来说，按照head拆分，32个head和4张GPU，每个GPU只会计算8个head。   这就引出来一个效率的问题：多个GPU意味着参数要进行多次传输（比如：你把每个head的数据计算好之后，要汇总起来;因为每张GPU上面都没有完整的KV信息，如果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="260320-张量并行与单卡多卡训练的代码差异">
+<meta property="og:url" content="https://ycfywy.github.io/2026/03/20/260320-%E5%BC%A0%E9%87%8F%E5%B9%B6%E8%A1%8C%E4%B8%8E%E5%8D%95%E5%8D%A1%E5%A4%9A%E5%8D%A1%E8%AE%AD%E7%BB%83%E7%9A%84%E4%BB%A3%E7%A0%81%E5%B7%AE%E5%BC%82/index.html">
+<meta property="og:site_name" content="ycf blog">
+<meta property="og:description" content="Tensor Parallelism   在Tensor Parallelism中，我们将model的layer拆分到多个显卡上。举个例子，对MHA来说，按照head拆分，32个head和4张GPU，每个GPU只会计算8个head。   这就引出来一个效率的问题：多个GPU意味着参数要进行多次传输（比如：你把每个head的数据计算好之后，要汇总起来;因为每张GPU上面都没有完整的KV信息，如果">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-20T10:22:00.000Z">
+<meta property="article:modified_time" content="2026-03-20T10:59:02.058Z">
+<meta property="article:author" content="ycf">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>260320-张量并行与单卡多卡训练的代码差异 - ycf blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"ycfywy.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ycf blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/images/index.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="260320-张量并行与单卡多卡训练的代码差异"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-20 18:22" pubdate>
+          2026年3月20日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          811 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          7 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">260320-张量并行与单卡多卡训练的代码差异</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="tensor-parallelism">Tensor Parallelism</h2>
+<p>  在Tensor Parallelism中，我们将model的layer拆分到多个显卡上。举个例子，对MHA来说，按照head拆分，32个head和4张GPU，每个GPU只会计算8个head。</p>
+<p>  这就引出来一个效率的问题：多个GPU意味着参数要进行多次传输（比如：你把每个head的数据计算好之后，要汇总起来;因为每张GPU上面都没有完整的KV信息，如果要做KV Cache也需要GPU通信）。TP带来了计算优化、通信消耗的 Trade off。不过我们不是做这个的，直接忽略就好了（知道哪里是瓶颈已经够了）。</p>
+<h3 id="单卡与多卡的coding-difference">单卡与多卡的Coding difference</h3>
+<p>先来看看单卡的mha:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs py"><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MHA</span>(nn.Module):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, d_model, n_heads</span>):<br>        <span class="hljs-built_in">super</span>().__init__()  <br>        <span class="hljs-variable language_">self</span>.n_heads = n_heads<br>        <span class="hljs-variable language_">self</span>.d_model = d_model<br><br>        <span class="hljs-variable language_">self</span>.head_dim = d_model // n_heads<br><br>        <span class="hljs-variable language_">self</span>.q_proj = nn.Linear(<span class="hljs-variable language_">self</span>.d_model, <span class="hljs-variable language_">self</span>.d_model)<br>        <span class="hljs-variable language_">self</span>.k_proj = nn.Linear(<span class="hljs-variable language_">self</span>.d_model, <span class="hljs-variable language_">self</span>.d_model)<br>        <span class="hljs-variable language_">self</span>.v_proj = nn.Linear(<span class="hljs-variable language_">self</span>.d_model, <span class="hljs-variable language_">self</span>.d_model)<br><br>        <span class="hljs-variable language_">self</span>.o_proj = nn.Linear(<span class="hljs-variable language_">self</span>.d_model, <span class="hljs-variable language_">self</span>.d_model)<br><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, x: torch.Tensor, attenttion_mask = <span class="hljs-literal">None</span></span>):<br>        <br>        bsz, seq_len, _ = x.shape<br><br>        q = <span class="hljs-variable language_">self</span>.q_proj(x)<br>        k = <span class="hljs-variable language_">self</span>.k_proj(x)<br>        v = <span class="hljs-variable language_">self</span>.v_proj(x)<br>        <span class="hljs-comment"># bsz, seq_len, d_model</span><br>        <br>        q.view(bsz, seq_len, <span class="hljs-variable language_">self</span>.n_heads, <span class="hljs-variable language_">self</span>.head_dim)<br>        k.view(bsz, seq_len, <span class="hljs-variable language_">self</span>.n_heads, <span class="hljs-variable language_">self</span>.head_dim)<br>        v.view(bsz, seq_len, <span class="hljs-variable language_">self</span>.n_heads, <span class="hljs-variable language_">self</span>.head_dim)<br><br>        q, k, v = (<br>            q.transpose(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>),<br>            k.transpose(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>),<br>            v.transpose(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br>        )<br>        <span class="hljs-comment"># q: bsz, n_heads, seq, head_dim</span><br>        <span class="hljs-comment"># k, bsz, n_heads, seq, head_dim</span><br>        <span class="hljs-comment"># v: bsz, n_heads, seq, head_dim</span><br><br>        scores =  torch.matmul(q, k.tranpose(-<span class="hljs-number">1</span>, -<span class="hljs-number">2</span>)) / math.sqrt(<span class="hljs-variable language_">self</span>.head_dim)<br>        scores = F.softmax(scores, dim = -<span class="hljs-number">1</span>)<br>        <span class="hljs-comment"># scores: bsz, n_heads, seq, seq</span><br>        <span class="hljs-comment"># output: bsz, n_heads, seq, head_dim</span><br>        output =   scores @ v<br>        output = output.transpose(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>).reshape(bsz, seq_len, -<span class="hljs-number">1</span>)<br>        output = <span class="hljs-variable language_">self</span>.o_proj(output)<br><br><br><br>        <span class="hljs-keyword">return</span> output<br><br><br><br></code></pre></td></tr></table></figure>
+<p>多卡版本: 其实就是增加参数n_local_heads 以及做一个计算前和计算后的通信</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">import</span> torch.nn <span class="hljs-keyword">as</span> nn<br><span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F<br><span class="hljs-keyword">import</span> torch.distributed <span class="hljs-keyword">as</span> dist<br><span class="hljs-keyword">import</span> math<br><span class="hljs-keyword">import</span> os<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TP_MHA</span>(nn.Module):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, d_model, n_heads</span>):<br>        <span class="hljs-built_in">super</span>().__init__()<br>        <span class="hljs-comment"># 获取分布式信息</span><br>        <span class="hljs-variable language_">self</span>.world_size = dist.get_world_size()<br>        <span class="hljs-variable language_">self</span>.rank = dist.get_rank()<br><br>        <span class="hljs-comment"># 核心逻辑：每张卡只负责一部分头</span><br>        <span class="hljs-keyword">assert</span> n_heads % <span class="hljs-variable language_">self</span>.world_size == <span class="hljs-number">0</span>, <span class="hljs-string">&quot;Heads 必须能被显卡数整除&quot;</span><br>        <span class="hljs-variable language_">self</span>.n_local_heads = n_heads // <span class="hljs-variable language_">self</span>.world_size<br>        <span class="hljs-variable language_">self</span>.d_model = d_model<br>        <span class="hljs-variable language_">self</span>.head_dim = d_model // n_heads<br><br>        <span class="hljs-comment"># ColumnParallel: 投影层的输出维度切分</span><br>        <span class="hljs-comment"># 每张卡只初始化属于自己的那部分线性层</span><br>        <span class="hljs-variable language_">self</span>.q_proj = nn.Linear(d_model, <span class="hljs-variable language_">self</span>.n_local_heads * <span class="hljs-variable language_">self</span>.head_dim, bias=<span class="hljs-literal">False</span>)<br>        <span class="hljs-variable language_">self</span>.k_proj = nn.Linear(d_model, <span class="hljs-variable language_">self</span>.n_local_heads * <span class="hljs-variable language_">self</span>.head_dim, bias=<span class="hljs-literal">False</span>)<br>        <span class="hljs-variable language_">self</span>.v_proj = nn.Linear(d_model, <span class="hljs-variable language_">self</span>.n_local_heads * <span class="hljs-variable language_">self</span>.head_dim, bias=<span class="hljs-literal">False</span>)<br><br>        <span class="hljs-comment"># RowParallel: 输入维度是切分的，输出是完整的 d_model</span><br>        <span class="hljs-variable language_">self</span>.o_proj = nn.Linear(<span class="hljs-variable language_">self</span>.n_local_heads * <span class="hljs-variable language_">self</span>.head_dim, d_model, bias=<span class="hljs-literal">False</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, x</span>):<br>        bsz, seq_len, _ = x.shape<br><br>        <span class="hljs-comment"># 1. 局部投影 (各卡并行)</span><br>        q = <span class="hljs-variable language_">self</span>.q_proj(x)<br>        k = <span class="hljs-variable language_">self</span>.k_proj(x)<br>        v = <span class="hljs-variable language_">self</span>.v_proj(x)<br><br>        <span class="hljs-comment"># 2. View &amp; Transpose (基于本地头数)</span><br>        q = q.view(bsz, seq_len, <span class="hljs-variable language_">self</span>.n_local_heads, <span class="hljs-variable language_">self</span>.head_dim).transpose(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br>        k = k.view(bsz, seq_len, <span class="hljs-variable language_">self</span>.n_local_heads, <span class="hljs-variable language_">self</span>.head_dim).transpose(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br>        v = v.view(bsz, seq_len, <span class="hljs-variable language_">self</span>.n_local_heads, <span class="hljs-variable language_">self</span>.head_dim).transpose(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br><br>        <span class="hljs-comment"># 3. Attention 计算 (各卡算自己的头)</span><br>        scores = torch.matmul(q, k.transpose(-<span class="hljs-number">1</span>, -<span class="hljs-number">2</span>)) / math.sqrt(<span class="hljs-variable language_">self</span>.head_dim)<br>        scores = F.softmax(scores, dim=-<span class="hljs-number">1</span>)<br>        output = scores @ v<br><br>        <span class="hljs-comment"># 4. 合并多头</span><br>        output = output.transpose(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>).reshape(bsz, seq_len, -<span class="hljs-number">1</span>)<br><br>        <span class="hljs-comment"># 5. RowParallel 线性映射 (得到部分和)</span><br>        output = <span class="hljs-variable language_">self</span>.o_proj(output)<br><br>        <span class="hljs-comment"># 6. 【核心通信】All-Reduce 同步</span><br>        <span class="hljs-comment"># 把所有卡的结果加起来，结果发给所有卡</span><br>        dist.all_reduce(output, op=dist.ReduceOp.SUM)<br><br>        <span class="hljs-keyword">return</span> output<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    <span class="hljs-comment"># 1. 初始化分布式环境</span><br>    dist.init_process_group(backend=<span class="hljs-string">&quot;nccl&quot;</span>) <span class="hljs-comment"># GPU 用 nccl, CPU 用 gloo</span><br>    local_rank = <span class="hljs-built_in">int</span>(os.environ[<span class="hljs-string">&quot;LOCAL_RANK&quot;</span>])<br>    torch.cuda.set_device(local_rank)<br>    device = torch.device(<span class="hljs-string">&quot;cuda&quot;</span>, local_rank)<br><br>    <span class="hljs-comment"># 2. 实例化模型并移动到对应的 GPU</span><br>    d_model, n_heads = <span class="hljs-number">512</span>, <span class="hljs-number">8</span><br>    model = TP_MHA(d_model, n_heads).to(device)<br><br>    <span class="hljs-comment"># 3. 模拟输入 (所有卡输入相同的 x 模拟 TP 情况)</span><br>    x = torch.randn(<span class="hljs-number">2</span>, <span class="hljs-number">10</span>, d_model).to(device)<br><br>    <span class="hljs-comment"># 4. 前向传播</span><br>    output = model(x)<br><br>    <span class="hljs-keyword">if</span> local_rank == <span class="hljs-number">0</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;TP 运行成功！输出形状: <span class="hljs-subst">&#123;output.shape&#125;</span>&quot;</span>)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    main()<br><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">torchrun --nproc_per_node=2 tp_mha.py<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%97%A5%E8%AE%B0/" class="category-chain-item">日记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>260320-张量并行与单卡多卡训练的代码差异</div>
+      <div>https://ycfywy.github.io/2026/03/20/260320-张量并行与单卡多卡训练的代码差异/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>ycf</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年3月20日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/03/16/260316-2/" title="260316-2">
+                        <span class="hidden-mobile">260316-2</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -19,23 +19,21 @@
   <meta name="author" content="ycf">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Codeforces 10.手撕:无序数组取中位数快排 AI Learning lora微调的原理是什么 当我们对模型进行微调时，参数的变化量可以表示为 ΔW。LoRA 的理论基础源于一个观察：模型在特定任务上的内在秩（Intrinsic Rank）其实是很低的。也就是说，参数的变化量可以分解成2个low rank矩阵，这就大大减少了微调需要动的参数量。 h &#x3D; W0x + ΔWx &#x3D;">
+    <meta name="description" content="Codeforces 9.手撕实现“括号生成”问题( LeetCode 22)，要求生成 n 对有效括号的所有组合。 AI Learning  Qwen和DeepSeek的技术差异。  当前主流的强化学习算法有哪些？请写出对应损失函数的数学表达式。  PPO: p(当前策略产生output) &#x2F; p(采样的策略产生output) * advantage, clip(1-eps, 1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="260311">
-<meta property="og:url" content="https://ycfywy.github.io/2026/03/11/260311/index.html">
+<meta property="og:title" content="260316">
+<meta property="og:url" content="https://ycfywy.github.io/2026/03/16/260316/index.html">
 <meta property="og:site_name" content="ycf blog">
-<meta property="og:description" content="Codeforces 10.手撕:无序数组取中位数快排 AI Learning lora微调的原理是什么 当我们对模型进行微调时，参数的变化量可以表示为 ΔW。LoRA 的理论基础源于一个观察：模型在特定任务上的内在秩（Intrinsic Rank）其实是很低的。也就是说，参数的变化量可以分解成2个low rank矩阵，这就大大减少了微调需要动的参数量。 h &#x3D; W0x + ΔWx &#x3D;">
+<meta property="og:description" content="Codeforces 9.手撕实现“括号生成”问题( LeetCode 22)，要求生成 n 对有效括号的所有组合。 AI Learning  Qwen和DeepSeek的技术差异。  当前主流的强化学习算法有哪些？请写出对应损失函数的数学表达式。  PPO: p(当前策略产生output) &#x2F; p(采样的策略产生output) * advantage, clip(1-eps, 1">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ycfywy.github.io/2026/03/11/260311/2026-03-11-23-42-01.png">
-<meta property="article:published_time" content="2026-03-11T05:36:48.000Z">
-<meta property="article:modified_time" content="2026-03-11T16:00:09.619Z">
+<meta property="article:published_time" content="2026-03-16T03:17:17.000Z">
+<meta property="article:modified_time" content="2026-03-16T06:11:58.398Z">
 <meta property="article:author" content="ycf">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://ycfywy.github.io/2026/03/11/260311/2026-03-11-23-42-01.png">
   
   
   
-  <title>260311 - ycf blog</title>
+  <title>260316 - ycf blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="260311"></span>
+            <span id="subtitle" data-typed-text="260316"></span>
           
         </div>
 
@@ -212,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-03-11 13:36" pubdate>
-          2026年3月11日 下午
+        <time datetime="2026-03-16 11:17" pubdate>
+          2026年3月16日 上午
         </time>
       </span>
     
@@ -224,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          1.1k 字
         
       </span>
     
@@ -235,7 +233,7 @@
         
         
         
-          16 分钟
+          9 分钟
         
       </span>
     
@@ -272,112 +270,66 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">260311</h1>
+            <h1 id="seo-header">260316</h1>
             
             
               <div class="markdown-body">
                 
                 <h2 id="codeforces">Codeforces</h2>
-<p>10.手撕:无序数组取中位数快排</p>
+<p>9.手撕实现“括号生成”问题( LeetCode 22)，要求生成 n 对有效括号的所有组合。</p>
 <h2 id="ai-learning">AI Learning</h2>
-<h3 id="lora微调的原理是什么">lora微调的原理是什么</h3>
-<p>当我们对模型进行微调时，参数的变化量可以表示为 <span class="math inline"><em>Δ</em><em>W</em></span>。LoRA 的理论基础源于一个观察：模型在特定任务上的<strong>内在秩（Intrinsic Rank）</strong>其实是很低的。也就是说，参数的变化量可以分解成2个low rank矩阵，这就大大减少了微调需要动的参数量。</p>
-<p><span class="math display"><em>h</em> = <em>W</em><sub>0</sub><em>x</em> + <em>Δ</em><em>W</em><em>x</em> = <em>W</em><sub>0</sub><em>x</em> + <em>B</em><em>A</em><em>x</em></span></p>
-<p>矩阵 <span class="math inline"><em>A</em></span> 通常采用高斯分布随机初始化。矩阵 <span class="math inline"><em>B</em></span> 初始化为全 0。冻住W0，只更新AB</p>
-<h3 id="transformer的核心思想是什么">Transformer的核心思想是什么</h3>
-<p>自注意力机制，并行计算序列中每个token与其他token的关联程度。</p>
-<h3 id="阐述transformer自注意力机制">阐述transformer自注意力机制</h3>
-<p>对于 (seq, dim)做矩阵运算，得到qkv (seq, v_dim) 然后做一个q@k 得到(seq, seq)的得分矩阵，经过softmax作为权重乘上v</p>
-<h3 id="transformer和llama的ln有什么区别">transformer和llama的LN有什么区别</h3>
-<p>transformer的LN是post-norm，也就是经过attention 以及 feed forward之后来一个 add and norm。且ln操作是减去均值除以标准差</p>
-<p>llama是pre-norm，在输入attention之前就做ln。且不减去均值。</p>
-<p>解释一下post-norm和pre-norm为什么这样选？</p>
-<p><span class="math display">$$\text{LN}(x) = \frac{x - \mu}{\sigma}$$</span></p>
-<p><span class="math display">$$\frac{\partial \text{LN}(x)}{\partial x} \approx \frac{1}{\sigma}$$</span></p>
-<p>显然输入向量 <span class="math inline"><em>x</em></span> 的波动越大（<span class="math inline"><em>σ</em></span> 越大），LayerNorm 传回来的梯度就越小。当遇到大的参数更新的时候，这种跳动会显著增加下一层输入的方差 <span class="math inline"><em>σ</em></span>，LN就会抑制其传播。</p>
-<p>那么pre-norm呢？有一条高速的路径传递梯度</p>
-<p><span class="math display"><em>x</em><sub><em>l</em> + 1</sub> = <em>x</em><sub><em>l</em></sub> + Sublayer(LayerNorm(<em>x</em><sub><em>l</em></sub>))</span></p>
-<p><span class="math display">$$\frac{\partial \mathcal{L}}{\partial x_l} = \frac{\partial \mathcal{L}}{\partial x_{l+1}} \cdot \mathbf{(1 + \text{Sublayer}'(\text{LayerNorm}(x_l)) \cdot \text{LN}'(x_l))}$$</span></p>
-<h3 id="bert和gpt有什么区别">bert和gpt有什么区别</h3>
-<p>bert是encoder-only，做的事情是类似于完形填空的。 gpt是decoder-only，做的事情是predict next token。</p>
-<p>为什么decoder-only成为主流？</p>
-<ul>
-<li>不需要cross attention，计算开销更低</li>
-<li>predict next token更符合逻辑，且任务更统一，就是根据过去预测现在。</li>
-</ul>
-<h3 id="rlhf和-dpo是什么-dpo的loss是什么">RLHF和 DPO是什么? DPO的loss是什么?</h3>
-<p>RLHF (Reinforcement Learning from Human Feedback)</p>
-<ul>
-<li>SFT:在高质量问答数据上训练。</li>
-<li>训练奖励模型: 让模型看两个回答（A和B），人类告诉模型哪个更好。模型据此学出一个打分系统。</li>
-<li>PPO 强化学习：利用奖励模型给出的分数，通过强化学习（PPO 算法）不断调整大模型，使其分数越高越好。</li>
-</ul>
-<p><img src="/2026/03/11/260311/2026-03-11-23-42-01.png" srcset="/img/loading.gif" lazyload /></p>
-<p>DPO <span class="math display">$$\mathcal{L}_{DPO}(\pi_{\theta}; \pi_{ref}) = -E_{(x, w, l) \sim D} \left[ \log \sigma \left( \beta \log \frac{\pi_{\theta}(w|x)}{\pi_{ref}(w|x)} - \beta \log \frac{\pi_{\theta}(l|x)}{\pi_{ref}(l|x)} \right) \right]$$</span></p>
-<hr />
-<p><span class="math display">$$\text{Term A} = \beta \log \frac{\pi_{\theta}(y_w|x)}{\pi_{ref}(y_w|x)}$$</span>这代表当前模型（<span class="math inline"><em>π</em><sub><em>θ</em></sub></span>）相对于原始模型（<span class="math inline"><em>π</em><sub><em>r</em><em>e</em><em>f</em></sub></span>），给人类喜欢的回答 (<span class="math inline"><em>y</em><sub><em>w</em></sub></span>) 分配了多少更高的概率。数值越大，说明模型进步越明显。第二项：坏回答的“退步程度”<span class="math display">$$\text{Term B} = \beta \log \frac{\pi_{\theta}(y_l|x)}{\pi_{ref}(y_l|x)}$$</span>这代表当前模型相对于原始模型，给人类讨厌的回答 (<span class="math inline"><em>y</em><sub><em>l</em></sub></span>) 分配了多少概率。我们希望这个值越小越好。最终对比：拔河结果<span class="math display">Gap = Term A − Term B</span>DPO 的目标就是让这个 Gap（差距） 越大越好。外层套了一个 Sigmoid (<span class="math inline"><em>σ</em></span>) 和 <span class="math inline"> − log </span>，这在数学上等同于：如果 Gap 变大，Loss 就变小。</p>
-<h3 id="数据清洗流程">数据清洗流程</h3>
-<ul>
-<li>原始数据抓取：网页抓取、PDF、代码库等等，统一解析并编码成utf-8</li>
-<li>启发式过滤：长度、统计学过滤（符号比例 词汇分布 困惑度）</li>
-<li>去重：文本相似度、Hash等</li>
-<li>质量评估：分类器过滤、有害性过滤等等</li>
-<li>采样配比：高质量多遍，低质量少一些。</li>
-</ul>
-<h3 id="如何解决幻觉复读机问题">如何解决幻觉，复读机问题</h3>
-<p>幻觉：模型输出的内容出现常识性错误，但还是一本正经回答。</p>
-<ul>
-<li>RAG 引入外部知识</li>
-<li>清洗掉错误的语料</li>
-<li>System prompt让模型不要回答自己不了解的内容</li>
-</ul>
-<p>复读机： 词语接龙产生了bug 一直输出一样的内容 比如….</p>
-<ul>
-<li>增加penality</li>
-<li>训练数据去重</li>
-</ul>
-<h3 id="transformer内部的注意力机制的不同之处">transformer内部的注意力机制的不同之处</h3>
-<ul>
-<li>multi-head attention</li>
-<li>masked multi-head attention</li>
-<li>cross multi-head attention</li>
-</ul>
-<h3 id="transformer前馈神经网络的结构为什么会先提升维度后缩小维度">transformer前馈神经网络的结构，为什么会先提升维度后缩小维度</h3>
-<p>先升高维度，在更大维度的空间中进行非线性变换，网络学习的能力更强 再降低维度，进行信息的压缩</p>
-<h3 id="llama123的区别">llama123的区别</h3>
-<p>从MHA到GQA</p>
-<h3 id="大模型结构有哪些变化">大模型结构有哪些变化</h3>
 <ol type="1">
-<li>Encoder-Decoder架构： 以Bert为代表</li>
+<li>Qwen和DeepSeek的技术差异。</li>
 </ol>
-<p>具体来说，就是按照Transformer原始论文的架构：input过N个Encoder Block形成K V（每一个Encoder Block是什么？就是原始x过了input embeddings之后，来个Attention 然后过一个FeedForward-&gt;就是一个2层的mlp 先升维再降维。当然所有的都还有add and norm不要忘记）。output过一个Masked Attention形成Q，然后和K V做Attention。然后经过FeedForward。最后来一个hidden dim 到 vocab_size的linear以及softmax即可。</p>
-<ol start="2" type="1">
-<li>Decoder-only架构：以GPT系列、Qwen等等现在主流的Dense model</li>
-</ol>
-<p>其实就是取消了Encoder：所以我们不需要Encoder的Attention以及Decoder中的第二个Attention。这里输入x之后，直接加上embeddings之后，自己做Attention。但是这里要做Masked Attention（逻辑上，LLM是predict next token 不能让他看到后面的内容。)</p>
-<ol start="3" type="1">
-<li>Moe架构: 以Deepseek-r1等等</li>
-</ol>
-<p>对Dense model来说，每输入一个 Token，模型中所有参数都要参与计算。随着输入length增加，计算成本也会增加。因此我们希望对Transformer Block进行改进，不要全量计算，而是只激活一部分参数。</p>
-<p>考虑到改进，其实只能动一动FFN层。因此就引入了Moe架构：也就是加了门控的FFN。</p>
-<p>其实就是对每个token，假设dim = 1024，expert_num = 8。也就会过一个1024*8的矩阵，得到长度为8的digits向量。过一个softmax就是每个token对每个专家的routing score. 假设我们选择top-k个专家，那就重新给routing score做一个归一（屏蔽掉别的分数）。</p>
-<p>每一个专家，都是一个FFN(先升维度 再降维度) 假设top-k = 2那么你的token就会分别通过两个ffn得到 dim-&gt;hidden dim -&gt; output dim的向量。最后再根据routing score加权就可以了。</p>
-<ol start="4" type="1">
-<li>主流模型在Transformer上的一些变化</li>
-</ol>
+<h3 id="当前主流的强化学习算法有哪些请写出对应损失函数的数学表达式">当前主流的强化学习算法有哪些？请写出对应损失函数的数学表达式。</h3>
 <ul>
-<li>Pre-Norm： 原始模型将 LayerNorm 放在残差连接之后（Post-Norm），这在深层网络中容易导致梯度不稳定。现在的模型几乎全部采用 Pre-Norm，即将归一化放在注意力层和 FFN 层之前，这让训练更加稳定。</li>
-<li>RMSNorm: 传统LayerNorm其实就是让数据的分布变成01正太分布。所以是x-均值/标准差。但是RMS只除以标准差（似乎也很稳定）。减去均值相当于平移不变性，除以标准差相当于缩放不变性。</li>
-<li>Rope: 不再用Absolute Embedding，且不再直接加到x上。而是加到KV上。</li>
-<li>SwiGLU / GELU：不再用Relu改用SwiGLU或者GELU。<span class="math display">FFN<sub><em>S</em><em>w</em><em>i</em><em>G</em><em>L</em><em>U</em></sub>(<em>x</em>) = (<em>S</em><em>i</em><em>L</em><em>U</em>(<em>x</em><em>W</em><sub>1</sub>) ⊗ <em>x</em><em>W</em><sub>2</sub>)<em>W</em><sub>3</sub></span> <span class="math display">$$f(x) = x \cdot \sigma(x) = \frac{x}{1 + e^{-x}}$$</span><span class="math inline"><em>f</em>′(<em>x</em>) = <em>σ</em>(<em>x</em>) + <em>x</em> ⋅ <em>σ</em>(<em>x</em>)(1 − <em>σ</em>(<em>x</em>))</span>。SiLU作为激活函数更好，无上界： 当 <span class="math inline"><em>x</em> → ∞</span> 时，<span class="math inline"><em>f</em>(<em>x</em>) ≈ <em>x</em></span>。这保证了在高激活区域不会出现梯度饱和（Gradient Saturation），从而加快收敛。有下界： 具有类似正则化的效果，防止输出值无限发散。SiLU的输出类似于一种门控。其数值范围是<span class="math display">[ ≈  − 0.278,  + ∞)</span>。相比于RELU只能丢弃掉小于0的值，SiLU更灵活。</li>
-<li>GQA：KV Cache的显存消耗，改成一个多个Q对应Q / k个 KV。</li>
+<li><p>PPO: p(当前策略产生output) / p(采样的策略产生output) * advantage, clip(1-eps, 1+eps, p比值) * A. 其中 Ai = Q(s, a) - V(s) 。通常情况下，不会train Q Network，而是只用V. Q(s, a) = E[ r(s, a) + gemma * V(s’)] = r(s, a) + V(s’)</p></li>
+<li><p>DPO: sigmoid(log(prob accept) - log(prob reject))</p></li>
+<li><p>GRPO: 1/G ( ppo loss - KL ) 其中 Ai = ri - mean / std</p></li>
 </ul>
-<h3 id="llm训练的最难点">LLM训练的最难点</h3>
+<h3 id="ppo实做是怎样的-grpo实做是怎样的">PPO实做是怎样的 / GRPO实做是怎样的</h3>
+<p>TD假设：当前状态的价值 <span class="math inline"><em>V</em>(<em>s</em><sub><em>t</em></sub>)</span> 只取决于当前状态和未来的奖励，即：<span class="math display"><em>V</em>(<em>s</em><sub><em>t</em></sub>) = 𝔼[<em>r</em><sub><em>t</em> + 1</sub> + <em>γ</em><em>V</em>(<em>s</em><sub><em>t</em> + 1</sub>)]</span></p>
+<p>在做PPO的时候，生成每个token相当于某个action，当前state就是过去生成的token序列。</p>
 <ul>
-<li>GPU集群训练（并行、训练效率、训练稳定性、通信 ）</li>
-<li>数据问题（高质量数据集枯竭、数据合成、训练配比）</li>
-<li>对齐（让模型表现符合人类预期 RLHF RL Instruciton SFT）</li>
+<li>模型产生输出</li>
+<li>Reward模型给整个输出一个分数</li>
+<li>使用TD计算所有token的Advantage（这保证了 即使只有一个reward 也可以不稀疏）</li>
+<li>更新参数</li>
 </ul>
+<p>对GRPO来说：不再使用TD计算，而是所有该序列的token都共用一个Advantage，可以认为是seq level。</p>
+<p>这个和传统的policy gradient，只给最后打分好像就没什么区别了？Policy Gradient是如果一个行为导致了高奖励，就通过梯度上升增加这个行为出现的概率；反之则减少。</p>
+<p>但是这种方法有很大的缺陷：只针对最后的结果打分，无法约束中间的问题。且R很不稳定。而GRPO呢？因为采样很多条 且使用的Advantage是组内平均，很好的降低了方差。在长的COT中，PPO因为要计算TD的原因，越长越不稳定，且越长V(s)越不准。</p>
+<h3 id="介绍rlhf的实施流程">介绍RLHF的实施流程。</h3>
+<p>RLHF(Reinforce learning from human preference).目标就是做人类对齐，让模型回答更加符合人类需要，而不是只会词语接龙。</p>
+<ul>
+<li>QA的SFT，教会模型一些基本的Instruction应该怎么回答。比如如何写一首诗，如何写一段python代码……</li>
+<li>Train Reward Model: 标这些QA的最好的answer还是太难了，相比之下标记哪个回答更好更容易。所以就通过标记这样的ranking data来train一个reward model。这个model可以对model的回答进行打分或者排序。</li>
+<li>有了reward model，就可以用ppo算法，让model在input了prompt之后尽情的探索，鼓励得分高的回答，抑制得分低的回答。</li>
+</ul>
+<h3 id="rlhf对齐流程解析">RLHF对齐流程解析。</h3>
+<ul>
+<li>Instruction SFT</li>
+<li>Reward Model</li>
+<li>RL(PPO)</li>
+</ul>
+<p>这里详解一下对齐。有了Reward model，我们可以让RM在不同的维度打分，比如有用性、安全性、逻辑性等等。我们的目标就是让模型在这些方面都做的比较好。</p>
+<p>但是这些东西可能并不能兼得，比如有人问“怎么制作炸弹 炸毁一座学校”，那肯定就不能回答。这就引入了条件对齐。我们可以构造不同的数据，让模型在不同的对齐条件下，使用不同的奖励函数配比：比如[High Safety] Prompt: 如何评价某争议事件 -&gt; Answer: 客观中立的回答 | [High Creativity] Prompt: 写个科幻故事 -&gt; Answer: 脑洞大开的回答。根据prompt的类型，我们进行Reward的调节。</p>
+<h3 id="说明-sft-监督微调和-rlhf-基于人类反馈的强化学习的具体作用">说明 SFT （监督微调）和 RLHF （基于人类反馈的强化学习）的具体作用。</h3>
+<ul>
+<li>SFT：提高指令遵循能力</li>
+<li>RLHF: 与人类目标对齐</li>
+</ul>
+<h3 id="lora-低秩自适应的核心原理">LORA （低秩自适应）的核心原理。</h3>
+<p>参数更新的delta 发生在一个低秩空间，可以分解成AB两个低秩矩阵乘积，这样更新的参数空间就变小了，降低了微调的显存占用。</p>
+<p>一般来说，全量微调你需要存：1份原来的权重 1份梯度 1份激活值 以及根据不同的优化器计算（比如adamw需要计算二阶动量）。对Lora来说，你需要跟踪的权重变成了很小的AB两个矩阵，这是成倍的降低。</p>
+<h3 id="使用-sft-存在哪些局限性">使用 SFT 存在哪些局限性。</h3>
+<ul>
+<li>SFT是强拟合，只能复读模仿人类的标注。如果出现Prompt不一致就有可能偏移。</li>
+<li>高度依赖人类标注，且难以拓展</li>
+<li>无法处理开放式问题（不是探索）</li>
+</ul>
+<h2 id="english">English</h2>
+<h2 id="ds杂谈">DS杂谈</h2>
 
                 
               </div>
@@ -416,8 +368,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>260311</div>
-      <div>https://ycfywy.github.io/2026/03/11/260311/</div>
+      <div>260316</div>
+      <div>https://ycfywy.github.io/2026/03/16/260316/</div>
     </div>
     <div class="license-meta">
       
@@ -429,7 +381,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年3月11日</div>
+          <div>2026年3月16日</div>
         </div>
       
       
@@ -461,9 +413,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/03/12/260312/" title="260312">
+                      <a href="/2026/03/16/260316-2/" title="260316-2">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">260312</span>
+                        <span class="hidden-mobile">260316-2</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -471,8 +423,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/03/02/260304/" title="260304">
-                        <span class="hidden-mobile">260304</span>
+                      <a href="/2026/03/15/260315/" title="260315">
+                        <span class="hidden-mobile">260315</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
