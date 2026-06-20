@@ -18,7 +18,7 @@ Put simply, 3D rendering is the process of using a computer to generate a 2D ima
 
 To generate an image, specific methodologies and special software and hardware are used. Therefore, we need to understand that 3D rendering is a process—the one that builds the image.
 
-![alt text](./nikola-arsov-still-life-interior-design-vray-3ds-max-05-930px.jpg)
+![alt text](./thumbnail.jpg)
 
 ## Types of 3D rendering
 
