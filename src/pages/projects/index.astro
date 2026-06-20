@@ -14,13 +14,13 @@ const headings = [
   { depth: 2, slug: 'programs', text: 'Programs' },
   { depth: 2, slug: 'learnings', text: 'Learnings' },
   { depth: 2, slug: 'others', text: 'Others' },
-  { depth: 2, slug: 'gpg-signature', text: 'GPG Signature' },
+  // { depth: 2, slug: 'gpg-signature', text: 'GPG Signature' },
   { depth: 2, slug: 'sponsorship', text: 'Sponsorship' }
 ]
 ---
 
 <PageLayout title='Projects' {headings} view>
-  {/* About astro-pure */}
+  <!-- {/* About astro-pure */}
   <div class='not-prose flex justify-center'>
     <a
       href='/docs/advanced/about' target='_blank'
@@ -29,7 +29,7 @@ const headings = [
       <span class='size-2 rounded-full bg-green-400'></span>
       <p class='font-medium text-muted-foreground'>About Astro-Theme-Pure Project</p>
     </a>
-  </div>
+  </div> -->
   <!-- <p>Github Activities:</p>
   <p>
     <Image
@@ -71,7 +71,7 @@ const headings = [
       }
     ]}
   />
-  <Collapse title='Some old projects'>
+  <!-- <Collapse title='Some old projects'>
     <ProjectSection
       projects={[
         {
@@ -93,46 +93,46 @@ const headings = [
         }
       ]}
     />
-  </Collapse>
+  </Collapse> -->
 
   <h2 id='learnings'>Learnings</h2>
   <ProjectSection
     class='my-2'
     projects={[
-      {
-        name: 'R Learning',
-        description: 'Some notes and code about learning R language',
-        links: [
-          { type: 'github', href: 'https://github.com/cworld1/r-learning' },
-          { type: 'site', href: 'https://cworld1.github.io/r-learning' }
-        ]
-      },
-      {
-        name: 'CS 213 Learning',
-        description: 'Notes, code and experiences for Introduction to Computer Systems course',
-        links: [
-          {
-            type: 'github',
-            href: 'https://github.com/zhuozhiyongde/Introduction-To-Computer-System-2023Fall-PKU'
-          }
-        ]
-      }
+      // {
+      //   name: 'R Learning',
+      //   description: 'Some notes and code about learning R language',
+      //   links: [
+      //     { type: 'github', href: 'https://github.com/cworld1/r-learning' },
+      //     { type: 'site', href: 'https://cworld1.github.io/r-learning' }
+      //   ]
+      // },
+      // {
+      //   name: 'CS 213 Learning',
+      //   description: 'Notes, code and experiences for Introduction to Computer Systems course',
+      //   links: [
+      //     {
+      //       type: 'github',
+      //       href: 'https://github.com/zhuozhiyongde/Introduction-To-Computer-System-2023Fall-PKU'
+      //     }
+      //   ]
+      // }
     ]}
   />
 
   <h2 id='others'>Others</h2>
   <ProjectSection
     projects={[
-      {
-        name: 'CWorld',
-        description: "CWorld's Github",
-        links: [{ type: 'github', href: 'https://github.com/cworld1' }]
-      },
-      {
-        name: 'Arthals',
-        description: 'Arthals Github',
-        links: [{ type: 'github', href: 'https://github.com/zhuozhiyongde' }]
-      }
+      // {
+      //   name: 'CWorld',
+      //   description: "CWorld's Github",
+      //   links: [{ type: 'github', href: 'https://github.com/cworld1' }]
+      // },
+      // {
+      //   name: 'Arthals',
+      //   description: 'Arthals Github',
+      //   links: [{ type: 'github', href: 'https://github.com/zhuozhiyongde' }]
+      // }
     ]}
   />
 <!-- 
@@ -146,7 +146,7 @@ const headings = [
   </Button> -->
 
   <h2 id='sponsorship'>Sponsorship</h2>
-  <p>Chinese methods: <a href="https://afdian.com/a/cworld" target="_blank"></a>, Wechat or Alipay </p>
+  <p>Chinese methods: <a href="https://afdian.com/a/cworld" target="_blank"></a> Wechat or Alipay </p>
   <Sponsorship
     methods={[
       { name: 'WeChat', icon: 'wechat-pay', image: wechat },

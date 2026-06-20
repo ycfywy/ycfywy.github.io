@@ -25,9 +25,9 @@ const { title, headings, view, comment: enableComment, ...props } = Astro.props
 
   <slot />
 
-  <slot name='bottom' slot='bottom'>
+  <!-- <slot name='bottom' slot='bottom'>
     {enableComment && <Comment class='mt-3 sm:mt-6' />}
-  </slot>
+  </slot> -->
 
   <slot name='bottom-sidebar' slot='bottom-sidebar' />
 </PageLayout>
