@@ -1,6 +1,4 @@
 ---
-import { Image } from 'astro:assets'
-
 import config from '@/site-config'
 
 interface AvatarCache {
@@ -50,7 +48,7 @@ const getAvatarSrc = (friend: Friend) =>
             <div class='relative z-10 flex h-full items-center gap-3'>
               {/* avatar */}
               <div class='relative h-14 w-14 min-w-14 overflow-hidden rounded-full'>
-                <Image
+                <img
                   class='my-0 bg-card'
                   src={getAvatarSrc(frd)}
                   height={80}
@@ -93,7 +91,7 @@ const getAvatarSrc = (friend: Friend) =>
               </div>
             </div>
             {/* avatar bg */}
-            <Image
+            <img
               class='absolute -start-2 top-0 z-0 my-0 h-full w-2/3 bg-white object-cover opacity-15'
               src={getAvatarSrc(frd)}
               height={80}
