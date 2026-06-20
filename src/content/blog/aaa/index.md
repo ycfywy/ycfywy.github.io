@@ -34,7 +34,6 @@ In design and architecture, renders allow creative people to communicate their i
 
 For the media and entertainment industries, 3D rendering is fundamental to the creation of sequences and animations that tell stories, whether we’re watching an animated movie, a period drama, or an action sequence with explosions, ships from the future, exotic locales, or extraterrestrial creatures.
 
-![alt text](./thanos-dd-single-image-004a.jpg)
 
 Over the past few years, the evolution of computer graphics in these industries has replaced traditional techniques. For example, special effects are being replaced by visual effects, which means stunt people no longer risk their lives in car crashes.
 
