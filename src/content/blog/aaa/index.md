@@ -7,7 +7,7 @@ tags:
   - Example
   - 3D
 language: 'English'
-heroImage: { src: './u.jpg', color: '#D58388' }
+heroImage: { src: './thumbnail.jpg', color: '#D58388' }
 ---
 
 
