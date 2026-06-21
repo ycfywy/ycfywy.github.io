@@ -219,7 +219,7 @@ PPO 的 clipped objective 是整个算法的灵魂：
 
 $$
 \mathcal{L}^{\text{CLIP}} = \mathbb{E}_t\left[ \min\left( r_t(\theta) \cdot A_t,\; \text{clip}(r_t(\theta), 1-\varepsilon, 1+\varepsilon) \cdot A_t \right) \right]
-$$·
+$$
 
 这个 `min` 的含义非常精巧：
 
