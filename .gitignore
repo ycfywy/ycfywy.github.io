@@ -1,3 +1,6 @@
+## .venv ###
+
+.venv/
 ### Astro ###
 dist/
 .astro/

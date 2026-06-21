@@ -12,6 +12,8 @@ heroImage: { src: './image.png', color: '#D58388' }
 
 
 
+## 题目描述
+
 在一座城市里，你需要建 n 栋新的建筑。这些新的建筑会从 1 到 n 编号排成一列。
 
 这座城市对这些新建筑有一些规定：
@@ -38,5 +40,39 @@ heroImage: { src: './image.png', color: '#D58388' }
 - $id_i$ 是 唯一的 。
 - $0 <= maxHeight_i <= 10^9$
 
+
+
+## 解题思路
+
+
+### 高度是如何限制的？
+
+前一栋建筑会限制后一栋建筑的最大高度。如果 $A$ 和 $B$ 相邻（排序后），$B$ 的最高高度不能超过 $A\text{的高} + A\text{和}B\text{的距离}$。
+
+且这个计算是双向的（从左往右 从右往左）
+
+### 如何计算RES
+
+在两栋受限建筑之间，高度可以先升后降，形成一个“山峰”，计算出这个山峰的最大值，最后取所有区间的最大值。
+
+
+
+## 代码实现
+
+
+```cpp
+
+class Solution {
+public:
+    int maxBuilding(int n, vector<vector<int>>& restrictions) {
+
+        // 1. 从左往右遍历受到restriction的建筑
+
+        sort(restrictions.begin(), restrictions.end())
+
+    }
+};
+
+```
 
 
