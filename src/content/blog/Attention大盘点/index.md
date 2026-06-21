@@ -33,7 +33,10 @@ heroImage: { src: './image.png', color: '#839dd5' }
 
 
 $$\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, \text{head}_2, \dots, \text{head}_h)W^O$$
+
 $$\text{head}_i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)$$
+
+
 $$\text{Attention}(Q', K', V') = \text{softmax}\left(\frac{Q'{K'}^T}{\sqrt{d_k}}\right)V'$$
 
 
@@ -87,7 +90,7 @@ class MultiHeadAttention(nn.Module):
 
 
 
-### GQA
+## GQA
 
 相比之下，只是多了一个KV拷贝的操作。
 
@@ -146,7 +149,7 @@ class GroupedQueryAttention(nn.Module):
 ```
 
 
-### Axis Attention
+## Axis Attention
 在计算机视觉等领域，H * W个 token，每个token维度是C，都做Attention计算的话，开销很大，时间复杂度是 $O((H * W)^2 * C)$，而使用Axis Attention的方式，时间复杂度降低至 $O(H^2W + W^2H) * C$。可以理解为，做行的Attention时，每一行的token有W个，单行的复杂度为 $O(W^2 * C)$。
 ```python
 class AxisAttentionSingle(nn.Module):

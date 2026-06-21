@@ -1,5 +1,5 @@
 ---
-title: 'Dijkstra算法及其变题'
+title: 'Dijkstra算法及其变体'
 publishDate: 2026-06-21
 updatedDate: 2026-06-21
 description: ‘最短路算法 Dijkstra 很常用，本文章讲解最常用的堆优化版本的Dijkstra算法及其变体（维护除距离之外的内容）'
