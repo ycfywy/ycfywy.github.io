@@ -1,0 +1,136 @@
+---
+import { type TocItem } from 'astro-pure/plugins/toc'
+import { cn } from 'astro-pure/utils'
+
+interface Props {
+  heading: TocItem
+}
+
+const {
+  heading: { depth, slug, subheadings, text: rawText }
+} = Astro.props
+// TODO: Temporary fix for the issue with the headings that end with link reference text
+const text = rawText.endsWith('#') ? rawText.slice(0, -1) : rawText
+const hasSubheadings = subheadings.length > 0
+---
+
+<li class='toc-li' data-has-children={hasSubheadings ? 'true' : undefined}>
+  <div class='toc-row'>
+    <span
+      class='absolute top-[5%] w-[2px] rounded transition-colors duration-300 [&.highlight-bg]:bg-primary [&.is-read]:bg-border'
+    ></span>
+    {
+      hasSubheadings && (
+        <button
+          class='toc-toggle'
+          aria-label={text ? `Toggle section: ${text}` : 'Toggle section'}
+          type='button'
+        >
+          <svg
+            class='toc-chevron'
+            width='14'
+            height='14'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            stroke-width='2'
+            stroke-linecap='round'
+            stroke-linejoin='round'
+          >
+            <path d='m9 18 6-6-6-6'></path>
+          </svg>
+        </button>
+      )
+    }
+    <a
+      aria-label={`Scroll to section: ${text}`}
+      class={cn(
+        'toc-item line-clamp-2 px-3 py-1 ms-2 text-foreground/75 transition-all hover:text-foreground [&.highlight]:font-medium [&.highlight]:text-primary [&.highlight-bg-translucent]:bg-muted',
+        depth > 2 && !hasSubheadings && 'ps-7',
+        depth > 2 && hasSubheadings && 'ps-5'
+      )}
+      href={`#${slug}`}>{text}</a
+    >
+  </div>
+  {
+    hasSubheadings && (
+      <ul>
+        {subheadings.map((subheading) => (
+          <Astro.self heading={subheading} />
+        ))}
+      </ul>
+    )
+  }
+</li>
+
+<style>
+  .toc-row {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .toc-toggle {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    margin-top: 4px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--color-foreground, inherit);
+    opacity: 0.5;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: opacity 0.2s, transform 0.2s;
+    z-index: 1;
+  }
+
+  .toc-toggle:hover {
+    opacity: 1;
+    background: var(--color-muted, rgba(127, 127, 127, 0.1));
+  }
+
+  .toc-chevron {
+    transition: transform 0.2s ease;
+  }
+
+  /* Collapsed state */
+  .toc-li.collapsed > .toc-row .toc-chevron {
+    transform: rotate(0deg);
+  }
+
+  .toc-li:not(.collapsed) > .toc-row .toc-chevron {
+    transform: rotate(90deg);
+  }
+
+  .toc-li.collapsed > ul {
+    display: none;
+  }
+</style>
+
+<script>
+  // Delegate click events on the toggle buttons
+  function initTocCollapse() {
+    const toc = document.querySelector('toc-heading')
+    if (!toc) return
+
+    toc.addEventListener('click', (e) => {
+      const toggle = (e.target as HTMLElement).closest('.toc-toggle') as HTMLButtonElement | null
+      if (!toggle) return
+
+      const li = toggle.closest('.toc-li') as HTMLElement | null
+      if (!li) return
+
+      li.classList.toggle('collapsed')
+    })
+  }
+
+  // Run on load
+  initTocCollapse()
+  // Also run when Astro page transitions complete
+  document.addEventListener('astro:page-load', initTocCollapse)
+</script>
