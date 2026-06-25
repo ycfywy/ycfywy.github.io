@@ -11,9 +11,8 @@ interface Props {
 }
 
 const {
-  heading: { depth, slug, subheadings, text: rawText }
+  heading: { slug, subheadings, text: rawText }
 } = Astro.props
-// TODO: Temporary fix for the issue with the headings that end with link reference text
 const text = rawText.endsWith('#') ? rawText.slice(0, -1) : rawText
 const hasSubheadings = subheadings.length > 0
 ---
@@ -24,7 +23,7 @@ const hasSubheadings = subheadings.length > 0
       class='absolute top-[5%] w-[2px] rounded transition-colors duration-300 [&.highlight-bg]:bg-primary [&.is-read]:bg-border'
     ></span>
     {
-      hasSubheadings && (
+      hasSubheadings ? (
         <button
           class='toc-toggle'
           aria-label={text ? `Toggle section: ${text}` : 'Toggle section'}
@@ -44,14 +43,14 @@ const hasSubheadings = subheadings.length > 0
             <path d='m9 18 6-6-6-6'></path>
           </svg>
         </button>
+      ) : (
+        <span class='toc-toggle-placeholder' />
       )
     }
     <a
       aria-label={`Scroll to section: ${text}`}
       class={cn(
-        'toc-item line-clamp-2 px-3 py-1 ms-2 text-foreground/75 transition-all hover:text-foreground [&.highlight]:font-medium [&.highlight]:text-primary [&.highlight-bg-translucent]:bg-muted',
-        depth > 2 && !hasSubheadings && 'ps-7',
-        depth > 2 && hasSubheadings && 'ps-5'
+        'toc-item line-clamp-2 px-3 py-1 ms-2 text-foreground/75 transition-all hover:text-foreground [&.highlight]:font-medium [&.highlight]:text-primary [&.highlight-bg-translucent]:bg-muted'
       )}
       href={`#${slug}`}>{text}</a
     >
@@ -74,6 +73,12 @@ const hasSubheadings = subheadings.length > 0
     align-items: flex-start;
   }
 
+  /* ---- nested ul: progressive indentation per depth level ---- */
+  .toc-li > ul {
+    padding-left: 1.25rem;
+  }
+
+  /* ---- toggle button ---- */
   .toc-toggle {
     flex-shrink: 0;
     display: inline-flex;
@@ -89,7 +94,7 @@ const hasSubheadings = subheadings.length > 0
     opacity: 0.5;
     cursor: pointer;
     border-radius: 4px;
-    transition: opacity 0.2s, transform 0.2s;
+    transition: opacity 0.2s;
     z-index: 1;
   }
 
@@ -98,11 +103,19 @@ const hasSubheadings = subheadings.length > 0
     background: var(--color-muted, rgba(127, 127, 127, 0.1));
   }
 
+  /* ---- toggle placeholder: keeps text aligned with items that have toggles ---- */
+  .toc-toggle-placeholder {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 4px;
+  }
+
+  /* ---- chevron rotation ---- */
   .toc-chevron {
     transition: transform 0.2s ease;
   }
 
-  /* Collapsed state */
   .toc-li.collapsed > .toc-row .toc-chevron {
     transform: rotate(0deg);
   }
@@ -111,13 +124,13 @@ const hasSubheadings = subheadings.length > 0
     transform: rotate(90deg);
   }
 
+  /* ---- collapse behavior ---- */
   .toc-li.collapsed > ul {
     display: none;
   }
 </style>
 
 <script>
-  // Delegate click events on the toggle buttons
   function initTocCollapse() {
     const toc = document.querySelector('toc-heading')
     if (!toc) return
@@ -133,8 +146,6 @@ const hasSubheadings = subheadings.length > 0
     })
   }
 
-  // Run on load
   initTocCollapse()
-  // Also run when Astro page transitions complete
   document.addEventListener('astro:page-load', initTocCollapse)
 </script>
