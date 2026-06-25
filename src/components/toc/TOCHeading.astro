@@ -1,6 +1,10 @@
 ---
-import { type TocItem } from 'astro-pure/plugins/toc'
+import type { MarkdownHeading } from 'astro'
 import { cn } from 'astro-pure/utils'
+
+export interface TocItem extends MarkdownHeading {
+  subheadings: TocItem[]
+}
 
 interface Props {
   heading: TocItem
@@ -55,7 +59,7 @@ const hasSubheadings = subheadings.length > 0
   {
     hasSubheadings && (
       <ul>
-        {subheadings.map((subheading) => (
+        {subheadings.map((subheading: TocItem) => (
           <Astro.self heading={subheading} />
         ))}
       </ul>
