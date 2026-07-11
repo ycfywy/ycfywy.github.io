@@ -7,7 +7,7 @@ tags:
   - Leetcode
   - 算法题
 language: '中文'
-heroImage: {  color: '#46cdfe' }
+heroImage: { src: './image.png', color: '#46cdfe' }
 ---
 
 
