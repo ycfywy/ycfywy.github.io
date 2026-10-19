@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">ChatGPT 与 Codex：三张工作台</title>
+  <desc id="desc">桌面端有 ChatGPT 和 Codex 两个入口。ChatGPT 下分 Chat 和 Work。项目、模型、工具与执行环境分别决定工作背景、思考方式、可用能力和执行位置。</desc>
+  <rect width="1200" height="630" rx="24" fill="#f1f5f9"/>
+  <g font-family="system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle">
+    <text x="600" y="60" font-size="30" font-weight="700" fill="#0f172a">同一项工作，可以从三张桌子开始</text>
+    <rect x="50" y="95" width="720" height="60" rx="15" fill="#d1fae5"/>
+    <text x="410" y="134" font-size="25" font-weight="700" fill="#065f46">ChatGPT</text>
+    <rect x="810" y="95" width="340" height="60" rx="15" fill="#dbeafe"/>
+    <text x="980" y="134" font-size="25" font-weight="700" fill="#1e40af">Codex</text>
+    <g fill="none" stroke="#94a3b8" stroke-width="3">
+      <path d="M410 155 V175 H220 V195 M410 175 H600 V195 M980 155 V195"/>
+    </g>
+    <rect x="50" y="195" width="340" height="205" rx="18" fill="#fff" stroke="#a7f3d0" stroke-width="2"/>
+    <rect x="430" y="195" width="340" height="205" rx="18" fill="#fff" stroke="#a7f3d0" stroke-width="2"/>
+    <rect x="810" y="195" width="340" height="205" rx="18" fill="#fff" stroke="#bfdbfe" stroke-width="2"/>
+    <g font-size="27" font-weight="700" fill="#0f172a">
+      <text x="220" y="244">Chat · 聊天</text>
+      <text x="600" y="244">Work · 工作</text>
+      <text x="980" y="244">Codex</text>
+    </g>
+    <g font-size="23" fill="#334155">
+      <text x="220" y="293">讨论桌</text><text x="600" y="293">交付工作台</text><text x="980" y="293">工程工作台</text>
+    </g>
+    <g font-size="19" fill="#475569">
+      <text x="220" y="339">提问、比较、推敲想法</text><text x="220" y="371">“帮我把问题想清楚”</text>
+      <text x="600" y="339">整理材料，制作可检查的成果</text><text x="600" y="371">“帮我把这件事做出来”</text>
+      <text x="980" y="339">查看文件、实施修改、验证</text><text x="980" y="371">“让我看见具体改了什么”</text>
+    </g>
+    <text x="600" y="444" font-size="19" fill="#475569">Work 与 Codex 能力有重叠；根据任务与审查需要选择入口</text>
+    <rect x="50" y="475" width="1100" height="115" rx="18" fill="#e2e8f0"/>
+    <g font-size="21" font-weight="650" fill="#0f172a">
+      <text x="190" y="518">Project</text><text x="465" y="518">模型 / 思考强度</text><text x="740" y="518">Skills / 插件</text><text x="1015" y="518">执行环境 / 权限</text>
+    </g>
+    <g font-size="18" fill="#475569">
+      <text x="190" y="556">围绕哪些资料和文件</text><text x="465" y="556">由谁思考，投入多少</text><text x="740" y="556">怎样做，有哪些工具</text><text x="1015" y="556">在哪里做，能做什么</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,13 @@
+{
+  "tool": "Built-in image_gen",
+  "prompts": [
+    {
+      "asset": "src/content/blog/ChatGPT与Codex工作指南/hero.png",
+      "prompt": "Use case: illustration-story. Asset type: wide landscape editorial blog cover, 16:9. Primary request: an elegant conceptual illustration of three AI-assisted workspaces: a conversation desk with two speech bubbles and notes, a document-making desk with tidy report pages and chart cards, and an engineering desk with a monitor displaying abstract code and version-control branches. Arrange three clearly distinguished desks as a cohesive scene, connected subtly by a flowing ribbon suggesting one continuous workflow from idea to finished result. Modern restrained editorial illustration with slight isometric depth, soft daylight, warm ivory background, mint green and blue accents, sophisticated uncluttered composition, important subjects within central 80 percent for cropping. No readable text, no brand logos, no watermarks. This is a cover about ChatGPT Chat, Work, and Codex, not an exact interface screenshot."
+    },
+    {
+      "asset": "src/content/blog/RNA二级结构预测/hero.png",
+      "prompt": "Use case: scientific-educational. Asset type: wide landscape editorial cover for a research blog about RNA secondary structure prediction, 16:9. Primary request: an elegant conceptual scientific illustration of a SINGLE RNA strand forming a recognizable two-dimensional stem-loop cloverlike structure, with paired short stem segments and graceful unpaired hairpin loops. A delicate square contact-map heatmap and faint machine-learning network in the background suggest computational prediction and generalization. Clean cream background, teal RNA backbone, coral paired-base accents, dark navy small details, subtle translucent layers and refined editorial rendering. Keep the composition uncluttered and all important subjects within central 80 percent. This is conceptual cover art, not experimental data. Do not depict DNA double helix. No text, letters, numbers, labels, logos, watermark."
+    }
+  ]
+}
